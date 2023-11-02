@@ -290,9 +290,9 @@ else:
 print(40*"="," Your stock purchase and sale calculations",sahame,)
 # چکارن
 if index == 1:
-     p=4192
-     s=0
-     v=22000
+     p=0
+     s=4250
+     v=20000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
@@ -302,9 +302,9 @@ if index == 1:
           Fib == Fib    
 # تليسه
 if index == 2:
-     p=4601
+     p=4569
      s=0
-     v=43000
+     v=45000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
@@ -315,8 +315,8 @@ if index == 2:
 # غمينو
 if index == 3:
      p=11181
-     s=0
-     v=4000
+     s=10110
+     v=5000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
@@ -326,9 +326,9 @@ if index == 3:
           Fib == Fib   
 # وسپه
 if index == 4:
-     p=5384
+     p=5017
      s=0
-     v=8000
+     v=6000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
