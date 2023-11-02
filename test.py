@@ -288,8 +288,8 @@ print(buy_signals.tail(3))
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
 if index == 1:
-     p=4192
-     s=0
+     p=0
+     s=4724
      v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -324,9 +324,9 @@ if index == 3:
  
 # وسپه
 if index == 4:
-     p=4555
+     p=5017
      s=0
-     v=9794
+     v=6000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -420,8 +420,8 @@ if index == 11:
 
 # حتوکا
 if index == 12:
-     p=3261
-     s=0
+     p=0
+     s=3705
      v=5000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
