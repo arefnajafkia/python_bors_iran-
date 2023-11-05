@@ -916,11 +916,17 @@ if today_price_min1 < today_price_min6 and  today_price_min1 < today_price_min9:
         if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
             print ('بانوسانات انجام شده احتمالا افزايشيه')
 
-if today_price1 > today_price6 or today_price1 > today_price9 :
-    print ('قيمت بسته شدن 6الي9روزمتوالي افزايشيه')
+if today_price1 > today_price6 :
+    print ('قيمت بسته شدن امروزاز6روزقبل هم بالاتررفت')
 
-if today_price1 < today_price6 or today_price1 < today_price9 :
-    print ('قيمت بسته شدن 6الي 9روزمتوالي کاهشيه')
+if today_price1 > today_price9 :
+    print ('قيمت بسته شدن امروزاز9 روزقبل هم بالاتررفت')
+
+if today_price1 < today_price6 :
+    print ('قيمت بسته شدن امروز کمترازقيمت 6روزقبل شده')
+
+if today_price1 < today_price9 :
+    print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
 
 
 print (20*'-')
