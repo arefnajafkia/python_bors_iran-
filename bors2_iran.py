@@ -454,7 +454,7 @@ if omc == today_price_min:
 elif omc < today_price_min:
      print (' مراقب باش نريزه پايين')
 elif omc > today_Open_price:
-     print ('آماده فروش باش')
+     print ('اگر توسودی آماده فروش باش')
      
     
 if today_Final_price == today_price_max:
