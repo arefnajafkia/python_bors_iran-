@@ -554,7 +554,12 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
                if ticker.adj_close < ticker.open_price:
                      print (" امروزتيک نزولي داريم")
 
-#==============================================
+#===============================================
+print (40*'=',sahame,'volume')
+print (ticker.volume ,'حجم امروز')
+print (today_Volume , 'حجم يک روزقبل')
+print (today_Volume_yesterday , 'حجم دوروزقبل')
+#=================================================
 print(30*"=",sahame,"bmi محاسبه")
  # تعریف یک تابع برای محاسبه بی ام آی
 def bmi(last_price, adj_close):
@@ -716,7 +721,7 @@ print(30*"=","محاسبات خريد شمااز",sahame,)
 # چکارن
 if index == 1:
      p=0
-     s=4250
+     s=4724
      v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -727,9 +732,9 @@ if index == 1:
           Fib == Fib    
 # تليسه
 if index == 2:
-     p=4284
+     p=4357
      s=0
-     v=75000
+     v=65000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -741,7 +746,7 @@ if index == 2:
 if index == 3:
      p=11181
      s=10020
-     v=5000
+     v=4000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -751,9 +756,9 @@ if index == 3:
           Fib == Fib   
 # وسپه
 if index == 4:
-     p=5017
+     p=5384
      s=0
-     v=6000
+     v=8000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
