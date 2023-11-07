@@ -216,7 +216,10 @@ else:
      else:
           if today_Volume > (math.ceil(average_Volume_Month))*3 :
                print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
-     
+
+print ()               
+print (today_Volume , 'حجم امروز')
+print (today_Volume_yesterday , 'حجم ديروز')
 #==================================================
 print(40*"=",nam,"Moving Average")
 ave7 = (' EM_3 :',(math.ceil(average_prices7)))
@@ -927,8 +930,7 @@ if today_price1 < today_price6 :
 
 if today_price1 < today_price9 :
     print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
-
-
+    
 print (20*'-')
 #--------------------------------------------
 
@@ -1108,6 +1110,12 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
           if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
                if ticker.adj_close < ticker.open_price:
                      print (" امروزتيک نزولي داريم")
+
+#===============================================
+print (40*'=',sahame,'volume')
+print (ticker.volume ,'حجم امروز')
+print (today_Volume , 'حجم يک روزقبل')
+print (today_Volume_yesterday , 'حجم دوروزقبل')
 #=================================================
 print(40*"=",sahame,"bmi محاسبه")
 # تعریف یک تابع برای محاسبه بی ام آی
@@ -1199,6 +1207,7 @@ buy_signals = (
         (sma_10.shift(1) > sma_3.shift(1))
 )
 print(buy_signals.tail(3))
+
 #-------------------------------------------
 print(30*"=",sahame," True and False مقادير sma3-20")          
 
@@ -1284,9 +1293,9 @@ if index == 1:
           Fib == Fib    
 # تليسه
 if index == 2:
-     p=4284
+     p=4357
      s=0
-     v=75000
+     v=65000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1298,7 +1307,7 @@ if index == 2:
 if index == 3:
      p=11181
      s=10020
-     v=5000
+     v=4000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1492,3 +1501,5 @@ if index<=12 and p > 0:
 print ()          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
+
+
