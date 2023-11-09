@@ -651,7 +651,7 @@ print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 
 print ('-'*20)
 print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
 print ('-'*20)
-print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "شش ماهه")
+print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
 print ('-'*20)
 
 print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
@@ -846,7 +846,7 @@ if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
     print (' ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
     print ('-'*20)
 
-print ()
+
 print ( ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
     print (' قيمت زير ميانگين 10روزميباشد')
@@ -893,7 +893,7 @@ print ()
 print ('min',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
 print ()
 print ('Close',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
-print ()
+
 if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
     if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
         if today_price1 < today_price9 :
@@ -913,7 +913,8 @@ if today_price_min1 < today_price_min6 and  today_price_min1 < today_price_min9:
     if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
         if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
             print ('بانوسانات انجام شده احتمالا افزايشيه')
-
+            
+print (20*'-')
 if today_price1 > today_price6 :
     print ('قيمت بسته شدن امروزاز6روزقبل هم بالاتررفت')
 
@@ -925,8 +926,22 @@ if today_price1 < today_price6 :
 
 if today_price1 < today_price9 :
     print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
+
+
+#محاسبه 5درصد زيرقيمت امروز
+zarar = (math.ceil((today_price*-5)/100)+today_price)
+sood = (math.ceil((today_price*5)/100)+today_price)
+
+if today_price_max2>today_price_max1 and today_price_min2>today_price_min1 and today_price2>today_price1:
+    print (" به احتمال قوي فرداقيمت ميريزه")
+    print (  zarar,'تا5درصد ضررميشه')
+
+if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and today_price2<today_price1:
+    print (" به احتمال قوي فردا قيمت ميره بالاتر")
+    print (  sood , 'تا5درصدسودميشه')
     
-print (20*'-')
+    
+print (40*'=')
 #--------------------------------------------
 
 print("          "," Time information")
