@@ -478,27 +478,32 @@ ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
 #for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 and ma4 <= ma10:
-    print (" signal Buy")
-    print ('ma3 > ma10 & ma4 <= ma10')
-    if ma3 > ma10 and ma4 > ma10:
-        print (" No signal and ascending Hold نگهدارصعوديه")
-        print (' ma3 > ma10 and ma4 > ma10')
-        if ma3 < ma10 and ma4 >= ma10:
-            print (" signal Sell")
-            print ('ma3 < ma10 & ma4 >= ma10')
-            if ma3 < ma10 and ma4 < ma10:
-                print (" No signal and Descending not Hold نگه ندارنزوليه")
-                print (' ma3 < ma10 and ma4 < ma10')
-                if ma3 > ma10 and ma10 > ma20 :
-                    print ('ascending Hold نگهدارصعوديه')
-                    print ('ma3 > ma10 & ma10 > ma20')
-                    if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
-                        print (" no signal wait رنجه صبرکن")
-                        print ('ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
+if ma3 > ma10 and ma4 <= ma10 or ma4 > ma10:
+    print (" signal Buy نگهدارصعودي شده")
+    print (" buy  اگه نداري بخر")
+    print (' ma3 > ma10 and ma4 <= ma10 or ma4 > ma10 ')
+    print ('-'*20)
+      
+    
+if ma3 < ma10 and ma4 >= ma10 or ma4 < ma10:
+    print (" signal Sell  نگه ندارنزولي شده")
+    print (' ma3 < ma10 and ma4 >= ma10 or ma4 < ma10')
+    print ('-'*20)
+    
+    
+if ma3 > ma10 and ma10 > ma20 :
+    print (' ascending Hold نگهدارصعوديه')
+    print (" buy  اگه نداري بخر")
+    print (' ma3 > ma10 & ma10 > ma20')
+    print ('-'*20)
+    
+    
+if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
+    print (" no signal wait کمي رنج شده بااحتياط بخريابفروش")
+    print (' ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
+    print ('-'*20)
     
 
-print ()
 print (ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
     print ('قيمت زير ميانگين 10روزميباشد')
@@ -511,7 +516,6 @@ if ma3 < today_Final_price:
 
 if ma3 > today_Final_price:
     print ('ma3>price : قيمت پايين ترميره')
-print ('-'*20)
 
 #------------------------------------------------
 print(20*"=",nam,"price_max,min,Close  6yers")
@@ -545,7 +549,7 @@ print ()
 print ('min',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
 print ()
 print ('Close',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
-print ()
+
 if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
     if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
         if today_price1 < today_price9 :
@@ -565,7 +569,8 @@ if today_price_min1 < today_price_min6 and  today_price_min1 < today_price_min9:
     if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
         if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
             print ('بانوسانات انجام شده احتمالا افزايشيه')
-
+            
+print (20*'-')
 if today_price1 > today_price6 :
     print ('قيمت بسته شدن امروزاز6روزقبل هم بالاتررفت')
 
@@ -578,8 +583,20 @@ if today_price1 < today_price6 :
 if today_price1 < today_price9 :
     print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
 
-
             
-print (20*'-')
+#محاسبه 5درصد زيرقيمت امروز
+zarar = (math.ceil((today_price*-5)/100)+today_price)
+sood = (math.ceil((today_price*5)/100)+today_price)
+
+if today_price_max2>today_price_max1 and today_price_min2>today_price_min1 and today_price2>today_price1:
+    print (" به احتمال قوي فرداقيمت ميريزه")
+    print (  zarar,'تا5درصد ضررميشه')
+
+if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and today_price2<today_price1:
+    print (" به احتمال قوي فردا قيمت ميره بالاتر")
+    print (  sood , 'تا5درصدسودميشه')
+    
+    
+print (40*'=')
 #--------------------------------------------
 
