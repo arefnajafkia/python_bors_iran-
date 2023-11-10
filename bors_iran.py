@@ -664,7 +664,7 @@ print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103
 print ()
 print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
 print(30*"-")
-print ( 'today_price :',today_price)
+print ( 'قيمت بسته شدن امروز :',today_price)
 print(40*"=")
 #=======================================================
 # max year360 + min year360 /2
@@ -698,11 +698,11 @@ week7 = (max_price_b1 + min_price_b2)/2
 week7_mean = (average_max1 + average_min1)/2
 
 if today_price > year_mean:
-    print ('سهم',nam,'رونگهدارهنوزنفروش')
+    print ('سهم',nam,'قيمت امروزبيشترازديروزشده')
     print ('-'*20)
 
 if today_price < year_mean:
-    print ('سهم',nam,'روبفروش نگه ندار')
+    print ('سهم',nam,'قيمت امروزکمترازديروزشده')
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
