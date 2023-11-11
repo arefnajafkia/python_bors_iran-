@@ -1076,15 +1076,17 @@ else:
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
 
 print(35*"=",nam,"Process Stock trends")     
-if ticker.adj_close > ticker.max_week  :
-     print (' قيمت امروزازحداکثرقيمت هفتگي بالاتره')
+if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
+     print (' روند قيمتي هفتگي نزولي شد')
      print (ticker.max_week," : هفتگي ")
-     print (ticker.adj_close," : امروز")
-else :
-     if ticker.adj_close < ticker.min_week  :
-          print (' قيمت امروزازحداقل قيمت هفتگي پايين تره')
-          print (ticker.min_week," : هفتگي ")
-          print (ticker.adj_close," : امروز")
+     print (ticker.yesterday_price," : قيمت ديروز")
+
+
+if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
+     print (' روند قيمتي هفتگي صعودي شد')
+     print (ticker.max_week," : هفتگي ")
+     print (ticker.yesterday_price," : قيمت ديروز")
+     
 
 print(20*"-")
 ravand =(ticker.max_year + ticker.min_year)/2
@@ -1100,11 +1102,11 @@ else :
           
 
 if ravand_2 < ticker.high_price :
-     print ('** توجه توجه روند هفتگي قيمت صعودي شد **')
+     print ('** قيمت فعلا بالاي نيمه هفتگي است **')
      print ()
 else :
      if ravand_2 > ticker.low_price :
-          print ('** توجه توجه روند هفتگي قيمت نزولي شد **')
+          print ('** قيمت فعلا پايين نيمه هفتگي است **')
           print ()
      
 
