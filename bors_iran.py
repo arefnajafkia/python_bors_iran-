@@ -663,8 +663,6 @@ print ()
 print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
 print ()
 print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
-print(30*"-")
-print ( 'قيمت بسته شدن امروز :',today_price)
 print(40*"=")
 #=======================================================
 # max year360 + min year360 /2
@@ -1089,14 +1087,24 @@ else :
           print (ticker.adj_close," : امروز")
 
 print(20*"-")
-ravand =(ticker.max_year + ticker.min_year)/2 
+ravand =(ticker.max_year + ticker.min_year)/2
+ravand_2 =(ticker.max_week + ticker.min_week)/2 
 
 if ravand < ticker.high_price :
-     print ('** توجه داشته باشيد روندقيمتي کلا صعودي **')
+     print ('** توجه داشته باشيد روند قيمتي ساليانه صعوديه **')
      print ()
 else :
      if ravand > ticker.low_price :
-          print ('** توجه داشته باشيد روندقيمتي کلا نزولي **')
+          print ('** توجه داشته باشيد روند قيمتي ساليانه نزوليه **')
+          print ()
+          
+
+if ravand_2 < ticker.high_price :
+     print ('** توجه توجه روند هفتگي قيمت صعودي شد **')
+     print ()
+else :
+     if ravand_2 > ticker.low_price :
+          print ('** توجه توجه روند هفتگي قيمت نزولي شد **')
           print ()
      
 
