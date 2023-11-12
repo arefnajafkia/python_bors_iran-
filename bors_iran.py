@@ -696,11 +696,11 @@ week7 = (max_price_b1 + min_price_b2)/2
 week7_mean = (average_max1 + average_min1)/2
 
 if today_price > year_mean:
-    print ('سهم',nam,'قيمت امروزبيشترازديروزشده')
+    print ('قيمت امروزبيشترازديروزشده')
     print ('-'*20)
 
 if today_price < year_mean:
-    print ('سهم',nam,'قيمت امروزکمترازديروزشده')
+    print ('قيمت امروزکمترازديروزشده')
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
@@ -886,11 +886,13 @@ today_price5 = DF['Close'].iloc[-5]
 today_price6 = DF['Close'].iloc[-6]
 today_price9 = DF['Close'].iloc[-9]
 
-print ('max',today_price_max6,today_price_max5,today_price_max4,today_price_max3,today_price_max2,today_price_max1)
+print ('max ===>',today_price_max6,today_price_max5,today_price_max4,today_price_max3,today_price_max2,today_price_max1)
 print ()
-print ('min',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
+print ('Close =>',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
 print ()
-print ('Close',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
+print ('min ===>',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
+
+
 
 if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
     if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
