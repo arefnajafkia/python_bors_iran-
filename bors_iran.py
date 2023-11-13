@@ -1315,9 +1315,9 @@ if index == 1:
           Fib == Fib    
 # تليسه
 if index == 2:
-     p=4357
+     p=4285
      s=0
-     v=65000
+     v=75000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
