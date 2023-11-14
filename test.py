@@ -180,13 +180,13 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if bmi < adj_close:
+if ticker.open_price < bmi > ticker.adj_close:
     print("قيمت پايين ترمياد")
-elif bmi > adj_close:
+elif ticker.open_price > bmi < ticker.last_price:
     print("قيمت بالاتر ميره")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
-elif bmi < ticker.yesterday_price:
+elif ticker.adj_close <= bmi < ticker.yesterday_price:
     print ("احتمال ريزش شديدخارج شو")
 else:
     print("معامله نکن")
