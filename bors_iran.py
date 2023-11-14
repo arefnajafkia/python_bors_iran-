@@ -1076,7 +1076,8 @@ if (ticker.last_price) > (ticker.adj_close):
 else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
-
+          
+#====================================================
 print(35*"=",nam,"Process Stock trends")     
 if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
      print (' روند قيمتي هفتگي نزولي شد')
@@ -1157,14 +1158,14 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if bmi < adj_close:
-    print("قيمت پايين ترمياد")
-elif bmi > adj_close:
-    print("قيمت بالاتر ميره")
-elif bmi == adj_close:
+if ticker.open_price < bmi > ticker.adj_close:
+    print("bmi قيمت امروزپايين تراز")
+elif ticker.open_price > bmi < ticker.last_price:
+    print("bmi قيمت امروزبالاتراز")
+elif bmi == ticker.adj_close:
     print("قيمت درجاميزنه گيجه")
-elif bmi < ticker.yesterday_price:
-    print ("احتمال ريزش شديدخارج شو")
+elif ticker.adj_close <= bmi < ticker.yesterday_price:
+    print ("bmi  قيمت ديروزبالاتراز")
 else:
     print("معامله نکن")
 
