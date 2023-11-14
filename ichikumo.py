@@ -560,8 +560,8 @@ print (ticker.volume ,'حجم امروز')
 print (today_Volume , 'حجم يک روزقبل')
 print (today_Volume_yesterday , 'حجم دوروزقبل')
 #=================================================
-print(30*"=",sahame,"bmi محاسبه")
- # تعریف یک تابع برای محاسبه بی ام آی
+print(40*"=",sahame,"bmi محاسبه")
+# تعریف یک تابع برای محاسبه بی ام آی
 def bmi(last_price, adj_close):
 
      bmi = (adj_close + (last_price*2))/3
@@ -570,21 +570,21 @@ def bmi(last_price, adj_close):
      return bmi
 
 # دريافت قيمت پاياني  وآخرين قيمت
-last_price = ticker.last_price # آخرين قيمت
-adj_close = ticker.adj_close  # قيمت پاياني
+last_price = ticker.last_price
+adj_close = ticker.adj_close
 # فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
 bmi = bmi(last_price, adj_close)
 # نمایش بی ام آی کاربر
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if bmi < adj_close:
+if ticker.open_price < bmi > ticker.adj_close:
     print("قيمت پايين ترمياد")
-elif bmi > adj_close:
+elif ticker.open_price > bmi < ticker.last_price:
     print("قيمت بالاتر ميره")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
-elif bmi < ticker.yesterday_price:
+elif ticker.adj_close <= bmi < ticker.yesterday_price:
     print ("احتمال ريزش شديدخارج شو")
 else:
     print("معامله نکن")
