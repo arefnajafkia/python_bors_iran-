@@ -1161,11 +1161,13 @@ print(f" بی ام آی شما {bmi:.2f} است ")
 if ticker.open_price < bmi > ticker.adj_close:
     print("bmi قيمت امروزپايين تراز")
 elif ticker.open_price > bmi < ticker.last_price:
-    print("bmi قيمت امروزبالاتراز")
+    print("bmi آخرين معامله بالاتراز")
 elif bmi == ticker.adj_close:
     print("قيمت درجاميزنه گيجه")
 elif ticker.adj_close <= bmi < ticker.yesterday_price:
     print ("bmi  قيمت ديروزبالاتراز")
+elif ticker.open_price > bmi > ticker.last_price:
+    print("bmi آخرين معامله پايين تراز")
 else:
     print("معامله نکن")
 
@@ -1514,12 +1516,30 @@ if index<=12 and p > 0:
           print (hs3,'حدسود5درصد') 
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
-          print(ticker.last_price,' : آخرين معامله')
+          print(ticker.adj_close,' : قيمت بسته شدن امروز')
           print ('-'*20)
      if pk == pf :
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
-          
+#====================================================
+price = ticker.adj_close
+darsad_up4 = (math.ceil((price * 0.04 + price)*100)/100)      #قميت بسته شدن 4درصدبالاتر
+darsad_down4 = (math.ceil((price * 0.04 - price)*100)/100)    #قيمت بسته شدن 4درصدپايين تر
+
+darsad_up6 = (math.ceil((price * 0.06 + price)*100)/100)      #قيمت بسته شدن6درصدبالاتر
+darsad_down6 = (math.ceil((price * 0.06 - price)*100)/100)    #قيمت بسته شدن 6درصدپايين تر
+
+print ()
+if ticker.adj_close > ticker.yesterday_price :
+    print (darsad_up4 , ": قيمت فرداتا4درصدمثبت")
+    print (darsad_up6 , ": قيمت فردا تا6درصدمثبت")
+    print (20*'-')
+
+if ticker.adj_close < ticker.yesterday_price :
+    print (darsad_down4 , ": قيمت فرداتا4درصدمنفي")
+    print (darsad_down6 , ": قيمت فرداتا6درصدمنفي")
+    print (20*'-')
+    
 #=====================================================
 print ()          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
