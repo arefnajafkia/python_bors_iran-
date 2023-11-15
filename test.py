@@ -499,8 +499,26 @@ if index<=12 and p > 0:
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
 
+#====================================================
+price = ticker.adj_close
+darsad_up4 = (math.ceil((price * 0.04 + price)*100)/100)      #قميت بسته شدن 4درصدبالاتر
+darsad_down4 = (math.ceil((price * 0.04 - price)*100)/100)    #قيمت بسته شدن 4درصدپايين تر
 
-#=====================================================          
+darsad_up6 = (math.ceil((price * 0.06 + price)*100)/100)      #قيمت بسته شدن6درصدبالاتر
+darsad_down6 = (math.ceil((price * 0.06 - price)*100)/100)    #قيمت بسته شدن 6درصدپايين تر
+
+print ()
+if ticker.adj_close > ticker.yesterday_price :
+    print (darsad_up4 , ": قيمت فرداتا4درصدمثبت")
+    print (darsad_up6 , ": قيمت فردا تا6درصدمثبت")
+    print (20*'-')
+
+if ticker.adj_close < ticker.yesterday_price :
+    print (darsad_down4 , ": قيمت فرداتا4درصدمنفي")
+    print (darsad_down6 , ": قيمت فرداتا6درصدمنفي")
+    print (20*'-')
+    
+#=====================================================         
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')         
 
 
