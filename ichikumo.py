@@ -487,7 +487,7 @@ if senk_sa1 <  senk_ab1 < today_price :
 else:
      print (" قيمت داره ميره بالاي ابرقرمز ")
 print('-'*20)
-#==============================================
+#==============================================  
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
@@ -510,30 +510,99 @@ if (ticker.last_price) > (ticker.adj_close):
 else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
-
-print(35*"=",sahame,"Process Stock trends")
-if ticker.adj_close > ticker.max_week  :
-     print (' قيمت امروزازحداکثرقيمت هفتگي بالاتره')
+          
+#====================================================
+print(35*"=",nam,"Process Stock trends")     
+if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
+     print (' روند قيمتي هفتگي نزولي شد')
      print (ticker.max_week," : هفتگي ")
-     print (ticker.adj_close," : امروز")
-else :
-     if ticker.adj_close < ticker.min_week  :
-          print (' قيمت امروزازحداقل قيمت هفتگي پايين تره')
-          print (ticker.min_week," : هفتگي ")
-          print (ticker.adj_close," : امروز")
+     print (ticker.yesterday_price," : قيمت ديروز")
+     print (ticker.adj_close, ": قيمت امروز")
 
+
+if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
+     print (' روند قيمتي هفتگي صعودي شد')
+     print (ticker.max_week," : هفتگي ")
+     print (ticker.yesterday_price," : قيمت ديروز")
+     print (ticker.adj_close, ": قيمت امروز")
+     
+#====================================================
+price = ticker.adj_close
+darsad_up4 = (math.ceil((price * 0.04 + price)*100)/100)      #قميت بسته شدن 4درصدبالاتر
+darsad_down4 = (math.ceil((price * 0.04 - price)*100)/100)    #قيمت بسته شدن 4درصدپايين تر
+
+darsad_up6 = (math.ceil((price * 0.06 + price)*100)/100)      #قيمت بسته شدن6درصدبالاتر
+darsad_down6 = (math.ceil((price * 0.06 - price)*100)/100)    #قيمت بسته شدن 6درصدپايين تر
+
+print ()
+if ticker.adj_close > ticker.yesterday_price :
+    print (darsad_up4 , ": قيمت فرداتا4درصدمثبت")
+    print (darsad_up6 , ": قيمت فردا تا6درصدمثبت")
+
+if ticker.adj_close < ticker.yesterday_price :
+    print (darsad_down4 , ": قيمت فرداتا4درصدمنفي")
+    print (darsad_down6 , ": قيمت فرداتا6درصدمنفي")
+    
+#=====================================================
 print(20*"-")
-ravand =(ticker.max_year + ticker.min_year)/2 
+ravand =(ticker.max_year + ticker.min_year)/2
+ravand_2 =(ticker.max_week + ticker.min_week)/2
 
-if ravand < ticker.high_price :
-     print ('** توجه داشته باشيد روندقيمتي کلا صعودي **')
+
+if ticker.adj_close > ravand and ticker.yesterday_price > ticker.adj_close :
+    print (" قيمت بالاي ميانه ساليانه است ولي به سمت ميانه ميره پايين")
+
+
+if ticker.adj_close > ravand and ticker.yesterday_price < ticker.adj_close :
+    print (" قيمت بالاي ميانه ساليانه است وبه سمت بالاميره")
+    
+
+if ticker.adj_close < ravand and ticker.yesterday_price < ticker.adj_close :
+    print (" قيمت پايين ميانه ساليانه است ولي به سمت ميانه ميره بالا")
+
+
+if ticker.adj_close < ravand and ticker.yesterday_price > ticker.adj_close :
+    print (" قيمت پايين ميانه ساليانه است وبه سمت پايين ميره")
+    
+
+if ravand < ticker.adj_close :
+     print ('** توجه داشته باشيد روند قيمتي ساليانه صعوديه **')
      print ()
 else :
-     if ravand > ticker.low_price :
-          print ('** توجه داشته باشيد روندقيمتي کلا نزولي **')
+     if ravand > ticker.adj_close :
+          print ('** توجه داشته باشيد روند قيمتي ساليانه نزوليه **')
           print ()
+
+
+if ticker.adj_close > ravand_2 and ticker.yesterday_price > ticker.adj_close :
+    print (" قيمت بالاي نيمه هفتگي است ولي به سمت پايين ميره")
+    
+
+if ticker.adj_close > ravand_2 and ticker.yesterday_price < ticker.adj_close :
+    print (" قيمت بالاي نيمه هفتگي است وبه سمت بالاميره")
+
+
+if ticker.adj_close < ravand_2 and ticker.yesterday_price < ticker.adj_close :
+    print (" قيمت پايين نيمه هفتگي است ولي به سمت بالاميره")
+
+    
+if ticker.adj_close < ravand_2 and ticker.yesterday_price > ticker.adj_close :
+    print (" قيمت پايين نيمه هفتگي است وبه سمت پايين ميره")
           
-print(20*"-",sahame,"Tik Top or Down")
+
+if ticker.max_year > ticker.adj_close > ticker.min_year :
+    print (" قيمت درمحدوده رنج ساليانه ميباشد")
+
+
+if ticker.yesterday_price < ticker.max_year < ticker.adj_close > ticker.min_year :
+    print (" بالاترين قيمت ساليانه راروبه بالا شکستيم ")
+
+
+if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price :
+    print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
+
+     
+print(20*"-",nam,"Tik Top or Down")
 
 if ticker.open_price>ticker.low_price < ticker.adj_close:
      if (math.ceil(tik_close_low))>(math.ceil(tik_open_low)):     
@@ -544,6 +613,16 @@ if ticker.open_price>ticker.low_price < ticker.adj_close:
                     if (math.ceil(tik_close_high))>(math.ceil(tik_open_high)):
                          if ticker.adj_close < ticker.open_price :
                               print (tik_Descending , ' : تيک نزولي')
+
+
+if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
+    if ticker.adj_close > ticker.open_price :
+        print (tik_ascending , ' : تيک صعودي')
+    else:
+        if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:
+            if ticker.adj_close < ticker.open_price :
+                print (tik_Descending , ' : تيک نزولي')
+
                
 
 if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
@@ -557,8 +636,7 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
 #===============================================
 print (40*'=',sahame,'volume')
 print (ticker.volume ,'حجم امروز')
-print (today_Volume , 'حجم يک روزقبل')
-print (today_Volume_yesterday , 'حجم دوروزقبل')
+print (today_Volume_yesterday , 'حجم ديروز')
 #=================================================
 print(40*"=",sahame,"bmi محاسبه")
 # تعریف یک تابع برای محاسبه بی ام آی
