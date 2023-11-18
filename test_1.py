@@ -297,19 +297,19 @@ if index == 1:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib    
 # تليسه
 if index == 2:
-     p=4569
+     p=4285
      s=0
-     v=45000
+     v=75000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 # غمينو
@@ -321,38 +321,38 @@ if index == 3:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib   
 # وسپه
 if index == 4:
-     p=5017
+     p=4548
      s=0
-     v=6000
+     v=7538
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib   
 # غکورش
 if index == 5:
-     p=13875
+     p=9916
      s=0
-     v=14000
+     v=20333
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib    
 # شپاکسا
 if index == 6:
-     p=3610
+     p=3310
      s=0
-     v=38000
+     v=51000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
@@ -369,7 +369,7 @@ if index == 7:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 # تاپيکو
@@ -381,7 +381,7 @@ if index == 8:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 # دسبحان
@@ -405,7 +405,7 @@ if index == 10:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 # ومعادن
@@ -417,19 +417,19 @@ if index == 11:
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 # حتوکا
 if index == 12:
-     p=32611
-     s=0
+     p=3261
+     s=3400
      v=5000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
      if s > 0 :
-          print (s , ': your buy price',sahame )
+          print (s , ': your sell price',sahame )
           print (v ,': Number of shares sold')
           Fib == Fib  
 
@@ -462,7 +462,7 @@ if index<=12 and p > 0:
           profit_percentage =(profit_float / pk) * 100
           print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
           print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
-          print (" شماسود ميکنيد به مبلغ :" ,pp)
+          print (" You make a profit in the amount :" ,pp)
           print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
           print(20*"-" )
  
@@ -472,7 +472,7 @@ if index<=12 and p > 0:
           loss_percentage = (loss_float / pk) * 100
           print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
           print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
-          print ("   your loss  :" ,pp)
+          print ("   You lose the amount  :" ,pp)
           print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
           print(20*"-" )
      else:
