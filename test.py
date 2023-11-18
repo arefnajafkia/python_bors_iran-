@@ -92,25 +92,6 @@ print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()
 #=====================================================
-print('-*'*20)
-if ticker.adj_close > ticker.max_year :
-     print (' مقاومت يک ساله شکسته شد')
-
-if ticker.adj_close < average_price:
-     print (' قيمت امروز پايين ترازميانگين 10 روزه است')
-else:
-    if ticker.adj_close > average_price:
-          print (' قيمت امروزبالاترازميانگين 10روزه است') 
-
-if (ticker.min_week)>(ticker.adj_close):
-     print(' قيمت امروز پايين ترازحداقل قيمت هفتگي است')
-else:
-     if (ticker.min_week)<(ticker.adj_close):
-          print(' قيمت امروز بالاترازحداقل قيمت هفتگي است')
-
-if (ticker.max_week)<(ticker.adj_close):
-     print(' قيمت امروزبالاترازحداکثرقيمت هفتگي است')
-     
 print('-*'*20)   
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
