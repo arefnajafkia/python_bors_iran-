@@ -207,36 +207,24 @@ if ticker.adj_close == ticker.min_year :
     print (" خيلي مهم به کف قيمت ساليانه رسيديم")
 
      
-print(20*"-",sahame,"Tik Top or Down")
-
-if ticker.open_price>ticker.low_price < ticker.adj_close:
-     if (math.ceil(tik_close_low))>(math.ceil(tik_open_low)):     
-          if ticker.adj_close > ticker.open_price :
-               print (tik_ascending , ' : تيک صعودي')
-          else:
-               if ticker.open_price<ticker.high_price > ticker.adj_close:
-                    if (math.ceil(tik_close_high))>(math.ceil(tik_open_high)):
-                         if ticker.adj_close < ticker.open_price :
-                              print (tik_Descending , ' : تيک نزولي')
+print(30*"=",sahame,"Tik Top or Down")
 
 
-if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
-    if ticker.adj_close > ticker.open_price :
-        print (tik_ascending , ' : تيک صعودي')
-    else:
-        if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:
-            if ticker.adj_close < ticker.open_price :
-                print (tik_Descending , ' : تيک نزولي')
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (tik_ascending , ' : تيک صعودي')
+
+    
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
+    print (tik_Descending , ' : تيک نزولي')
 
                
 
-if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
-     if ticker.adj_close > ticker.open_price:
-          print (" امروزتيک صعودي داريم")
-     else:
-          if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
-               if ticker.adj_close < ticker.open_price:
-                     print (" امروزتيک نزولي داريم")
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (" امروزتيک صعودي داريم")
+
+     
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+    print (" امروزتيک نزولي داريم")
 
 #===============================================
 print(40*"=",sahame,"bmi محاسبه")
