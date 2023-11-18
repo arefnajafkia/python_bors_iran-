@@ -379,9 +379,9 @@ if index == 3:
  
 # وسپه
 if index == 4:
-     p=5017
+     p=4548
      s=0
-     v=6000
+     v=7538
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -556,4 +556,7 @@ if index<=12 and p > 0:
 
 #====================================================
 print ()      
-print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')         
+print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
+
+
+
