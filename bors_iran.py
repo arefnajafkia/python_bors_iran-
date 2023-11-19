@@ -540,16 +540,32 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if bmi < adj_close:
-    print("قيمت پايين ترمياد")
-elif bmi > adj_close:
-    print("قيمت بالاتر ميره")
+if today_Open_price < bmi < today_price:
+    print("امکان داره قيمت پايين تربره")
+elif today_Open_price > bmi > today_price:
+    print("امکان داره قيمت بالاتربره")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
-elif bmi < ticker.yesterday_price:
+elif today_price <= bmi < yesterday_price:
     print ("احتمال ريزش شديدخارج شو")
 else:
-    print("معامله نکن")
+    print("مراقب باش معامله نکن")
+    
+
+if yesterday_price > today_Open_price:
+    print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
+
+
+if yesterday_price < today_Open_price:
+    print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+          
+
+if today_price_max == today_Final_price:
+    print(' صف خريدشده')
+
+
+if today_price_min == today_Final_price:
+    print (' صف فروش شده')
 
 #-------------------------------------
 print(20*"-",nam,"omc محاسبه")
@@ -1157,47 +1173,43 @@ if ticker.adj_close < ravand_2 and ticker.yesterday_price > ticker.adj_close :
           
 
 if ticker.max_year > ticker.adj_close > ticker.min_year :
-    print (" قيمت درمحدوده رنج ساليانه ميباشد")
+    print (" قيمت درمحدوده رنج ساليانه حرکت ميکنه  بالا  و پايين  ميره")
 
 
 if ticker.yesterday_price < ticker.max_year < ticker.adj_close > ticker.min_year :
-    print (" بالاترين قيمت ساليانه راروبه بالا شکستيم ")
+    print ('بالاترين قيمت ساليانه راروبه بالا شکستيم ')
 
+if ticker.max_year == ticker.adj_close :
+    print (" خيلي مهم به سقف قيمت ساليانه رسيديم")
 
 if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price :
     print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
 
-     
+
+if ticker.adj_close == ticker.min_year :
+    print (" خيلي مهم به کف قيمت ساليانه رسيديم")     
 print(20*"-",nam,"Tik Top or Down")
 
-if ticker.open_price>ticker.low_price < ticker.adj_close:
-     if (math.ceil(tik_close_low))>(math.ceil(tik_open_low)):     
-          if ticker.adj_close > ticker.open_price :
-               print (tik_ascending , ' : تيک صعودي')
-          else:
-               if ticker.open_price<ticker.high_price > ticker.adj_close:
-                    if (math.ceil(tik_close_high))>(math.ceil(tik_open_high)):
-                         if ticker.adj_close < ticker.open_price :
-                              print (tik_Descending , ' : تيک نزولي')
+print(ticker.max_year,' : حداکثر قیمت بازه سال')
+print(ticker.min_year,' : حداقل قیمت بازه سال')
 
 
-if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
-    if ticker.adj_close > ticker.open_price :
-        print (tik_ascending , ' : تيک صعودي')
-    else:
-        if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:
-            if ticker.adj_close < ticker.open_price :
-                print (tik_Descending , ' : تيک نزولي')
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (tik_ascending , ' : تيک صعودي')
+
+    
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
+    print (tik_Descending , ' : تيک نزولي')
 
                
 
-if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
-     if ticker.adj_close > ticker.open_price:
-          print (" امروزتيک صعودي داريم")
-     else:
-          if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
-               if ticker.adj_close < ticker.open_price:
-                     print (" امروزتيک نزولي داريم")
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (" امروزتيک صعودي داريم")
+
+     
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+    print (" امروزتيک نزولي داريم")
+
 
 #===============================================
 print (40*'=',sahame,'volume')
@@ -1222,18 +1234,32 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if ticker.open_price < bmi > ticker.adj_close:
-    print("bmi قيمت امروزپايين تراز")
-elif ticker.open_price > bmi < ticker.last_price:
-    print("bmi آخرين معامله بالاتراز")
-elif bmi == ticker.adj_close:
+if ticker.open_price < bmi < ticker.adj_close:
+    print("امکان داره قيمت پايين تربره")
+elif ticker.open_price > bmi > ticker.adj_close:
+    print("امکان داره قيمت بالاتربره")
+elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
 elif ticker.adj_close <= bmi < ticker.yesterday_price:
-    print ("bmi  قيمت ديروزبالاتراز")
-elif ticker.open_price > bmi > ticker.last_price:
-    print("bmi آخرين معامله پايين تراز")
+    print ("احتمال ريزش شديدخارج شو")
 else:
-    print("معامله نکن")
+    print("مراقب باش معامله نکن")
+    
+
+if ticker.yesterday_price > ticker.open_price:
+    print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
+
+
+if ticker.yesterday_price < ticker.open_price:
+    print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+          
+
+if ticker.sta_max == ticker.high_price:
+    print(' صف خريدشده')
+
+
+if ticker.sta_min == ticker.low_price:
+    print (' صف فروش شده')
 
 #-------------------------------------
 print(40*"=",sahame,"omc محاسبه")
