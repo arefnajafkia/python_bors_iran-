@@ -540,9 +540,9 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if today_Open_price < bmi < today_price:
+if today_Open_price < bmi > today_price:
     print("امکان داره قيمت پايين تربره")
-elif today_Open_price > bmi > today_price:
+elif today_Open_price > bmi < today_price:
     print("امکان داره قيمت بالاتربره")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
