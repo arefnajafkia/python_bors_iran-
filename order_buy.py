@@ -207,7 +207,9 @@ if ticker.adj_close == ticker.min_year :
     print (" خيلي مهم به کف قيمت ساليانه رسيديم")
 
      
-print(30*"=",sahame,"Tik Top or Down")
+print(30*"=",sahame,"Tik Top or Down") 
+print(ticker.max_year,' : حداکثر قیمت بازه سال')
+print(ticker.min_year,' : حداقل قیمت بازه سال')
 
 
 if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
@@ -245,9 +247,9 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if ticker.open_price < bmi > ticker.adj_close:
+if ticker.open_price < bmi < ticker.adj_close:
     print("امکان داره قيمت پايين تربره")
-elif ticker.open_price > bmi < ticker.last_price:
+elif ticker.open_price > bmi > ticker.adj_close:
     print("امکان داره قيمت بالاتربره")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
@@ -290,6 +292,7 @@ buy_signals = (
         (sma_10.shift(1) > sma_3.shift(1))
 )
 print(buy_signals.tail(3))
+
 #-------------------------------------------
 print(30*"=",sahame," True and False مقادير sma3-20")          
 
@@ -391,9 +394,9 @@ if index == 5:
 
 # شپاکسا
 if index == 6:
-     p=3310
+     p=3256
      s=0
-     v=51000
+     v=54000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
