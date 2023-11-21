@@ -870,8 +870,8 @@ if index == 6:
           Fib == Fib
 # پاکشو
 if index == 7:
-     p=6650
-     s=0
+     p=0
+     s=6750
      v=1000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
