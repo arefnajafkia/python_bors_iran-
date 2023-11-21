@@ -589,14 +589,143 @@ zarar = (math.ceil((today_price*-5)/100)+today_price)
 sood = (math.ceil((today_price*5)/100)+today_price)
 
 if today_price_max2>today_price_max1 and today_price_min2>today_price_min1 and today_price2>today_price1:
-    print (" به احتمال قوي فرداقيمت ميريزه")
+    print (" به احتمال قوي فرداقيمت ميريزه مگه جمعش کنن")
     print (  zarar,'تا5درصد ضررميشه')
 
 if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and today_price2<today_price1:
-    print (" به احتمال قوي فردا قيمت ميره بالاتر")
+    print (" به احتمال قوي فرداقيمت ميره بالا مگه خودشون بيارن پايين")
     print (  sood , 'تا5درصدسودميشه')
     
-    
-print (40*'=')
-#--------------------------------------------
 
+#==================================================
+print(40*"=",nam,"One year support and resistance")
+# Engulfing Calculations  محاسبات اينگل فينگ
+today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
+today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
+yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
+yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
+
+highest_price_7 = max(DF['Close'][-7:])
+highest_price_8 = max(DF['Close'][-8:])
+highest_price_30 = max(DF['Close'][-30:])
+highest_price_31 = max(DF['Close'][-31:])
+highest_price_280 = max(DF['Close'][-280:])
+highest_price_180 = max(DF['Close'][-180:])
+highest_price_90 = max(DF['Close'][-90:])
+#------------------------
+lowest_price_7 = min(DF['Close'][-7:])
+lowest_price_8 = min(DF['Close'][-8:])
+lowest_price_30 = min(DF['Close'][-30:])
+lowest_price_31 = min(DF['Close'][-31:])
+lowest_price_280 = min(DF['Close'][-280:])                              
+lowest_price_180 = min(DF['Close'][-180:])
+lowest_price_90 = min(DF['Close'][-90:])
+
+print (today_price,': قيمت امروز')
+print ('-'*10)
+print(highest_price_280,': مقاومت يک سال پيش')
+print(highest_price_180,': مقاومت شش ماه پيش')
+print(highest_price_90,': مقاومت سه ماه پيش')
+print(highest_price_30,': مقاومت يک ماه پيش')
+print(highest_price_7,': مقاومت هفتگي')
+print ('~'*20)
+print(lowest_price_280,': حمايت يک سال پيش')
+print(lowest_price_180,': حمايت شش ماه پيش')
+print(lowest_price_90,': حمايت سه ماه پيش')
+print(lowest_price_30,': حمايت يک ماه پيش')
+print(lowest_price_7,': حمايت هفتگي ')
+print ('-'*10)
+
+
+if highest_price_280 > highest_price_90 and lowest_price_280 < lowest_price_90:
+    print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
+
+    
+if highest_price_90 <=  lowest_price_90 :
+    print ("حمايت تبديل به مقاومت شد")
+
+if lowest_price_30 < lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه بالابره")
+
+if lowest_price_30 > lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه  پايين بره")
+
+if lowest_price_30 == lowest_price_31 :
+    print ("حمايت يکماهه درجاميزنه")
+
+if highest_price_30 < highest_price_31 :
+    print ("مقاومت يکماه شروع کرده روبه بالابره")
+
+if highest_price_30 > highest_price_31 :
+    print ("مقاومت يکماهه شروع کرده روبه پايين بره")
+
+if highest_price_30 == highest_price_31 :
+    print ("مقاومت يکماهه درجاميزنه")
+
+if lowest_price_7 < lowest_price_8 :
+    print ("حمايت هفتگي شروع کرده روبه بالابره")
+
+if lowest_price_7 > lowest_price_8 :
+    print ("حمايت هفتگي شروع کرده روبه پايين بره")
+
+if lowest_price_7 == lowest_price_8 :
+    print ("حمايت هفتگي درجاميزنه")
+
+if lowest_price_7 > lowest_price_30 > lowest_price_90:
+    print ("درکل حمايت افزايشي است 7>30>90 ")
+
+if lowest_price_7 < lowest_price_30 < lowest_price_90:
+    print ("درکل حمايت کاهشي است  7<30<90 ")
+
+if highest_price_7 > highest_price_30 > highest_price_90:
+    print ("ومقاومت کلا افزايشي است  7>30>90")
+
+if highest_price_7 < highest_price_30 < highest_price_90:
+    print ("ومقاومت کلا کاهشي است 7<30<90")
+    
+#==================================================
+print(40*"=",nam,"Engulfing Calculations")
+# Engulfing  ascending صعودي
+h1 = today_price > today_Open_price
+h2 = yesterday_Open_price > yesterday_price
+h3 = yesterday_price > today_Open_price
+h4 = today_price > yesterday_Open_price
+
+h_ascending = h1 and h2 and h3 and h4
+h5 = (today_price - today_Open_price) > 5*(yesterday_Open_price - yesterday_price) 
+
+# Engulfing  Descending نزولي
+h6 = today_price < today_Open_price
+h7 = yesterday_Open_price < yesterday_price
+h8 = yesterday_price < today_Open_price
+h9 = today_price < yesterday_Open_price
+
+h_Descending = h6 and h7 and h8 and h9
+h10 = (today_price - today_Open_price) < 5*(yesterday_Open_price - yesterday_price)
+
+
+if today_price > highest_price_90 :
+     print (' مقاومت سه ماه شکسته شد')
+
+if today_price < lowest_price_90 :
+     print (' حمايت سه ماه ازدست رفت')
+     
+
+if h_ascending and h5:
+    c = "Engulfing :"
+    print (c , "hemer ascending !  صعودي مناسب خريد" )
+    
+if h_Descending and h10:
+    c = "Engulfing :"
+    print (c , "hemer Descending !  نزولي وقت فروش" )
+    
+else:
+    c = "hold :"
+    print (c , "not Engulfing !")
+    print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
+    
+print ('~'*10)
+print ('روند False يا True دقت کنيدبه')
+print (h5,'ascending روند صعودي ')
+print (h10 ,'Descending روند نزولي')
+#===================================================
