@@ -382,10 +382,24 @@ if highest_price_7 == highest_price_30 == highest_price_90:
 print ('-'*10)
 # فاصله مقاومت هفتگي باساليانه
 resistance= highest_price_7 - highest_price_360
-print (resistance ,": فاصله مقاومت هفتگي باساليانه")
+resistance_1= highest_price_8 - highest_price_360
+if resistance < resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
+
+if resistance > resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
+
+print (resistance,": فاصله مقاومت هفتگي باساليانه")    
 
 # فاصله حمايت هفتگي باساليانه
 support= lowest_price_7 -lowest_price_360
+support_1= lowest_price_8 -lowest_price_360
+if support < support_1:
+    print (support_1 ,": فاصله حمايت هفتگي باساليانه داره زيادميشه")
+
+if support > support_1:
+    print (support_1 ,": فاصله حمايت هفتگي باساليانه داره کم ميشه")    
+
 print (support ,": فاصله حمايت هفتگي باساليانه")
 
 #==================================================
