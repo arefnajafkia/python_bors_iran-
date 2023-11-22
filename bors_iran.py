@@ -383,24 +383,30 @@ print ('-'*10)
 # فاصله مقاومت هفتگي باساليانه
 resistance= highest_price_7 - highest_price_360
 resistance_1= highest_price_8 - highest_price_360
+
 if resistance < resistance_1 :
     print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
+
 
 if resistance > resistance_1 :
     print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
 
-print (resistance,": فاصله مقاومت هفتگي باساليانه")    
+
+print ( resistance ,": فاصله بين مقاومت هفتگي و ساليانه")    
 
 # فاصله حمايت هفتگي باساليانه
 support= lowest_price_7 -lowest_price_360
 support_1= lowest_price_8 -lowest_price_360
+
 if support < support_1:
     print (support_1 ,": فاصله حمايت هفتگي باساليانه داره زيادميشه")
+
 
 if support > support_1:
     print (support_1 ,": فاصله حمايت هفتگي باساليانه داره کم ميشه")    
 
-print (support ,": فاصله حمايت هفتگي باساليانه")
+
+print ( support ,": فاصله بين حمايت هفتگي و ساليانه")
 
 #==================================================
 print(40*"=",nam,"Engulfing Calculations")
@@ -1525,9 +1531,9 @@ if index == 3:
           Fib == Fib   
 # وسپه
 if index == 4:
-     p=5017
+     p=4398
      s=0
-     v=6000
+     v=7794
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
