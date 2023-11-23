@@ -126,28 +126,27 @@ average_max6 = closing_price_b11.mean()   # average_max_price_day360
 average_min6 = closing_price_b12.mean()   # average_mix_price_day360
 
 #=====================================================
-print ()
-print ( today_price_max,'price_max_day','******' ,today_price_min,'price_min_day' , "روزانه")
-print ('-'*20)
-print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 -',min_price_b4,'min14' , "هفتگي")
-print ('-'*20)
-print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
-print ('-'*20)
-print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
-print ('-'*20)
-
-print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
-print (math.ceil(average_max2),"max14 mean -- ",math.ceil(average_min2),"min14 mean" , "ميانگين دوهفته")
-print ()
-print (math.ceil(average_max3),"max30 mean -- ",math.ceil(average_min3),"min30 mean" , "ميانگين ماه")
-print (math.ceil(average_max4),"max60 mean -- ",math.ceil(average_min4),"min60 mean" , "ميانگين دوماه")
-print ()
-print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
-print ()
-print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
-print(30*"-")
+#print ()
+#print ( today_price_max,'price_max_day','******' ,today_price_min,'price_min_day' , "روزانه")
+#print ('-'*20)
+#print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 -',min_price_b4,'min14' , "هفتگي")
+#print ('-'*20)
+#print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
+#print ('-'*20)
+#print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
+#print ('-'*20)
+#print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
+#print (math.ceil(average_max2),"max14 mean -- ",math.ceil(average_min2),"min14 mean" , "ميانگين دوهفته")
+#print ()
+#print (math.ceil(average_max3),"max30 mean -- ",math.ceil(average_min3),"min30 mean" , "ميانگين ماه")
+#print (math.ceil(average_max4),"max60 mean -- ",math.ceil(average_min4),"min60 mean" , "ميانگين دوماه")
+#print ()
+#print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
+#print ()
+#print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
+#print(20*"-")
 print ( 'today_price :',today_price)
-print(40*"=")
+print(20*"-")
 #=======================================================
 
 # max year360 + min year360 /2
@@ -181,12 +180,14 @@ week7 = (max_price_b1 + min_price_b2)/2
 week7_mean = (average_max1 + average_min1)/2
 
 
-if today_price > year_mean:
+if today_price > week7_mean:
     print ('سهم',nam,'رونگهدارهنوزنفروش')
+    print (" ازميانگين هفتگي بالاتره")
     print ('-'*20)
 
-if today_price < year_mean:
+if today_price < week7_mean:
     print ('سهم',nam,'روبفروش نگه ندار')
+    print (" ازميانگين هفتگي پايين تره")
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
@@ -195,77 +196,77 @@ if week7 > Month30 or week7 < Month30 :
     print ('احتمال برگشت قيمت از  :' ,  max_price_b3 ,'<==>', min_price_b4 )
     print ('-'*20)
 
-if today_price_max > max_price_b1 and yesterday_price <= max_price_b1:
+if today_price_max > max_price_b1 >= yesterday_price:
      print (" سقف کانال هفتگي روبه بالازده شد ======>", max_price_b1)
      print ('احتمال صعود تا : ',max_price_b3,)
      print('-'*20)
 
-if today_price_max < max_price_b1 and yesterday_price >= max_price_b1:
+if today_price_max < max_price_b1 <= yesterday_price:
      print (" سقف کانال هفتگي روبه پايين زده شد======>", max_price_b1)
      print('-'*20)
 
-if today_price_min > min_price_b2 and yesterday_price <= min_price_b2:
+if today_price_min > min_price_b2 >= yesterday_price:
      print ("کف کانال هفتگي روبه بالازده شد =====>", min_price_b2)
      print('-'*20)
 
-if today_price_min < min_price_b2 and yesterday_price >= min_price_b2:
+if today_price_min < min_price_b2 <= yesterday_price:
      print ("کف کانال هفتگي روبه پايين زده شد =====>", min_price_b2)
      print ('احتمال ريزش تا : ',min_price_b4,)
      print('-'*20)
 
-if today_price_max > max_price_b3 and yesterday_price <= max_price_b3:
+if today_price_max > max_price_b3 >= yesterday_price:
      print ("سقف کانال دوهفتگي روبه بالازده شد =====>", max_price_b3)
      print('-'*20)
 
-if today_price_max < max_price_b3 and yesterday_price >= max_price_b3:
+if today_price_max < max_price_b3 <= yesterday_price:
      print ("سقف کانال دوهفتگي روبه پايين زده شد =====>", max_price_b3)
      print('-'*20)
 
-if today_price_min > min_price_b4 and yesterday_price <= min_price_b4:
+if today_price_min > min_price_b4 >= yesterday_price:
      print ("کف کانال دوهفتگي روبه بالازده شد =====>", min_price_b4)
      print('-'*20)
 
-if today_price_min < min_price_b4 and yesterday_price >= min_price_b4:
+if today_price_min < min_price_b4 <= yesterday_price:
      print ("کف کانال دوهفتگي روبه پايين زده شد =====>", min_price_b4)
      print('-'*20)
 
-if today_price_max > max_price_b5 and yesterday_price <= max_price_b5:
+if today_price_max > max_price_b5 >= yesterday_price:
      print ("سقف کانال ماهيان روبه بالازده شد =====>", max_price_b5)
      print('-'*20)
 
-if today_price_max < max_price_b5 and yesterday_price >= max_price_b5:
+if today_price_max < max_price_b5 <= yesterday_price:
      print ("سقف کانال ماهيانه روبه پايين زده شد =====>", max_price_b5)
      print('-'*20)
 
-if today_price_min > min_price_b6 and yesterday_price <= min_price_b6:
+if today_price_min > min_price_b6 >= yesterday_price:
      print ("کف کانال ماهيانه روبه بالازده شد =====>", min_price_b6)
      print('-'*20)
 
-if today_price_min < min_price_b6 and yesterday_price >= min_price_b6:
+if today_price_min < min_price_b6 <= yesterday_price:
      print ("کف کانال ماهيانه روبه پايين زده شد =====>", min_price_b6)
      print('-'*20)
 
-if today_price_max > Month103_mean and yesterday_price > Month103_mean:
+if today_price_max > Month103_mean < yesterday_price:
     print ('قيمت بالاي ميانگين    103')
     print ('-'*20)
 
-if today_price > Month103_mean and today_price < yesterday_price < today_two_price:
+if Month103_mean < today_price < yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
-if today_price_min < Month103_mean and yesterday_price < Month103_mean:
+if today_price_min < Month103_mean > yesterday_price:
     print ('قيمت پايين ميانگين   103')
     print ('-'*20)
 
-if today_price < Month103_mean and today_price > yesterday_price > today_two_price:
+if Month103_mean > today_price > yesterday_price > today_two_price:
     print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
-if today_price_max > Month60 and yesterday_price <= Month60:
+if today_price_max > Month30 >= yesterday_price:
     print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
     print ('-'*20)
 
-if today_price_min < Month60 and yesterday_price >= Month60:
+if today_price_min < Month30 <= yesterday_price:
     print ('Month60 شروع روند کاهشي مراقب باش ')
     print ('-'*20)
 
@@ -348,19 +349,19 @@ average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
 average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
 average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
                
-print(40*"=",nam,"Moving Average")
-ave7 = (' EM_3 :',(math.ceil(average_prices7)))
-ave5 = (' EM_26 :',(math.ceil(average_prices2)))
-print (ave7,'     ',ave5)
-ave1 = (' EM_5 :',(math.ceil(average_prices6)))
-ave2 = (' EM_50 :',(math.ceil(average_prices3)))
-print (ave1,'     ',ave2)
-ave3 = (' EM_10 :',(math.ceil(average_price)))
-ave4 = (' EM_103 :',(math.ceil(average_prices4)))
-print (ave3,'     ',ave4)
-ave8 = (' EM_20 :',(math.ceil(average_prices8)))
-ave6 = (' EM_150 :',(math.ceil(average_prices5)))
-print  (ave8,'    ',ave6)
+#print(40*"=",nam,"Moving Average")
+#ave7 = (' EM_3 :',(math.ceil(average_prices7)))
+#ave5 = (' EM_26 :',(math.ceil(average_prices2)))
+#print (ave7,'     ',ave5)
+#ave1 = (' EM_5 :',(math.ceil(average_prices6)))
+#ave2 = (' EM_50 :',(math.ceil(average_prices3)))
+#print (ave1,'     ',ave2)
+#ave3 = (' EM_10 :',(math.ceil(average_price)))
+#ave4 = (' EM_103 :',(math.ceil(average_prices4)))
+#print (ave3,'     ',ave4)
+#ave8 = (' EM_20 :',(math.ceil(average_prices8)))
+#ave6 = (' EM_150 :',(math.ceil(average_prices5)))
+#print  (ave8,'    ',ave6)
 print(25*"-")
 
 # Compare the average price to today's price
@@ -397,10 +398,10 @@ else:
 
 print(25*"-")
 if today_price > yesterday_price:
-     print (' دقت کنيد قيمت افزايشي است ')
+     print (' قيمت امروزبالاترازديروزه ')
 else :
      if today_price < yesterday_price:
-          print (' دقت کنيد قيمت کاهشي است ')
+          print (' قيمت امروزپايين ترازديروزه ')
 
 #=======================================================
 print(40*"=",nam,"bmi محاسبه")
@@ -432,7 +433,7 @@ elif bmi < ticker.yesterday_price:
 else:
     print("معامله نکن")
 #-------------------------------------
-print(20*"-",nam,"omc محاسبه")
+print(40*"=",nam,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
 def bmi(today_Open_price, today_price_min):
 
@@ -469,7 +470,7 @@ if today_Final_price == today_price_min:
      print ('صف فروش شده')
 
 #------------------------------------------------
-print ('-'*20)
+print(40*"=",nam,"signal buy and sell")
 
 ma3 = (math.ceil(average_prices7))
 ma10 = (math.ceil(average_price))
@@ -478,29 +479,29 @@ ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
 #for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 and ma4 <= ma10 or ma4 > ma10:
+if ma3 > ma10 >= ma4 or ma4 > ma10:
     print (" signal Buy نگهدارصعودي شده")
     print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 and ma4 <= ma10 or ma4 > ma10 ')
+    print (' ma3 > ma10 >= ma4 or ma4 > ma10 ')
     print ('-'*20)
       
     
-if ma3 < ma10 and ma4 >= ma10 or ma4 < ma10:
+if ma3 < ma10 <= ma4 or ma4 < ma10:
     print (" signal Sell  نگه ندارنزولي شده")
-    print (' ma3 < ma10 and ma4 >= ma10 or ma4 < ma10')
+    print (' ma3 < ma10 <= ma4 or ma4 < ma10')
     print ('-'*20)
     
     
-if ma3 > ma10 and ma10 > ma20 :
+if ma3 > ma10 > ma20 :
     print (' ascending Hold نگهدارصعوديه')
     print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 & ma10 > ma20')
+    print (' ma3 > ma10 > ma20')
     print ('-'*20)
     
     
-if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
-    print (" no signal wait کمي رنج شده بااحتياط بخريابفروش")
-    print (' ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
+if ma3 <= ma10 >= ma20 or ma10 <= ma20:
+    print (" signal wait قيمت شايد بريزه کمي احتياط کن")
+    print (' ma3 <= ma10 >= ma20 or ma10 <= ma20')
     print ('-'*20)
     
 
@@ -550,10 +551,9 @@ print ('min',today_price_min6,today_price_min5,today_price_min4,today_price_min3
 print ()
 print ('Close',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
 
-if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
-    if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
-        if today_price1 < today_price9 :
-            print ('قيمت داره ميره بالا خريدکن')
+if today_price1 > today_price2 > today_price3 and today_price_min1 > today_price_min2 > today_price_min3:
+    if today_price1 < today_price9 :
+        print ('قيمت داره ميره بالا خريدکن')
 
 if today_price1 < today_price2 and today_price_min1 < today_price_min2 :
     if today_price2 < today_price3 and today_price_min2 < today_price_min3 :
