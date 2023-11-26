@@ -601,22 +601,25 @@ today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
 yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
 yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
-
-highest_price_7 = max(DF['Close'][-7:])
+# محاسبات مقاومت هفتگي تاساليانه 
+highest_price_7 = max(DF['Close'][-7:])    #محاسبه مقاومت هفتگي
 highest_price_8 = max(DF['Close'][-8:])
 highest_price_30 = max(DF['Close'][-30:])
 highest_price_31 = max(DF['Close'][-31:])
-highest_price_280 = max(DF['Close'][-280:])
-highest_price_180 = max(DF['Close'][-180:])
 highest_price_90 = max(DF['Close'][-90:])
+highest_price_180 = max(DF['Close'][-180:])
+highest_price_280 = max(DF['Close'][-280:])
+highest_price_360 = max(DF['Close'][-360:])    #محاسبه مقاومت ساليانه
 #------------------------
-lowest_price_7 = min(DF['Close'][-7:])
+# محاسبات حمايت هفتگي تاساليانه
+lowest_price_7 = min(DF['Close'][-7:])         #محاسبه حمايت هفتگي
 lowest_price_8 = min(DF['Close'][-8:])
 lowest_price_30 = min(DF['Close'][-30:])
 lowest_price_31 = min(DF['Close'][-31:])
-lowest_price_280 = min(DF['Close'][-280:])                              
-lowest_price_180 = min(DF['Close'][-180:])
 lowest_price_90 = min(DF['Close'][-90:])
+lowest_price_180 = min(DF['Close'][-180:])
+lowest_price_280 = min(DF['Close'][-280:])                              
+lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت ساليانه
 
 print (today_price,': قيمت امروز')
 print ('-'*10)
@@ -641,20 +644,19 @@ if highest_price_7 > highest_price_30 > highest_price_90:
 
 if highest_price_7 < highest_price_30 < highest_price_90:
     print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")    
-    
 
-if highest_price_280 > highest_price_90 and lowest_price_280 < lowest_price_90:
-    print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
 
-if lowest_price_7 > lowest_price_30 > lowest_price_90:
-    print (" ودرکل حمايت سه ماه افزايشي است 7>30>90 ")
+# فاصله مقاومت هفتگي باساليانه
+resistance= highest_price_7 - highest_price_360
+resistance_1= highest_price_8 - highest_price_360
 
-if lowest_price_7 < lowest_price_30 < lowest_price_90:
-    print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")      
+if resistance < resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
 
-    
-if highest_price_90 <=  lowest_price_90 :
-    print ("حمايت تبديل به مقاومت شد")
+
+if resistance > resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
+ 
 
 
 if highest_price_30 < highest_price_31 :
@@ -693,7 +695,32 @@ if lowest_price_7 > lowest_price_8 :
 
 if lowest_price_7 == lowest_price_8 :
     print (lowest_price_7 ,": حمايت هفتگي درجاميزنه")
-  
+   
+# فاصله حمايت هفتگي باساليانه
+support= lowest_price_7 -lowest_price_360
+support_1= lowest_price_8 -lowest_price_360
+
+if support < support_1:
+    print (support_1 ,": فاصله حمايت هفتگي باساليانه داره زيادميشه")
+
+
+if support > support_1:
+    print (support_1 ,": فاصله حمايت هفتگي باساليانه داره کم ميشه")    
+
+
+
+if highest_price_280 > highest_price_90 and lowest_price_280 < lowest_price_90:
+    print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
+
+if lowest_price_7 > lowest_price_30 > lowest_price_90:
+    print (" ودرکل حمايت سه ماه افزايشي است 7>30>90 ")
+
+if lowest_price_7 < lowest_price_30 < lowest_price_90:
+    print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")      
+
+    
+if highest_price_90 <=  lowest_price_90 :
+    print ("حمايت تبديل به مقاومت شد")
     
 #==================================================
 print(40*"=",nam,"Engulfing Calculations")

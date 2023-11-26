@@ -293,54 +293,63 @@ today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
 yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
 yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
-
-highest_price_7 = max(DF['Close'][-7:])
+# محاسبات مقاومت هفتگي تاساليانه 
+highest_price_7 = max(DF['Close'][-7:])    #محاسبه مقاومت هفتگي
 highest_price_8 = max(DF['Close'][-8:])
 highest_price_30 = max(DF['Close'][-30:])
 highest_price_31 = max(DF['Close'][-31:])
-highest_price_360 = max(DF['Close'][-360:])
-highest_price_180 = max(DF['Close'][-180:])
 highest_price_90 = max(DF['Close'][-90:])
+highest_price_180 = max(DF['Close'][-180:])
+highest_price_280 = max(DF['Close'][-280:])
+highest_price_360 = max(DF['Close'][-360:])    #محاسبه مقاومت ساليانه
 #------------------------
-lowest_price_7 = min(DF['Close'][-7:])
+# محاسبات حمايت هفتگي تاساليانه
+lowest_price_7 = min(DF['Close'][-7:])         #محاسبه حمايت هفتگي
 lowest_price_8 = min(DF['Close'][-8:])
 lowest_price_30 = min(DF['Close'][-30:])
 lowest_price_31 = min(DF['Close'][-31:])
-lowest_price_360 = min(DF['Close'][-360:])                              
-lowest_price_180 = min(DF['Close'][-180:])
 lowest_price_90 = min(DF['Close'][-90:])
+lowest_price_180 = min(DF['Close'][-180:])
+lowest_price_280 = min(DF['Close'][-280:])                              
+lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت ساليانه
 
 print (today_price,': قيمت امروز')
 print ('-'*10)
-print(highest_price_360,': مقاومت يک سال پيش')
-print(highest_price_180,': مقاومت شش ماه پيش')
-print(highest_price_90,': مقاومت سه ماه پيش')
-print(highest_price_30,': مقاومت يک ماه پيش')
-print(highest_price_7,': مقاومت هفتگي')
-print ('~'*20)
-print(lowest_price_360,': حمايت يک سال پيش')
-print(lowest_price_180,': حمايت شش ماه پيش')
-print(lowest_price_90,': حمايت سه ماه پيش')
-print(lowest_price_30,': حمايت يک ماه پيش')
-print(lowest_price_7,': حمايت هفتگي ')
-print ('-'*10)
+#print(highest_price_280,': مقاومت يک سال پيش')
+#print(highest_price_180,': مقاومت شش ماه پيش')
+#print(highest_price_90,': مقاومت سه ماه پيش')
+#print(highest_price_30,': مقاومت يک ماه پيش')
+#print(highest_price_7,': مقاومت هفتگي')
+#print ('~'*20)
+#print(lowest_price_280,': حمايت يک سال پيش')
+#print(lowest_price_180,': حمايت شش ماه پيش')
+#print(lowest_price_90,': حمايت سه ماه پيش')
+#print(lowest_price_30,': حمايت يک ماه پيش')
+#print(lowest_price_7,': حمايت هفتگي ')
+#print ('-'*10)
+
+if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
+    print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
+
+if highest_price_7 > highest_price_30 > highest_price_90:
+    print ("ومقاومت درسه ماه کلا افزايشي  است  7>30>90")
+
+if highest_price_7 < highest_price_30 < highest_price_90:
+    print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")    
 
 
-if highest_price_360 > highest_price_90 and lowest_price_360 < lowest_price_90:
-    print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
+# فاصله مقاومت هفتگي باساليانه
+resistance= highest_price_7 - highest_price_360
+resistance_1= highest_price_8 - highest_price_360
 
-    
-if highest_price_90 <=  lowest_price_90 :
-    print ("حمايت تبديل به مقاومت شد")
+if resistance < resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
 
-if lowest_price_30 < lowest_price_31 :
-    print ("حمايت يکماه شروع کرده روبه بالابره")
 
-if lowest_price_30 > lowest_price_31 :
-    print ("حمايت يکماه شروع کرده روبه  پايين بره")
+if resistance > resistance_1 :
+    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
+ 
 
-if lowest_price_30 == lowest_price_31 :
-    print ("حمايت يکماهه درجاميزنه")
 
 if highest_price_30 < highest_price_31 :
     print ("مقاومت يکماه شروع کرده روبه بالابره")
@@ -349,7 +358,26 @@ if highest_price_30 > highest_price_31 :
     print ("مقاومت يکماهه شروع کرده روبه پايين بره")
 
 if highest_price_30 == highest_price_31 :
-    print ("مقاومت يکماهه درجاميزنه")
+    print (highest_price_30 ,": مقاومت يکماهه درجاميزنه")
+
+if highest_price_7 < highest_price_8:
+    print ("مقاومت هفتگي شروع کرده روبه بالابره")
+
+if highest_price_7 > highest_price_8:
+    print ("مقاومت هفتگي شروع کرده روبه پايين بره")
+
+if highest_price_7 == highest_price_8:
+    print (highest_price_7 ,": مقاومت هفتگي درجاميزنه")    
+    
+
+if lowest_price_30 < lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه بالابره")
+
+if lowest_price_30 > lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه  پايين بره")
+
+if lowest_price_30 == lowest_price_31 :
+    print (lowest_price_30 ,": حمايت يکماهه درجاميزنه")
 
 if lowest_price_7 < lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه بالابره")
@@ -358,42 +386,8 @@ if lowest_price_7 > lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه پايين بره")
 
 if lowest_price_7 == lowest_price_8 :
-    print ("حمايت هفتگي درجاميزنه")
-    
-print ('-'*10)
-if lowest_price_7 > lowest_price_30 > lowest_price_90:
-    print ("درکل حمايت افزايشي است 7>30>90 ")
-
-if lowest_price_7 < lowest_price_30 < lowest_price_90:
-    print ("درکل حمايت کاهشي است  7<30<90 ")
-
-if lowest_price_7 == lowest_price_30 == lowest_price_90:
-    print ("درکل حمايت درجاميزنه  7=30=90 ")    
-
-if highest_price_7 > highest_price_30 > highest_price_90:
-    print ("ومقاومت کلا افزايشي است  7>30>90")
-
-if highest_price_7 < highest_price_30 < highest_price_90:
-    print ("ومقاومت کلا کاهشي است 7<30<90")
-
-if highest_price_7 == highest_price_30 == highest_price_90:
-    print ("ومقاومت کلادرجاميزنه  7=30=90")    
-
-print ('-'*10)
-# فاصله مقاومت هفتگي باساليانه
-resistance= highest_price_7 - highest_price_360
-resistance_1= highest_price_8 - highest_price_360
-
-if resistance < resistance_1 :
-    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
-
-
-if resistance > resistance_1 :
-    print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
-
-
-print ( resistance ,": فاصله بين مقاومت هفتگي و ساليانه")    
-
+    print (lowest_price_7 ,": حمايت هفتگي درجاميزنه")
+   
 # فاصله حمايت هفتگي باساليانه
 support= lowest_price_7 -lowest_price_360
 support_1= lowest_price_8 -lowest_price_360
@@ -406,7 +400,19 @@ if support > support_1:
     print (support_1 ,": فاصله حمايت هفتگي باساليانه داره کم ميشه")    
 
 
-print ( support ,": فاصله بين حمايت هفتگي و ساليانه")
+
+if highest_price_280 > highest_price_90 and lowest_price_280 < lowest_price_90:
+    print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
+
+if lowest_price_7 > lowest_price_30 > lowest_price_90:
+    print (" ودرکل حمايت سه ماه افزايشي است 7>30>90 ")
+
+if lowest_price_7 < lowest_price_30 < lowest_price_90:
+    print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")      
+
+    
+if highest_price_90 <=  lowest_price_90 :
+    print ("حمايت تبديل به مقاومت شد")
 
 #==================================================
 print(40*"=",nam,"Engulfing Calculations")
@@ -759,26 +765,27 @@ average_min6 = closing_price_b12.mean()   # average_mix_price_day360
 
 
 #=====================================================
-print ()
-print ( today_price_max,'price_max_day','******' ,today_price_min,'price_min_day' , "روزانه")
-print ('-'*20)
-print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 -',min_price_b4,'min14' , "هفتگي")
-print ('-'*20)
-print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
-print ('-'*20)
-print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
-print ('-'*20)
-
-print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
-print (math.ceil(average_max2),"max14 mean -- ",math.ceil(average_min2),"min14 mean" , "ميانگين دوهفته")
-print ()
-print (math.ceil(average_max3),"max30 mean -- ",math.ceil(average_min3),"min30 mean" , "ميانگين ماه")
-print (math.ceil(average_max4),"max60 mean -- ",math.ceil(average_min4),"min60 mean" , "ميانگين دوماه")
-print ()
-print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
-print ()
-print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
-print(40*"=")
+#print ()
+#print ( today_price_max,'price_max_day','******' ,today_price_min,'price_min_day' , "روزانه")
+#print ('-'*20)
+#print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 -',min_price_b4,'min14' , "هفتگي")
+#print ('-'*20)
+#print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
+#print ('-'*20)
+#print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
+#print ('-'*20)
+#print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
+#print (math.ceil(average_max2),"max14 mean -- ",math.ceil(average_min2),"min14 mean" , "ميانگين دوهفته")
+#print ()
+#print (math.ceil(average_max3),"max30 mean -- ",math.ceil(average_min3),"min30 mean" , "ميانگين ماه")
+#print (math.ceil(average_max4),"max60 mean -- ",math.ceil(average_min4),"min60 mean" , "ميانگين دوماه")
+#print ()
+#print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
+#print ()
+#print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
+#print(40*"=")
+print ( 'today_price :',today_price)
+print(20*"-")
 #=======================================================
 # max year360 + min year360 /2
 year = (max_price_b11 + min_price_b12)/2
@@ -810,12 +817,14 @@ week7 = (max_price_b1 + min_price_b2)/2
 # max week7_mean + min week7_mean /2
 week7_mean = (average_max1 + average_min1)/2
 
-if today_price > year_mean:
-    print ('قيمت امروزبيشترازديروزشده')
+if today_price > week7_mean:
+    print ('سهم',nam,'رونگهدارهنوزنفروش')
+    print (" چون ازميانگين هفتگي بالاتره")
     print ('-'*20)
 
-if today_price < year_mean:
-    print ('قيمت امروزکمترازديروزشده')
+if today_price < week7_mean:
+    print ('سهم',nam,'روبفروش نگه ندار')
+    print (" چون ازميانگين هفتگي پايين تره")
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
@@ -824,77 +833,77 @@ if week7 > Month30 or week7 < Month30 :
     print ('احتمال برگشت قيمت از  :' ,  max_price_b3 ,'<==>', min_price_b4 )
     print ('-'*20)
 
-if today_price_max > max_price_b1 and yesterday_price <= max_price_b1:
+if today_price_max > max_price_b1 >= yesterday_price:
      print (" سقف کانال هفتگي روبه بالازده شد ======>", max_price_b1)
      print ('احتمال صعود تا : ',max_price_b3,)
      print('-'*20)
 
-if today_price_max < max_price_b1 and yesterday_price >= max_price_b1:
+if today_price_max < max_price_b1 <= yesterday_price:
      print (" سقف کانال هفتگي روبه پايين زده شد======>", max_price_b1)
      print('-'*20)
 
-if today_price_min > min_price_b2 and yesterday_price <= min_price_b2:
+if today_price_min > min_price_b2 >= yesterday_price:
      print ("کف کانال هفتگي روبه بالازده شد =====>", min_price_b2)
      print('-'*20)
 
-if today_price_min < min_price_b2 and yesterday_price >= min_price_b2:
+if today_price_min < min_price_b2 <= yesterday_price:
      print ("کف کانال هفتگي روبه پايين زده شد =====>", min_price_b2)
      print ('احتمال ريزش تا : ',min_price_b4,)
      print('-'*20)
 
-if today_price_max > max_price_b3 and yesterday_price <= max_price_b3:
+if today_price_max > max_price_b3 >= yesterday_price:
      print ("سقف کانال دوهفتگي روبه بالازده شد =====>", max_price_b3)
      print('-'*20)
 
-if today_price_max < max_price_b3 and yesterday_price >= max_price_b3:
+if today_price_max < max_price_b3 <= yesterday_price:
      print ("سقف کانال دوهفتگي روبه پايين زده شد =====>", max_price_b3)
      print('-'*20)
 
-if today_price_min > min_price_b4 and yesterday_price <= min_price_b4:
+if today_price_min > min_price_b4 >= yesterday_price:
      print ("کف کانال دوهفتگي روبه بالازده شد =====>", min_price_b4)
      print('-'*20)
 
-if today_price_min < min_price_b4 and yesterday_price >= min_price_b4:
+if today_price_min < min_price_b4 <= yesterday_price:
      print ("کف کانال دوهفتگي روبه پايين زده شد =====>", min_price_b4)
      print('-'*20)
 
-if today_price_max > max_price_b5 and yesterday_price <= max_price_b5:
+if today_price_max > max_price_b5 >= yesterday_price:
      print ("سقف کانال ماهيان روبه بالازده شد =====>", max_price_b5)
      print('-'*20)
 
-if today_price_max < max_price_b5 and yesterday_price >= max_price_b5:
+if today_price_max < max_price_b5 <= yesterday_price:
      print ("سقف کانال ماهيانه روبه پايين زده شد =====>", max_price_b5)
      print('-'*20)
 
-if today_price_min > min_price_b6 and yesterday_price <= min_price_b6:
+if today_price_min > min_price_b6 >= yesterday_price:
      print ("کف کانال ماهيانه روبه بالازده شد =====>", min_price_b6)
      print('-'*20)
 
-if today_price_min < min_price_b6 and yesterday_price >= min_price_b6:
+if today_price_min < min_price_b6 <= yesterday_price:
      print ("کف کانال ماهيانه روبه پايين زده شد =====>", min_price_b6)
      print('-'*20)
 
-if today_price_max > Month103_mean and yesterday_price > Month103_mean:
+if today_price_max > Month103_mean < yesterday_price:
     print ('قيمت بالاي ميانگين    103')
     print ('-'*20)
 
-if today_price > Month103_mean and today_price < yesterday_price < today_two_price:
+if Month103_mean < today_price < yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
-if today_price_min < Month103_mean and yesterday_price < Month103_mean:
+if today_price_min < Month103_mean > yesterday_price:
     print ('قيمت پايين ميانگين   103')
     print ('-'*20)
 
-if today_price < Month103_mean and today_price > yesterday_price > today_two_price:
+if Month103_mean > today_price > yesterday_price > today_two_price:
     print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
-if today_price_max > Month60 and yesterday_price <= Month60:
+if today_price_max > Month30 >= yesterday_price:
     print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
     print ('-'*20)
 
-if today_price_min < Month60 and yesterday_price >= Month60:
+if today_price_min < Month30 <= yesterday_price:
     print ('Month60 شروع روند کاهشي مراقب باش ')
     print ('-'*20)
 
@@ -1001,33 +1010,28 @@ today_price5 = DF['Close'].iloc[-5]
 today_price6 = DF['Close'].iloc[-6]
 today_price9 = DF['Close'].iloc[-9]
 
-print ('max ===>',today_price_max6,today_price_max5,today_price_max4,today_price_max3,today_price_max2,today_price_max1)
-print ()
-print ('Close =>',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
-print ()
-print ('min ===>',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
+#print ('max ===>',today_price_max6,today_price_max5,today_price_max4,today_price_max3,today_price_max2,today_price_max1)
+#print ()
+#print ('Close =>',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
+#print ()
+#print ('min ===>',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
 
 
+if today_price1 > today_price2 > today_price3 and today_price_min1 > today_price_min2:
+    if today_price1 < today_price6 :
+        print ('قيمت داره ميره بالا خريدکن')
 
-if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
-    if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
-        if today_price1 < today_price9 :
-            print ('قيمت داره ميره بالا خريدکن')
+if today_price1 < today_price2 < today_price3 and today_price_min1 < today_price_min2:
+    if today_price1 > today_price6 :
+        print ('قيمت داره ميره پايين بفروش')
 
-if today_price1 < today_price2 and today_price_min1 < today_price_min2 :
-    if today_price2 < today_price3 and today_price_min2 < today_price_min3 :
-        if today_price1 > today_price9 :
-            print ('قيمت داره ميره پايين بفروش')
-
-if today_price_min1 > today_price_min6 and  today_price_min1 > today_price_min9:
+if today_price_min9 < today_price_min1 > today_price_min6 :
     if today_price1 < today_price2 and today_price_min1 < today_price_min2 :
-        if today_price2 < today_price3 and today_price_min2 < today_price_min3 :
-            print ('بانواسانات انجام شده احتمالا ريزشيه')
+        print ('بانواسانات انجام شده احتمالا ريزشيه')
     
-if today_price_min1 < today_price_min6 and  today_price_min1 < today_price_min9:
+if today_price_min9 > today_price_min1 < today_price_min6:
     if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
-        if today_price2 > today_price3 and today_price_min2 > today_price_min3 :
-            print ('بانوسانات انجام شده احتمالا افزايشيه')
+        print ('بانوسانات انجام شده احتمالا افزايشيه')
             
 print (20*'-')
 if today_price1 > today_price6 :
