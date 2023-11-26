@@ -296,7 +296,7 @@ if max_price_b1 < max_price_b3 > max_price_b5 and today_price_max < yesterday_pr
 if min_price_b2 > min_price_b4 < min_price_b6 and today_price_max > yesterday_price:
     print ("روند نزولي يکماه صعودي شد")
     print ('-'*20)
-  
+ 
 #=================================================
 print(40*"=",nam,"Volume")
 
@@ -624,34 +624,38 @@ print ('-'*10)
 #print(highest_price_180,': مقاومت شش ماه پيش')
 #print(highest_price_90,': مقاومت سه ماه پيش')
 #print(highest_price_30,': مقاومت يک ماه پيش')
-print(highest_price_7,': مقاومت هفتگي')
+#print(highest_price_7,': مقاومت هفتگي')
 #print ('~'*20)
 #print(lowest_price_280,': حمايت يک سال پيش')
 #print(lowest_price_180,': حمايت شش ماه پيش')
 #print(lowest_price_90,': حمايت سه ماه پيش')
 #print(lowest_price_30,': حمايت يک ماه پيش')
-print(lowest_price_7,': حمايت هفتگي ')
-print ('-'*10)
+#print(lowest_price_7,': حمايت هفتگي ')
+#print ('-'*10)
 
+if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
+    print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
+
+if highest_price_7 > highest_price_30 > highest_price_90:
+    print ("ومقاومت درسه ماه کلا افزايشي  است  7>30>90")
+
+if highest_price_7 < highest_price_30 < highest_price_90:
+    print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")    
+    
 
 if highest_price_280 > highest_price_90 and lowest_price_280 < lowest_price_90:
     print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
 
-if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
-    print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
+if lowest_price_7 > lowest_price_30 > lowest_price_90:
+    print (" ودرکل حمايت سه ماه افزايشي است 7>30>90 ")
+
+if lowest_price_7 < lowest_price_30 < lowest_price_90:
+    print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")      
 
     
 if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
-if lowest_price_30 < lowest_price_31 :
-    print ("حمايت يکماه شروع کرده روبه بالابره")
-
-if lowest_price_30 > lowest_price_31 :
-    print ("حمايت يکماه شروع کرده روبه  پايين بره")
-
-if lowest_price_30 == lowest_price_31 :
-    print ("حمايت يکماهه درجاميزنه")
 
 if highest_price_30 < highest_price_31 :
     print ("مقاومت يکماه شروع کرده روبه بالابره")
@@ -660,7 +664,26 @@ if highest_price_30 > highest_price_31 :
     print ("مقاومت يکماهه شروع کرده روبه پايين بره")
 
 if highest_price_30 == highest_price_31 :
-    print ("مقاومت يکماهه درجاميزنه")
+    print (highest_price_30 ,": مقاومت يکماهه درجاميزنه")
+
+if highest_price_7 < highest_price_8:
+    print ("مقاومت هفتگي شروع کرده روبه بالابره")
+
+if highest_price_7 > highest_price_8:
+    print ("مقاومت هفتگي شروع کرده روبه پايين بره")
+
+if highest_price_7 == highest_price_8:
+    print (highest_price_7 ,": مقاومت هفتگي درجاميزنه")    
+    
+
+if lowest_price_30 < lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه بالابره")
+
+if lowest_price_30 > lowest_price_31 :
+    print ("حمايت يکماه شروع کرده روبه  پايين بره")
+
+if lowest_price_30 == lowest_price_31 :
+    print (lowest_price_30 ,": حمايت يکماهه درجاميزنه")
 
 if lowest_price_7 < lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه بالابره")
@@ -669,28 +692,8 @@ if lowest_price_7 > lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه پايين بره")
 
 if lowest_price_7 == lowest_price_8 :
-    print ("حمايت هفتگي درجاميزنه")
-
-if highest_price_7 == highest_price_8:
-    print ("مقاومت هفتگي درجاميزنه")
-
-if highest_price_7 < highest_price_8:
-    print ("مقاومت هفتگي شروع کرده روبه بالابره")
-
-if highest_price_7 > highest_price_8:
-    print ("مقاومت هفتگي شروع کرده روبه پايين بره")
-
-if lowest_price_7 > lowest_price_30 > lowest_price_90:
-    print ("درکل حمايت افزايشي است 7>30>90 ")
-
-if lowest_price_7 < lowest_price_30 < lowest_price_90:
-    print ("درکل حمايت کاهشي است  7<30<90 ")
-
-if highest_price_7 > highest_price_30 > highest_price_90:
-    print ("ومقاومت کلا افزايشي است  7>30>90")
-
-if highest_price_7 < highest_price_30 < highest_price_90:
-    print ("ومقاومت کلا کاهشي است 7<30<90")
+    print (lowest_price_7 ,": حمايت هفتگي درجاميزنه")
+  
     
 #==================================================
 print(40*"=",nam,"Engulfing Calculations")
