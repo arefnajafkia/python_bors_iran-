@@ -1154,6 +1154,7 @@ print(rsi.tail(3))
 
 #=====================================================
 print('-'*30)
+week_min = ticker.adj_close - ticker.min_week
 if ticker.adj_close > ticker.max_year :
      print (' مقاومت يک ساله شکسته شد')
 
@@ -1165,9 +1166,11 @@ else:
 
 if (ticker.min_week)>(ticker.adj_close):
      print(' قيمت امروز پايين ترازحداقل قيمت هفتگي است')
+     print (week_min," :فاصله قيمت امروزباهفتگي")
 else:
      if (ticker.min_week)<(ticker.adj_close):
           print(' قيمت امروز بالاترازحداقل قيمت هفتگي است')
+          print (week_min," :فاصله قيمت امروزباهفتگي")
 
 if (ticker.max_week)<(ticker.adj_close):
      print(' قيمت امروزبالاترازحداکثرقيمت هفتگي است')
