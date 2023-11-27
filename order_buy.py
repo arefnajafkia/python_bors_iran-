@@ -74,7 +74,8 @@ print(ticker.float_shares,' : درصد سهام شناور')
 print(ticker.base_volume,' : حجم مبنا ')
 print()  
 print(ticker.last_price,' : آخرین معامله ')  
-print(ticker.adj_close,' : قیمت پایانی ')  
+print(ticker.adj_close,' : قیمت پایانی ')
+print(ticker.best_demand_price," : آخرين تقاضاي خريد")
 print(ticker.yesterday_price,' : قیمت دیروز ')
 print(ticker.open_price,' : قيمت بازشدن')   
 print()
@@ -86,8 +87,28 @@ print()
 print(ticker.count,' : تعداد معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print()
-#=====================================================  
-print('-*'*20)   
+#=====================================================
+print('-'*30)
+week_min = ticker.adj_close - ticker.min_week
+week_max = ticker.adj_close - ticker.max_week
+if ticker.adj_close > ticker.max_year :
+     print (' مقاومت يک ساله شکسته شد')
+
+
+if (ticker.min_week)>(ticker.adj_close):
+     print(' قيمت امروز پايين ترازحداقل قيمت هفتگي است')
+     print (week_min," :فاصله قيمت امروزباهفتگي")
+else:
+     if (ticker.min_week)<(ticker.adj_close):
+          print(' قيمت امروز بالاترازحداقل قيمت هفتگي است')
+          print (week_min," :فاصله قيمت امروزباهفتگي")
+          
+
+if (ticker.max_week)<(ticker.adj_close):
+     print(' قيمت امروزبالاترازحداکثرقيمت هفتگي است')
+     print (week_max," :فاصله قيمت امروزباهفتگي")
+     
+print('-'*30)   
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
