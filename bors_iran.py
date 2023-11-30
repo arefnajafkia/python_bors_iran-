@@ -1409,6 +1409,7 @@ print ()
 if ma3 < ticker.last_price :
     print ('ma3<price : قيمت بالاترميره')
 
+
 if ma3 >  ticker.last_price :
     print ('ma3>price : قيمت پايين ترميره')
 #======================================================
@@ -1714,6 +1715,8 @@ if index<=12 and p > 0:
           print (hs4,'قيمت سربه سربراي فروش')
           print(ticker.adj_close,' : قيمت بسته شدن امروز')
           print ('-'*20)
+
+          
      if pk == pf :
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
