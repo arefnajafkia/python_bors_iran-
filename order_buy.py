@@ -158,6 +158,7 @@ print ()
 if ticker.adj_close > ticker.yesterday_price :
     print (darsad_up4 , ": قيمت فرداتا4درصدمثبت")
     print (darsad_up6 , ": قيمت فردا تا6درصدمثبت")
+    
 
 if ticker.adj_close < ticker.yesterday_price :
     print (darsad_down4 , ": قيمت فرداتا4درصدمنفي")
@@ -216,9 +217,11 @@ if ticker.max_year > ticker.adj_close > ticker.min_year :
 
 if ticker.yesterday_price < ticker.max_year < ticker.adj_close > ticker.min_year :
     print ('بالاترين قيمت ساليانه راروبه بالا شکستيم ')
+    
 
 if ticker.max_year == ticker.adj_close :
     print (" خيلي مهم به سقف قيمت ساليانه رسيديم")
+    
 
 if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price :
     print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
@@ -562,6 +565,8 @@ if index<=12 and p > 0:
           print (hs4,'قيمت سربه سربراي فروش')
           print(ticker.last_price,' : آخرين معامله')
           print ('-'*20)
+
+          
      if pk == pf :
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
