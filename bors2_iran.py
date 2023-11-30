@@ -319,6 +319,7 @@ else:
          if today_Volume < today_Volume_yesterday :
                print ('حجم امروز کمترازحجم ديروزشده')
                
+               
 if today_Volume < today_Volume_yesterday < Volume_week:
        print ('حجم درهفته گذشته کاهشي بود')
 else:
@@ -376,12 +377,14 @@ if today_price > average_prices7 > average_prices8 :
 else:
      if today_price < average_prices7 < average_prices8 :
           print(' Sell signal : price < EMA_3 < EmE_20')
+
           
 if today_price > average_prices7 > average_price :
      print(' Buy signal Important : price > EMA_3 > EmE_10')
 else:
      if today_price < average_prices7 < average_price : 
-          print(' Sell signal Important: price < EMA_3 < EmE_10')         
+          print(' Sell signal Important: price < EMA_3 < EmE_10')
+
           
 if today_price > average_prices3 > average_prices4 :
      print (' signal Important ascending : price > EM_50 > EM_130 ')
@@ -389,11 +392,13 @@ else:
      if today_price < average_prices3 < average_prices4 :
           print (' signal Important Descending : price < EM_50 < EM_130 ')
 
+
 if average_prices7 > average_price :
      print (' EM_3 > Em_10 ')
 else:
      if average_prices7 < average_price :
          print (' EM_3 < Em_10 ')
+
 
 if average_prices7 < average_prices8:
      print (" EM_3 < EM_20")
@@ -470,6 +475,7 @@ elif omc > today_Open_price:
     
 if today_Final_price == today_price_max:
      print('صف خريدشده')
+
 if today_Final_price == today_price_min:
      print ('صف فروش شده')
 #------------------------------------------------
@@ -517,6 +523,7 @@ else:
 
 if ma3 < today_Final_price:
     print ('ma3<price : قيمت بالاترميره')
+
 
 if ma3 > today_Final_price:
     print ('ma3>price : قيمت پايين ترميره')
