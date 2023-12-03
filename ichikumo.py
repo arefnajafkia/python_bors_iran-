@@ -550,19 +550,19 @@ ravand_2 =(ticker.max_week + ticker.min_week)/2
 
 
 if ticker.adj_close > ravand and ticker.yesterday_price > ticker.adj_close :
-    print (" قيمت بالاي ميانه ساليانه است ولي به سمت ميانه ميره پايين")
+    print (" قيمت بالاي نيمه ساليانه است وبه سمت پايين ميره")
 
 
 if ticker.adj_close > ravand and ticker.yesterday_price < ticker.adj_close :
-    print (" قيمت بالاي ميانه ساليانه است وبه سمت بالاميره")
+    print (" قيمت بالاي نيمه ساليانه است وبه سمت بالاميره")
     
 
 if ticker.adj_close < ravand and ticker.yesterday_price < ticker.adj_close :
-    print (" قيمت پايين ميانه ساليانه است ولي به سمت ميانه ميره بالا")
+    print (" قيمت پايين نيمه ساليانه است وبه سمت بالاميره")
 
 
 if ticker.adj_close < ravand and ticker.yesterday_price > ticker.adj_close :
-    print (" قيمت پايين ميانه ساليانه است وبه سمت پايين ميره")
+    print (" قيمت پايين نيمه ساليانه است وبه سمت پايين ميره")
     
 
 if ravand < ticker.adj_close :
@@ -591,17 +591,44 @@ if ticker.adj_close < ravand_2 and ticker.yesterday_price > ticker.adj_close :
           
 
 if ticker.max_year > ticker.adj_close > ticker.min_year :
-    print (" قيمت درمحدوده رنج ساليانه ميباشد")
+    print (" قيمت درمحدوده رنج ساليانه حرکت ميکنه  بالا  و پايين  ميره")
 
 
 if ticker.yesterday_price < ticker.max_year < ticker.adj_close > ticker.min_year :
-    print (" بالاترين قيمت ساليانه راروبه بالا شکستيم ")
+    print ('بالاترين قيمت ساليانه راروبه بالا شکستيم ')
 
+if ticker.max_year == ticker.adj_close :
+    print (" خيلي مهم به سقف قيمت ساليانه رسيديم")
 
 if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price :
     print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
 
+
+if ticker.adj_close == ticker.min_year :
+    print (" خيلي مهم به کف قيمت ساليانه رسيديم")     
+print(20*"-",nam,"Tik Top or Down")
+
+print(ticker.max_year,' : حداکثر قیمت بازه سال')
+print(ticker.min_year,' : حداقل قیمت بازه سال')
+
+
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (tik_ascending , ' : تيک صعودي')
+
+    
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
+    print (tik_Descending , ' : تيک نزولي')
+
+               
+
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (" امروزتيک صعودي داريم")
+
      
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+    print (" امروزتيک نزولي داريم")
+
+#=========================================================     
 print(20*"-",nam,"Tik Top or Down")
 
 if ticker.open_price>ticker.low_price < ticker.adj_close:
@@ -798,8 +825,8 @@ print(30*"=","محاسبات خريد شمااز",sahame,)
           
 # چکارن
 if index == 1:
-     p=0
-     s=4724
+     p=4450
+     s=0
      v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
