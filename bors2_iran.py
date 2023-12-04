@@ -517,8 +517,10 @@ if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
 print (ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
     print ('قيمت زير ميانگين 10روزميباشد')
+    print("sell price")
 else:
     print ('قيمت بالاي ميانگين 10 روزه ميباشد')
+    print ("buy price")
 
 
 if ma3 < today_Final_price:
