@@ -665,18 +665,17 @@ if highest_price_30 < highest_price_31 :
 if highest_price_30 > highest_price_31 :
     print ("مقاومت يکماهه شروع کرده روبه پايين بره")
 
-if highest_price_30 == highest_price_31 :
-    print (highest_price_30 ,": مقاومت يکماهه درجاميزنه")
 
 if highest_price_7 < highest_price_8:
     print ("مقاومت هفتگي شروع کرده روبه بالابره")
 
 if highest_price_7 > highest_price_8:
-    print ("مقاومت هفتگي شروع کرده روبه پايين بره")
+    print ("مقاومت هفتگي شروع کرده روبه پايين بره")   
 
-if highest_price_7 == highest_price_8:
-    print (highest_price_7 ,": مقاومت هفتگي درجاميزنه")    
     
+if highest_price_30 == highest_price_7 :
+    print (highest_price_7 , ": مقاومت هفتگي باماهيانه برابرشده")
+
 
 if lowest_price_30 < lowest_price_31 :
     print ("حمايت يکماه شروع کرده روبه بالابره")
@@ -684,8 +683,6 @@ if lowest_price_30 < lowest_price_31 :
 if lowest_price_30 > lowest_price_31 :
     print ("حمايت يکماه شروع کرده روبه  پايين بره")
 
-if lowest_price_30 == lowest_price_31 :
-    print (lowest_price_30 ,": حمايت يکماهه درجاميزنه")
 
 if lowest_price_7 < lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه بالابره")
@@ -693,8 +690,9 @@ if lowest_price_7 < lowest_price_8 :
 if lowest_price_7 > lowest_price_8 :
     print ("حمايت هفتگي شروع کرده روبه پايين بره")
 
-if lowest_price_7 == lowest_price_8 :
-    print (lowest_price_7 ,": حمايت هفتگي درجاميزنه")
+
+if lowest_price_30 == lowest_price_7:
+    print (lowest_price_7,": حمايت هفتگي باماهيانه برابرشده")
    
 # فاصله حمايت هفتگي باساليانه
 support= lowest_price_7 -lowest_price_360
