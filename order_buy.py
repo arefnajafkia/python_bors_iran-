@@ -353,6 +353,17 @@ buy_signals = (
 )
 print(buy_signals.tail(3))
 
+#---------------------------------
+print(40*"=",sahame,"For order")
+nimeh_price = ((ticker.high_price + ticker.low_price)/2)
+nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
+
+if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
+    print ("ميتوني خريد کني فردا قيمت بالاترميره")
+    
+
+if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
+    print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
           
 #----------------------------------
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
