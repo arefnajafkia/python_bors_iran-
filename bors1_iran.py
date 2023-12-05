@@ -72,7 +72,7 @@ today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
 average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيانه
 
-print(20*"=",nam,"How the share trend and now Stock information")
+print(25*"=",nam,"How the share trend and now Stock information")
 # بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
 max_price_b1 = max(DF['High'][-7:]) # max_price day7
 min_price_b2 = min(DF['Low'][-7:])  # min_price day7
@@ -126,25 +126,6 @@ average_max6 = closing_price_b11.mean()   # average_max_price_day360
 average_min6 = closing_price_b12.mean()   # average_mix_price_day360
 
 #=====================================================
-#print ()
-#print ( today_price_max,'price_max_day','******' ,today_price_min,'price_min_day' , "روزانه")
-#print ('-'*20)
-#print ( max_price_b1,'max7 -',min_price_b2,'min7','******' ,max_price_b3,'max14 -',min_price_b4,'min14' , "هفتگي")
-#print ('-'*20)
-#print ( max_price_b5,'max30 -',min_price_b6,'min30','******' ,max_price_b7,'max60 -',min_price_b8,'min60' , "ماهيانه")
-#print ('-'*20)
-#print ( max_price_b9,'max103 -',min_price_b10,'min103','******' ,max_price_b11,'max360 -',min_price_b12,'min360' , "ساليانه")
-#print ('-'*20)
-#print (math.ceil(average_max1),"max7 mean -- ",math.ceil(average_min1),"min7 mean" , "ميانگين هفتگي")
-#print (math.ceil(average_max2),"max14 mean -- ",math.ceil(average_min2),"min14 mean" , "ميانگين دوهفته")
-#print ()
-#print (math.ceil(average_max3),"max30 mean -- ",math.ceil(average_min3),"min30 mean" , "ميانگين ماه")
-#print (math.ceil(average_max4),"max60 mean -- ",math.ceil(average_min4),"min60 mean" , "ميانگين دوماه")
-#print ()
-#print (math.ceil(average_max5),"max103 mean -- ",math.ceil(average_min5),"min103 mean" , "ميانگين شش ماه")
-#print ()
-#print (math.ceil(average_max6),"max360 mean -- ",math.ceil(average_min6),"min360 mean" , "ميانگين ساليانه")
-#print(20*"-")
 print ( 'today_price :',today_price)
 print(20*"-")
 #=======================================================
@@ -254,12 +235,20 @@ if Month103_mean < today_price < yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
+if Month103_mean < today_price > yesterday_price > today_two_price:
+    print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
+    print ('-'*20)
+
 if today_price_min < Month103_mean > yesterday_price:
     print ('قيمت پايين ميانگين   103')
     print ('-'*20)
 
 if Month103_mean > today_price > yesterday_price > today_two_price:
     print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
+    print ('-'*20)
+
+if Month103_mean > today_price < yesterday_price < today_two_price:
+    print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
     print ('-'*20)
 
 if today_price_max > Month30 >= yesterday_price:
@@ -349,19 +338,6 @@ average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
 average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
 average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
                
-#print(40*"=",nam,"Moving Average")
-#ave7 = (' EM_3 :',(math.ceil(average_prices7)))
-#ave5 = (' EM_26 :',(math.ceil(average_prices2)))
-#print (ave7,'     ',ave5)
-#ave1 = (' EM_5 :',(math.ceil(average_prices6)))
-#ave2 = (' EM_50 :',(math.ceil(average_prices3)))
-#print (ave1,'     ',ave2)
-#ave3 = (' EM_10 :',(math.ceil(average_price)))
-#ave4 = (' EM_103 :',(math.ceil(average_prices4)))
-#print (ave3,'     ',ave4)
-#ave8 = (' EM_20 :',(math.ceil(average_prices8)))
-#ave6 = (' EM_150 :',(math.ceil(average_prices5)))
-#print  (ave8,'    ',ave6)
 print(25*"-")
 
 # Compare the average price to today's price
@@ -404,35 +380,7 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 #=======================================================
-print(40*"=",nam,"bmi محاسبه")
- # تعریف یک تابع برای محاسبه بی ام آی
-def bmi(last_price, adj_close):
 
-     bmi = (adj_close + (last_price*2))/3
-     
-    # برگرداندن بی ام آی به عنوان خروجی تابع
-     return bmi
-
-# دريافت قيمت پاياني  وآخرين قيمت
-last_price = today_Final_price
-adj_close = today_price
-# فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
-bmi = bmi(last_price, adj_close)
-# نمایش بی ام آی کاربر
-print(f" بی ام آی شما {bmi:.2f} است ")
-
-# شروع شرط براي محاسبه 
-if bmi < adj_close:
-    print("احتمالا پايين تربياد") 
-elif bmi > adj_close:
-    print("احتمالا بالاتربره")
-elif bmi == adj_close:
-    print("قيمت درجاميزنه گيجه")
-elif bmi < ticker.yesterday_price:
-    print ("احتمال ريزش شديدخارج شو")
-else:
-    print("معامله نکن")
-#-------------------------------------
 print(40*"=",nam,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
 def bmi(today_Open_price, today_price_min):
@@ -545,12 +493,6 @@ today_price5 = DF['Close'].iloc[-5]
 today_price6 = DF['Close'].iloc[-6]
 today_price9 = DF['Close'].iloc[-9]
 
-#print ('max',today_price_max6,today_price_max5,today_price_max4,today_price_max3,today_price_max2,today_price_max1)
-#print ()
-#print ('min',today_price_min6,today_price_min5,today_price_min4,today_price_min3,today_price_min2,today_price_min1)
-#print ()
-#print ('Close',today_price6,today_price5,today_price4,today_price3,today_price2,today_price1)
-
 if today_price1 > today_price2 > today_price3 and today_price_min1 > today_price_min2:
     if today_price1 < today_price6 :
         print ('قيمت داره ميره بالا خريدکن')
@@ -623,18 +565,6 @@ lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت سال
 
 print (today_price,': قيمت امروز')
 print ('-'*10)
-#print(highest_price_280,': مقاومت يک سال پيش')
-#print(highest_price_180,': مقاومت شش ماه پيش')
-#print(highest_price_90,': مقاومت سه ماه پيش')
-#print(highest_price_30,': مقاومت يک ماه پيش')
-#print(highest_price_7,': مقاومت هفتگي')
-#print ('~'*20)
-#print(lowest_price_280,': حمايت يک سال پيش')
-#print(lowest_price_180,': حمايت شش ماه پيش')
-#print(lowest_price_90,': حمايت سه ماه پيش')
-#print(lowest_price_30,': حمايت يک ماه پيش')
-#print(lowest_price_7,': حمايت هفتگي ')
-#print ('-'*10)
 
 if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
     print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
