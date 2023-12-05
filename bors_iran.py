@@ -891,12 +891,20 @@ if Month103_mean < today_price < yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 
+if Month103_mean < today_price > yesterday_price > today_two_price:
+    print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
+    print ('-'*20)
+
 if today_price_min < Month103_mean > yesterday_price:
     print ('قيمت پايين ميانگين   103')
     print ('-'*20)
 
 if Month103_mean > today_price > yesterday_price > today_two_price:
     print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
+    print ('-'*20)
+
+if Month103_mean > today_price < yesterday_price < today_two_price:
+    print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
     print ('-'*20)
 
 if today_price_max > Month30 >= yesterday_price:
@@ -1296,9 +1304,9 @@ if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price
 
 
 if ticker.adj_close == ticker.min_year :
-    print (" خيلي مهم به کف قيمت ساليانه رسيديم")     
+    print (" خيلي مهم به کف قيمت ساليانه رسيديم")
+    
 print(20*"-",nam,"Tik Top or Down")
-
 print(ticker.max_year,' : حداکثر قیمت بازه سال')
 print(ticker.min_year,' : حداقل قیمت بازه سال')
 
