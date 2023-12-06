@@ -369,8 +369,8 @@ if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
 if index == 1:
-     p=4450
-     s=0
+     p=0
+     s=4591
      v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
