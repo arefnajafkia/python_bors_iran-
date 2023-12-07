@@ -696,5 +696,108 @@ print ('روند False يا True دقت کنيدبه')
 print (h5,'ascending روند صعودي ')
 print (h10 ,'Descending روند نزولي')
 #===================================================
+print ('='*10)
+# کدهای برنامه نویسی پایتون برای بررسی اول بودن اعداد
+def is_prime(num):
+    if num <= 1:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
 
+num = int(input("Enter a number: "))
+if is_prime(num):
+    print(num, "is a prime number.")
+else:
+    print(num, "is not a prime number.")
+
+#=====================================================
+print ('='*10)
+#کد برنامه نویسی در پایتون برای سری فیبوناچی
+
+def fibonacci(n):
+    fib_series = [0, 1]
+    while len(fib_series) < n:
+        fib_series.append(fib_series[-1] + fib_series[-2])
+    return fib_series
+
+num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
+print(fibonacci(num_terms))
+
+#=====================================================
+print ('='*10)
+#شمارشگر فرکانس کاراکتر با پایتون
+def count_character_frequency(sentence):
+    char_frequency = {}
+    for char in sentence:
+        if char.isalpha():
+            char = char.lower()
+            char_frequency[char] = char_frequency.get(char, 0) + 1
+    return char_frequency
+
+input_sentence = input("Enter a sentence: ")
+result = count_character_frequency(input_sentence)
+
+print("Character Frequencies:")
+for char, frequency in result.items():
+    print(f"{char}: {frequency}")
+
+#====================================================
+print ('='*10)
+#رمزگذاری / رمزگشایی فایل با پایتون
+def encrypt(text, key):
+    encrypted_text = ""
+    for char in text:
+        encrypted_text += chr((ord(char) + key) % 128)
+    return encrypted_text
+
+def decrypt(encrypted_text, key):
+    decrypted_text = ""
+    for char in encrypted_text:
+        decrypted_text += chr((ord(char) - key) % 128)
+    return decrypted_text
+
+message = "Hello, World!"
+encryption_key = 3
+encrypted_message = encrypt(message, encryption_key)
+print("Encrypted Message:", encrypted_message)
+print("Decrypted Message:", decrypt(encrypted_message, encryption_key))
+
+#========================================================
+print ('='*10)
+#وب اسکراپینگ با پایتون
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://maktabkhooneh.org/mag/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+print(soup.title.text)
+
+#====================================================
+print ('='*10)
+#یجاد یک API وب ساده
+#برنامه پایتون آماده زیر به منظور استفاده از
+#وب در پایتون آورده شده است API
+#توضیح: این برنامه از چارچوب وب
+#Flask برای ایجاد یک
+#API ساده استفاده می‌کند که یک ورودی
+#JSON را با یک عدد می‌گیرد و مربع آن عدد را برمی‌گرداند.
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+@app.route('/api/square', methods=['POST'])
+def square_number():
+    data = request.get_json()
+    number = data.get('number')
+    result = number ** 2
+    return jsonify({'result': result})
+
+if __name__ == '__main__':
+    app.run()
+
+#===============================================
 
