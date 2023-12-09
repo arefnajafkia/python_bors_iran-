@@ -327,7 +327,7 @@ if index == 3:
 # وسپه
 if index == 4:
      p=4548
-     s=0
+     s=5062
      v=7538
      if p > 0 :
           print (p , ': your buy price ',sahame )
