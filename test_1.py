@@ -117,6 +117,8 @@ else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : price Tomorrow ( + )')
 
+
+#===============================================================
 print(40*"=",sahame,"Process")     
 if ticker.adj_close > ticker.max_week :
      print ('ticker adj close > ticker max week')
@@ -127,7 +129,9 @@ else :
           print ('ticker adj close < ticker max week')
           print (ticker.min_week," : max week")
           print (ticker.adj_close," : adj close")
-     
+
+
+#==================================================================
 print(20*"-",sahame,"Tik Top or Down")
 
 if ticker.open_price>ticker.low_price < ticker.adj_close:
@@ -141,6 +145,7 @@ if ticker.open_price>ticker.low_price < ticker.adj_close:
                               print (tik_Descending , ' :  Down tick')
                
 
+
 if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
      if ticker.adj_close > ticker.open_price:
           print (" Today Up tick")
@@ -148,6 +153,7 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
           if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
                if ticker.adj_close < ticker.open_price:
                      print (" Today Down tick")
+
 
 #=================================================
 print(40*"=",sahame,"bmi Computing")
