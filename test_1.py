@@ -113,9 +113,11 @@ else:
 
 if (ticker.last_price) > (ticker.adj_close):
      print ((math.floor(Percent_last )),'% : price Tomorrow ( - )')
+     print ("قیمت امروزکمترازقیمت دیروزشد")
 else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : price Tomorrow ( + )')
+          print("قیمت امروزبشترازقیمت دیروزشد")
 
 
 #===============================================================
