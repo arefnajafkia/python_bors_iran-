@@ -83,11 +83,13 @@ print('-*'*20)
 if ticker.adj_close > ticker.max_year :
      print ('  break ticker max year')
 
+
 if (ticker.min_week)>(ticker.adj_close):
      print(' ticker min week > ticker adj close ')
 else:
      if (ticker.min_week)<(ticker.adj_close):
           print(' ticker min week < ticker adj close ')
+
 
 if (ticker.max_week)<(ticker.adj_close):
      print(' ticker max week < ticker adj close')
