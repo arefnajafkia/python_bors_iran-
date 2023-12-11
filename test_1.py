@@ -298,8 +298,8 @@ else:
 print(40*"="," Your stock purchase and sale calculations",sahame,)
 # چکارن
 if index == 1:
-     p=4450
-     s=0
+     p=0
+     s=4250
      v=20000
      if p > 0 :
           print (p , ': your buy price ',sahame )
