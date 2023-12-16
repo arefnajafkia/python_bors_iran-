@@ -1575,8 +1575,7 @@ if index == 5:
 if index == 6:
      p=3075
      s=0
-     v=71000
-     if p > 0 :
+     v=71000     if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
      if s > 0 :
