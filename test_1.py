@@ -360,9 +360,9 @@ if index == 5:
           Fib == Fib    
 # شپاکسا
 if index == 6:
-     p=3310
+     p=3075
      s=0
-     v=51000
+     v=71000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
