@@ -348,9 +348,9 @@ if index == 4:
           Fib == Fib   
 # غکورش
 if index == 5:
-     p=9916
+     p=9605
      s=0
-     v=20333
+     v=23000
      if p > 0 :
           print (p , ': your buy price ',sahame )
           print (v ,': Your number of shares')
