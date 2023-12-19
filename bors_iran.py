@@ -1679,6 +1679,7 @@ if index<=12 and p > 0:
      # تعیین حد سود
      take_profit = price * (1+tp)
      pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
+     sz= pf-pk 
      print(20*"-" )
      
      if today_price > take_profit:
@@ -1690,7 +1691,6 @@ if index<=12 and p > 0:
           print (" شماسود ميکنيد به مبلغ :" ,pp)
           print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
           print(20*"-" )
- 
      elif today_price < stop_loss:
           loss = str ( pk - pf )
           loss_float = float(loss)
@@ -1704,10 +1704,12 @@ if index<=12 and p > 0:
           if pk > today_price :
               print("Price to limit")
               print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
+              print (sz ,": اگرامروزبفروشيد مقدارسودشماميشود")
               print(20*"-" )
           if pk < today_price :
               print("Price to limit")
               print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
+              print(sz,": اگرامروزبفروشيد مقدارزيان شماميشود")
               print(20*"-" )
 
           

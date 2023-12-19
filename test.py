@@ -517,7 +517,7 @@ if index >= 13 :
          
 import sys
 
-if index<=12 and p > 0:     
+if index<=12 and p > 0:
      price=p
      price_s=s
      vol=v
@@ -534,8 +534,10 @@ if index<=12 and p > 0:
      # تعیین حد سود
      take_profit = price * (1+tp)
      pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
+     sz= pf-pk 
+     print(20*"-" )
      
-     if today_price >= take_profit:
+     if today_price > take_profit:
           profit = str ( pf - pk )
           profit_float = float(profit)
           profit_percentage =(profit_float / pk) * 100
@@ -544,8 +546,7 @@ if index<=12 and p > 0:
           print (" شماسود ميکنيد به مبلغ :" ,pp)
           print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
           print(20*"-" )
- 
-     elif today_price <= stop_loss:
+     elif today_price < stop_loss:
           loss = str ( pk - pf )
           loss_float = float(loss)
           loss_percentage = (loss_float / pk) * 100
@@ -555,10 +556,17 @@ if index<=12 and p > 0:
           print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
           print(20*"-" )
      else:
-          print("Price to limit")
-          print (" قيمت به حدزيان3وسود20درصدنرسيده است !  \n The price has not reached the limit of 5% loss and 20% profit")                             
-          print(20*"-" )
-          
+          if pk > today_price :
+              print("Price to limit")
+              print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
+              print (sz ,": اگرامروزبفروشيد مقدارسودشماميشود")
+              print(20*"-" )
+          if pk < today_price :
+              print("Price to limit")
+              print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
+              print(sz,": اگرامروزبفروشيد مقدارزيان شماميشود")
+              print(20*"-" )
+
           
      if p == p :
           hs1 = (( p * 0.2 + p )*100)/100 # حدسود20درصد
@@ -572,8 +580,10 @@ if index<=12 and p > 0:
           print (hs3,'حدسود5درصد') 
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
-          print(ticker.last_price,' : آخرين معامله')
+          print(ticker.adj_close,' : قيمت بسته شدن امروز')
           print ('-'*20)
+
+          
      if pk == pf :
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
