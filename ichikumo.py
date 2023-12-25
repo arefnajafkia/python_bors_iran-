@@ -1017,12 +1017,12 @@ if index<=12 and p > 0:
           if pk > today_price :
               print("Price to limit")
               print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
-              print (sz ,": اگرامروزبفروشيد مقدارسودشماميشود")
+              print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
               print(20*"-" )
           if pk < today_price :
               print("Price to limit")
               print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
-              print(sz,": اگرامروزبفروشيد مقدارزيان شماميشود")
+              print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
               print(20*"-" )
 
           
