@@ -1561,9 +1561,9 @@ if index == 4:
           Fib == Fib     
 # غکورش
 if index == 5:
-     p=9605
+     p=9339
      s=0
-     v=23000
+     v=26000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1573,9 +1573,9 @@ if index == 5:
           Fib == Fib
 # شپاکسا
 if index == 6:
-     p=3068
+     p=3049
      s=0
-     v=73000
+     v=77000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
