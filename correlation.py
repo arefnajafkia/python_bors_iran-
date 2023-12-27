@@ -47,7 +47,7 @@ def lin_regr (ticker_a,ticker_b):
     ax.plot(X, Y_pred, c='r')
 
 
-def calc_beta(ticker_a, ticker_b)
+def calc_beta(ticker_a, ticker_b):
     X = data[ticker_a].iloc[1:].values.reshape(-1, 1)
     Y = data[ticker_b].iloc[1:].values.reshape(-1, 1)
 
