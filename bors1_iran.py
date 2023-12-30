@@ -399,7 +399,7 @@ omc = bmi(today_Open_price, today_price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 
-# شروع شرط براي ادامه کار
+# شروع شربراي ادامه کار
 if today_Open_price > yesterday_price:
      print ('today_Open_price > yesterday_price ')
 if today_Open_price < yesterday_price:

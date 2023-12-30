@@ -1561,9 +1561,9 @@ if index == 4:
           Fib == Fib     
 # غکورش
 if index == 5:
-     p=9339
+     p=9194
      s=0
-     v=26000
+     v=28000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1733,6 +1733,21 @@ if index<=12 and p > 0:
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
 
+#=====================================================
+print ('='*10,sahame,'fibonacci')
+#کد برنامه نویسی در پایتون برای سری فیبوناچی
+
+def fibonacci(n):
+    fib_series = [ticker.adj_close, ticker.yesterday_price]
+    while len(fib_series) < n:
+        fib_series.append(fib_series[-1] + fib_series[-2])
+    return fib_series
+num_terms = 7
+#num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
+print(fibonacci(num_terms))
+
+print ('-'*10)
+#=====================================================      
 
 print ()          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
