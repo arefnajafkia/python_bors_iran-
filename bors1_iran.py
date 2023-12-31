@@ -722,8 +722,8 @@ else:
     
 print ('~'*10)
 print ('روند False يا True دقت کنيدبه')
-print (h5,'ascending روند صعودي ')
-print (h10 ,'Descending روند نزولي')
+print (h5,'ascending   روند صعودي ')
+print (h10 ,'Descending   روند نزولي')
 #===================================================
 print ('='*10)
 # کدهای برنامه نویسی پایتون برای بررسی اول بودن اعداد
@@ -742,7 +742,7 @@ else:
     print(num, "is not a prime number.")
 
 #=====================================================
-print ('='*10,nam,'fibonacci')
+print ('='*30,nam,'fibonacci')
 #کد برنامه نویسی در پایتون برای سری فیبوناچی
 
 def fibonacci(n):
@@ -753,35 +753,15 @@ def fibonacci(n):
 num_terms = 7
 #num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
 print(fibonacci(num_terms))
-
+print ('-'*10)
 #=====================================================
-print ('='*10)
 print()
-
-print (today_price_max)#1       
-print (today_price_min)#2
-print (today_Open_price)#3
-print (today_price)#4
-print (today_Final_price)#5 
-
-print (yesterday_price_max)#6
-print (yesterday_price_min)#7
-print (yesterday_Open_price)#8
-print (yesterday_price )#9
-print (yesterday_Final_price)#10 
-
-print (today_two_price_max)#11
-print (today_two_price_min)#12
-print (today_two_Open_price)#13
-print (today_two_price)#14
-print (today_two_Final_price)#15
-
 #===================================================
 # Bullish Harami EngulFing support or Resistance level
 
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
    if (today_two_price)<(yesterday_price)<(today_price):
-       if (lowest_price_7)<=(today_two_price_min)>=(lowest_price_30):
+       if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
            print ("Bullish Harami EngulFing support")
            print ("-----اینگل فینگ صعودی شده خریدکن -----")
            print ("-"*10)
@@ -789,10 +769,13 @@ if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yester
 
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
    if (today_two_price)>(yesterday_price)>(today_price):
-      if (highest_price_7)>=(today_two_price_max)<=(highest_price_30):
+      if highest_price_7 or highest_price_30 or highest_price_90 >=(today_two_price_max):
           print ("Bullish Harami EnngulFung Resistance level")
           print ("----- اینگل فینگ نزولی شده بفروش -----")
           print ("-"*10)
+
+#=====================================================
+
 
 
 
