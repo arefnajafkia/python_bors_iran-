@@ -441,9 +441,6 @@ print(today_price,": قيمت امروز")
 print(yesterday_price,": قيمت ديروز")
 print(max_price_b1,": بالاترين قيمت هفتگي ")
 print(min_price_b2,": پايين ترين قيمت هفتگي")
-print('-'*10)
-print("قيمت هاي هفت روزگذشته ")
-print(closing_price_b1)
 #------------------------------------------------
 print(40*"=",nam,"signal buy and sell")
 
@@ -590,9 +587,6 @@ lowest_price_180 = min(DF['Close'][-180:])
 lowest_price_280 = min(DF['Close'][-280:])                              
 lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت ساليانه
 
-print (today_price,': قيمت امروز')
-print ('-'*10)
-
 if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
     print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
 
@@ -715,11 +709,6 @@ if h_Descending and h10:
     c = "Engulfing :"
     print (c , "hemer Descending !  نزولي وقت فروش" )
     
-else:
-    c = "hold :"
-    print (c , "not Engulfing !")
-    print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
-    
 print ('~'*10)
 print ('روند False يا True دقت کنيدبه')
 print (h5,'ascending   روند صعودي ')
@@ -764,7 +753,7 @@ print()
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
    if (today_two_price)<(yesterday_price)<(today_price):
        if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
-           print ("Bullish Harami EngulFing support level")
+           print ("Bullish Harami EngulFing support")
            print ("-----اینگل فینگ صعودی شده خریدکن -----")
            print ("-"*10)
 
@@ -798,18 +787,6 @@ if today_two_price_max < yesterday_price_max > today_price_max:
                 print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
                 print ("-"*10)
                 
-#=======================================================                
+#=======================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+                
