@@ -54,16 +54,26 @@ print("date and time =", dt_string)
 print ()
 #-------------------------------------------
 
-# Get today's price قيمتهاي امروز
-today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
-today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
-today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
-yesterday_price = DF['Close'].iloc[-2]  # قيمت بسته شدن ديروز
-yesterday_Final_price = DF['Final'].iloc[-2] # قيمت آخرين معامله ديروز
-yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
-today_two_price = DF['Close'].iloc[-3]   # قيمت بسته شدن دوروزقبل
+# Get today's price قيمتهاي روزانه 
+
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
+today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
+today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
+today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
+
+yesterday_price_max = DF['High'].iloc[-2] # بالاترين قيمت ديروز
+yesterday_price_min = DF['Low'].iloc[-2]  # پايين ترين قيمت ديروز
+yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
+yesterday_price = DF['Close'].iloc[-2] # قيمت بسته شده ديروز
+yesterday_Final_price = DF['Final'].iloc[-2] #قيمت آخرين معامله ديروز
+
+today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
+today_two_price_min = DF['Low'].iloc[-3]  # پايين ترين قيمت پريروز
+today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
+today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
+today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
+
 # حجم هفتگي وروزانه وماهيانه Volume
 Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
@@ -432,7 +442,7 @@ print(yesterday_price,": قيمت ديروز")
 print(max_price_b1,": بالاترين قيمت هفتگي ")
 print(min_price_b2,": پايين ترين قيمت هفتگي")
 print('-'*10)
-print("محاسبات قيمتي يک هفته ")
+print("قيمت هاي هفت روزگذشته ")
 print(closing_price_b1)
 #------------------------------------------------
 print(40*"=",nam,"signal buy and sell")
@@ -670,15 +680,17 @@ if highest_price_90 <=  lowest_price_90 :
 #==================================================
 print(40*"=",nam,"Engulfing Calculations")
 # Engulfing  ascending صعودي
+# Bullish Engulfing Support level
 h1 = today_price > today_Open_price
 h2 = yesterday_Open_price > yesterday_price
 h3 = yesterday_price > today_Open_price
 h4 = today_price > yesterday_Open_price
 
 h_ascending = h1 and h2 and h3 and h4
-h5 = (today_price - today_Open_price) > 5*(yesterday_Open_price - yesterday_price) 
+h5 =  (today_price - today_Open_price) > 5*(yesterday_Open_price - yesterday_price) 
 
 # Engulfing  Descending نزولي
+# Bullish Engulfing Resistance level 
 h6 = today_price < today_Open_price
 h7 = yesterday_Open_price < yesterday_price
 h8 = yesterday_price < today_Open_price
@@ -744,4 +756,53 @@ print(fibonacci(num_terms))
 
 #=====================================================
 print ('='*10)
+print()
+
+print (today_price_max)#1       
+print (today_price_min)#2
+print (today_Open_price)#3
+print (today_price)#4
+print (today_Final_price)#5 
+
+print (yesterday_price_max)#6
+print (yesterday_price_min)#7
+print (yesterday_Open_price)#8
+print (yesterday_price )#9
+print (yesterday_Final_price)#10 
+
+print (today_two_price_max)#11
+print (today_two_price_min)#12
+print (today_two_Open_price)#13
+print (today_two_price)#14
+print (today_two_Final_price)#15
+
+#===================================================
+# Bullish Harami EngulFing support or Resistance level
+
+if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
+   if (today_two_price)<(yesterday_price)<(today_price):
+       if (lowest_price_7)<=(today_two_price_min)>=(lowest_price_30):
+           print ("Bullish Harami EngulFing support")
+           print ("-----اینگل فینگ صعودی شده خریدکن -----")
+           print ("-"*10)
+
+
+if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
+   if (today_two_price)>(yesterday_price)>(today_price):
+      if (highest_price_7)>=(today_two_price_max)<=(highest_price_30):
+          print ("Bullish Harami EnngulFung Resistance level")
+          print ("----- اینگل فینگ نزولی شده بفروش -----")
+          print ("-"*10)
+
+
+
+
+
+
+
+
+
+
+
+
 
