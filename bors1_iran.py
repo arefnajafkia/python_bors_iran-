@@ -757,12 +757,14 @@ print ('-'*10)
 #=====================================================
 print()
 #===================================================
+#هرموقع باريش هارامي صعودي يانزولي صورت بگيرد پرينت ميکند درغيراين
+#صورت چيزي نشان نميدهد 
 # Bullish Harami EngulFing support or Resistance level
 
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
    if (today_two_price)<(yesterday_price)<(today_price):
        if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
-           print ("Bullish Harami EngulFing support")
+           print ("Bullish Harami EngulFing support level")
            print ("-----اینگل فینگ صعودی شده خریدکن -----")
            print ("-"*10)
 
@@ -775,6 +777,28 @@ if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yester
           print ("-"*10)
 
 #=====================================================
+# اين کد براي اينگل فينگ نوشته شده است ودرصورت اجراشدن پرينت انجام ميشود
+# درغيراين صورت هيچ چيزي پرينت نميکند
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max < yesterday_price_max < today_price_max:
+    if today_two_price_min > yesterday_price_min < today_price_min:
+        if today_two_price < yesterday_price < today_price:
+            if lowest_price_7 or lowest_price_30 or lowest_price_90 <= yesterday_price_min:
+                print ("EngulFing support level")
+                print ("----- اینگل فینگ صعودی رخ داده خریدکن-----")
+                print ("-"*10)
+
+
+if today_two_price_max < yesterday_price_max > today_price_max:
+    if today_two_price_min > yesterday_price_min > today_price_min:
+        if today_two_price > yesterday_price > today_price:
+            if highest_price_7 or highest_price_30 or highest_price_90 >= yesterday_price_min:
+                print ("EngulFing Resistance level")
+                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("-"*10)
+                
+#=======================================================                
 
 
 
