@@ -834,17 +834,17 @@ week7 = (max_price_b1 + min_price_b2)/2
 week7_mean = (average_max1 + average_min1)/2
 
 if today_price > week7_mean:
-    print ('سهم',nam,'رونگهدارهنوزنفروش')
+    print ('سهم',nam,' اگه داري فعلا براي ميان مدت نگهدار')
     print (" چون ازميانگين هفتگي بالاتره")
     print ('-'*20)
 
 if today_price < week7_mean:
-    print ('سهم',nam,'روبفروش نگه ندار')
+    print ('سهم',nam,' اگه داري براي ميان مدت هم نگه ندار')
     print (" چون ازميانگين هفتگي پايين تره")
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
-    print ('روند کمي حالت رنج پيداکرده دقت کن')
+    print (nam,' بين اين کف وسقف ها نوسان داره ميزنه')
     print ('سقف وکف روندرنج  :' ,  max_price_b7 ,'<==>', min_price_b8 )
     print ('احتمال برگشت قيمت از  :' ,  max_price_b3 ,'<==>', min_price_b4 )
     print ('-'*20)
@@ -1628,9 +1628,9 @@ if index == 4:
           Fib == Fib     
 # غکورش
 if index == 5:
-     p=9194
+     p=9126
      s=0
-     v=28000
+     v=29000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')

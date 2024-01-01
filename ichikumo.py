@@ -948,9 +948,9 @@ if index == 4:
           Fib == Fib     
 # غکورش
 if index == 5:
-     p=9194
+     p=9126
      s=0
-     v=28000
+     v=29000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1199,7 +1199,7 @@ if today_two_price_max < yesterday_price_max > ticker.high_price:
                 print ("-"*10)
                 
 #=======================================================
-         
+print ()         
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 
 #===================================================== 
