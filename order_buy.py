@@ -300,6 +300,65 @@ if ticker.sta_min == ticker.low_price:
     print (' صف فروش شده')
           
 print ()
+#-------------------------------------
+print(40*"=",sahame,"omc محاسبه")
+# تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
+def bmi(open_price, price_min):
+
+     omc = (((ticker.high_price *2 )+ price_min)/3)-(ticker.adj_close - yesterday_price)
+     
+    # برگرداندن او ام سي براي خروجي تابع
+     return omc
+
+# دريافت قيمت بازشدن با پايين ترين قيمت امروز
+open_price = ticker.open_price
+price_min = ticker.low_price
+price_max = ticker.high_price
+yesterday_price = ticker.yesterday_price # قيمت ديروز
+#فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
+omc = bmi(open_price, price_min)
+# نمايش اوام سي به کاربر
+print(f" او ام سي شما {omc:.2f} است ")
+print ('-'*15)
+# شروع شرط براي ادامه کار
+if open_price > yesterday_price:
+    print ('open_price > yesterday_price')
+if open_price < yesterday_price:
+    print ('open_price < yesterday_price')
+
+if omc > ticker.adj_close :
+    print ('قيمت بسته شدن فردابيشتراز بسته شدن امروزميشه')
+
+if omc < ticker.adj_close :
+    print ('قيمت بسنه شدن فردا کمترازبسته شدن امروزميشه')
+
+if omc >= price_max :
+    print ('صبرکن وآماده خريد باش')
+    print ('omc >= price_max')
+elif omc < price_min < yesterday_price :
+     print (' شروع ريزش هفتگي ميتوني بفروشي')
+     print ('omc < price_min')
+elif omc > open_price > yesterday_price :     
+     print ('ميتوني نگهداري اگرمنفي زدبفروشي')
+     print ('omc > Open_price')
+
+if ticker.last_price == price_max:
+     print('صف خريدشده')
+     
+if ticker.last_price == price_min:
+     print ('صف فروش شده')     
+
+if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
+    print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
+if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
+    print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
+
+
+print ((math.ceil(omc)),": omc قيمت")
+print (ticker.adj_close,": قيمت امروز")
+print (yesterday_price,": قيمت ديروز")
+print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
+print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 

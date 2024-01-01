@@ -414,6 +414,12 @@ if today_Open_price > yesterday_price:
      print ('today_Open_price > yesterday_price ')
 if today_Open_price < yesterday_price:
      print ('today_Open_price < yesterday_price ')
+
+if omc > today_price :
+    print ('قيمت بسته شدن فردا بيشترازبسته شدن امروزميشه')
+
+if omc < today_price :
+    print ('قيمت بسته شدن فرداکمترازبسته شدن امروزميشه')
      
 if omc >= today_price_max:
      print (' صبرکن وآماده خريدباش')
@@ -427,6 +433,7 @@ elif omc > today_Open_price > yesterday_price:
      
 if today_Final_price == today_price_max:
      print('صف خريدشده')
+     
 if today_Final_price == today_price_min:
      print ('صف فروش شده')
 
