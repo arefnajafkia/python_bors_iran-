@@ -321,18 +321,7 @@ lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت سال
 
 print (today_price,': قيمت امروز')
 print ('-'*10)
-#print(highest_price_280,': مقاومت يک سال پيش')
-#print(highest_price_180,': مقاومت شش ماه پيش')
-#print(highest_price_90,': مقاومت سه ماه پيش')
-#print(highest_price_30,': مقاومت يک ماه پيش')
-#print(highest_price_7,': مقاومت هفتگي')
-#print ('~'*20)
-#print(lowest_price_280,': حمايت يک سال پيش')
-#print(lowest_price_180,': حمايت شش ماه پيش')
-#print(lowest_price_90,': حمايت سه ماه پيش')
-#print(lowest_price_30,': حمايت يک ماه پيش')
-#print(lowest_price_7,': حمايت هفتگي ')
-#print ('-'*10)
+
 
 if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
     print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
@@ -736,7 +725,7 @@ print(today_price,": قيمت امروز")
 print(yesterday_price,": قيمت ديروز")
 print(max_price_b1,": بالاترين قيمت هفتگي ")
 print(min_price_b2,": پايين ترين قيمت هفتگي")
-#================================================================*****
+#================================================================
 print(20*"=",nam,"How the share trend and now Stock information")
 # بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
 max_price_b1 = max(DF['High'][-7:]) # max_price day7
@@ -1826,6 +1815,49 @@ print(fibonacci(num_terms))
 
 print ('-'*10)
 #=====================================================      
+
+#هرموقع باريش هارامي صعودي يانزولي صورت بگيرد پرينت ميکند درغيراين
+#صورت چيزي نشان نميدهد 
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
+   if today_two_price < yesterday_price < ticker.adj_close:
+       if lowest_price_7 or lowest_price_30 or lowest_price_90 <= today_two_price_min :
+           print ("Bullish Harami EngulFing support")
+           print ("-----اینگل فینگ صعودی شده خریدکن -----")
+           print ("-"*10)
+
+
+if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
+   if today_two_price > yesterday_price > ticker.adj_close:
+      if highest_price_7 or highest_price_30 or highest_price_90 >=(today_two_price_max):
+          print ("Bullish Harami EnngulFung Resistance level")
+          print ("----- اینگل فینگ نزولی شده بفروش -----")
+          print ("-"*10)
+
+#=====================================================
+# اين کد براي اينگل فينگ نوشته شده است ودرصورت اجراشدن پرينت انجام ميشود
+# درغيراين صورت هيچ چيزي پرينت نميکند
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max < yesterday_price_max < ticker.high_price:
+    if today_two_price_min > yesterday_price_min < ticker.low_price:
+        if today_two_price < yesterday_price < ticker.adj_close:
+            if ticker.min_week or lowest_price_30 or ticker.min_year <= yesterday_price_min:
+                print ("EngulFing support level")
+                print ("----- اینگل فینگ صعودی رخ داده خریدکن-----")
+                print ("-"*10)
+
+
+if today_two_price_max < yesterday_price_max > ticker.high_price:
+    if today_two_price_min > yesterday_price_min > ticker.low_price:
+        if today_two_price > yesterday_price > ticker.adj_close:
+            if ticker.max_week or highest_price_30 or ticker.max_year >= yesterday_price_min:
+                print ("EngulFing Resistance level")
+                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("-"*10)
+                
+#=======================================================
 
 print ()          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')

@@ -41,12 +41,23 @@ rsi = ta.momentum.rsi(DF['Close'], length=14)
 rsi_diff = rsi
 print(rsi.tail(3))
     
-today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
-today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
-today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
-yesterday_price = DF['Close'].iloc[-2]  # قيمت بسته شدن ديروز
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
+today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
+today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
+today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
+
+yesterday_price_max = DF['High'].iloc[-2] # بالاترين قيمت ديروز
+yesterday_price_min = DF['Low'].iloc[-2]  # پايين ترين قيمت ديروز
+yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
+yesterday_price = DF['Close'].iloc[-2] # قيمت بسته شده ديروز
+yesterday_Final_price = DF['Final'].iloc[-2] #قيمت آخرين معامله ديروز
+
+today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
+today_two_price_min = DF['Low'].iloc[-3]  # پايين ترين قيمت پريروز
+today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
+today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
+today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
 
 Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
@@ -174,45 +185,66 @@ else:
     print("معامله نکن")
 print()
 #-------------------------------------
-print(20*"-",nam,"omc محاسبه")
+# محاسبه بالاترين وپايين ترين قيمت يک هفته پيش    
+max_price_b1 = max(DF['High'][-7:]) # max_price day7
+min_price_b2 = min(DF['Low'][-7:])  # min_price day7
+print(40*"=",nam,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
 def bmi(today_Open_price, today_price_min):
 
-     omc = (((today_Open_price *4 )+ today_price_min)/5)-(today_Open_price - today_price_min)
+     omc = (((today_price_max *2 )+ today_price_min)/3)-(today_price - yesterday_price)
      
     # برگرداندن او ام سي براي خروجي تابع
      return omc
-
 # دريافت قيمت بازشدن با پايين ترين قيمت امروز
 today_Open_price = DF['Open'].iloc[-1]
 today_price_min = DF['Low'].iloc[-1]
+today_price_max = DF['High'].iloc[-1]
 yesterday_price = DF['Close'].iloc[-2] # قيمت ديروز
 #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
 omc = bmi(today_Open_price, today_price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
-# شروع شرط براي ادامه کار
-if today_Open_price <= yesterday_price:
-     print ('خريدممنوع open < yesterday کاهشي ')
-if omc == today_price_min:
-     print ('صبرکن')
-elif omc < today_price_min:
-     print ('خريدنکن')
-elif omc > today_Open_price:
-     print ('آماده فروش باش')
+
+# شروع شربراي ادامه کار
+if today_Open_price > yesterday_price:
+     print ('today_Open_price > yesterday_price ')
+if today_Open_price < yesterday_price:
+     print ('today_Open_price < yesterday_price ')
+
+if omc > today_price :
+    print ('قيمت بسته شدن فردا بيشترازبسته شدن امروزميشه')
+
+if omc < today_price :
+    print ('قيمت بسته شدن فرداکمترازبسته شدن امروزميشه')
      
-
-if yesterday_price > today_Open_price:
-     print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
-else:
-     if yesterday_price < today_Open_price:
-          print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
-
+if omc >= today_price_max:
+     print (' صبرکن وآماده خريدباش')
+     print ('omc >= today_price_max')
+elif omc < today_price_min < yesterday_price :
+     print (' شروع ريزش هفتگي ميتوني بفروشي')
+     print ('omc < today_price_min')
+elif omc > today_Open_price > yesterday_price:
+     print ('ميتوني نگهداري اگرمنفي زدبفروشي')
+     print ('omc > today_Open_price')
+     
 if today_Final_price == today_price_max:
      print('صف خريدشده')
-else:
-     if today_Final_price == today_price_min:
-          print ('صف فروش شده')
+     
+if today_Final_price == today_price_min:
+     print ('صف فروش شده')
+
+if omc > today_price > yesterday_price <= min_price_b2:
+    print (max_price_b1,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
+if omc < today_price < yesterday_price <= max_price_b1:
+    print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
+     
+
+print((math.ceil(omc)),": omc قيمت")
+print(today_price,": قيمت امروز")
+print(yesterday_price,": قيمت ديروز")
+print(max_price_b1,": بالاترين قيمت هفتگي ")
+print(min_price_b2,": پايين ترين قيمت هفتگي")
 
 #=====================================================
 # EMA_3,10,20 نمايش نمودارقيمت و
@@ -269,6 +301,49 @@ else :
           print ()
           print ('-'*10,"If you want to continue, please select your share",'-'*10)
 #==============================================================
+#هرموقع باريش هارامي صعودي يانزولي صورت بگيرد پرينت ميکند درغيراين
+#صورت چيزي نشان نميدهد 
+# Bullish Harami EngulFing support or Resistance level
+
+if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
+   if (today_two_price)<(yesterday_price)<(today_price):
+       if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
+           print ("Bullish Harami EngulFing support")
+           print ("-----اینگل فینگ صعودی شده خریدکن -----")
+           print ("-"*10)
+
+
+if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
+   if (today_two_price)>(yesterday_price)>(today_price):
+      if highest_price_7 or highest_price_30 or highest_price_90 >=(today_two_price_max):
+          print ("Bullish Harami EnngulFung Resistance level")
+          print ("----- اینگل فینگ نزولی شده بفروش -----")
+          print ("-"*10)
+
+#=====================================================
+# اين کد براي اينگل فينگ نوشته شده است ودرصورت اجراشدن پرينت انجام ميشود
+# درغيراين صورت هيچ چيزي پرينت نميکند
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max < yesterday_price_max < today_price_max:
+    if today_two_price_min > yesterday_price_min < today_price_min:
+        if today_two_price < yesterday_price < today_price:
+            if lowest_price_7 or lowest_price_30 or lowest_price_90 <= yesterday_price_min:
+                print ("EngulFing support level")
+                print ("----- اینگل فینگ صعودی رخ داده خریدکن-----")
+                print ("-"*10)
+
+
+if today_two_price_max < yesterday_price_max > today_price_max:
+    if today_two_price_min > yesterday_price_min > today_price_min:
+        if today_two_price > yesterday_price > today_price:
+            if highest_price_7 or highest_price_30 or highest_price_90 >= yesterday_price_min:
+                print ("EngulFing Resistance level")
+                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("-"*10)
+                
+#=======================================================
+          
 import math
 import yfinance as yf
 #from operator import pos
@@ -1080,7 +1155,50 @@ num_terms = 7
 print(fibonacci(num_terms))
 
 print ('-'*20)
-#=====================================================       
+#=====================================================
+
+#هرموقع باريش هارامي صعودي يانزولي صورت بگيرد پرينت ميکند درغيراين
+#صورت چيزي نشان نميدهد 
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
+   if today_two_price < yesterday_price < ticker.adj_close:
+       if lowest_price_7 or lowest_price_30 or lowest_price_90 <= today_two_price_min :
+           print ("Bullish Harami EngulFing support")
+           print ("-----اینگل فینگ صعودی شده خریدکن -----")
+           print ("-"*10)
+
+
+if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
+   if today_two_price > yesterday_price > ticker.adj_close:
+      if highest_price_7 or highest_price_30 or highest_price_90 >=(today_two_price_max):
+          print ("Bullish Harami EnngulFung Resistance level")
+          print ("----- اینگل فینگ نزولی شده بفروش -----")
+          print ("-"*10)
+
+#=====================================================
+# اين کد براي اينگل فينگ نوشته شده است ودرصورت اجراشدن پرينت انجام ميشود
+# درغيراين صورت هيچ چيزي پرينت نميکند
+# Bullish Harami EngulFing support or Resistance level
+
+if today_two_price_max < yesterday_price_max < ticker.high_price:
+    if today_two_price_min > yesterday_price_min < ticker.low_price:
+        if today_two_price < yesterday_price < ticker.adj_close:
+            if ticker.min_week or lowest_price_30 or ticker.min_year <= yesterday_price_min:
+                print ("EngulFing support level")
+                print ("----- اینگل فینگ صعودی رخ داده خریدکن-----")
+                print ("-"*10)
+
+
+if today_two_price_max < yesterday_price_max > ticker.high_price:
+    if today_two_price_min > yesterday_price_min > ticker.low_price:
+        if today_two_price > yesterday_price > ticker.adj_close:
+            if ticker.max_week or highest_price_30 or ticker.max_year >= yesterday_price_min:
+                print ("EngulFing Resistance level")
+                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("-"*10)
+                
+#=======================================================
          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 
