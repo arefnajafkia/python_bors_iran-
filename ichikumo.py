@@ -948,9 +948,9 @@ if index == 4:
           Fib == Fib     
 # غکورش
 if index == 5:
-     p=9126
+     p=9063
      s=0
-     v=29000
+     v=30000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
