@@ -1163,7 +1163,7 @@ print ('-'*20)
 
 if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
    if today_two_price < yesterday_price < ticker.adj_close:
-       if lowest_price_7 or lowest_price_30 or lowest_price_90 <= today_two_price_min :
+       if ticker.min_week or lowest_price_30 or ticker.min_year <= today_two_price_min :
            print ("Bullish Harami EngulFing support")
            print ("-----اینگل فینگ صعودی شده خریدکن -----")
            print ("-"*10)
@@ -1171,7 +1171,7 @@ if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday
 
 if today_two_price_max > yesterday_price_max and today_two_price_min < yesterday_price_min:
    if today_two_price > yesterday_price > ticker.adj_close:
-      if highest_price_7 or highest_price_30 or highest_price_90 >=(today_two_price_max):
+      if ticker.max_week or highest_price_30 or ticker.max_year >=(today_two_price_max):
           print ("Bullish Harami EnngulFung Resistance level")
           print ("----- اینگل فینگ نزولی شده بفروش -----")
           print ("-"*10)
