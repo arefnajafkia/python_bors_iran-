@@ -1066,16 +1066,21 @@ if today_price1 < today_price9 :
 
 
 #محاسبه 5درصد زيرقيمت امروز
-zarar = (math.ceil((today_price*-5)/100)+today_price)
-sood = (math.ceil((today_price*5)/100)+today_price)
+
+zarar1 = (math.ceil((today_price*-3)/100)+today_price)    
+zarar2 = (math.ceil((today_price*-5)/100)+today_price)
+sood1 = (math.ceil((today_price*3)/100)+today_price)
+sood2 = (math.ceil((today_price*5)/100)+today_price)
 
 if today_price_max2>today_price_max1 and today_price_min2>today_price_min1 and today_price2>today_price1:
     print (" به احتمال قوي فرداقيمت ميريزه")
-    print (  zarar,'تا5درصد ضررميشه')
+    print (  zarar1,'تا3درصد ضررميشه')
+    print (  zarar2,'تا5درصد ضررميشه')
 
 if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and today_price2<today_price1:
     print (" به احتمال قوي فردا قيمت ميره بالاتر")
-    print (  sood , 'تا5درصدسودميشه')
+    print (  sood1 , 'تا3درصدسودميشه')
+    print (  sood2 , 'تا5درصدسودميشه')
         
 print (40*'=')
 #=====================================================
@@ -1487,8 +1492,8 @@ if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
 print (yesterday_price,": قيمت ديروز")
-print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
-print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
+print ((math.ceil(ticker.max_week)),": بالاترين قيمت هفتگي ")
+print ((math.ceil(ticker.min_week)),": پايين ترين قيمت هفتگي")
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
