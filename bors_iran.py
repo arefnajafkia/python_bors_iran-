@@ -1065,8 +1065,7 @@ if today_price1 < today_price9 :
     print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
 
 
-#محاسبه 5درصد زيرقيمت امروز
-
+#محاسبه درصدسودوزيان امروزبراي فردا
 zarar1 = (math.ceil((today_price*-3)/100)+today_price)    
 zarar2 = (math.ceil((today_price*-5)/100)+today_price)
 sood1 = (math.ceil((today_price*3)/100)+today_price)

@@ -1,5 +1,4 @@
 
-
 # برسی روند سهام باتایپ نام سهم
 # محاسبات max - min - year - month - week and mean price
 import math
@@ -13,7 +12,6 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
-
 
 nam = input ("Hello,Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
 
@@ -55,7 +53,6 @@ print ()
 #-------------------------------------------
 
 # Get today's price قيمتهاي روزانه 
-
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
@@ -172,17 +169,17 @@ week7_mean = (average_max1 + average_min1)/2
 
 
 if today_price > week7_mean:
-    print ('سهم',nam,'رونگهدارهنوزنفروش')
+    print ('سهم',nam,' اگه داري فعلا براي ميان مدت نگهدار')
     print (" چون ازميانگين هفتگي بالاتره")
     print ('-'*20)
 
 if today_price < week7_mean:
-    print ('سهم',nam,'روبفروش نگه ندار')
+    print ('سهم',nam,' اگه داري براي ميان مدت هم نگه ندار')
     print (" چون ازميانگين هفتگي پايين تره")
     print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
-    print ('روند کمي حالت رنج پيداکرده دقت کن')
+    print (nam,' بين اين کف وسقف ها نوسان داره ميزنه')
     print ('سقف وکف روندرنج  :' ,  max_price_b7 ,'<==>', min_price_b8 )
     print ('احتمال برگشت قيمت از  :' ,  max_price_b3 ,'<==>', min_price_b4 )
     print ('-'*20)
@@ -554,17 +551,21 @@ if today_price1 < today_price9 :
     print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
 
             
-#محاسبه 5درصد زيرقيمت امروز
-zarar = (math.ceil((today_price*-5)/100)+today_price)
-sood = (math.ceil((today_price*5)/100)+today_price)
+#محاسبه درصدسودوزيان امروزبراي فردا
+zarar1 = (math.ceil((today_price*-3)/100)+today_price)    
+zarar2 = (math.ceil((today_price*-5)/100)+today_price)
+sood1 = (math.ceil((today_price*3)/100)+today_price)
+sood2 = (math.ceil((today_price*5)/100)+today_price)
 
 if today_price_max2>today_price_max1 and today_price_min2>today_price_min1 and today_price2>today_price1:
-    print (" به احتمال قوي فرداقيمت ميريزه مگه جمعش کنن")
-    print (  zarar,'تا5درصد ضررميشه')
+    print (" به احتمال قوي فرداقيمت ميريزه")
+    print (  zarar1,'تا3درصد ضررميشه')
+    print (  zarar2,'تا5درصد ضررميشه')
 
 if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and today_price2<today_price1:
-    print (" به احتمال قوي فرداقيمت ميره بالا مگه خودشون بيارن پايين")
-    print (  sood , 'تا5درصدسودميشه')
+    print (" به احتمال قوي فردا قيمت ميره بالاتر")
+    print (  sood1 , 'تا3درصدسودميشه')
+    print (  sood2 , 'تا5درصدسودميشه')
     
 
 #==================================================
@@ -771,7 +772,6 @@ if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yester
           print ("Bullish Harami EnngulFung Resistance level")
           print ("----- اینگل فینگ نزولی شده بفروش -----")
           print ("-"*10)
-
 #=====================================================
 # اين کد براي اينگل فينگ نوشته شده است ودرصورت اجراشدن پرينت انجام ميشود
 # درغيراين صورت هيچ چيزي پرينت نميکند
@@ -792,8 +792,7 @@ if today_two_price_max < yesterday_price_max > today_price_max:
             if highest_price_7 or highest_price_30 or highest_price_90 >= yesterday_price_min:
                 print ("EngulFing Resistance level")
                 print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
-                print ("-"*10)
-                
+                print ("-"*10)        
 #=======================================================
 
-                
+ 
