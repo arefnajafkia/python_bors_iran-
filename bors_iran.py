@@ -1644,9 +1644,9 @@ if index == 5:
           Fib == Fib
 # شپاکسا
 if index == 6:
-     p=3029
+     p=3022
      s=0
-     v=83000
+     v=85000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
