@@ -1620,9 +1620,9 @@ if index == 3:
           Fib == Fib   
 # وسپه
 if index == 4:
-     p=4398
+     p=2981
      s=0
-     v=1000
+     v=4000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1858,7 +1858,7 @@ if today_two_price_max < yesterday_price_max > ticker.high_price:
         if today_two_price > yesterday_price > ticker.adj_close:
             if ticker.max_week or highest_price_30 or ticker.max_year >= yesterday_price_min:
                 print ("EngulFing Resistance level")
-                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("----- اينگل فينگ نزولي رخ داده بفروش -----")
                 print ("-"*10)
                 
 #=======================================================
