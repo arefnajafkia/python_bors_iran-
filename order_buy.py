@@ -28,7 +28,7 @@ print("date and time =", dt_string)
 print ('-'*30,)
 #-------------------------------------------
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
-namad =["چکارن","تلیسه","غمینو","وسپه", "غکورش","شپاکسا",
+namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا",
         "پاکشو","تاپیکو","دسبحان","کگل","ومعادن","حتوکا",
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
@@ -167,8 +167,8 @@ if ticker.adj_close < ticker.yesterday_price :
     
 #=====================================================
 print(20*"-")
-ravand =(ticker.max_year + ticker.min_year)/2
-ravand_2 =(ticker.max_week + ticker.min_week)/2
+ravand =(ticker.max_year + ticker.min_year)/2 # محاسبه قيمت نيمه ساليانه
+ravand_2 =(ticker.max_week + ticker.min_week)/2 # محاسبه قيمت نيمه هفتگي
 
 
 if ticker.adj_close > ravand and ticker.yesterday_price > ticker.adj_close :
@@ -230,7 +230,7 @@ if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price
 
 if ticker.adj_close == ticker.min_year :
     print (" خيلي مهم به کف قيمت ساليانه رسيديم")
-
+    
      
 print(30*"=",sahame,"Tik Top or Down") 
 print(ticker.max_year,' : حداکثر قیمت بازه سال')
@@ -303,7 +303,7 @@ print ()
 #-------------------------------------
 print(40*"=",sahame,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-def bmi(open_price, price_min):
+def cmo(open_price, price_min):
 
      omc = (((ticker.high_price *2 )+ price_min)/3)-(ticker.adj_close - yesterday_price)
      
@@ -316,7 +316,7 @@ price_min = ticker.low_price
 price_max = ticker.high_price
 yesterday_price = ticker.yesterday_price # قيمت ديروز
 #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-omc = bmi(open_price, price_min)
+omc = cmo(open_price, price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 print ('-'*15)
@@ -353,7 +353,8 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
-
+print ()
+print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
 print (yesterday_price,": قيمت ديروز")
@@ -420,6 +421,11 @@ nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
 
 if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
     print ("ميتوني خريد کني فردا قيمت بالاترميره")
+
+if bmi > omc :
+    print ('bmi > omc',': for buy')
+if bmi < omc :
+    print ('bmi < omc',': for sell')
     
 
 if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
@@ -427,7 +433,7 @@ if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
 
           
 #----------------------------------
-print(40*"=","تعيين مناطق حمايت ومقاومت با محاسبات قيمت ",sahame,)
+print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
 # چکارن
 if index == 1:
      p=0
@@ -724,10 +730,7 @@ num_terms = 7
 print(fibonacci(num_terms))
 
 print ('-'*10)
-
-#=====================================================
-
-print ()      
+#=====================================================      
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 
 
