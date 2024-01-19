@@ -386,11 +386,15 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
+print(25*"-")
+if today_price > 4*(average_Volume_week):
+    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
 #=======================================================
 
 print(40*"=",nam,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-def bmi(today_Open_price, today_price_min):
+def cmo(today_Open_price, today_price_min):
 
      omc = (((today_price_max *2 )+ today_price_min)/3)-(today_price - yesterday_price)
      
@@ -402,7 +406,7 @@ today_price_min = DF['Low'].iloc[-1]
 today_price_max = DF['High'].iloc[-1]
 yesterday_price = DF['Close'].iloc[-2] # قيمت ديروز
 #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-omc = bmi(today_Open_price, today_price_min)
+omc = cmo(today_Open_price, today_price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 
@@ -455,14 +459,14 @@ ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
 #for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 >= ma4 or ma4 > ma10:
+if ma3 > ma10 >= ma4 :
     print (" signal Buy نگهدارصعودي شده")
     print (" buy  اگه نداري بخر")
     print (' ma3 > ma10 >= ma4 or ma4 > ma10 ')
     print ('-'*20)
       
     
-if ma3 < ma10 <= ma4 or ma4 < ma10:
+if ma3 < ma10 <= ma4 :
     print (" signal Sell  نگه ندارنزولي شده")
     print (' ma3 < ma10 <= ma4 or ma4 < ma10')
     print ('-'*20)
@@ -794,5 +798,51 @@ if today_two_price_max < yesterday_price_max > today_price_max:
                 print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
                 print ("-"*10)        
 #=======================================================
+# سرانه خريد
+import pandas as pd
 
- 
+def per_capita_purchase_filter(df: pd.DataFrame, threshold: float) -> pd.DataFrame:
+    """
+    Filters the given DataFrame based on the per capita purchase amount.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to filter.
+        threshold (float): The minimum per capita purchase amount.
+
+    Returns:
+        pd.DataFrame: The filtered DataFrame.
+    """
+    # Calculate the per capita purchase amount
+    df['per_capita_purchase'] = df['purchase_amount'] / df['population']
+
+    # Filter the DataFrame based on the threshold
+    filtered_df = df[df['per_capita_purchase'] >= threshold]
+
+    # Drop the per capita purchase column
+    filtered_df.drop(columns=['per_capita_purchase'], inplace=True)
+
+    return filtered_df
+# سرانه فروش
+import pandas as pd
+
+def per_capita_sales_filter(df: pd.DataFrame, threshold: float) -> pd.DataFrame:
+    """
+    Filters the given DataFrame based on the per capita sales amount.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to filter.
+        threshold (float): The minimum per capita sales amount.
+
+    Returns:
+        pd.DataFrame: The filtered DataFrame.
+    """
+    # Calculate the per capita sales amount
+    df['per_capita_sales'] = df['sales_amount'] / df['population']
+
+    # Filter the DataFrame based on the threshold
+    filtered_df = df[df['per_capita_sales'] >= threshold]
+
+    # Drop the per capita sales column
+    filtered_df.drop(columns=['per_capita_sales'], inplace=True)
+
+    return filtered_df
