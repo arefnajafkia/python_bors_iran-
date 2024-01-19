@@ -272,7 +272,7 @@ else:
 #-------------------------------------
 print(40*"=",sahame,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-def bmi(open_price, price_min):
+def cmo(open_price, price_min):
 
      omc = (((ticker.high_price *2 )+ price_min)/3)-(ticker.adj_close - yesterday_price)
      
@@ -285,7 +285,7 @@ price_min = ticker.low_price
 price_max = ticker.high_price
 yesterday_price = ticker.yesterday_price # قيمت ديروز
 #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-omc = bmi(open_price, price_min)
+omc = cmo(open_price, price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 print ('-'*15)
@@ -323,6 +323,13 @@ if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
 
+if (math.ceil(bmi)) > (math.ceil(omc)) :
+    print ('bmi > omc : فرداقيمت بالاترميره')
+if (math.ceil(bmi)) < (math.ceil(omc)) :
+    print ('bmi < omc : فرداقيمت پايين مياد')
+    
+print ()
+print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
 print (yesterday_price,": قيمت ديروز")
