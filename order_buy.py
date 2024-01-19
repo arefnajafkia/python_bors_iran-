@@ -353,6 +353,12 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
+
+if (math.ceil(bmi)) > (math.ceil(omc)) :
+    print ('bmi > omc : فرداقيمت بالاترميره')
+if (math.ceil(bmi)) < (math.ceil(omc)) :
+    print ('bmi < omc : فرداقيمت پايين مياد')
+    
 print ()
 print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
