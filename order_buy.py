@@ -32,7 +32,8 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "پاکشو","تاپیکو","دسبحان","کگل","ومعادن","حتوکا",
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
-        "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",]
+        "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
+        "فصبا","داتام","نخريس"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -119,6 +120,10 @@ tik_ascending = ((math.ceil(tik_close_low))-(math.ceil(tik_open_low)))
 tik_close_high = ((((ticker.high_price)-(ticker.adj_close))/(ticker.high_price))*100)
 tik_open_high = ((((ticker.high_price)-(ticker.open_price))/(ticker.high_price))*100)
 tik_Descending =((math.ceil(tik_close_high))-(math.ceil(tik_open_high)))
+#محاسبه قدرت هرسهامداروتعداد سهام معامله شده توسط يک نفرازسهامداران
+godrat = ticker.count / ticker.volume 
+tedad = ticker.volume / ticker.count
+
                               
 if (ticker.last_price) > (ticker.adj_close):
      print ((math.floor(Percent )),'% : فاصله بالاترين وپايين ترين قيمت امروزبه درصد')
@@ -136,17 +141,22 @@ else:
 print(40*"=",sahame,"Process")     
 if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
      print (' روند قيمتي هفتگي نزولي شد')
-     print (ticker.max_week," : هفتگي ")
-     print (ticker.yesterday_price," : قيمت ديروز")
-     print (ticker.adj_close, ": قيمت امروز")
+     print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
+     print ((math.ceil(godrat))," : قدرت سهامداران براي فروش")
 
 
 if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
      print (' روند قيمتي هفتگي صعودي شد')
-     print (ticker.max_week," : هفتگي ")
-     print (ticker.yesterday_price," : قيمت ديروز")
-     print (ticker.adj_close, ": قيمت امروز")
+     print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
+     print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
      
+
+print(20*"-")
+print (ticker.max_week," : بالاترين قيمت هفتگي ")
+print (ticker.min_week," : پايين ترين قيمت هفتگي ")
+print (ticker.yesterday_price," : قيمت ديروز")
+print (ticker.adj_close, ": قيمت امروز")
+print(20*"-")     
 #====================================================
 price = ticker.adj_close
 darsad_up4 = (math.ceil((price * 0.04 + price)*100)/100)      #قميت بسته شدن 4درصدبالاتر
@@ -326,11 +336,11 @@ if open_price > yesterday_price:
 if open_price < yesterday_price:
     print ('open_price < yesterday_price')
 
-if omc > ticker.adj_close :
-    print ('قيمت بسته شدن فردابيشتراز بسته شدن امروزميشه')
+#if omc > ticker.adj_close :
+ #   print ('قيمت بسته شدن فردابيشتراز بسته شدن امروزميشه')
 
-if omc < ticker.adj_close :
-    print ('قيمت بسنه شدن فردا کمترازبسته شدن امروزميشه')
+#if omc < ticker.adj_close :
+ #   print ('قيمت بسنه شدن فردا کمترازبسته شدن امروزميشه')
 
 if omc >= price_max :
     print ('صبرکن وآماده خريد باش')
@@ -352,12 +362,6 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
     print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
-
-
-if (math.ceil(bmi)) > (math.ceil(omc)) :
-    print ('bmi > omc : فرداقيمت بالاترميره')
-if (math.ceil(bmi)) < (math.ceil(omc)) :
-    print ('bmi < omc : فرداقيمت پايين مياد')
     
 print ()
 print ((math.ceil(bmi)),": bmi قيمت")
