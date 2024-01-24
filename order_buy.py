@@ -285,7 +285,7 @@ print(f" بی ام آی شما {bmi:.2f} است ")
 if ticker.open_price < bmi < ticker.adj_close:
     print("امکان داره قيمت پايين تربره")
 elif ticker.open_price > bmi > ticker.adj_close:
-    print("امکان داره قيمت بالاتربره")
+    print("امکان داره قيمت برگرده")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
 elif ticker.adj_close <= bmi < ticker.yesterday_price:
