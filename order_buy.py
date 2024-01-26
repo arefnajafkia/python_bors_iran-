@@ -363,8 +363,8 @@ print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
 print (yesterday_price,": قيمت ديروز")
-print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
-print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
+print (math.ceil(ticker.max_week),": بالاترين قيمت هفتگي ")
+print (math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي")
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 

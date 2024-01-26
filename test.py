@@ -26,11 +26,12 @@ print("date and time =", dt_string)
 print ('-'*30,)
 #-------------------------------------------
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
-namad =["چکارن","تلیسه","غمینو","وسپه", "غکورش","شپاکسا",
+namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا",
         "پاکشو","تاپیکو","دسبحان","کگل","فصبا","حتوکا",
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
-        "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد"]
+        "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
+        "ومعادن","داتام","نخريس"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -258,16 +259,34 @@ bmi = bmi(last_price, adj_close)
 print(f" بی ام آی شما {bmi:.2f} است ")
 
 # شروع شرط براي محاسبه 
-if ticker.open_price < bmi > ticker.adj_close:
-    print("قيمت پايين ترمياد")
-elif ticker.open_price > bmi < ticker.last_price:
-    print("قيمت بالاتر ميره")
+if ticker.open_price < bmi < ticker.adj_close:
+    print("امکان داره قيمت پايين تربره")
+elif ticker.open_price > bmi > ticker.adj_close:
+    print("امکان داره قيمت برگرده")
 elif bmi == adj_close:
     print("قيمت درجاميزنه گيجه")
 elif ticker.adj_close <= bmi < ticker.yesterday_price:
     print ("احتمال ريزش شديدخارج شو")
 else:
-    print("معامله نکن")
+    print("مراقب باش معامله نکن")
+    
+
+if ticker.yesterday_price > ticker.open_price:
+    print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
+
+
+if ticker.yesterday_price < ticker.open_price:
+    print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+          
+
+if ticker.sta_max == ticker.high_price:
+    print(' صف خريدشده')
+
+
+if ticker.sta_min == ticker.low_price:
+    print (' صف فروش شده')
+          
+print ()
 
 #-------------------------------------
 print(40*"=",sahame,"omc محاسبه")
@@ -295,11 +314,6 @@ if open_price > yesterday_price:
 if open_price < yesterday_price:
     print ('open_price < yesterday_price')
 
-if omc > ticker.adj_close :
-    print ('قيمت بسته شدن فردابيشتراز بسته شدن امروزميشه')
-
-if omc < ticker.adj_close :
-    print ('قيمت بسنه شدن فردا کمترازبسته شدن امروزميشه')
 
 if omc >= price_max :
     print ('صبرکن وآماده خريد باش')
@@ -321,20 +335,14 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
     print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
-
-
-if (math.ceil(bmi)) > (math.ceil(omc)) :
-    print ('bmi > omc : فرداقيمت بالاترميره')
-if (math.ceil(bmi)) < (math.ceil(omc)) :
-    print ('bmi < omc : فرداقيمت پايين مياد')
     
 print ()
 print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
 print (yesterday_price,": قيمت ديروز")
-print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
-print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
+print (math.ceil(ticker.max_week),": بالاترين قيمت هفتگي ")
+print (math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي")
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
@@ -390,7 +398,7 @@ print(buy_signals.tail(3))
 
           
 #----------------------------------
-print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
+print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
 # چکارن
 if index == 1:
      p=0
@@ -414,6 +422,22 @@ if index == 2:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 2370>ticker.adj_close>1334:
+         print ("مابين حمايت 1334ومقاومت 2370هستيم ودرميانه 1878روداريم")
+     if 3421>ticker.adj_close>2370:
+         print ("مابين حمايت 2370ومقاومت 3421هستيم درميانه 2920روداريم")
+     if 4516>ticker.adj_close>3421:
+         print ("مابين حمايت 3421 ومقاومت 4516 هستيم درميانه 3956 روداريم ")
+     if 5597>ticker.adj_close>4516:
+         print ("مابين حمايت 4516 ومقاومت 5597 هستيم درميانه 5025 روداريم")
+     if 6663>ticker.adj_close>5597:
+         print ("مابين حمايت 5597 ومقاومت 6663 هستيم درميانه 6094 روداريم")
+     if 7758>ticker.adj_close>6663:
+         print ("مابين حمايت 6663 ومقاومت 7758 هستيم درميانه 7208 روداريم")
+     if 8839>ticker.adj_close>7758:
+         print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
+     if 9918>ticker.adj_close>8839:
+         print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
 
 # غمينو
 if index == 3:
@@ -438,6 +462,26 @@ if index == 4:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 1330>ticker.adj_close>618:
+         print ("مابين حمايت 618 ومقاومت 1330 هستيم درميانه 974 روداريم")
+     if 2022>ticker.adj_close>1330:
+         print ("مابين حمايت 1330 ومقاومت2022 هستيم درميانه 1666 روداريم")
+     if 2714>ticker.adj_close>2022:
+         print ("مابين حمايت 2022 ومقاومت 2714 هستيم درميانه 2358 روداريم ")
+     if 3397>ticker.adj_close>2714:
+         print ("مابين حمايت 2714 ومقاومت 3397 هستيم درميانه 3041 روداريم")
+     if 4079>ticker.adj_close>3397:
+         print ("مابين حمايت 3397 ومقاومت 4079 هستيم درميانه 3733 روداريم")
+     if 4782>ticker.adj_close>4079:
+         print ("مابين حمايت 4079 ومقاومت 4782 هستيم درميانه 4435 روداريم")
+     if 5465>ticker.adj_close>4782:
+         print ("مابين حمايت 4782 ومقاومت 5465 هستيم درميانه 5127 روداريم")
+     if 6146>ticker.adj_close>5465:
+         print ("مابين حمايت 5465 ومقاومت 6146 هستيم درميانه 5807 روداريم")
+     if 6810>ticker.adj_close>6146:
+         print ("مابين حمايت 6146 ومقاومت 6810 هستيم درميانه 6461 روداريم")
+     if 7473>ticker.adj_close>6810:
+         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")          
     
 # غکورش
 if index == 5:
@@ -450,6 +494,18 @@ if index == 5:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 5210>ticker.adj_close>4032:
+         print ("مابين حمايت 4032 ومقاومت 5210 هستيم درميانه 4615 روداريم")
+     if 6410>ticker.adj_close>5210:
+         print ("مابين حمايت 5210 ومقاومت 6410 هستيم درميانه 5804 روداريم")
+     if 7599>ticker.adj_close>6410:
+         print ("مابين حمايت 6410 ومقاومت 7599 هستيم درميانه 7004 روداريم ")
+     if 8788>ticker.adj_close>7599:
+         print ("مابين حمايت 7599 ومقاومت 8788 هستيم درميانه 8204 روداريم")
+     if 9977>ticker.adj_close>8788:
+         print ("مابين حمايت 8788 ومقاومت 9977 هستيم درميانه 9383 روداريم")
+     if 11160>ticker.adj_close>9977:
+         print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم") 
 
 # شپاکسا
 if index == 6:
@@ -462,6 +518,18 @@ if index == 6:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 1769>ticker.adj_close>1382:
+         print ("مابين حمايت 1382 ومقاومت 1769 هستيم درميانه1572 روداريم")
+     if 2543>ticker.adj_close>1769:
+         print ("مابين حمايت 1769 ومقاومت 2543 هستيم درميانه 2149 روداريم")
+     if 3302>ticker.adj_close>2543:
+         print ("مابين حمايت 2543 ومقاومت 3302 هستيم درميانه 2922 روداريم ")
+     if 4061>ticker.adj_close>3302:
+         print ("مابين حمايت 3302 ومقاومت 4061 هستيم درميانه 3688 روداريم")
+     if 4834>ticker.adj_close>4061:
+         print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
+     if 5591>ticker.adj_close>4834:
+         print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
 
 # پاکشو
 if index == 7:
@@ -513,9 +581,9 @@ if index == 10:
 
 # فصبا
 if index == 11:
-     p=6640
+     p=4931
      s=0
-     v=15000
+     v=1500
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -534,11 +602,11 @@ if index == 12:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-       
 
 
 if index >= 13 : 
      print (sahame ,'  :  شماازاين سهم خريد نداريد')
+       
 
      
          
