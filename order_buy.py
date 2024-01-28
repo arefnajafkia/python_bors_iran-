@@ -138,7 +138,8 @@ else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
 
-print(40*"=",sahame,"Process")     
+
+print(40*"=",sahame,"Process")
 if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
@@ -151,7 +152,7 @@ if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
      print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
      
 
-print(20*"-")
+print(40*"-")
 print (ticker.max_week," : بالاترين قيمت هفتگي ")
 print (ticker.min_week," : پايين ترين قيمت هفتگي ")
 print (ticker.yesterday_price," : قيمت ديروز")
@@ -242,7 +243,7 @@ if ticker.adj_close == ticker.min_year :
     print (" خيلي مهم به کف قيمت ساليانه رسيديم")
     
      
-print(30*"=",sahame,"Tik Top or Down") 
+print(35*"=",sahame,"Tik Top or Down") 
 print(ticker.max_year,' : حداکثر قیمت بازه سال')
 print(ticker.min_year,' : حداقل قیمت بازه سال')
 
@@ -453,9 +454,9 @@ if index == 1:
     
 # تليسه
 if index == 2:
-     p=4283
+     p=4274
      s=0
-     v=77000
+     v=79000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -525,9 +526,9 @@ if index == 4:
     
 # غکورش
 if index == 5:
-     p=9063
+     p=9719
      s=0
-     v=30000
+     v=22000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -549,9 +550,9 @@ if index == 5:
 
 # شپاکسا
 if index == 6:
-     p=3022
+     p=3279
      s=0
-     v=85000
+     v=60000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -669,7 +670,7 @@ if index<=12 and p > 0:
      take_profit = price * (1+tp)
      pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
      sz= pf-pk 
-     print(20*"-" )
+     print(40*"-" )
      
      if today_price > take_profit:
           profit = str ( pf - pk )
@@ -722,7 +723,7 @@ if index<=12 and p > 0:
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
 #=====================================================
-print ('='*10,sahame,'fibonacci')
+print ('='*30,sahame,'fibonacci')
 #کد برنامه نویسی در پایتون برای سری فیبوناچی
 
 def fibonacci(n):
