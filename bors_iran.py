@@ -198,34 +198,64 @@ print (nemone)
 #print (DF.describe())
 #=================================================
 print(40*"=",nam,"Volume")
-
-print (' حجم ماهيانه : ' ,(math.ceil(average_Volume_Month)))
           
 if today_Volume > (math.ceil(average_Volume_Month)):
      print ('حجم امروزبيشترازحجم ماهيانه شده')
 else:
      if today_Volume < (math.ceil(average_Volume_Month)):
           print ('حجم امروزکمتر ازحجم ماهيانه شده')
-     elif today_Volume > today_Volume_yesterday :
-          print ('حجم امروزبيشترازحجم ديروزشده')
-     else:
-         if today_Volume < today_Volume_yesterday :
-               print ('حجم امروز کمترازحجم ديروزشده')
-               
+          
+
 if today_Volume < today_Volume_yesterday < Volume_week:
-       print ('حجم درهفته گذشته کاهشي بود')
+     print ('حجم درهفته گذشته کاهشي بود')
 else:
      if today_Volume > today_Volume_yesterday > Volume_week:
          print ('حجم درهفته گذشته افزايشي بود')
-     elif today_Volume < today_Volume_yesterday :
-          print ('حجم امروز کمترازحجم ديروزشده')
-     else:
-          if today_Volume > (math.ceil(average_Volume_Month))*3 :
-               print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
 
+          
+if today_Volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if today_Volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+
+         
+if today_Volume > (math.ceil(average_Volume_Month))*3 :
+     print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
+
+
+if today_price > 4*(average_Volume_week):
+    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+#================================================
+print(25*"-")     
+if today_price > yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if today_price < yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
+
+#================================================
+print(40*"=",nam,"order sell and buy")
+if today_Volume > today_Volume_yesterday and today_price < yesterday_price :
+    print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
+else:
+    if today_Volume < today_Volume_yesterday and today_price > yesterday_price :
+        print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
+
+
+if today_Volume > today_Volume_yesterday and today_price > yesterday_price :
+    print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
+else:
+    if today_Volume < today_Volume_yesterday and today_price < yesterday_price :
+        print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+
+#==================================================
 print ()               
 print (today_Volume , 'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
+print (today_price , 'قيمت امروز')
+print (today_Volume_yesterday , 'قيمت ديروز')
 #==================================================
 print(40*"=",nam,"Moving Average")
 ave7 = (' EM_3 :',(math.ceil(average_prices7)))
@@ -1595,9 +1625,9 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=4283
+     p=4274
      s=0
-     v=77000
+     v=79000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1670,9 +1700,9 @@ if index == 4:
          
 # غکورش
 if index == 5:
-     p=9063
+     p=9719
      s=0
-     v=30000
+     v=22000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1695,9 +1725,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3022
+     p=3279
      s=0
-     v=85000
+     v=60000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')

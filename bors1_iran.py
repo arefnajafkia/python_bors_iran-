@@ -1,4 +1,4 @@
-
+  
 # برسی روند سهام باتایپ نام سهم
 # محاسبات max - min - year - month - week and mean price
 import math
@@ -136,32 +136,26 @@ average_min6 = closing_price_b12.mean()   # average_mix_price_day360
 print ( 'today_price :',today_price)
 print(20*"-")
 #=======================================================
-
 # max year360 + min year360 /2
 year = (max_price_b11 + min_price_b12)/2
 # max year_mean + min year_mean /2
 year_mean = (average_max6 + average_min6)/2
-
 # (max 103 + min 103) /2
 Month103 = (max_price_b9 + min_price_b10)/2
 # (max 103_mean + min 103_mean) /2
 Month103_mean = (average_max5 + average_min5)/2
-
 # max Month60 + min Month60 /2
 Month60 = (max_price_b7 + min_price_b8)/2
 # max Month60_mean + min Month60_mean /2
 Month60_mean = (average_max4 + average_min4)/2
-
 # max Month30 + min Month30 /2
 Month30 = (max_price_b5 + min_price_b6)/2
 # max Month30_mean + min Month30_mean /2
 Month30_mean = (average_max3 + average_min3)/2
-
 # max week14 + min week14 /2
 week14 = (max_price_b3 + min_price_b4)/2
 # max week14_mean + min week14_mean /2
 week14_mean = (average_max2 + average_min2)/2
-
 # max week7 + min week7 /2
 week7 = (max_price_b1 + min_price_b2)/2
 # max week7_mean + min week7_mean /2
@@ -261,10 +255,10 @@ if Month103_mean > today_price < yesterday_price < today_two_price:
 if today_price_max > Month30 >= yesterday_price:
     print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
     print ('-'*20)
-
-if today_price_min < Month30 <= yesterday_price:
-    print ('Month60 شروع روند کاهشي مراقب باش ')
-    print ('-'*20)
+else:
+    if today_price_min < Month30 <= yesterday_price:
+        print ('Month60 شروع روند کاهشي مراقب باش ')
+        print ('-'*20)
 
 
 if max_price_b1 < max_price_b3 < max_price_b5 < max_price_b7 < max_price_b9 :
@@ -295,31 +289,59 @@ if min_price_b2 > min_price_b4 < min_price_b6 and today_price_max > yesterday_pr
  
 #=================================================
 print(40*"=",nam,"Volume")
-
-print (' حجم ماهيانه : ' ,(math.ceil(average_Volume_Month)))
           
 if today_Volume > (math.ceil(average_Volume_Month)):
      print ('حجم امروزبيشترازحجم ماهيانه شده')
 else:
      if today_Volume < (math.ceil(average_Volume_Month)):
           print ('حجم امروزکمتر ازحجم ماهيانه شده')
-     elif today_Volume > today_Volume_yesterday :
-          print ('حجم امروزبيشترازحجم ديروزشده')
-     else:
-         if today_Volume < today_Volume_yesterday :
-               print ('حجم امروز کمترازحجم ديروزشده')
-               
+          
+
 if today_Volume < today_Volume_yesterday < Volume_week:
-       print ('حجم درهفته گذشته کاهشي بود')
+     print ('حجم درهفته گذشته کاهشي بود')
 else:
      if today_Volume > today_Volume_yesterday > Volume_week:
          print ('حجم درهفته گذشته افزايشي بود')
-     elif today_Volume < today_Volume_yesterday :
-          print ('حجم امروز کمترازحجم ديروزشده')
-     else:
-          if today_Volume > (math.ceil(average_Volume_Month))*3 :
-               print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
-     
+
+          
+if today_Volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if today_Volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+
+         
+if today_Volume > (math.ceil(average_Volume_Month))*3 :
+     print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
+
+
+if today_price > 4*(average_Volume_week):
+    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+#================================================
+print(25*"-")     
+if today_price > yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if today_price < yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
+
+#================================================
+print(40*"=",nam,"order sell and buy")
+if today_Volume > today_Volume_yesterday and today_price < yesterday_price :
+    print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
+else:
+    if today_Volume < today_Volume_yesterday and today_price > yesterday_price :
+        print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
+
+
+if today_Volume > today_Volume_yesterday and today_price > yesterday_price :
+    print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
+else:
+    if today_Volume < today_Volume_yesterday and today_price < yesterday_price :
+        print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+
+
 #==================================================
 # Get the closing prices for the last 10and26 days
 closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
@@ -377,24 +399,57 @@ if average_prices7 < average_prices8:
 else:
      if average_prices7 > average_prices8:
           print (" EM_3 > EM_20")
-               
-
-print(25*"-")
-if today_price > yesterday_price:
-     print (' قيمت امروزبالاترازديروزه ')
-else :
-     if today_price < yesterday_price:
-          print (' قيمت امروزپايين ترازديروزه ')
-
-print(25*"-")
-if today_price > 4*(average_Volume_week):
-    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
 
 #=======================================================
+print(20*"-",nam,"bmi محاسبه")
+ # تعریف یک تابع برای محاسبه بی ام آی
+def bmi(last_price, adj_close):
 
+     bmi = (adj_close + (last_price*2))/3
+     
+    # برگرداندن بی ام آی به عنوان خروجی تابع
+     return bmi
+
+# دريافت قيمت پاياني  وآخرين قيمت
+last_price = today_Final_price
+adj_close = today_price
+# فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
+bmi = bmi(last_price, adj_close)
+# نمایش بی ام آی کاربر
+print(f" بی ام آی شما {bmi:.2f} است ")
+
+# شروع شرط براي محاسبه 
+if today_Open_price < bmi > today_price:
+    print("امکان داره قيمت پايين تربره")
+elif today_Open_price > bmi < today_price:
+    print("امکان داره قيمت برگرده")
+elif bmi == adj_close:
+    print("قيمت درجاميزنه گيجه")
+elif today_price <= bmi < yesterday_price:
+    print ("احتمال ريزش شديدخارج شو")
+else:
+    print("مراقب باش معامله نکن")
+    
+if yesterday_price > today_Open_price:
+    print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
+
+if yesterday_price < today_Open_price:
+    print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+          
+
+if today_price_max == today_Final_price:
+    print(' صف خريدشده')
+
+if today_price_min == today_Final_price:
+    print (' صف فروش شده')
+
+#-------------------------------------
+# محاسبه بالاترين وپايين ترين قيمت يک هفته پيش    
+max_price_b1 = max(DF['High'][-7:]) # max_price day7
+min_price_b2 = min(DF['Low'][-7:])  # min_price day7
 print(40*"=",nam,"omc محاسبه")
 # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-def cmo(today_Open_price, today_price_min):
+def bmi(today_Open_price, today_price_min):
 
      omc = (((today_price_max *2 )+ today_price_min)/3)-(today_price - yesterday_price)
      
@@ -406,7 +461,7 @@ today_price_min = DF['Low'].iloc[-1]
 today_price_max = DF['High'].iloc[-1]
 yesterday_price = DF['Close'].iloc[-2] # قيمت ديروز
 #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-omc = cmo(today_Open_price, today_price_min)
+omc = bmi(today_Open_price, today_price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 
@@ -443,7 +498,7 @@ if omc > today_price > yesterday_price <= min_price_b2:
 if omc < today_price < yesterday_price <= max_price_b1:
     print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
      
-
+    
 print((math.ceil(omc)),": omc قيمت")
 print(today_price,": قيمت امروز")
 print(yesterday_price,": قيمت ديروز")
@@ -454,49 +509,22 @@ print(40*"=",nam,"signal buy and sell")
 
 ma3 = (math.ceil(average_prices7))
 ma10 = (math.ceil(average_price))
-ma4 = (math.ceil(average_prices9))
-ma11 = (math.ceil(average_price10))
+#ma4 = (math.ceil(average_prices9))
+#ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
-#for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 >= ma4 :
-    print (" signal Buy نگهدارصعودي شده")
-    print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 >= ma4 or ma4 > ma10 ')
-    print ('-'*20)
-      
-    
-if ma3 < ma10 <= ma4 :
-    print (" signal Sell  نگه ندارنزولي شده")
-    print (' ma3 < ma10 <= ma4 or ma4 < ma10')
-    print ('-'*20)
-    
-    
-if ma3 > ma10 > ma20 :
-    print (' ascending Hold نگهدارصعوديه')
-    print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 > ma20')
-    print ('-'*20)
-    
-    
-if ma3 <= ma10 >= ma20 or ma10 <= ma20:
-    print (" signal wait قيمت شايد بريزه کمي احتياط کن")
-    print (' ma3 <= ma10 >= ma20 or ma10 <= ma20')
-    print ('-'*20)
-    
-
-print (ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
     print ('قيمت زير ميانگين 10روزميباشد')
 else:
-    print ('قيمت بالاي ميانگين 10 روزه ميباشد')
+    if today_price > ma10 :
+        print ('قيمت بالاي ميانگين 10 روزه ميباشد')
 
-
-if ma3 < today_Final_price:
-    print ('ma3<price : قيمت بالاترميره')
 
 if ma3 > today_Final_price:
-    print ('ma3>price : قيمت پايين ترميره')
+    print ('ma3<price : قيمت بالاترميره')
+else:
+    if ma3 < today_Final_price:
+        print ('ma3>price : قيمت پايين ترميره')
 
 #------------------------------------------------
 print(20*"=",nam,"price_max,min,Close  6yers")
@@ -846,3 +874,8 @@ def per_capita_sales_filter(df: pd.DataFrame, threshold: float) -> pd.DataFrame:
     filtered_df.drop(columns=['per_capita_sales'], inplace=True)
 
     return filtered_df
+
+#======================================================
+
+
+
