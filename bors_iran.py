@@ -255,7 +255,7 @@ print ()
 print (today_Volume , 'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
 print (today_price , 'قيمت امروز')
-print (today_Volume_yesterday , 'قيمت ديروز')
+print (yesterday_price , 'قيمت ديروز')
 #==================================================
 print(40*"=",nam,"Moving Average")
 ave7 = (' EM_3 :',(math.ceil(average_prices7)))
@@ -1171,11 +1171,11 @@ print ('-'*20)
 
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
 namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا",
-        "پاکشو","تاپیکو","دسبحان","کگل","فصبا","حتوکا",
+        "ثبهساز","تاپیکو","دسبحان","کگل","فصبا","حتوکا",
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
         "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
-        "ومعادن","داتام","نخريس"]
+        "ومعادن","داتام","نخريس","پاکشو"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -1625,9 +1625,9 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=4274
+     p=4340
      s=0
-     v=79000
+     v=69000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1700,9 +1700,9 @@ if index == 4:
          
 # غکورش
 if index == 5:
-     p=9719
+     p=94350
      s=0
-     v=22000
+     v=25000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1725,9 +1725,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3279
+     p=3237
      s=0
-     v=60000
+     v=64847
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1748,11 +1748,11 @@ if index == 6:
          print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
          Fib == Fib
           
-# پاکشو
+# ثبهساز
 if index == 7:
-     p=0
-     s=6750
-     v=1000
+     p=3207
+     s=0
+     v=30000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1799,9 +1799,9 @@ if index == 10:
 
 # فصبا
 if index == 11:
-     p=4931
+     p=4893
      s=0
-     v=1500
+     v=3000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1954,7 +1954,51 @@ if today_two_price_max < yesterday_price_max > ticker.high_price:
                 print ("EngulFing Resistance level")
                 print ("----- اينگل فينگ نزولي رخ داده بفروش -----")
                 print ("-"*10)
-                
+
+
+#==================================================
+print(40*"=",nam,"Engulfing Calculations")
+# Engulfing  ascending صعودي
+# Bullish Engulfing Support level
+h1 = today_price > today_Open_price
+h2 = yesterday_Open_price > yesterday_price
+h3 = yesterday_price > today_Open_price
+h4 = today_price > yesterday_Open_price
+
+h_ascending = h1 and h2 and h3 and h4
+h5 =  (today_price - today_Open_price) > 5*(yesterday_Open_price - yesterday_price) 
+
+# Engulfing  Descending نزولي
+# Bullish Engulfing Resistance level 
+h6 = today_price < today_Open_price
+h7 = yesterday_Open_price < yesterday_price
+h8 = yesterday_price < today_Open_price
+h9 = today_price < yesterday_Open_price
+
+h_Descending = h6 and h7 and h8 and h9
+h10 = (today_price - today_Open_price) < 5*(yesterday_Open_price - yesterday_price)
+
+
+if today_price > highest_price_90 :
+     print (' مقاومت سه ماه شکسته شد')
+
+if today_price < lowest_price_90 :
+     print (' حمايت سه ماه ازدست رفت')
+     
+
+if h_ascending and h5:
+    c = "Engulfing :"
+    print (c , "hemer ascending !  صعودي مناسب خريد" )
+    
+if h_Descending and h10:
+    c = "Engulfing :"
+    print (c , "hemer Descending !  نزولي وقت فروش" )
+    
+print ('~'*10)
+print ('روند False يا True دقت کنيدبه')
+print (h5,'ascending   روند صعودي ')
+print (h10 ,'Descending   روند نزولي')
+               
 #=======================================================         
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------

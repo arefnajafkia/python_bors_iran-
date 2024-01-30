@@ -520,10 +520,10 @@ else:
         print ('قيمت بالاي ميانگين 10 روزه ميباشد')
 
 
-if ma3 > today_Final_price:
+if ma3 < today_Final_price:
     print ('ma3<price : قيمت بالاترميره')
 else:
-    if ma3 < today_Final_price:
+    if ma3 > today_Final_price:
         print ('ma3>price : قيمت پايين ترميره')
 
 #------------------------------------------------
