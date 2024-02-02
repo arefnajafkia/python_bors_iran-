@@ -1158,11 +1158,6 @@ print(ticker.low_price,' : حداقل قيمت امروز')
 print(ticker.sta_max,' : حداکثر قیمت مجاز')  
 print(ticker.sta_min,' : حداقل قیمت مجاز')
 print()
-print(ticker.min_week,' : حداقل قیمت هفته اخیر')  
-print(ticker.max_week,' : حداکثر قیمت هفته اخیر')
-print(ticker.min_year,' : حداقل قیمت بازه سال')  
-print(ticker.max_year,' : حداکثر قیمت بازه سال')
-print()
 print(ticker.count,' : تعداد معاملات ')
 print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
@@ -1379,7 +1374,7 @@ if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_p
 
 
 #===============================================
-print (40*'=',sahame,'volume')
+print (40*'=',sahame,'volume',"and order sell and buy")
 print (ticker.volume ,'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
           
@@ -1413,25 +1408,25 @@ if ticker.volume > 4*(average_Volume_week):
 
 #================================================
 print(25*"-")     
-if today_price > yesterday_price:
+if ticker.adj_close > ticker.yesterday_price:
      print (' قيمت امروزبالاترازديروزه ')
 else :
-     if today_price < yesterday_price:
+     if ticker.adj_close < ticker.yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
 #================================================
-print(40*"=",nam,"order sell and buy")
-if ticker.volume > today_Volume_yesterday and today_price < yesterday_price :
+print(20*"-")
+if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
     print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
 else:
-    if ticker.volume < today_Volume_yesterday and today_price > yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
         print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
 
-if ticker.volume > today_Volume_yesterday and today_price > yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
     print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
 else:
-    if ticker.volume < today_Volume_yesterday and today_price < yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
 print(40*"=",sahame,"bmi محاسبه")
@@ -1532,7 +1527,7 @@ print ()
 print ((math.ceil(bmi)),": bmi قيمت")
 print ((math.ceil(omc)),": omc قيمت")
 print (ticker.adj_close,": قيمت امروز")
-print (yesterday_price,": قيمت ديروز")
+print (ticker.yesterday_price,": قيمت ديروز")
 print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
 print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
 #======================================================
@@ -1551,7 +1546,7 @@ buy_signals = (
         (sma_3 > sma_10) &
         (sma_10.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 
 #-------------------------------------------
 print(30*"=",sahame," True and False مقادير sma3-20")          
@@ -1569,24 +1564,8 @@ buy_signals = (
         (sma_3 > sma_20) &
         (sma_20.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
-#---------------------------------------------------
-print(30*"=",sahame," True and False مقادير sma10-20")          
+print(buy_signals.tail(2))
 
-history = ticker.history
-
-
-def sma(series, periods: int, ):
-    return series.rolling(window=periods, min_periods=periods).mean()
-
-
-sma_10 = sma(history.close, 10)
-sma_20 = sma(history.close, 20)
-buy_signals = (
-        (sma_10 > sma_20) &
-        (sma_20.shift(1) > sma_10.shift(1))
-)
-print(buy_signals.tail(3))
           
 #==========================================================
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
@@ -1976,8 +1955,8 @@ if h_Descending and h10:
     
 print ('~'*10)
 print ('روند False يا True دقت کنيدبه')
-print (h5,'ascending   روند صعودي ')
-print (h10 ,'Descending   روند نزولي')
+print (h5, ' :ascending   روند صعودي ')
+print (h10 , ' :Descending   روند نزولي')
                
 #=======================================================         
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
