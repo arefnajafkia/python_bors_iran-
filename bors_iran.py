@@ -43,6 +43,12 @@ today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
 today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
 today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
+today_price_max4 = DF['High'].iloc[-4]    #بالاترين قيمت 4روزپيش
+today_price_min4 = DF['Low'].iloc[-4]      #پايين ترين قيمت 4روزپيش
+today_price_max8 = DF['High'].iloc[-8]     #ب8#
+today_price_min8 = DF['Low'].iloc[-8]       #پ8#
+today_price_max12 = DF['High'].iloc[-12]    #ب12#
+today_price_min12 = DF['Low'].iloc[-12]     #پ12#
 
 yesterday_price_max = DF['High'].iloc[-2] # بالاترين قيمت ديروز
 yesterday_price_min = DF['Low'].iloc[-2]  # پايين ترين قيمت ديروز
@@ -249,7 +255,14 @@ if today_Volume > today_Volume_yesterday and today_price > yesterday_price :
 else:
     if today_Volume < today_Volume_yesterday and today_price < yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+#=============================================
+print (20*'-')
 
+if today_price_max>today_price_max4>today_price_max8>today_price_max12:
+    print ("دوازده روز سقف جديد ميزنه")
+else:
+    if today_price_min<today_price_min4<today_price_min8<today_price_min12:
+        print ("دوازده روزکف جديدميزنه")
 #==================================================
 print ()               
 print (today_Volume , 'حجم امروز')
@@ -304,9 +317,9 @@ yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
 yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
 # محاسبات مقاومت هفتگي تاساليانه 
 highest_price_7 = max(DF['Close'][-7:])    #محاسبه مقاومت هفتگي
-highest_price_8 = max(DF['Close'][-8:])
+highest_price_10 = max(DF['Close'][-10:])
 highest_price_30 = max(DF['Close'][-30:])
-highest_price_31 = max(DF['Close'][-31:])
+highest_price_33 = max(DF['Close'][-33:])
 highest_price_90 = max(DF['Close'][-90:])
 highest_price_180 = max(DF['Close'][-180:])
 highest_price_280 = max(DF['Close'][-280:])
@@ -314,16 +327,39 @@ highest_price_360 = max(DF['Close'][-360:])    #محاسبه مقاومت سال
 #------------------------
 # محاسبات حمايت هفتگي تاساليانه
 lowest_price_7 = min(DF['Close'][-7:])         #محاسبه حمايت هفتگي
-lowest_price_8 = min(DF['Close'][-8:])
+lowest_price_10 = min(DF['Close'][-10:])
 lowest_price_30 = min(DF['Close'][-30:])
-lowest_price_31 = min(DF['Close'][-31:])
+lowest_price_33 = min(DF['Close'][-33:])
 lowest_price_90 = min(DF['Close'][-90:])
 lowest_price_180 = min(DF['Close'][-180:])
 lowest_price_280 = min(DF['Close'][-280:])                              
 lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت ساليانه
 
-if highest_price_280 < highest_price_90 and lowest_price_280 > lowest_price_90:
-    print (" مقاومت روبه پايين وبه سمت حمايت يکساله ميرود")
+#قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
+if today_price < lowest_price_7 > yesterday_price:
+    print ('قيمت حمايت هفتگي راردکرد')
+else:
+    if today_price > highest_price_7 < yesterday_price:
+        print ('قيمت مقاومت هفتگي رو ردکرد')
+
+
+if today_price < lowest_price_30 > yesterday_price:
+    print ('قيمت حمايت ماهيانه راردکرد')
+else:
+    if today_price > highest_price_30 < yesterday_price:
+        print ('قيمت مقاومت ماهيانه راردکرد')
+
+
+if today_price < lowest_price_280 > yesterday_price:
+    print ('قيمت حمايت ساليانه راازدست داد')
+else:
+    if today_price > highest_price_280 < yesterday_price:
+        print ('قيمت مقاومت ساليانه راازدست داد')
+        
+
+if highest_price_280 < highest_price_90 < highest_price_90 and lowest_price_280 > lowest_price_90 > lowest_price_30:
+    print (" کف وسقف يکساله دارن بهم نزديک ميشن")
+
 
 if highest_price_7 > highest_price_30 > highest_price_90:
     print ("ومقاومت درسه ماه کلا افزايشي  است  7>30>90")
@@ -333,7 +369,7 @@ else:
 
 # فاصله مقاومت هفتگي باساليانه
 resistance= highest_price_7 - highest_price_360
-resistance_1= highest_price_8 - highest_price_360
+resistance_1= highest_price_10 - highest_price_360
 
 if resistance < resistance_1 :
     print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
@@ -342,36 +378,36 @@ else:
         print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره زيادميشه")
  
 
-if highest_price_30 < highest_price_31 :
+if highest_price_30 < highest_price_33 :
     print ("مقاومت يکماه شروع کرده روبه بالابره")
 else:
-    if highest_price_30 > highest_price_31 :
+    if highest_price_30 > highest_price_33 :
         print ("مقاومت يکماهه شروع کرده روبه پايين بره")
 
 
-if highest_price_7 < highest_price_8:
+if highest_price_7 < highest_price_10:
     print ("مقاومت هفتگي شروع کرده روبه بالابره")
 else:
-    if highest_price_7 > highest_price_8:
+    if highest_price_7 > highest_price_10:
         print ("مقاومت هفتگي شروع کرده روبه پايين بره")
     
 
-if lowest_price_30 < lowest_price_31 :
+if lowest_price_30 < lowest_price_33 :
     print ("حمايت يکماه شروع کرده روبه بالابره")
 else:
-    if lowest_price_30 > lowest_price_31 :
+    if lowest_price_30 > lowest_price_33 :
         print ("حمايت يکماه شروع کرده روبه  پايين بره")
 
 
-if lowest_price_7 < lowest_price_8 :
+if lowest_price_7 < lowest_price_10 :
     print ("حمايت هفتگي شروع کرده روبه بالابره")
 else:
-    if lowest_price_7 > lowest_price_8 :
+    if lowest_price_7 > lowest_price_10 :
         print ("حمايت هفتگي شروع کرده روبه پايين بره")
    
 # فاصله حمايت هفتگي باساليانه
 support= lowest_price_7 -lowest_price_360
-support_1= lowest_price_8 -lowest_price_360
+support_1= lowest_price_10 -lowest_price_360
 
 if support < support_1:
     print (support_1 ,": فاصله حمايت هفتگي باساليانه داره زيادميشه")
@@ -381,10 +417,17 @@ else:
 
 
 if highest_price_7 < highest_price_30 < highest_price_90 < highest_price_180 < highest_price_280:
-    print ("مقاومت روبه پايين ويه سمت حمايت يکساله ميره")
+    print ("کانال کاهشي يکساله داريم")
 else:
     if lowest_price_280 < lowest_price_180 < lowest_price_90 < lowest_price_30 < lowest_price_7:
-         print ("حمايت روبه بالا وبه سمت مقاومت يکساله ميرود")
+         print ("کانال افزايشي يکساله داريم")
+
+
+if highest_price_7 < highest_price_30 < highest_price_90 :
+    print ("کانال کاهشي 90روزه داريم")
+else:
+    if lowest_price_90 < lowest_price_30 < lowest_price_7:
+         print ("کانال افزايشي 90روزه داريم")
 
 
 if lowest_price_7 > lowest_price_30 > lowest_price_90:
@@ -886,28 +929,28 @@ ma10 = (math.ceil(average_price))
 ma4 = (math.ceil(average_prices9))
 ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
+
 #for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 and ma4 <= ma10 or ma4 > ma10:
+if ma3 > ma10 < ma4 :
     print (" signal Buy نگهدارصعودي شده")
     print (" buy  اگه نداري بخر")
     print (' ma3 > ma10 and ma4 <= ma10 or ma4 > ma10 ')
     print ('-'*20)
-      
+else:   
+    if ma3 < ma10 > ma4:
+        print (" signal Sell  نگه ندارنزولي شده")
+        print (' ma3 < ma10 and ma4 >= ma10 or ma4 < ma10')
+        print ('-'*20)
     
-if ma3 < ma10 and ma4 >= ma10 or ma4 < ma10:
-    print (" signal Sell  نگه ندارنزولي شده")
-    print (' ma3 < ma10 and ma4 >= ma10 or ma4 < ma10')
-    print ('-'*20)
     
-    
-if ma3 > ma10 and ma10 > ma20 :
+if ma3 > ma10 > ma20 :
     print (' ascending Hold نگهدارصعوديه')
     print (" buy  اگه نداري بخر")
     print (' ma3 > ma10 & ma10 > ma20')
     print ('-'*20)
     
     
-if ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20:
+if ma3 >= ma10 >= ma20 or ma10 <= ma20:
     print (" no signal wait کمي رنج شده بااحتياط بخريابفروش")
     print (' ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
     print ('-'*20)
@@ -917,14 +960,15 @@ print ( ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20'
 if today_price < ma10 :
     print (' قيمت زير ميانگين 10روزميباشد')
 else:
-    print (' قيمت بالاي ميانگين 10 روزه ميباشد')
+    if today_price > ma10 :
+        print (' قيمت بالاي ميانگين 10 روزه ميباشد')
 
 
 if ma3 < today_Final_price:
     print (' price > ma3 : قيمت بالاترميره')
-
-if ma3 > today_Final_price:
-    print (' price < ma3 : قيمت پايين ترميره')
+else:
+    if ma3 > today_Final_price:
+        print (' price < ma3 : قيمت پايين ترميره')
 #------------------------------------------------
 print(20*"=",nam,"price_max,min,Close  6yers")
 # محاسبه بالاترين وپايين ترين قيمت شش روزمتوالي
