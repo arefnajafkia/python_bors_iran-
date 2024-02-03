@@ -86,6 +86,7 @@ print(ticker.sta_min,' : حداقل قیمت مجاز')
 print()
 print(ticker.count,' : تعداد معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
+print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()
 #=====================================================
 print('-'*30)
@@ -137,8 +138,9 @@ else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
 
+#==============================================
+print(40*"=",sahame,"Process and Volume")
 
-print(40*"=",sahame,"Process")
 if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
@@ -150,12 +152,14 @@ if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
      print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
      
+#================================================
+print(25*"-")     
+if ticker.adj_close > ticker.yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if ticker.adj_close < ticker.yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
 
-print(40*"-")
-print (ticker.max_week," : بالاترين قيمت هفتگي ")
-print (ticker.min_week," : پايين ترين قيمت هفتگي ")
-print (ticker.yesterday_price," : قيمت ديروز")
-print (ticker.last_price, ": قيمت امروز")
 print(20*"-")     
 #====================================================
 price = ticker.adj_close
@@ -381,7 +385,7 @@ buy_signals = (
         (sma_3 > sma_10) &
         (sma_10.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 
 #-------------------------------------------
 print(30*"=",sahame," True and False مقادير sma3-20")          
@@ -399,27 +403,9 @@ buy_signals = (
         (sma_3 > sma_20) &
         (sma_20.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 
 #------------------------------------------------
-print(30*"=",sahame," True and False مقادير sma10-20")          
-
-history = ticker.history
-
-
-def sma(series, periods: int, ):
-    return series.rolling(window=periods, min_periods=periods).mean()
-
-
-sma_10 = sma(history.close, 10)
-sma_20 = sma(history.close, 20)
-buy_signals = (
-        (sma_10 > sma_20) &
-        (sma_20.shift(1) > sma_10.shift(1))
-)
-print(buy_signals.tail(3))
-
-#---------------------------------
 print(40*"=",sahame,"For order")
 nimeh_price = ((ticker.high_price + ticker.low_price)/2)
 nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
