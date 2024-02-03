@@ -930,45 +930,49 @@ ma4 = (math.ceil(average_prices9))
 ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
-#for signal Buy or Sell (ma10 , ma3):
-if ma3 > ma10 < ma4 :
-    print (" signal Buy نگهدارصعودي شده")
-    print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 and ma4 <= ma10 or ma4 > ma10 ')
-    print ('-'*20)
-else:   
-    if ma3 < ma10 > ma4:
-        print (" signal Sell  نگه ندارنزولي شده")
-        print (' ma3 < ma10 and ma4 >= ma10 or ma4 < ma10')
-        print ('-'*20)
-    
+#for signal Buy or Sell (ma10 , ma3)
     
 if ma3 > ma10 > ma20 :
     print (' ascending Hold نگهدارصعوديه')
-    print (" buy  اگه نداري بخر")
-    print (' ma3 > ma10 & ma10 > ma20')
     print ('-'*20)
+else:
+    if ma3 < ma10 < ma20 :
+        print (" signal Sell  نگه ندارنزولي شده")
+        print ('-'*20)
     
     
 if ma3 >= ma10 >= ma20 or ma10 <= ma20:
-    print (" no signal wait کمي رنج شده بااحتياط بخريابفروش")
-    print (' ma3 >= ma10 and ma10 >= ma20 or ma10 <= ma20')
-    print ('-'*20)
+    if today_Volume > today_Volume_yesterday:
+        print (" حجم وميانگين هاداره صعودي ميشه")
+        print ('-'*20) 
+    else:
+        if ma3 <= ma10 <= ma20 or ma10 >= ma20:
+            if today_Volume < today_Volume_yesterday:
+                print (" حجم ومانگين هاداره نزولي ميشه")
+                print ('-'*20)
 
 
 print ( ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
-    print (' قيمت زير ميانگين 10روزميباشد')
+    print (' قيمت زيرميانگين 10 روزه')
 else:
     if today_price > ma10 :
-        print (' قيمت بالاي ميانگين 10 روزه ميباشد')
+        print (' قيمت بالاي ميانگين 10 روزه')
 
 
 if ma3 < today_Final_price:
-    print (' price > ma3 : قيمت بالاترميره')
+    print (' price > ma3 : قيمت بالاي ميانگين 3 روزه')
 else:
     if ma3 > today_Final_price:
-        print (' price < ma3 : قيمت پايين ترميره')
+        print (' price < ma3 : قيمت زيرميانگين 3 روزه')
+
+
+if ma3 > today_Final_price and today_price < ma10:
+    print ('روند قيمت وميانگين ها نزولي شده')
+else:
+    if ma3 < today_Final_price and today_price > ma10:
+        print ('روند قيمت وميانگين ها صعودي شده')
+        
 #------------------------------------------------
 print(20*"=",nam,"price_max,min,Close  6yers")
 # محاسبه بالاترين وپايين ترين قيمت شش روزمتوالي
@@ -998,34 +1002,36 @@ today_price9 = DF['Close'].iloc[-9]
 
 
 if today_price1 > today_price2 > today_price3 and today_price_min1 > today_price_min2:
-    if today_price1 < today_price6 :
-        print ('قيمت داره ميره بالا خريدکن')
-
-if today_price1 < today_price2 < today_price3 and today_price_min1 < today_price_min2:
-    if today_price1 > today_price6 :
-        print ('قيمت داره ميره پايين بفروش')
+    if today_price1 < today_price6 and today_Volume > today_Volume_yesterday :
+        print ('حجم وقيمت 6 روزه داره بالاميره')
+    else:
+        if today_price1 < today_price2 < today_price3 and today_price_min1 < today_price_min2:
+            if today_price1 > today_price6 and today_Volume < today_Volume_yesterday:
+                print ('حجم وقيمت 6 روزه داره پايين ميره')
+                
 
 if today_price_min9 < today_price_min1 > today_price_min6 :
     if today_price1 < today_price2 and today_price_min1 < today_price_min2 :
         print ('بانواسانات انجام شده احتمالا ريزشيه')
-    
-if today_price_min9 > today_price_min1 < today_price_min6:
-    if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
-        print ('بانوسانات انجام شده احتمالا افزايشيه')
+    else:
+        if today_price_min9 > today_price_min1 < today_price_min6:
+            if today_price1 > today_price2 and today_price_min1 > today_price_min2 :
+                print ('بانوسانات انجام شده احتمالا افزايشيه') 
+
             
 print (20*'-')
-if today_price1 > today_price6 :
-    print ('قيمت بسته شدن امروزاز6روزقبل هم بالاتررفت')
+if today_price1 > today_price6 and today_Volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
+else:
+    if today_price1 < today_price6 and today_Volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
 
-if today_price1 > today_price9 :
-    print ('قيمت بسته شدن امروزاز9 روزقبل هم بالاتررفت')
-
-if today_price1 < today_price6 :
-    print ('قيمت بسته شدن امروز کمترازقيمت 6روزقبل شده')
-
-if today_price1 < today_price9 :
-    print ('قيمت بسته شدن امروزکمترازقيمت 9روزقبل شده')
-
+        
+if today_price1 > today_price9 and today_Volume > today_Volume_yesterday:
+    print ('حج افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
+else:
+    if today_price1 < today_price9 and today_Volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
 
 #محاسبه درصدسودوزيان امروزبراي فردا
 zarar1 = (math.ceil((today_price*-3)/100)+today_price)    
