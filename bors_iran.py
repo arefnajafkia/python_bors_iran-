@@ -483,8 +483,8 @@ else:
     
 print ('~'*10)
 print ('روند False يا True دقت کنيدبه')
-print (h5,'ascending روند صعودي ')
-print (h10 ,'Descending روند نزولي')
+print (h5,': ascending روند صعودي ')
+print (h10 ,': Descending روند نزولي')
 #=====================================================
 print(45*"=",nam,"ichimoku")
 
@@ -933,11 +933,11 @@ ma20 = (math.ceil(average_prices8))
 #for signal Buy or Sell (ma10 , ma3)
     
 if ma3 > ma10 > ma20 :
-    print (' ascending Hold نگهدارصعوديه')
+    print (' ascending Hold ميانگين هاعلامت صعودميدن')
     print ('-'*20)
 else:
     if ma3 < ma10 < ma20 :
-        print (" signal Sell  نگه ندارنزولي شده")
+        print (" signal Sell  ميانگين هاعلامت خروج ميدن")
         print ('-'*20)
     
     
@@ -948,7 +948,7 @@ if ma3 >= ma10 >= ma20 or ma10 <= ma20:
     else:
         if ma3 <= ma10 <= ma20 or ma10 >= ma20:
             if today_Volume < today_Volume_yesterday:
-                print (" حجم ومانگين هاداره نزولي ميشه")
+                print (" حجم وميانگين هاداره نزولي ميشه")
                 print ('-'*20)
 
 
@@ -968,10 +968,10 @@ else:
 
 
 if ma3 > today_Final_price and today_price < ma10:
-    print ('روند قيمت وميانگين ها نزولي شده')
+    print (' روند قيمت وميانگين ها نزولي شده')
 else:
     if ma3 < today_Final_price and today_price > ma10:
-        print ('روند قيمت وميانگين ها صعودي شده')
+        print (' روند قيمت وميانگين ها صعودي شده')
         
 #------------------------------------------------
 print(20*"=",nam,"price_max,min,Close  6yers")
