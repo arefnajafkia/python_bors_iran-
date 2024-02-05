@@ -334,22 +334,14 @@ omc = cmo(open_price, price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 print ('-'*15)
-# شروع شرط براي ادامه کار
-if open_price > yesterday_price:
-    print ('open_price > yesterday_price')
-if open_price < yesterday_price:
-    print ('open_price < yesterday_price')
-
 
 if omc >= price_max :
     print ('صبرکن وآماده خريد باش')
-    print ('omc >= price_max')
 elif omc < price_min < yesterday_price :
      print (' شروع ريزش هفتگي ميتوني بفروشي')
-     print ('omc < price_min')
 elif omc > open_price > yesterday_price :     
      print ('ميتوني نگهداري اگرمنفي زدبفروشي')
-     print ('omc > Open_price')
+     
 
 if ticker.last_price == price_max:
      print('صف خريدشده')
@@ -362,13 +354,6 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
     
-print ()
-print ((math.ceil(bmi)),": bmi قيمت")
-print ((math.ceil(omc)),": omc قيمت")
-print (ticker.adj_close,": قيمت امروز")
-print (yesterday_price,": قيمت ديروز")
-print (math.ceil(ticker.max_week),": بالاترين قيمت هفتگي ")
-print (math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي")
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 

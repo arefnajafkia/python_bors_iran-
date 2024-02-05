@@ -71,6 +71,8 @@ today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
 today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
 today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
 
+today_two_price_min6 = DF['Low'].iloc[-6]  # پايين ترين قيمت 6روزقبل
+
 # حجم هفتگي وروزانه وماهيانه Volume
 Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
@@ -273,7 +275,14 @@ if Month103_mean < today_price > yesterday_price > today_two_price:
 else:
     if Month103_mean < today_price < yesterday_price < today_two_price:
          print ('قيمت بالاي ميانگين 103روزه است وداره پايين ميره')
-         print ('-'*20) 
+         print ('-'*20)
+
+
+if today_price_min > yesterday_price_min > today_two_price_min6 :
+    print (' روندروزانه افزايشي شده ')
+else:
+    if today_price_min < yesterday_price_min < today_two_price_min6 :
+        print (' روند روزانه کاهشي شده')
 
 
 if today_price_max > Month30 >= yesterday_price:
@@ -490,12 +499,6 @@ omc = bmi(today_Open_price, today_price_min)
 # نمايش اوام سي به کاربر
 print(f" او ام سي شما {omc:.2f} است ")
 
-# شروع شربراي ادامه کار
-if today_Open_price > yesterday_price:
-     print ('today_Open_price > yesterday_price ')
-if today_Open_price < yesterday_price:
-     print ('today_Open_price < yesterday_price ')
-
 if omc > today_price :
     print ('قيمت بسته شدن فردا بيشترازبسته شدن امروزميشه')
 
@@ -504,13 +507,11 @@ if omc < today_price :
      
 if omc >= today_price_max:
      print (' صبرکن وآماده خريدباش')
-     print ('omc >= today_price_max')
 elif omc < today_price_min < yesterday_price :
      print (' شروع ريزش هفتگي ميتوني بفروشي')
-     print ('omc < today_price_min')
 elif omc > today_Open_price > yesterday_price:
      print ('ميتوني نگهداري اگرمنفي زدبفروشي')
-     print ('omc > today_Open_price')
+
      
 if today_Final_price == today_price_max:
      print('صف خريدشده')
@@ -523,12 +524,6 @@ if omc > today_price > yesterday_price <= min_price_b2:
 if omc < today_price < yesterday_price <= max_price_b1:
     print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
      
-    
-print((math.ceil(omc)),": omc قيمت")
-print(today_price,": قيمت امروز")
-print(yesterday_price,": قيمت ديروز")
-print(max_price_b1,": بالاترين قيمت هفتگي ")
-print(min_price_b2,": پايين ترين قيمت هفتگي")
 #------------------------------------------------
 print(40*"=",nam,"signal buy and sell")
 

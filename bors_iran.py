@@ -61,7 +61,7 @@ today_two_price_min = DF['Low'].iloc[-3]  # پايين ترين قيمت پري�
 today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
 today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
 today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
-
+today_two_price_min6 = DF['Low'].iloc[-6]  # پايين ترين قيمت 6روزقبل
 
 max_price = DF['High'].iloc[-9:] # بالاترين قيمت هاي 9روز ten_max
 min_price = DF['Low'].iloc[-9:]  # پايين ترين قيمت هاي 9روز ten_min
@@ -277,30 +277,21 @@ ten_day_average = DF['Close'].rolling(10).mean()
 twenty_six_day_average = DF['Close'].rolling(26).mean()
 # Get today's 26-day average price
 today_twenty_six_day_average = twenty_six_day_average.iloc[-1]         
-# Compare the average price to today's price
-if today_price > average_prices7 > average_prices8 :
-     print(' the news signal : price > EMA_3 > EmE_20')
-else:
-     if today_price < average_prices7 < average_prices8 :
-          print(' Sell signal : price < EMA_3 < EmE_20')
+# Compare the average price to today's price      
           
-if today_price > average_prices7 > average_price :
-     print(' Buy signal Important : price > EMA_3 > EmE_10')
+if today_price > average_prices3 :
+     print (' EM_3 > EM_50 ')
 else:
-     if today_price < average_prices7 < average_price : 
-          print(' Sell signal Important: price < EMA_3 < EmE_10')         
+     if today_price < average_prices3 :
+          print (' EM_3 < EM_50 ')
           
-if today_price > average_prices3 > average_prices4 :
-     print (' signal Important ascending : price > EM_50 > EM_130 ')
-else:
-     if today_price < average_prices3 < average_prices4 :
-          print (' signal Important Descending : price < EM_50 < EM_130 ')
 
 if average_prices7 > average_price :
      print (' EM_3 > Em_10 ')
 else:
      if average_prices7 < average_price :
          print (' EM_3 < Em_10 ')
+         
 
 if average_prices7 < average_prices8:
      print (" EM_3 < EM_20")
@@ -688,11 +679,6 @@ omc = bmi(today_Open_price, today_price_min)
 print(f" او ام سي شما {omc:.2f} است ")
 
 # شروع شربراي ادامه کار
-if today_Open_price > yesterday_price:
-     print ('today_Open_price > yesterday_price ')
-if today_Open_price < yesterday_price:
-     print ('today_Open_price < yesterday_price ')
-
 if omc > today_price :
     print ('قيمت بسته شدن فردا بيشترازبسته شدن امروزميشه')
 
@@ -701,13 +687,11 @@ if omc < today_price :
      
 if omc >= today_price_max:
      print (' صبرکن وآماده خريدباش')
-     print ('omc >= today_price_max')
 elif omc < today_price_min < yesterday_price :
      print (' شروع ريزش هفتگي ميتوني بفروشي')
-     print ('omc < today_price_min')
 elif omc > today_Open_price > yesterday_price:
      print ('ميتوني نگهداري اگرمنفي زدبفروشي')
-     print ('omc > today_Open_price')
+     
      
 if today_Final_price == today_price_max:
      print('صف خريدشده')
@@ -721,7 +705,6 @@ if omc < today_price < yesterday_price <= max_price_b1:
     print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
      
     
-print((math.ceil(omc)),": omc قيمت")
 print(max_price_b1,": بالاترين قيمت هفتگي ")
 print(min_price_b2,": پايين ترين قيمت هفتگي")
 #================================================================
@@ -805,13 +788,11 @@ week7 = (max_price_b1 + min_price_b2)/2
 week7_mean = (average_max1 + average_min1)/2
 
 if today_price > week7_mean:
-    print ('سهم',nam,' اگه داري فعلا براي ميان مدت نگهدار')
-    print (" چون ازميانگين هفتگي بالاتره")
+    print (" قيمت ازميانگين هفتگي بالاتره")
     print ('-'*20)
 else:
     if today_price < week7_mean:
-        print ('سهم',nam,' اگه داري براي ميان مدت هم نگه ندار')
-        print (" چون ازميانگين هفتگي پايين تره")
+        print (" قيمت ازميانگين هفتگي پايين تره")
         print ('-'*20) 
 
 if week7 > Month30 or week7 < Month30 :
@@ -886,6 +867,13 @@ else:
         print ('-'*20)
 
 
+if today_price_min > yesterday_price_min > today_two_price_min6 :
+    print (' روندروزانه افزايشي شده ')
+else:
+    if today_price_min < yesterday_price_min < today_two_price_min6 :
+        print (' روند روزانه کاهشي شده')
+
+
 if today_price_max > Month30 >= yesterday_price:
     print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
     print ('-'*20)
@@ -941,15 +929,14 @@ else:
         print ('-'*20)
     
     
-if ma3 >= ma10 >= ma20 or ma10 <= ma20:
-    if today_Volume > today_Volume_yesterday:
-        print (" حجم وميانگين هاداره صعودي ميشه")
-        print ('-'*20) 
-    else:
-        if ma3 <= ma10 <= ma20 or ma10 >= ma20:
-            if today_Volume < today_Volume_yesterday:
-                print (" حجم وميانگين هاداره نزولي ميشه")
-                print ('-'*20)
+
+if today_Volume > today_Volume_yesterday:
+    print (" حجم افزايشي است")
+    print ('-'*20) 
+else:
+    if today_Volume < today_Volume_yesterday:
+        print (" حجم کاهشي است")
+        print ('-'*20)
 
 
 print ( ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
@@ -1028,7 +1015,7 @@ else:
 
         
 if today_price1 > today_price9 and today_Volume > today_Volume_yesterday:
-    print ('حج افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
+    print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
 else:
     if today_price1 < today_price9 and today_Volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
@@ -1261,13 +1248,13 @@ else:
           
 #====================================================
 print(35*"=",nam,"Process Stock trends")     
-if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
+if ticker.yesterday_price > ticker.low_price < ticker.min_week  :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
      print ((math.ceil(godrat))," : قدرت سهامداران براي فروش")
 
 
-if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
+if ticker.yesterday_price < ticker.low_price > ticker.min_week  :
      print (' روند قيمتي هفتگي صعودي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
      print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
@@ -1276,25 +1263,6 @@ if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
 print(20*"-")
 print (ticker.max_week," : بالاترين قيمت هفتگي ")
 print (ticker.min_week," : پايين ترين قيمت هفتگي ")
-print (ticker.yesterday_price," : قيمت ديروز")
-print (ticker.last_price, ": قيمت امروز")
-     
-#====================================================
-price = ticker.adj_close
-darsad_up4 = (math.ceil((price * 0.04 + price)*100)/100)      #قميت بسته شدن 4درصدبالاتر
-darsad_down4 = (math.ceil((price * 0.04 - price)*100)/100)    #قيمت بسته شدن 4درصدپايين تر
-
-darsad_up6 = (math.ceil((price * 0.06 + price)*100)/100)      #قيمت بسته شدن6درصدبالاتر
-darsad_down6 = (math.ceil((price * 0.06 - price)*100)/100)    #قيمت بسته شدن 6درصدپايين تر
-
-print ()
-if ticker.adj_close > ticker.yesterday_price :
-    print (darsad_up4 , ": قيمت فرداتا4درصدمثبت")
-    print (darsad_up6 , ": قيمت فردا تا6درصدمثبت")
-
-if ticker.adj_close < ticker.yesterday_price :
-    print (darsad_down4 , ": قيمت فرداتا4درصدمنفي")
-    print (darsad_down6 , ": قيمت فرداتا6درصدمنفي")
 #=====================================================
 print(20*"-")
 ravand =(ticker.max_year + ticker.min_year)/2
@@ -1501,21 +1469,14 @@ omc = cmo(open_price, price_min)
 print(f" او ام سي شما {omc:.2f} است ")
 print ('-'*15)
 # شروع شرط براي ادامه کار
-if open_price > yesterday_price:
-    print ('open_price > yesterday_price')
-if open_price < yesterday_price:
-    print ('open_price < yesterday_price')
-
 
 if omc >= price_max :
     print ('صبرکن وآماده خريد باش')
-    print ('omc >= price_max')
 elif omc < price_min < yesterday_price :
      print (' شروع ريزش هفتگي ميتوني بفروشي')
-     print ('omc < price_min')
 elif omc > open_price > yesterday_price :     
      print ('ميتوني نگهداري اگرمنفي زدبفروشي')
-     print ('omc > Open_price')
+
 
 if ticker.last_price == price_max:
      print('صف خريدشده')
@@ -1528,14 +1489,6 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
-    
-print ()
-print ((math.ceil(bmi)),": bmi قيمت")
-print ((math.ceil(omc)),": omc قيمت")
-print (ticker.adj_close,": قيمت امروز")
-print (ticker.yesterday_price,": قيمت ديروز")
-print ((math.ceil(ticker.max_week),": بالاترين قيمت هفتگي "))
-print ((math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي"))
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
