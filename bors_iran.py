@@ -135,7 +135,7 @@ if today_price > yesterday_price < today_two_price :
 
 
 if today_price<yesterday_price > today_two_price :
-    if yesterday_price<(Month_price):
+      if yesterday_price<(Month_price):
         if (math.ceil(rsi_diff.iloc[-3]))<(math.ceil(rsi_diff.iloc[-2]))>(math.ceil(rsi_diff.iloc[-1])):
             if (math.ceil(rsi_diff.iloc[-26])) <(math.ceil(rsi_diff.iloc[-2]))>= 70 :
                 print ('sell down price : واگرايي منفي rsi')
@@ -169,18 +169,25 @@ else:
           print(" Rsi : خروج ازمنطقه اشباع خريد")
 
 
-if (rsi_diff.iloc[-1])>70 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3]) and (rsi_diff.iloc[-2])>70:
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>70:
      print (' RSI  >  70')
-if (rsi_diff.iloc[-1])<70 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<70:
-     print (' RSI  <  70')
-if (rsi_diff.iloc[-1])>50 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>50:
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<70:
+         print (' RSI  <  70')
+
+         
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>50:
      print (' RSI  >  50')
-if (rsi_diff.iloc[-1])<50 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<50:
-     print (' RSI  <  50')
-if (rsi_diff.iloc[-1])>30 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>30:
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<50:
+         print (' RSI  <  50')
+
+         
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>30:
      print (' RSI  >  30')
-if (rsi_diff.iloc[-1])<30 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<30:
-     print (' RSI  <  30')
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<30:
+         print (' RSI  <  30')
 
 print(30*"-")
 #================================================
