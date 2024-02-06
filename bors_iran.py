@@ -518,80 +518,81 @@ for ich_ten_1 in range (18):
     ich_ten_1 = (ten_list_max_9,ten_list_min_9)
     t1 = ((highest_price_9)+(lowest_price_9))
     ten_1 = (t1 / 2)
+    
 
 # محاسبات تنکنسن ten_2
 for ich_ten_2 in range (20):
     ich_ten_2 = (ten_list_max_10,ten_list_min_10)
     t2 = ((highest_price_10)+(lowest_price_10))
     ten_2 = (t2 / 2)
+    
 
 # محاسبات تنکنسن ten_3
 for ich_ten_3 in range (22):
     ich_ten_3 = (ten_list_max_11,ten_list_min_11)
     t3 = ((highest_price_11)+(lowest_price_11))
     ten_3 = (t3 / 2)
+    
 
 # محاسبات کيجونسن kij_1
 for ich_kij_1 in range (52):
     ich_kij_1 = (kij_list_max_26,kij_list_min_26)
     kj1 = ((highest_price_26)+(lowest_price_26))
     kij_1 = (kj1 / 2)
+    
 
 # محاسبات کيجونسن kij_2
 for ich_kij_2 in range (54):
     ich_kij_2 = (kij_list_max_27,kij_list_min_27)
     kj2 = ((highest_price_27)+(lowest_price_27))
     kij_2 = (kj2 / 2)
+    
 
 # محاسبات کيجونسن kij_3
 for ich_kij_3 in range (56):
     ich_kij_3 = (kij_list_max_28,kij_list_min_28)
     kj3 = ((highest_price_28)+(lowest_price_28))
     kij_3 = (kj3 / 2)
+    
 
-if today_price > yesterday_price and ten_1>=kij_1:
-     if ten_1>ten_2 and kij_1>kij_2:
-          print (" buy : کراس تنکنس وکيجونسن روبه بالا ")
-
-
-if today_price < yesterday_price and ten_1<=kij_1:
-     if ten_1<ten_2 and kij_1<kij_2:
-          print (" sell : کراس تنکنسن وکسجونسن رو به پايين ")
+# برسي محاسبات تنکنسن وکيجونسن
+if today_price > yesterday_price and ten_2<ten_1>=kij_1>kij_2:
+    print (" buy : کراس تنکنس وکيجونسن روبه بالا ")
 
 
-if  today_price > ten_1 >kij_1 and ten_2>ten_3 and kij_2>kij_3:
-     if today_price > yesterday_price:
-          c = (' price > ten > kij and ten_2 > ten_3 and kij_2 > kij_3:')
-          print (c , ' \n ascending buy  !  صعودي ادامه دار')
-          print()
+if today_price < yesterday_price and ten_2>ten_1>=kij_1<kij_2:
+    print (" sell : کراس تنکنسن وکسجونسن رو به پايين ")
 
 
-if  today_price < ten_1 <kij_1 and ten_2<ten_3 and kij_2<kij_3:
-     if today_price < yesterday_price:
-          c1 = (' price < ten < kij and ten_2 < ten_3 and kij_2 < kij_3 :')
-          print (c1 , ' \n Descending sell !  نزولي ادامه دار')
-          print()
+if  yesterday_price<today_price > ten_1>ten_2 >=kij_1>kij_2 :
+    c= 'اگه داري نگهدار'
+    print (c , ' \n ascending buy  !  صعودي ادامه دار')
+    print()
 
 
-if  today_price > ten_1 >ten_2 and ten_1>kij_1 :
-     if today_price > yesterday_price :
-          c2 = (' price > ten > kij :')
-          print (c2 , ' \n ascending !  صعودي شد') 
+if  yesterday_price>today_price < ten_1<ten_2 <=kij_1<kij_2:
+    c1 = ('اگه داري بفروش ')
+    print (c1 , ' \n Descending sell !  نزولي ادامه دار')
+    print()
 
 
-if  today_price < ten_1 <ten_2 and ten_1<kij_1 :
-     if today_price < yesterday_price :
-          c3 = (' price < ten < kij :')
-          print (c3 , ' \n Descending !  نزولي شد')
+if  yesterday_price<today_price > ten_2 <ten_1>kij_1 :
+    c2 = (' price > ten > kij :')
+    print (c2 , ' \n ascending !  صعودي شد') 
 
 
-if today_price > ten_1 >=ten_2 and ten_1<kij_1 and kij_1==kij_2 ==kij_3 :
+if  yesterday_price>today_price < ten_2 >ten_1<kij_1 :
+    c3 = (' price < ten < kij :')
+    print (c3 , ' \n Descending !  نزولي شد')
+
+
+if yesterday_price>today_price <= ten_1 <ten_2 < ten_3 < kij_1==kij_2 ==kij_3 :
      c4 = (' price > ten < kij_1=kij_2=kij_3 : ')
      print (c4 , ' \n Buy Equilibrium ')
      print ((int(kij_1))," : احتمال صعود تا")
 
 
-if today_price < ten_1 <ten_2 and ten_1>kij_1 and kij_1==kij_2 ==kij_3  :
+if yesterday_price<today_price >= ten_1 >ten_2 > ten_3 > kij_1==kij_2 ==kij_3  :
      c5 = (' price < ten > kij_1=kij_2 = kij_3: ')
      print (c5 , ' \n Sell Equilibrium ')
      print ((int(kij_1))," : احتمال ريزش تا")
@@ -601,16 +602,18 @@ senk_sa2 = (kij_2+ten_2)/2    # senkou aسنکو
 senk_ab1 = (max(DF['Close'][-52:])+min(DF['Close'][-52:]))/2  #senkou  bسنکو
 senk_ab2 = (max(DF['Close'][-54:])+min(DF['Close'][-54:]))/2  #senkou  bسنکو
 
-if senk_sa1 <  senk_ab1  :
+
+if senk_sa1 < senk_ab1 :
      print (" ابرکوموآينده قرمزه")
 else:
-     if senk_sa1 >  senk_ab1  :
+     if senk_sa1 >  senk_ab1 :
           print (" ابرکومو آينده سبزه")
+          
 
-if senk_sa1 <  senk_ab1 < today_price :
+if senk_sa1 <  senk_ab1 > today_price<yesterday_price :
      print (" قيمت داره ميره زيرابرقرمز ")
 else:
-     if senk_sa1 >  senk_ab1 > today_price :  
+     if senk_sa1 >  senk_ab1 < today_price>yesterday_price :  
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ()
 #-------------------------------------------
