@@ -355,7 +355,7 @@ else:
         print ('قيمت مقاومت ساليانه راازدست داد')
         
 
-if highest_price_280 < highest_price_90 < highest_price_90 and lowest_price_280 > lowest_price_90 > lowest_price_30:
+if highest_price_280 < highest_price_90 < highest_price_30 and lowest_price_280 > lowest_price_90 > lowest_price_30:
     print (" کف وسقف يکساله دارن بهم نزديک ميشن")
 
 
@@ -803,7 +803,8 @@ if today_price > week7_mean:
 else:
     if today_price < week7_mean:
         print (" قيمت ازميانگين هفتگي پايين تره")
-        print ('-'*20) 
+        print ('-'*20)
+        
 
 if week7 > Month30 or week7 < Month30 :
     print (nam,' بين اين کف وسقف ها نوسان داره ميزنه')
@@ -905,20 +906,20 @@ if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
         print ('-'*20)
 
 
-if max_price_b1 > max_price_b3 > max_price_b5 and today_price_max > yesterday_price:
+if max_price_b1 > max_price_b3 > max_price_b5 < today_price_max > yesterday_price:
     print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
     print ('-'*20)
 else:
-    if min_price_b2 < min_price_b4 < min_price_b6 and today_price_max < yesterday_price:
+    if min_price_b2 < min_price_b4 < min_price_b6 > today_price_max < yesterday_price:
         print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
         print ('-'*20)
         
 
-if max_price_b1 < max_price_b3 > max_price_b5 and today_price_max < yesterday_price:
+if max_price_b1 < max_price_b3 > max_price_b5 > today_price_max < yesterday_price:
     print ("روند صعودي يکماه نزولي شد")
     print ('-'*20)
 else:
-    if min_price_b2 > min_price_b4 < min_price_b6 and today_price_max > yesterday_price:
+    if min_price_b2 > min_price_b4 < min_price_b6 < today_price_max > yesterday_price:
         print ("روند نزولي يکماه صعودي شد")
         print ('-'*20)
 #--------------------------------------------
@@ -1549,7 +1550,7 @@ if index == 1:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
           
 # تليسه
 if index == 2:
@@ -1578,7 +1579,7 @@ if index == 2:
          print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
      if 9918>ticker.adj_close>8839:
          print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
-         Fib == Fib
+         
           
 # غمينو
 if index == 3:
@@ -1591,13 +1592,13 @@ if index == 3:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
           
 # وسپه
 if index == 4:
-     p=2981
+     p=5405
      s=0
-     v=4000
+     v=2206
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1624,7 +1625,7 @@ if index == 4:
          print ("مابين حمايت 6146 ومقاومت 6810 هستيم درميانه 6461 روداريم")
      if 7473>ticker.adj_close>6810:
          print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")  
-         Fib == Fib
+         
          
 # غکورش
 if index == 5:
@@ -1649,7 +1650,7 @@ if index == 5:
          print ("مابين حمايت 8788 ومقاومت 9977 هستيم درميانه 9383 روداريم")
      if 11160>ticker.adj_close>9977:
          print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم") 
-         Fib == Fib
+         
          
 # شپاکسا
 if index == 6:
@@ -1674,12 +1675,12 @@ if index == 6:
          print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
      if 5591>ticker.adj_close>4834:
          print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
-         Fib == Fib
+         
           
 # ثبهساز
 if index == 7:
      p=3207
-     s=0
+     s=3324
      v=30000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1687,7 +1688,20 @@ if index == 7:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+     if 2381>ticker.adj_close>1891:
+         print ("مابين حمايت 1891 ومقاومت 2381 هستيم درميانه 2133 روداريم")
+     if 2865>ticker.adj_close>2381:
+         print ("مابين حمايت 2381 ومقاومت 2865 هستيم درميانه 2569 روداريم")
+     if 3355>ticker.adj_close>2865:
+         print ("مابين حمايت 2865 ومقاومت 3355 هستيم درميانه 3118 روداريم")
+     if 3835>ticker.adj_close>3355:
+         print ("مابين حمايت 3355 ومقاومت 3835 هستيم درميانه 3588 روداريم")
+     if 4320>ticker.adj_close>3835:
+         print ("مابين حمايت 3835 ومقاومت 4320 هستيم درميانه 4067 روداريم")
+     if 4807>ticker.adj_close>4320:
+         print ("مابين حمايت 4320 ومقاومت 4807 هستيم درميانه 4565 روداريم")          
+         
+         
 # تاپيکو
 if index == 8:
      p=0
@@ -1699,7 +1713,8 @@ if index == 8:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
+          
 # دسبحان
 if index == 9:
      p=0
@@ -1711,7 +1726,8 @@ if index == 9:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
+          
 # کگل
 if index == 10:
      p=0
@@ -1723,7 +1739,7 @@ if index == 10:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
 
 # فصبا
 if index == 11:
@@ -1736,6 +1752,8 @@ if index == 11:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+          
+          
 # حتوکا
 if index == 12:
      p=0 
@@ -1747,7 +1765,8 @@ if index == 12:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-          Fib == Fib
+          
+          
 
 if index >= 13 : 
      print (sahame ,'  :  شماازاين سهم خريد نداريد')
