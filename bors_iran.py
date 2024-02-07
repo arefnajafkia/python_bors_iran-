@@ -314,24 +314,34 @@ today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
 yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
 yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
 # محاسبات مقاومت هفتگي تاساليانه 
-highest_price_7 = max(DF['Close'][-7:])    #محاسبه مقاومت هفتگي
-highest_price_10 = max(DF['Close'][-10:])
-highest_price_30 = max(DF['Close'][-30:])
-highest_price_33 = max(DF['Close'][-33:])
-highest_price_90 = max(DF['Close'][-90:])
-highest_price_180 = max(DF['Close'][-180:])
-highest_price_280 = max(DF['Close'][-280:])
-highest_price_360 = max(DF['Close'][-360:])    #محاسبه مقاومت ساليانه
+highest_price_7 = max(DF['High'][-7:])    #محاسبه مقاومت هفتگي
+highest_price_10 = max(DF['High'][-10:])
+highest_price_30 = max(DF['High'][-30:])
+highest_price_33 = max(DF['High'][-33:])
+highest_price_60 = max(DF['High'][-60:])
+highest_price_90 = max(DF['High'][-90:])
+highest_price_180 = max(DF['High'][-180:])
+highest_price_280 = max(DF['High'][-280:])
+highest_price_360 = max(DF['High'][-360:])    #محاسبه مقاومت ساليانه
 #------------------------
 # محاسبات حمايت هفتگي تاساليانه
-lowest_price_7 = min(DF['Close'][-7:])         #محاسبه حمايت هفتگي
-lowest_price_10 = min(DF['Close'][-10:])
-lowest_price_30 = min(DF['Close'][-30:])
-lowest_price_33 = min(DF['Close'][-33:])
-lowest_price_90 = min(DF['Close'][-90:])
-lowest_price_180 = min(DF['Close'][-180:])
-lowest_price_280 = min(DF['Close'][-280:])                              
-lowest_price_360 = min(DF['Close'][-360:])       #محاسبه حمايت ساليانه
+lowest_price_7 = min(DF['Low'][-7:])         #محاسبه حمايت هفتگي
+lowest_price_10 = min(DF['Low'][-10:])
+lowest_price_30 = min(DF['Low'][-30:])
+lowest_price_33 = min(DF['Low'][-33:])
+lowest_price_60 = min(DF['Low'][-60:])
+lowest_price_90 = min(DF['Low'][-90:])
+lowest_price_180 = min(DF['Low'][-180:])
+lowest_price_280 = min(DF['Low'][-280:])                              
+lowest_price_360 = min(DF['Low'][-360:])       #محاسبه حمايت ساليانه
+
+#تشخيص روند
+if highest_price_90>=highest_price_60>=highest_price_30>=today_price_max>=lowest_price_90<=lowest_price_60<=lowest_price_30:
+    print (' کانال سه ماه رنج شده')
+else:
+    if highest_price_60>=highest_price_30>=today_price_max>=lowest_price_60<=lowest_price_30:
+        print (' کانال ماهيانه رنج شده') 
+
 
 #قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
 if today_price < lowest_price_7 > yesterday_price:
@@ -359,10 +369,10 @@ if highest_price_280 < highest_price_90 < highest_price_30 and lowest_price_280 
     print (" کف وسقف يکساله دارن بهم نزديک ميشن")
 
 
-if highest_price_7 > highest_price_30 > highest_price_90:
+if highest_price_30 >  highest_price_90:
     print ("ومقاومت درسه ماه کلا افزايشي  است  7>30>90")
 else:
-    if highest_price_7 < highest_price_30 < highest_price_90:
+    if highest_price_30 <  highest_price_90:
         print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")    
 
 # فاصله مقاومت هفتگي باساليانه
@@ -414,17 +424,17 @@ else:
         print (support_1 ,": فاصله حمايت هفتگي باساليانه داره کم ميشه")    
 
 
-if highest_price_7 < highest_price_30 < highest_price_90 < highest_price_180 < highest_price_280:
+if highest_price_180>highest_price_90>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_90<lowest_price_180:
     print ("کانال کاهشي يکساله داريم")
 else:
-    if lowest_price_280 < lowest_price_180 < lowest_price_90 < lowest_price_30 < lowest_price_7:
+    if highest_price_180<highest_price_90<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_90>lowest_price_180:
          print ("کانال افزايشي يکساله داريم")
 
 
-if highest_price_7 < highest_price_30 < highest_price_90 :
+if highest_price_90>highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60<lowest_price_90:
     print ("کانال کاهشي 90روزه داريم")
 else:
-    if lowest_price_90 < lowest_price_30 < lowest_price_7:
+    if highest_price_90<highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60>lowest_price_90:
          print ("کانال افزايشي 90روزه داريم")
 
 
@@ -432,7 +442,14 @@ if lowest_price_7 > lowest_price_30 > lowest_price_90:
     print (" ودرکل حمايت سه ماه افزايشي است 7>30>90 ")
 else:
     if lowest_price_7 < lowest_price_30 < lowest_price_90:
-        print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")      
+        print ("ودرکل حمايت سه ماه کاهشي است  7<30<90 ")
+
+
+if highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60  :
+    print ("کانال کاهشي ماهيانه داريم")
+else:
+    if highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60 :
+         print ("کانال افزايشي ماهيانه داريم")
 
     
 if highest_price_90 <=  lowest_price_90 :
@@ -560,7 +577,7 @@ for ich_kij_3 in range (56):
     ich_kij_3 = (kij_list_max_28,kij_list_min_28)
     kj3 = ((highest_price_28)+(lowest_price_28))
     kij_3 = (kj3 / 2)
-    
+
 
 # برسي محاسبات تنکنسن وکيجونسن
 if today_price > yesterday_price and ten_2<ten_1>=kij_1>kij_2:
