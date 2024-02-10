@@ -137,6 +137,36 @@ average_min6 = closing_price_b12.mean()   # average_mix_price_day360
 #=====================================================
 print ( 'today_price :',today_price)
 print(20*"-")
+#=====================================================
+print ('='*30,' candle DOje')
+DOje1= (today_price_max+today_price_min)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if today_Final_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if today_Final_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if today_Final_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+
+
+if today_Open_price < today_Final_price > DOje1:
+    print (' candle Green')
+else:
+    if today_Open_price > today_Final_price < DOje1:
+        print (' candle Red')
+
+
+if today_Open_price < today_Final_price == today_price_max > (today_price_min+150):
+    print (' candle marabozo Green')
+else:
+    if today_Open_price > today_Final_price == today_price_min < (today_price_max-150):
+        print (' candle marabozo Red')
+    
 #=======================================================
 # max year360 + min year360 /2
 year = (max_price_b11 + min_price_b12)/2
