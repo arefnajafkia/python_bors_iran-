@@ -209,6 +209,36 @@ print (nemone)
 #print ()
  # نمايش واريانس وديسکرايو و...
 #print (DF.describe())
+#=====================================================
+print ('='*30,' candle DOje')
+DOje1= (today_price_max+today_price_min)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if today_Final_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if today_Final_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if today_Final_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+
+
+if today_Open_price < today_Final_price > DOje1:
+    print (' candle Green')
+else:
+    if today_Open_price > today_Final_price < DOje1:
+        print (' candle Red')
+
+
+if today_Open_price < today_Final_price == today_price_max > (today_price_min+150):
+    print (' candle marabozo Green')
+else:
+    if today_Open_price > today_Final_price == today_price_min < (today_price_max-150):
+        print (' candle marabozo Red')
+    
 #=================================================
 print(40*"=",nam,"Volume")
           
@@ -869,12 +899,13 @@ else:
 
 
 if today_price_max > Month103_mean < yesterday_price:
-    print ('قيمت بالاي ميانگين    103')
+    print ('حداکثرقيمت امروزبالاي ميانگين  103')
     print ('-'*20)
 else:
     if today_price_min < Month103_mean > yesterday_price:
-        print ('قيمت پايين ميانگين   103')
+        print ('حداقل قيمت امروززير ميانگين  103')
         print ('-'*20)
+
     
     
 if Month103_mean < today_price < yesterday_price < today_two_price:
@@ -1226,6 +1257,35 @@ if (rsi_diff.iloc[-1])<30 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_di
      print (' RSI  <  30')
 
 #=====================================================
+print ('='*30,' candel DOje')
+DOje1= (ticker.high_price+ticker.low_price)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if ticker.last_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if ticker.last_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if ticker.last_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+
+if ticker.open_price < ticker.last_price > DOje1:
+    print (' candle Green')
+else:
+    if ticker.open_price > ticker.last_price < DOje1:
+        print (' candle Red')
+
+
+if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+    print (' candle marabozo Green')
+else:
+    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+        print (' candle marabozo Red')
+    
+#======================================================
 print('-'*30)
 week_min = ticker.adj_close - ticker.min_week
 week_max = ticker.adj_close - ticker.max_week
@@ -1571,9 +1631,9 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=4340
+     p=4331
      s=0
-     v=69000
+     v=74000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1646,7 +1706,7 @@ if index == 4:
          
 # غکورش
 if index == 5:
-     p=94350
+     p=9435
      s=0
      v=25000
      if p > 0 :
@@ -1671,9 +1731,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3237
+     p=3185
      s=0
-     v=64847
+     v=72000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')

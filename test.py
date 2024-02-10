@@ -92,8 +92,37 @@ print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()
+
 #=====================================================
-print('-*'*20)   
+print ('='*30,' candel DOje')
+DOje1= (ticker.high_price+ticker.low_price)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if ticker.last_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if ticker.last_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if ticker.last_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+
+if ticker.last_price > DOje1:
+    print (' candle Green')
+else:
+    if ticker.last_price < DOje1:
+        print (' candle Red')
+
+
+if ticker.last_price == ticker.high_price > (ticker.low_price+150):
+    print (' candle marabozo Green')
+else:
+    if ticker.last_price == ticker.low_price < (ticker.high_price-150):
+        print (' candle marabozo Red')
+    
+#======================================================print('-*'*20)   
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
@@ -235,12 +264,17 @@ if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_pr
 if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
     print (" امروزتيک نزولي داريم")
 
-
 #===============================================
-print (40*'=',sahame,'volume')
+print (40*'=',sahame,'volume',"and order sell and buy")
 print (ticker.volume ,'حجم امروز')
-#print (today_Volume_yesterday , 'حجم ديروز')
-#=================================================
+ 
+if ticker.adj_close > ticker.yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if ticker.adj_close < ticker.yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
+
+#================================================
 print(40*"=",sahame,"bmi محاسبه")
 # تعریف یک تابع برای محاسبه بی ام آی
 def bmi(last_price, adj_close):
@@ -337,10 +371,6 @@ if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
     
 print ()
-print ((math.ceil(bmi)),": bmi قيمت")
-print ((math.ceil(omc)),": omc قيمت")
-print (ticker.adj_close,": قيمت امروز")
-print (yesterday_price,": قيمت ديروز")
 print (math.ceil(ticker.max_week),": بالاترين قيمت هفتگي ")
 print (math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي")
 #======================================================
@@ -359,7 +389,7 @@ buy_signals = (
         (sma_3 > sma_10) &
         (sma_10.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 #-------------------------------------------
 print(30*"=",sahame," True and False مقادير sma3-20")          
 
@@ -376,7 +406,7 @@ buy_signals = (
         (sma_3 > sma_20) &
         (sma_20.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 
 #------------------------------------------------
 print(30*"=",sahame," True and False مقادير sma10-20")          
@@ -394,7 +424,7 @@ buy_signals = (
         (sma_10 > sma_20) &
         (sma_20.shift(1) > sma_10.shift(1))
 )
-print(buy_signals.tail(3))
+print(buy_signals.tail(2))
 
           
 #----------------------------------
