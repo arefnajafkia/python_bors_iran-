@@ -88,7 +88,73 @@ print(ticker.count,' : تعداد معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()
+
+#======================================================
+if rsi_diff.iloc[-1] >= 50 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+     print(" Rsi : ورود به بالاي 50 ")
+else:
+     if rsi_diff.iloc[-1] <= 50 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+          print(" Rsi : ريزش به زير50 ")
+                
+
+if rsi_diff.iloc[-1] <= 30 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+     print(" Rsi : ورود به منطقه اشباع فروش ")
+else:
+     if rsi_diff.iloc[-1] >= 70 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:
+          print(" Rsi : ورود به منطقه اشباع خريد")
+                
+
+if rsi_diff.iloc[-1] >= 30 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+     print(" Rsi : خروج ازمنطقه اشباع فروش ")
+else:
+     if rsi_diff.iloc[-1] <= 70 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:
+          print(" Rsi : خروج ازمنطقه اشباع خريد")
+
+
+if (rsi_diff.iloc[-1])>70 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3]) and (rsi_diff.iloc[-2])>70:
+     print (' RSI  >  70')
+if (rsi_diff.iloc[-1])<70 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<70:
+     print (' RSI  <  70')
+if (rsi_diff.iloc[-1])>50 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>50:
+     print (' RSI  >  50')
+if (rsi_diff.iloc[-1])<50 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<50:
+     print (' RSI  <  50')
+if (rsi_diff.iloc[-1])>30 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>30:
+     print (' RSI  >  30')
+if (rsi_diff.iloc[-1])<30 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<30:
+     print (' RSI  <  30')
+
 #=====================================================
+print ('='*30,' candel DOje')
+DOje1= (ticker.high_price+ticker.low_price)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if ticker.last_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if ticker.high_price > ticker.last_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if ticker.low_price < ticker.last_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+        
+
+if ticker.open_price < ticker.last_price > DOje1:
+    print (' candle Green')
+else:
+    if ticker.open_price > ticker.last_price < DOje1:
+        print (' candle Red')
+
+
+if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+    print (' candle marabozo Green')
+else:
+    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+        print (' candle marabozo Red')
+    
+#======================================================
 print('-'*30)
 week_min = ticker.adj_close - ticker.min_week
 week_max = ticker.adj_close - ticker.max_week
@@ -141,13 +207,13 @@ else:
 #==============================================
 print(40*"=",sahame,"Process and Volume")
 
-if ticker.yesterday_price > ticker.adj_close < ticker.max_week  :
+if ticker.yesterday_price > ticker.low_price < ticker.min_week :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
      print ((math.ceil(godrat))," : قدرت سهامداران براي فروش")
 
 
-if ticker.yesterday_price < ticker.adj_close > ticker.max_week  :
+if ticker.yesterday_price < ticker.low_price > ticker.min_week :
      print (' روند قيمتي هفتگي صعودي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
      print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
@@ -353,7 +419,10 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
     print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
-    
+
+print ()
+print (math.ceil(ticker.max_week),": بالاترين قيمت هفتگي ")
+print (math.ceil(ticker.min_week),": پايين ترين قيمت هفتگي")    
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
@@ -424,9 +493,9 @@ if index == 1:
     
 # تليسه
 if index == 2:
-     p=4340
-     s=0
-     v=69000
+     p=4331
+     s=4431
+     v=75000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -496,7 +565,7 @@ if index == 4:
     
 # غکورش
 if index == 5:
-     p=94350
+     p=9435
      s=0
      v=25000
      if p > 0 :
@@ -520,9 +589,9 @@ if index == 5:
 
 # شپاکسا
 if index == 6:
-     p=3237
+     p=3022
      s=0
-     v=64847
+     v=85000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -686,6 +755,7 @@ if index<=12 and p > 0:
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
           print(ticker.adj_close,' : قيمت بسته شدن امروز')
+          print (ticker.last_price,' : قيمت آخرين معامله امروز')
           print ('-'*20)
 
           

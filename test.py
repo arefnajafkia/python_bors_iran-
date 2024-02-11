@@ -408,6 +408,22 @@ buy_signals = (
         (sma_20.shift(1) > sma_3.shift(1))
 )
 print(buy_signals.tail(2))
+#---------------------------------------------
+rint(40*"=",sahame,"For order")
+nimeh_price = ((ticker.high_price + ticker.low_price)/2)
+nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
+
+if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
+    print ("ميتوني خريد کني فردا قيمت بالاترميره")
+
+if bmi > omc :
+    print ('bmi > omc',': for buy')
+if bmi < omc :
+    print ('bmi < omc',': for sell')
+    
+
+if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
+    print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
 
 #------------------------------------------------
 print(30*"=",sahame," True and False مقادير sma10-20")          
@@ -516,9 +532,9 @@ if index == 4:
     
 # غکورش
 if index == 5:
-     p=9063
+     p=9435
      s=0
-     v=30000
+     v=25000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
