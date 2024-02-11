@@ -103,23 +103,24 @@ if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
-if ticker.last_price >= DOje2:
+if ticker.high_price > ticker.last_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if ticker.last_price <= DOje3:
+    if ticker.low_price < ticker.last_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
+        
 
-if ticker.last_price > DOje1:
+if ticker.open_price < ticker.last_price > DOje1:
     print (' candle Green')
 else:
-    if ticker.last_price < DOje1:
+    if ticker.open_price > ticker.last_price < DOje1:
         print (' candle Red')
 
 
-if ticker.last_price == ticker.high_price > (ticker.low_price+150):
+if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
     print (' candle marabozo Green')
 else:
-    if ticker.last_price == ticker.low_price < (ticker.high_price-150):
+    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
         print (' candle marabozo Red')
     
 #======================================================print('-*'*20)   
@@ -443,9 +444,9 @@ if index == 1:
     
 # تليسه
 if index == 2:
-     p=4283
-     s=0
-     v=77000
+     p=4331
+     s=4431
+     v=75000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -705,6 +706,7 @@ if index<=12 and p > 0:
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
           print(ticker.adj_close,' : قيمت بسته شدن امروز')
+          print (ticker.last_price,' : قيمت آخرين معامله امروز') 
           print ('-'*20)
 
           

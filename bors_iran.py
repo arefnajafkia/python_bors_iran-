@@ -219,10 +219,10 @@ if today_Final_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
-if today_Final_price >= DOje2:
+if today_price_max > today_Final_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if today_Final_price <= DOje3:
+    if today_price_min < today_Final_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
 
 
@@ -1266,11 +1266,12 @@ if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
-if ticker.last_price >= DOje2:
+if ticker.high_price > ticker.last_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if ticker.last_price <= DOje3:
+    if ticker.low_price < ticker.last_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
+        
 
 if ticker.open_price < ticker.last_price > DOje1:
     print (' candle Green')
@@ -1632,7 +1633,7 @@ if index == 1:
 # تليسه
 if index == 2:
      p=4331
-     s=0
+     s=4431
      v=74000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1914,7 +1915,8 @@ if index<=12 and p > 0:
           print (hs3,'حدسود5درصد') 
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
-          print(ticker.adj_close,' : قيمت بسته شدن امروز')
+          print (ticker.adj_close,' : قيمت بسته شدن امروز')
+          print (ticker.last_price,' : قيمت آخرين معامله امروز')
           print ('-'*20)
 
           

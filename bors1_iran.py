@@ -147,10 +147,10 @@ if today_Final_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
-if today_Final_price >= DOje2:
+if today_price_max > today_Final_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if today_Final_price <= DOje3:
+    if today_price_min < today_Final_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
 
 
