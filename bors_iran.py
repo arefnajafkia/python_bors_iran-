@@ -428,6 +428,10 @@ if highest_price_7 < highest_price_10:
 else:
     if highest_price_7 > highest_price_10:
         print ("مقاومت هفتگي شروع کرده روبه پايين بره")
+
+
+if highest_price_30 == highest_price_7 :
+    print (highest_price_7 , ": مقاومت هفتگي باماهيانه برابرشده")
     
 
 if lowest_price_30 < lowest_price_33 :
@@ -1336,7 +1340,16 @@ else:
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
           
 #====================================================
-print(35*"=",nam,"Process Stock trends")     
+print(35*"=",nam,"Process Stock trends")
+if ticker.last_price > week7_mean:
+    print (" قيمت ازميانگين هفتگي بالاتره")
+    print ('-'*20)
+else:
+    if ticker.last_price < week7_mean:
+        print (" قيمت ازميانگين هفتگي پايين تره")
+        print ('-'*20)
+
+
 if ticker.yesterday_price > ticker.low_price < ticker.min_week  :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
@@ -1613,9 +1626,97 @@ buy_signals = (
         (sma_20.shift(1) > sma_3.shift(1))
 )
 print(buy_signals.tail(2))
+#=======================================================
+print (30*'=','  moving',sahame,)
+if ticker.last_price < ma10 :
+    print (' قيمت زيرميانگين 10 روزه')
+else:
+    if ticker.last_price > ma10 :
+        print (' قيمت بالاي ميانگين 10 روزه')
 
-          
+
+if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
+    print (' ميانگين ها وقيمت همه نزولي شدن')
+else:
+    if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
+        print (' ميانگين هاوقيمت همه صعودي شدن')
 #==========================================================
+print (30*'=','kanal ',sahame,)
+
+if ticker.high_price > Month103_mean < ticker.yesterday_price:
+    print ('حداکثرقيمت امروزبالاي ميانگين  103')
+    print ('-'*20)
+else:
+    if ticker.low_price < Month103_mean > ticker.yesterday_price:
+        print ('حداقل قيمت امروززير ميانگين  103')
+        print ('-'*20)
+
+    
+    
+if Month103_mean < ticker.last_price < ticker.yesterday_price < today_two_price:
+    print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
+    print ('-'*20)
+else:
+    if Month103_mean > ticker.last_price > ticker.yesterday_price > today_two_price:
+        print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
+        print ('-'*20)
+
+
+if Month103_mean < ticker.last_price > ticker.yesterday_price > today_two_price:
+    print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
+    print ('-'*20)
+else:
+    if Month103_mean > ticker.last_price < ticker.yesterday_price < today_two_price:
+        print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
+        print ('-'*20)
+
+
+if ticker.low_price > yesterday_price_min > today_two_price_min6 :
+    print (' روندروزانه افزايشي شده ')
+else:
+    if ticker.low_price < yesterday_price_min < today_two_price_min6 :
+        print (' روند روزانه کاهشي شده')
+
+
+if ticker.high_price > Month30 >= ticker.yesterday_price:
+    print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
+    print ('-'*20)
+else:
+    if ticker.low_price < Month30 <= ticker.yesterday_price:
+        print ('Month60 شروع روند کاهشي مراقب باش ')
+        print ('-'*20)
+
+
+if max_price_b1 < max_price_b3 < max_price_b5 < max_price_b7 < max_price_b9 :
+    if ticker.last_price < ticker.yesterday_price:
+        print ("کانال وروند سه ماهه نزولي است")
+        print ('-'*20)
+
+        
+if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
+    if ticker.last_price > ticker.yesterday_price:
+        print ("کانال وروند سه ماهه صعودي است ")
+        print ('-'*20)
+
+
+if max_price_b1 > max_price_b3 > max_price_b5 < ticker.high_price > ticker.yesterday_price:
+    print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
+    print ('-'*20)
+else:
+    if min_price_b2 < min_price_b4 < min_price_b6 > ticker.high_price < ticker.yesterday_price:
+        print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
+        print ('-'*20)
+        
+
+if max_price_b1 < max_price_b3 > max_price_b5 > ticker.high_price < ticker.yesterday_price:
+    print ("روند صعودي يکماه نزولي شد")
+    print ('-'*20)
+else:
+    if min_price_b2 > min_price_b4 < min_price_b6 < ticker.high_price > ticker.yesterday_price:
+        print ("روند نزولي يکماه صعودي شد")
+        print ('-'*20)
+
+#========================================================
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
 if index == 1:
