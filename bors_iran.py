@@ -117,55 +117,55 @@ rsi = ta.momentum.rsi(DF['Close'], length=14)
 rsi_diff = rsi
 print(rsi.tail(3))
 
-Month_price = DF['Close'].iloc[-26] # قيمت بسته شدن يک ماه قبل
-rsi_Month = rsi_diff.iloc[-26]  # يک ماه قبل rsi
 
-if today_price < yesterday_price > today_two_price :
-    if yesterday_price<(Month_price):
-        if (math.ceil(rsi_diff.iloc[-3]))<(math.ceil(rsi_diff.iloc[-2]))>(math.ceil(rsi_diff.iloc[-1])):
-            if (math.ceil(rsi_diff.iloc[-26])) <(math.ceil(rsi_diff.iloc[-2]))<= 30 :
-                print ('Buy down price : واگراي مثبت شده rsi')
+Month_price = DF['Final'].iloc[-26] # آخرين قيمت 30روزقبل
+Month_price1 = DF['Final'].iloc[-25] # آخرين قيمت 29روزقبل
+Month_price2 = DF['Final'].iloc[-24] # آخرين قيمت 28روزقبل
+rsi_Month26 = rsi_diff.iloc[-26]  # يک ماه قبل rsi
+rsi_Month25 = rsi_diff.iloc[-25]  #rsi 29روزقبل
+rsi_Month24 = rsi_diff.iloc[-24]  # rsi 28روزقبل
+rsi_Month = rsi_diff.iloc[-1]  # rsi امروز
+rsi_Month1 = rsi_diff.iloc[-2]  #rsi ديروز
+rsi_Month2 = rsi_diff.iloc[-3]  # rsi پري روز
 
-
-if today_price > yesterday_price < today_two_price :
-    if yesterday_price>(Month_price):
-        if (math.ceil(rsi_diff.iloc[-3]))>(math.ceil(rsi_diff.iloc[-2]))<(math.ceil(rsi_diff.iloc[-1])):
-            if (math.ceil(rsi_diff.iloc[-26]))>(math.ceil(rsi_diff.iloc[-2]))<= 30 :
-                print ('Buy top price: واگراي مثبت شده rsi')   
-
-
-if today_price<yesterday_price > today_two_price :
-      if yesterday_price<(Month_price):
-        if (math.ceil(rsi_diff.iloc[-3]))<(math.ceil(rsi_diff.iloc[-2]))>(math.ceil(rsi_diff.iloc[-1])):
-            if (math.ceil(rsi_diff.iloc[-26])) <(math.ceil(rsi_diff.iloc[-2]))>= 70 :
+# واگرايي منفي درفله ها
+if (today_Final_price<yesterday_Final_price>today_two_Final_price) > (Month_price<Month_price1>Month_price2): 
+    if (rsi_Month26 < Month_price25 > rsi_Month24) < 50<=(rsi_Month < Month_price1 > rsi_Month2)>=70:
+        print ('sell down price : واگرايي منفي rsi')
+    else:
+        if (today_Final_price<yesterday_Final_price>today_two_Final_price) < (Month_price<Month_price1>Month_price2):
+            if 50<=(rsi_Month26 < Month_price25 > rsi_Month24)>=70 > (rsi_Month < Month_price1 > rsi_Month2):
                 print ('sell down price : واگرايي منفي rsi')
                 
 
-if today_price<yesterday_price > today_two_price :
-    if yesterday_price>(Month_price):
-        if (math.ceil(rsi_diff.iloc[-3]))>(math.ceil(rsi_diff.iloc[-2]))<(math.ceil(rsi_diff.iloc[-1])):
-            if (math.ceil(rsi_diff.iloc[-26]))>(math.ceil(rsi_diff.iloc[-2]))>= 70 :
-                print ('sell top price : واگرايي منفي rsi')
+#واگرايي مثبت دردره ها
+if (today_Final_price>yesterday_Final_price<today_two_Final_price) > (Month_price>Month_price1<Month_price2): 
+    if (rsi_Month26 > Month_price25 < rsi_Month24) < 50>=(rsi_Month > Month_price1 < rsi_Month2)<=30:
+        print ('Buy top price: واگراي مثبت شده rsi')
+    else:
+        if (today_Final_price>yesterday_Final_price<today_two_Final_price) < (Month_price>Month_price1<Month_price2):
+            if 50>=(rsi_Month26 > Month_price25 < rsi_Month24)<=30 > (rsi_Month > Month_price1 < rsi_Month2):
+                print ('Buy top price: واگراي مثبت شده rsi')
         
 
-if rsi_diff.iloc[-1] >= 50 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 50 :      
      print(" Rsi : ورود به بالاي 50 ")
 else:
-     if rsi_diff.iloc[-1] <= 50 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+     if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 50 :      
           print(" Rsi : ريزش به زير50 ")
                 
 
-if rsi_diff.iloc[-1] <= 30 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 30 :      
      print(" Rsi : ورود به منطقه اشباع فروش ")
 else:
-     if rsi_diff.iloc[-1] >= 70 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:
+     if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 70:
           print(" Rsi : ورود به منطقه اشباع خريد")
                 
 
-if rsi_diff.iloc[-1] >= 30 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 30 :      
      print(" Rsi : خروج ازمنطقه اشباع فروش ")
 else:
-     if rsi_diff.iloc[-1] <= 70 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:
+     if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 70 :
           print(" Rsi : خروج ازمنطقه اشباع خريد")
 
 
@@ -614,11 +614,11 @@ for ich_kij_3 in range (56):
 
 
 # برسي محاسبات تنکنسن وکيجونسن
-if today_price > yesterday_price and ten_2<ten_1>=kij_1>kij_2:
+if yesterday_price < today_price >= ten_2<ten_1>=kij_1>kij_2:
     print (" buy : کراس تنکنس وکيجونسن روبه بالا ")
 
 
-if today_price < yesterday_price and ten_2>ten_1>=kij_1<kij_2:
+if yesterday_price > today_price <= ten_2>ten_1>=kij_1<kij_2:
     print (" sell : کراس تنکنسن وکسجونسن رو به پايين ")
 
 
@@ -661,17 +661,17 @@ senk_ab1 = (max(DF['Close'][-52:])+min(DF['Close'][-52:]))/2  #senkou  bسنکو
 senk_ab2 = (max(DF['Close'][-54:])+min(DF['Close'][-54:]))/2  #senkou  bسنکو
 
 
-if senk_sa1 < senk_ab1 :
+if senk_sa2 > senk_sa1 <= senk_ab1 > senk_ab2 :
      print (" ابرکوموآينده قرمزه")
 else:
-     if senk_sa1 >  senk_ab1 :
+     if senk_sa2 < senk_sa1 >= senk_ab1 < senk_ab2 :
           print (" ابرکومو آينده سبزه")
           
 
-if senk_sa1 <  senk_ab1 > today_price<yesterday_price :
+if senk_sa2 > senk_sa1 <= senk_ab1 > senk_ab2 > today_price<yesterday_price :
      print (" قيمت داره ميره زيرابرقرمز ")
 else:
-     if senk_sa1 >  senk_ab1 < today_price>yesterday_price :  
+     if senk_sa2 < senk_sa1 >= senk_ab1 < senk_ab2 < today_price>yesterday_price :  
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ()
 #-------------------------------------------
@@ -1225,40 +1225,67 @@ rsi = ta.momentum.rsi(DF['Close'], length=14)
 rsi_diff = rsi.diff()
 print(rsi.tail(3))
 
+# واگرايي منفي درفله ها
+if (ticker.last_price<ticker.yesterday_price>today_two_Final_price) > (Month_price<Month_price1>Month_price2): 
+    if (rsi_Month26 < Month_price25 > rsi_Month24) < 50<=(rsi_Month < Month_price1 > rsi_Month2)>=70:
+        print ('sell down price : واگرايي منفي rsi')
+    else:
+        if (ticker.last_price<ticker.yesterday_price>today_two_Final_price) < (Month_price<Month_price1>Month_price2):
+            if 50<=(rsi_Month26 < Month_price25 > rsi_Month24)>=70 > (rsi_Month < Month_price1 > rsi_Month2):
+                print ('sell down price : واگرايي منفي rsi')
+                
 
-if rsi_diff.iloc[-1] >= 50 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+#واگرايي مثبت دردره ها
+if (ticker.last_price>ticker.yesterday_price<today_two_Final_price) > (Month_price>Month_price1<Month_price2): 
+    if (rsi_Month26 > Month_price25 < rsi_Month24) < 50>=(rsi_Month > Month_price1 < rsi_Month2)<=30:
+        print ('Buy top price: واگراي مثبت شده rsi')
+    else:
+        if (ticker.last_price>ticker.yesterday_price<today_two_Final_price) < (Month_price>Month_price1<Month_price2):
+            if 50>=(rsi_Month26 > Month_price25 < rsi_Month24)<=30 > (rsi_Month > Month_price1 < rsi_Month2):
+                print ('Buy top price: واگراي مثبت شده rsi')
+
+
+
+if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 50 :      
      print(" Rsi : ورود به بالاي 50 ")
 else:
-     if rsi_diff.iloc[-1] <= 50 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+     if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 50 :      
           print(" Rsi : ريزش به زير50 ")
                 
 
-if rsi_diff.iloc[-1] <= 30 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
+if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 30 :      
      print(" Rsi : ورود به منطقه اشباع فروش ")
 else:
-     if rsi_diff.iloc[-1] >= 70 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:
+     if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 70 :
           print(" Rsi : ورود به منطقه اشباع خريد")
                 
 
-if rsi_diff.iloc[-1] >= 30 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
+if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 30 :      
      print(" Rsi : خروج ازمنطقه اشباع فروش ")
 else:
-     if rsi_diff.iloc[-1] <= 70 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:
+     if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 70 :
           print(" Rsi : خروج ازمنطقه اشباع خريد")
 
 
-if (rsi_diff.iloc[-1])>70 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3]) and (rsi_diff.iloc[-2])>70:
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>70:
      print (' RSI  >  70')
-if (rsi_diff.iloc[-1])<70 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<70:
-     print (' RSI  <  70')
-if (rsi_diff.iloc[-1])>50 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>50:
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<70:
+         print (' RSI  <  70')
+
+         
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>50:
      print (' RSI  >  50')
-if (rsi_diff.iloc[-1])<50 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<50:
-     print (' RSI  <  50')
-if (rsi_diff.iloc[-1])>30 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>30:
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<50:
+         print (' RSI  <  50')
+
+         
+if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>30:
      print (' RSI  >  30')
-if (rsi_diff.iloc[-1])<30 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<30:
-     print (' RSI  <  30')
+else:
+    if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<30:
+         print (' RSI  <  30')
 
 #=====================================================
 print ('='*30,' candel DOje')
@@ -1450,7 +1477,7 @@ if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_p
 
 
 #===============================================
-print (40*'=',sahame,'volume',"and order sell and buy")
+print (35*'=',sahame,'volume',"and order sell and buy")
 print (ticker.volume ,'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
           
@@ -1481,6 +1508,41 @@ if ticker.volume > (math.ceil(average_Volume_Month))*3 :
 
 if ticker.volume > 4*(average_Volume_week):
     print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+#===============================================
+print(35*"=",sahame,"price_max,min,Close  6yers")
+if ticker.last_price > ticker.yesterday_price > today_price3 and ticker.low_price > today_price_min2:
+    if ticker.last_price < today_price6 and ticker.volume > today_Volume_yesterday :
+        print ('حجم وقيمت 6 روزه داره بالاميره')
+    else:
+        if ticker.last_price<ticker.yesterday_price<today_price3 and ticker.low_price<today_price_min2:
+            if ticker.last_price > today_price6 and ticker.volume < today_Volume_yesterday:
+                print ('حجم وقيمت 6 روزه داره پايين ميره')
+                
+
+if today_price_min9 < ticker.low_price > today_price_min6 :
+    if ticker.last_price < ticker.yesterday_price and ticker.low_price < today_price_min2 :
+        print ('روبه پايين نوسان داشته احتمالا ريزشيه')
+    else:
+        if today_price_min9 > ticker.low_price < today_price_min6:
+            if ticker.last_price > ticker.yesterday_price and ticker.low_price > today_price_min2 :
+                print ('روبه بالانوسان داشته احتمالا افزايشيه') 
+
+            
+print (20*'-')
+if ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
+else:
+    if ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
+
+        
+if ticker.last_price > today_price9 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
+else:
+    if ticker.last_price < today_price9 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
+    
 
 #================================================
 print(25*"-")     
