@@ -1377,16 +1377,15 @@ else:
         print ('-'*20)
 
 
-if ticker.yesterday_price > ticker.low_price < ticker.min_week  :
+if ticker.yesterday_price > ticker.last_price < ticker.min_week  :
      print (' روند قيمتي هفتگي نزولي شد')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
      print ((math.ceil(godrat))," : قدرت سهامداران براي فروش")
-
-
-if ticker.yesterday_price < ticker.low_price > ticker.min_week  :
-     print (' روند قيمتي هفتگي صعودي شد')
-     print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
-     print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
+else:
+    if ticker.yesterday_price < ticker.last_price > ticker.max_week  :
+         print (' روند قيمتي هفتگي صعودي شد')
+         print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
+         print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
      
 
 print(20*"-")
@@ -1394,88 +1393,77 @@ print (ticker.max_week," : بالاترين قيمت هفتگي ")
 print (ticker.min_week," : پايين ترين قيمت هفتگي ")
 #=====================================================
 print(20*"-")
+# بالاترين وپايين ترين قيمت ساليانه تقسيم بردوشده
 ravand =(ticker.max_year + ticker.min_year)/2
+# بالاترين وپايين ترين قيمت هفتگي تقسيم بردوشده
 ravand_2 =(ticker.max_week + ticker.min_week)/2
 
 
-if ticker.adj_close > ravand and ticker.yesterday_price > ticker.adj_close :
+if ticker.yesterday_price > ticker.last_price > ravand :
     print (" قيمت بالاي نيمه ساليانه است وبه سمت پايين ميره")
-
-
-if ticker.adj_close > ravand and ticker.yesterday_price < ticker.adj_close :
-    print (" قيمت بالاي نيمه ساليانه است وبه سمت بالاميره")
+else:
+    if ticker.yesterday_price < ticker.last_price > ravand  :
+        print (" قيمت بالاي نيمه ساليانه است وبه سمت بالاميره")
     
 
-if ticker.adj_close < ravand and ticker.yesterday_price < ticker.adj_close :
+if ticker.yesterday_price < ticker.last_price < ravand :
     print (" قيمت پايين نيمه ساليانه است وبه سمت بالاميره")
-
-
-if ticker.adj_close < ravand and ticker.yesterday_price > ticker.adj_close :
-    print (" قيمت پايين نيمه ساليانه است وبه سمت پايين ميره")
+else:
+    if ticker.yesterday_price > ticker.last_price < ravand :
+        print (" قيمت پايين نيمه ساليانه است وبه سمت پايين ميره")
     
 
-if ravand < ticker.adj_close :
+if ravand < ticker.last_price :
      print ('** توجه داشته باشيد روند قيمتي ساليانه صعوديه **')
      print ()
 else :
-     if ravand > ticker.adj_close :
+     if ravand > ticker.last_price :
           print ('** توجه داشته باشيد روند قيمتي ساليانه نزوليه **')
           print ()
 
 
-if ticker.adj_close > ravand_2 and ticker.yesterday_price > ticker.adj_close :
+if ticker.yesterday_price > ticker.last_price > ravand_2 :
     print (" قيمت بالاي نيمه هفتگي است ولي به سمت پايين ميره")
 else:    
-    if ticker.adj_close > ravand_2 and ticker.yesterday_price < ticker.adj_close :
+    if ticker.yesterday_price < ticker.last_price > ravand_2 :
         print (" قيمت بالاي نيمه هفتگي است وبه سمت بالاميره")
 
 
-if ticker.adj_close < ravand_2 and ticker.yesterday_price < ticker.adj_close :
+if ticker.yesterday_price < ticker.last_price < ravand_2 :
     print (" قيمت پايين نيمه هفتگي است ولي به سمت بالاميره")
 else:   
-    if ticker.adj_close < ravand_2 and ticker.yesterday_price > ticker.adj_close :
+    if ticker.yesterday_price > ticker.last_price < ravand_2 :
         print (" قيمت پايين نيمه هفتگي است وبه سمت پايين ميره")
           
 
-if ticker.max_year > ticker.adj_close > ticker.min_year :
+if ticker.max_year > ticker.last_price > ticker.min_year :
     print (" قيمت درمحدوده رنج ساليانه حرکت ميکنه  بالا  و پايين  ميره")
 
 
-if ticker.yesterday_price < ticker.max_year < ticker.adj_close > ticker.min_year :
+if ticker.yesterday_price < ticker.max_year < ticker.last_price > ticker.min_year :
     print ('بالاترين قيمت ساليانه راروبه بالا شکستيم ')
+else:
+    if ticker.max_year > ticker.last_price < ticker.min_year < ticker.yesterday_price :
+        print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
+    
 
-if ticker.max_year == ticker.adj_close :
+if ticker.max_year == ticker.last_price :
     print (" خيلي مهم به سقف قيمت ساليانه رسيديم")
-
-if ticker.max_year > ticker.adj_close < ticker.min_year < ticker.yesterday_price :
-    print (" پايين ترين قيمت ساليانه را روبه پايين شکستيم")
-
-
-if ticker.adj_close == ticker.min_year :
-    print (" خيلي مهم به کف قيمت ساليانه رسيديم")
+else:
+    if ticker.last_price == ticker.min_year :
+        print (" خيلي مهم به کف قيمت ساليانه رسيديم")
     
 print(20*"-",nam,"Tik Top or Down")
 print(ticker.max_year,' : حداکثر قیمت بازه سال')
 print(ticker.min_year,' : حداقل قیمت بازه سال')
 
-
-if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
-    print (tik_ascending , ' : تيک صعودي')
-
-    
-if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
-    print (tik_Descending , ' : تيک نزولي')
-
                
-
-if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+if ticker.last_price > ticker.open_price > ticker.yesterday_price > ticker.low_price:
     print (" امروزتيک صعودي داريم")
-
-     
-if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
-    print (" امروزتيک نزولي داريم")
-
-
+else:
+    if ticker.last_price < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+        print (" امروزتيک نزولي داريم")
+    
 #===============================================
 print (35*'=',sahame,'volume',"and order sell and buy")
 print (ticker.volume ,'حجم امروز')
@@ -1734,10 +1722,10 @@ else:
 
 
 if ticker.low_price > yesterday_price_min > today_two_price_min6 :
-    print (' روندروزانه افزايشي شده ')
+    print (' کف امروزبالاترازکف 6روزپيش شده ')
 else:
     if ticker.low_price < yesterday_price_min < today_two_price_min6 :
-        print (' روند روزانه کاهشي شده')
+        print (' کف امروزپايين ترازکف 6روزپيشک شده')
 
 
 if ticker.high_price > Month30 >= ticker.yesterday_price:
@@ -1753,12 +1741,11 @@ if max_price_b1 < max_price_b3 < max_price_b5 < max_price_b7 < max_price_b9 :
     if ticker.last_price < ticker.yesterday_price:
         print ("کانال وروند سه ماهه نزولي است")
         print ('-'*20)
-
-        
-if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
-    if ticker.last_price > ticker.yesterday_price:
-        print ("کانال وروند سه ماهه صعودي است ")
-        print ('-'*20)
+    else:
+        if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
+            if ticker.last_price > ticker.yesterday_price:
+                print ("کانال وروند سه ماهه صعودي است ")
+                print ('-'*20)
 
 
 if max_price_b1 > max_price_b3 > max_price_b5 < ticker.high_price > ticker.yesterday_price:
