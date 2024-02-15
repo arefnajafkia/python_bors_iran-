@@ -296,10 +296,10 @@ else:
 print (20*'-')
 
 if today_price_max>today_price_max4>today_price_max8>today_price_max12:
-    print ("دوازده روز سقف جديد ميزنه")
+    print ("دوازده روزه سقف جديد بالاترميزنه")
 else:
     if today_price_min<today_price_min4<today_price_min8<today_price_min12:
-        print ("دوازده روزکف جديدميزنه")
+        print ("دوازده روزه کف جديد پايين ترميزنه")
 #==================================================
 print ()               
 print (today_Volume , 'حجم امروز')
@@ -520,11 +520,9 @@ else:
 if h_ascending and h5:
     c = "Engulfing :"
     print (c , "hemer ascending !  صعودي مناسب خريد" )
-    
-if h_Descending and h10:
+elif h_Descending and h10 :
     c = "Engulfing :"
     print (c , "hemer Descending !  نزولي وقت فروش" )
-    
 else:
     c = "hold :"
     print (c , "not Engulfing !")
@@ -910,8 +908,7 @@ else:
         print ('حداقل قيمت امروززير ميانگين  103')
         print ('-'*20)
 
-    
-    
+        
 if Month103_mean < today_price < yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
@@ -977,8 +974,6 @@ else:
 #--------------------------------------------
 ma3 = (math.ceil(average_prices7))
 ma10 = (math.ceil(average_price))
-ma4 = (math.ceil(average_prices9))
-ma11 = (math.ceil(average_price10))
 ma20 = (math.ceil(average_prices8))
 
 #for signal Buy or Sell (ma10 , ma3)
@@ -992,7 +987,6 @@ else:
         print ('-'*20)
     
     
-
 if today_Volume > today_Volume_yesterday:
     print (" حجم افزايشي است")
     print ('-'*20) 
@@ -1002,7 +996,6 @@ else:
         print ('-'*20)
 
 
-print ( ma3,'=ma3  ' ,ma10,'=ma10  ' ,ma4 ,'=ma4  ',ma11 ,'=ma11  ',ma20,'=ma20')
 if today_price < ma10 :
     print (' قيمت زيرميانگين 10 روزه')
 else:
@@ -1017,10 +1010,10 @@ else:
         print (' price < ma3 : قيمت زيرميانگين 3 روزه')
 
 
-if ma3 > today_Final_price and today_price < ma10:
+if ma10 > ma3 > today_Final_price < yesterday_price:
     print (' روند قيمت وميانگين ها نزولي شده')
 else:
-    if ma3 < today_Final_price and today_price > ma10:
+    if ma10 < ma3 < today_Final_price > yesterday_price:
         print (' روند قيمت وميانگين ها صعودي شده')
         
 #------------------------------------------------
@@ -1499,15 +1492,7 @@ if ticker.volume > 4*(average_Volume_week):
 
 #===============================================
 print(35*"=",sahame,"price_max,min,Close  6yers")
-if ticker.last_price > ticker.yesterday_price > today_price3 and ticker.low_price > today_price_min2:
-    if ticker.last_price < today_price6 and ticker.volume > today_Volume_yesterday :
-        print ('حجم وقيمت 6 روزه داره بالاميره')
-    else:
-        if ticker.last_price<ticker.yesterday_price<today_price3 and ticker.low_price<today_price_min2:
-            if ticker.last_price > today_price6 and ticker.volume < today_Volume_yesterday:
-                print ('حجم وقيمت 6 روزه داره پايين ميره')
                 
-
 if today_price_min9 < ticker.low_price > today_price_min6 :
     if ticker.last_price < ticker.yesterday_price and ticker.low_price < today_price_min2 :
         print ('روبه پايين نوسان داشته احتمالا ريزشيه')
@@ -1518,10 +1503,10 @@ if today_price_min9 < ticker.low_price > today_price_min6 :
 
             
 print (20*'-')
-if ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
+if ticker.yesterday_price > ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
     print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
 else:
-    if ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
+    if ticker.yesterday_price< ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
 
         
@@ -1542,17 +1527,17 @@ else :
 
 #================================================
 print(20*"-")
-if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
     print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
         print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
 
-if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
     print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
 print(40*"=",sahame,"bmi محاسبه")
@@ -1587,18 +1572,16 @@ else:
 
 if ticker.yesterday_price > ticker.open_price:
     print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
-
-
-if ticker.yesterday_price < ticker.open_price:
-    print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+else:
+    if ticker.yesterday_price < ticker.open_price:
+        print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
           
 
 if ticker.sta_max == ticker.high_price:
     print(' صف خريدشده')
-
-
-if ticker.sta_min == ticker.low_price:
-    print (' صف فروش شده')
+else:
+    if ticker.sta_min == ticker.low_price:
+        print (' صف فروش شده')
 
 #-------------------------------------
 print(40*"=",sahame,"omc محاسبه")
@@ -1701,8 +1684,7 @@ else:
         print ('حداقل قيمت امروززير ميانگين  103')
         print ('-'*20)
 
-    
-    
+       
 if Month103_mean < ticker.last_price < ticker.yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
