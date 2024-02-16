@@ -265,10 +265,9 @@ else:
          
 if today_Volume > (math.ceil(average_Volume_Month))*3 :
      print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
-
-
-if today_price > 4*(average_Volume_week):
-    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+else:
+    if today_price > 4*(average_Volume_week):
+         print (" حجم امروز 4برابر حجم هفتگي ميباشد")
 
 #================================================
 print(25*"-")     
@@ -1309,29 +1308,12 @@ if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_pric
 else:
     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
         print (' candle marabozo Red')
-    
-#======================================================
+
 print('-'*30)
+#======================================================
+# تشخيص بسته شدن قيمت بالا ياپايين قيمت هفتگي است ياخير
 week_min = ticker.adj_close - ticker.min_week
-week_max = ticker.adj_close - ticker.max_week
-if ticker.adj_close > ticker.max_year :
-     print (' مقاومت يک ساله شکسته شد')
-
-
-if (ticker.min_week)>(ticker.adj_close):
-     print(' قيمت امروز پايين ترازحداقل قيمت هفتگي است')
-     print (week_min," :فاصله قيمت امروزباهفتگي")
-else:
-     if (ticker.min_week)<(ticker.adj_close):
-          print(' قيمت امروز بالاترازحداقل قيمت هفتگي است')
-          print (week_min," :فاصله قيمت امروزباهفتگي")
-          
-
-if (ticker.max_week)<(ticker.adj_close):
-     print(' قيمت امروزبالاترازحداکثرقيمت هفتگي است')
-     print (week_max," :فاصله قيمت امروزباهفتگي")
-     
-print('-'*30)   
+week_max = ticker.adj_close - ticker.max_week       
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
@@ -1363,20 +1345,20 @@ else:
 print(35*"=",nam,"Process Stock trends")
 if ticker.last_price > week7_mean:
     print (" قيمت ازميانگين هفتگي بالاتره")
-    print ('-'*20)
+    print (week_max," : فاصله قيمت بالاترين قيمت هفتگي")
 else:
     if ticker.last_price < week7_mean:
         print (" قيمت ازميانگين هفتگي پايين تره")
-        print ('-'*20)
+        print (week_min," : فاصله قيمت باپايين ترين قيمت هفتگي ") 
 
 
 if ticker.yesterday_price > ticker.last_price < ticker.min_week  :
-     print (' روند قيمتي هفتگي نزولي شد')
+     print (' قيمت ازپايين ترين قيمت هفتگي پايين تررفت')
      print ((math.ceil(tedad))," : هرسهامدارامروزاين تعداد سهم فروخته")
      print ((math.ceil(godrat))," : قدرت سهامداران براي فروش")
 else:
     if ticker.yesterday_price < ticker.last_price > ticker.max_week  :
-         print (' روند قيمتي هفتگي صعودي شد')
+         print (' قيمت ازبالاترين قيمت هفتگي بالاتررفت')
          print ((math.ceil(tedad))," : هرسهامدارامروزاين تعدادسهام خريده")
          print ((math.ceil(godrat))," : قدرت سهامدارن براي خريد")
      
@@ -1676,6 +1658,13 @@ else:
 #==========================================================
 print (30*'=','kanal ',sahame,)
 
+if ticker.adj_close > ticker.max_year :
+     print (' مقاومت يک ساله شکسته شد')
+else:
+    if ticker.adj_close < ticker.min_year :
+        print (' حمايت يک ساله شکسته شد')
+
+
 if ticker.high_price > Month103_mean < ticker.yesterday_price:
     print ('حداکثرقيمت امروزبالاي ميانگين  103')
     print ('-'*20)
@@ -1707,7 +1696,7 @@ if ticker.low_price > yesterday_price_min > today_two_price_min6 :
     print (' کف امروزبالاترازکف 6روزپيش شده ')
 else:
     if ticker.low_price < yesterday_price_min < today_two_price_min6 :
-        print (' کف امروزپايين ترازکف 6روزپيشک شده')
+        print (' کف امروز پايين ترازکف 6 روزپيش شده')
 
 
 if ticker.high_price > Month30 >= ticker.yesterday_price:
@@ -1975,7 +1964,13 @@ if index == 12:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+
           
+if ticker.yesterday_price < ticker.last_price :
+    print (' بطرف مقاومت ميرويم')
+else:
+    if ticker.yesterday_price > ticker.last_price :
+        print (' بطرف حمايت ميرويم')
           
 
 if index >= 13 : 
