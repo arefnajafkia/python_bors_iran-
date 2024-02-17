@@ -17,7 +17,7 @@ nam = input ("Please write the name of the stock you want : \n لطفا نام �
 
 DF = tse.Get_Price_History(stock=nam,
                              start_date='1401-05-01',
-                             end_date='1402-07-07',
+                             end_date='1402-12-07',
                              ignore_date=True,
                              adjust_price=True,
                              show_weekday=True,
@@ -363,6 +363,33 @@ lowest_price_90 = min(DF['Low'][-90:])
 lowest_price_180 = min(DF['Low'][-180:])
 lowest_price_280 = min(DF['Low'][-280:])                              
 lowest_price_360 = min(DF['Low'][-360:])       #محاسبه حمايت ساليانه
+
+# محاسبه قيمتي مابين حمايت ومقاومت يکساله
+mohasebeh = (highest_price_360 + lowest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت بامقاومت يکساله
+mohasebeh1= (mohasebeh + highest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
+mohasebeh2= (mohasebeh + lowest_price_360)/2
+
+if highest_price_360 > today_Final_price > mohasebeh1:
+    print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' قيمت ميان اين دودرحرکت است')
+else:
+    if mohasebeh1 > today_Final_price > mohasebeh :
+        print (mohasebeh,':بالاي ميانه ساليانه هستيم ',mohasebeh1,' قيمت ميان اين دودرحرکت است')
+
+
+if mohasebeh2 < today_Final_price < mohasebeh:
+    print (mohasebeh2,':پايين ميانه ساليانه هستيم ',mohasebeh,' قيمت ميان اين دودرحرکت است')
+else:
+    if mohasebeh2 > today_Final_price > lowest_price_360 :
+        print (mohasebeh2,':پايين ميانه ساليانه هستيم ',lowest_price_360,' قيمت ميان اين دودرحرکت است')
+        
+
+if today_Final_price > yesterday_Final_price :
+    print (today_Final_price,' قيمت امروزبه سمت بالادرحرکت است')
+else:
+    if today_Final_price < yesterday_Final_price :
+        print (today_Final_price,' قيمت امروزبه سمت پايين درحرکت است')
 
 #تشخيص روند
 if highest_price_90>=highest_price_60>=highest_price_30>=today_price_max>=lowest_price_90<=lowest_price_60<=lowest_price_30:
@@ -1345,7 +1372,7 @@ else:
 print(35*"=",nam,"Process Stock trends")
 if ticker.last_price > week7_mean:
     print (" قيمت ازميانگين هفتگي بالاتره")
-    print (week_max," : فاصله قيمت بالاترين قيمت هفتگي")
+    print (week_max," : فاصله قيمت بابالاترين قيمت هفتگي")
 else:
     if ticker.last_price < week7_mean:
         print (" قيمت ازميانگين هفتگي پايين تره")
@@ -1735,6 +1762,33 @@ else:
     if min_price_b2 > min_price_b4 < min_price_b6 < ticker.high_price > ticker.yesterday_price:
         print ("روند نزولي يکماه صعودي شد")
         print ('-'*20)
+
+# محاسبه قيمتي مابين حمايت ومقاومت يکساله
+mohasebeh = (highest_price_360 + lowest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت بامقاومت يکساله
+mohasebeh1= (mohasebeh + highest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
+mohasebeh2= (mohasebeh + lowest_price_360)/2
+
+if highest_price_360 > ticker.last_price > mohasebeh1:
+    print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' قيمت ميان اين دودرحرکت است')
+else:
+    if mohasebeh1 > ticker.last_price > mohasebeh :
+        print (mohasebeh,':بالاي ميانه ساليانه هستيم ',mohasebeh1,' قيمت ميان اين دودرحرکت است')
+
+
+if mohasebeh2 < ticker.last_price < mohasebeh:
+    print (mohasebeh2,':پايين ميانه ساليانه هستيم ',mohasebeh,' قيمت ميان اين دودرحرکت است')
+else:
+    if mohasebeh2 > ticker.last_price > lowest_price_360 :
+        print (mohasebeh2,':پايين ميانه ساليانه هستيم ',lowest_price_360,' قيمت ميان اين دودرحرکت است')
+        
+
+if ticker.last_price > ticker.yesterday_price :
+    print (ticker.last_price,' قيمت امروزبه سمت بالادرحرکت است')
+else:
+    if ticker.last_price < ticker.yesterday_price :
+        print (ticker.last_price,' قيمت امروزبه سمت پايين درحرکت است')
 
 #========================================================
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
