@@ -241,7 +241,7 @@ else:
     
 #=================================================
 print(40*"=",nam,"Volume")
-          
+
 if today_Volume > (math.ceil(average_Volume_Month)):
      print ('حجم امروزبيشترازحجم ماهيانه شده')
 else:
@@ -1177,11 +1177,11 @@ print ('-'*20)
 
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
 namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا",
-        "ثبهساز","تاپیکو","دسبحان","کگل","فصبا","حتوکا",
+        "ثبهساز","تاپیکو","دسبحان","ومعادن","فصبا","حتوکا",
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
         "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
-        "ومعادن","داتام","نخريس","پاکشو"]
+        "کگل","داتام","نخريس","پاکشو"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -1771,19 +1771,20 @@ mohasebeh1= (mohasebeh + highest_price_360)/2
 mohasebeh2= (mohasebeh + lowest_price_360)/2
 
 if highest_price_360 > ticker.last_price > mohasebeh1:
-    print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' قيمت ميان اين دودرحرکت است')
+    print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' مابين اين دوقيمت')
 else:
     if mohasebeh1 > ticker.last_price > mohasebeh :
-        print (mohasebeh,':بالاي ميانه ساليانه هستيم ',mohasebeh1,' قيمت ميان اين دودرحرکت است')
+        print (mohasebeh,':بالاي ميانه ساليانه هستيم ',mohasebeh1,' مابين اين دوقيمت')
 
 
 if mohasebeh2 < ticker.last_price < mohasebeh:
-    print (mohasebeh2,':پايين ميانه ساليانه هستيم ',mohasebeh,' قيمت ميان اين دودرحرکت است')
+    print (mohasebeh2,':پايين ميانه ساليانه هستيم ',mohasebeh,' مابين اين دوقيمت')
 else:
     if mohasebeh2 > ticker.last_price > lowest_price_360 :
-        print (mohasebeh2,':پايين ميانه ساليانه هستيم ',lowest_price_360,' قيمت ميان اين دودرحرکت است')
+        print (mohasebeh2,':پايين ميانه ساليانه هستيم ',lowest_price_360,' مابين اين دوقيمت')
         
 
+print (20*'-')
 if ticker.last_price > ticker.yesterday_price :
     print (ticker.last_price,' قيمت امروزبه سمت بالادرحرکت است')
 else:
@@ -1981,17 +1982,23 @@ if index == 9:
           print (v ,': تعدادسهام فروخته شده')
           
           
-# کگل
+# ومعادن
 if index == 10:
-     p=0
-     s=7050
-     v=4000
+     p=4874
+     s=0
+     v=47000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 4066>ticker.adj_close>2526:
+          print ("مابين حمايت 2526 ومقاومت 4066 هستيم درميانه 3198 روداريم") 
+     if 5610>ticker.adj_close>4066:
+          print ("مابين حمايت  4066 ومقاومت 5610 هستيم درميانه  4763 روداريم")
+     if 7184>ticker.adj_close>5610:
+          print ("مابين حمايت 5610 ومقاومت 7184 هستيم درميانه  6343  روداريم")
           
 
 # فصبا
@@ -2019,6 +2026,33 @@ if index == 12:
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
 
+
+# خگستر
+if index == 13:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+
+
+# فولاد
+if index == 14:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+
+
           
 if ticker.yesterday_price < ticker.last_price :
     print (' بطرف مقاومت ميرويم')
@@ -2027,13 +2061,13 @@ else:
         print (' بطرف حمايت ميرويم')
           
 
-if index >= 13 : 
+if index >= 15 : 
      print (sahame ,'  :  شماازاين سهم خريد نداريد')
 
      
 import sys
 
-if index<=12 and p > 0:
+if index<=14 and p > 0:
      price=p
      price_s=s
      vol=v
