@@ -1671,6 +1671,12 @@ if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
 if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
     print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
+
+if omc < bmi :
+    print ('به احتمال زيادفردا قيمت بالاترازامروزه')
+else:
+    if omc > bmi :
+        print ('به احتمال زيادفردا قيمت پايين ترازامروزه')
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
@@ -1742,24 +1748,31 @@ else:
 
 
 if average_prices4 == average_prices79 == average_prices89 < ticker.last_price:
-    print ('قيمت بالاي ميانگين 103 که يکماه فلت شده ميباشد')
+    print ('قيمت بالاي فلت يکماه ميانگين 103روزه است')
 else:
     if average_prices4 == average_prices79 == average_prices89 > ticker.last_price:
-        print ('قيمت پايين ميانگين 103 که يکماه فلت شده ميباشد')
+        print ('قيمت پايين فلت يکماه ميانگين 103روزه است')
+
+
+if average_prices4 == average_prices99 < ticker.last_price:
+    print ('قيمت بالاي فلت 5روزه ميانگين 103 روزه است')
+else:
+    if average_prices4 == average_prices99 > ticker.last_price:
+        print ('قيمت پايين فلت 5 روزه ميانگين 103 روزه است')
 
 
 if average_prices4 == average_prices99 == average_prices94 < ticker.last_price:
-    print ('قيمت بالاي ميانگين 103 که 10 روزفلت شده')
+    print ('قيمت بالاي فلت ده روزه ميانگين103 روزه است')
 else:
     if average_prices4 == average_prices99 == average_prices94 > ticker.last_price:
-        print ('قيمت پايين ميانگين 103 که 10 روزفلت شده')
+        print ('قيمت پايين فلت ده روزه ميانگين 103 روزه است')
 
 
 if average_prices4 == average_prices94 == average_prices84 < ticker.last_price:
-    print ('قيمت بالاي ميانگين 103 که 15 روزفلت شده')
+    print ('قيمت بالاي فلت 15 روزه ميانگين 103 روزه است')
 else:
     if average_prices4 == average_prices94 == average_prices84 > ticker.last_price:
-        print ('قيمت پايين ميانگين 103 که 15 روزفلت شده')
+        print ('قيمت پايين فلت 15 روزه ميانگين 103 روزه است')
 
 
        
@@ -1824,6 +1837,9 @@ else:
     if min_price_b2 > min_price_b4 < min_price_b6 < ticker.high_price > ticker.yesterday_price:
         print ("روند نزولي يکماه صعودي شد")
         print ('-'*20)
+
+print ((math.ceil( average_prices4),' : ميانگين 103'))
+print ((math.ceil( Month103_mean),' : ميانگين 103'))
 
 # محاسبه قيمتي مابين حمايت ومقاومت يکساله
 mohasebeh = (highest_price_360 + lowest_price_360)/2
