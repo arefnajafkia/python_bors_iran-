@@ -80,6 +80,12 @@ closing_prices5 = DF['Close'].iloc[-150:]    # قيمت بسته شدن 150رو�
 closing_prices6 = DF['Close'].iloc[-5:]      # قيمت بسته شدن 5 روزگذشته
 closing_prices9 = DF['Close'].iloc[-4:]       # قيمت بسته شدن 4 روزگذشته
 closing_prices10 = DF['Close'].iloc[-11:]      # قيمت بسته شدن 11 روزگذشته
+closing_prices99 = DF['Close'].iloc[-99:]    # قيمت بسته شدن 99 روز
+closing_prices94 = DF['Close'].iloc[-94:]    # 94
+closing_prices89 = DF['Close'].iloc[-89:]    # 89
+closing_prices84 = DF['Close'].iloc[-84:]    # 84
+closing_prices79 = DF['Close'].iloc[-79:]    # 79
+
 
 Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
@@ -97,6 +103,12 @@ average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
 average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
 average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
 average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
+average_prices99 = closing_prices99.mean() #ميانگين قيمت 99
+average_prices94 = closing_prices94.mean() #94
+average_prices89 = closing_prices89.mean() #89
+average_prices84 = closing_prices84.mean() #84
+average_prices79 = closing_prices79.mean() #79
+
 
 average_max_price = max_price.mean() # ميانگين بالاترين قيمت 9روز ten_max_m9
 average_min_price = min_price.mean() # ميانگين پايين ترين قيمت 9روز ten_min_m9
@@ -105,9 +117,13 @@ average_max_price2 = max_price2.mean() # ميانگين بالاترين قيم�
 average_min_price2 = min_price2.mean() #ميانگين پايين ترين قيمت 26روز kij_min_m26
 
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
-average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيانه
+average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
+
+
+
 #print (" (220روزه)مقدارسودوزيان حاصل ازخريد اول وقت وفروش آخروقت")
 #print (DF["Close"].head(220).sum())
+
 #=====================================================
 print(30*"-")
 print(10*" ","rsi value")
@@ -130,21 +146,21 @@ rsi_Month2 = rsi_diff.iloc[-3]  # rsi پري روز
 
 # واگرايي منفي درفله ها
 if (today_Final_price<yesterday_Final_price>today_two_Final_price) > (Month_price<Month_price1>Month_price2): 
-    if (rsi_Month26 < Month_price25 > rsi_Month24) < 50<=(rsi_Month < Month_price1 > rsi_Month2)>=70:
+    if (rsi_Month26 < rsi_Month25 > rsi_Month24) < 50<=(rsi_Month < rsi_Month1 > rsi_Month2)>=70:
         print ('sell down price : واگرايي منفي rsi')
     else:
         if (today_Final_price<yesterday_Final_price>today_two_Final_price) < (Month_price<Month_price1>Month_price2):
-            if 50<=(rsi_Month26 < Month_price25 > rsi_Month24)>=70 > (rsi_Month < Month_price1 > rsi_Month2):
+            if 50<=(rsi_Month26 < rsi_Month25 > rsi_Month24)>=70 > (rsi_Month < rsi_Month1 > rsi_Month2):
                 print ('sell down price : واگرايي منفي rsi')
                 
 
 #واگرايي مثبت دردره ها
 if (today_Final_price>yesterday_Final_price<today_two_Final_price) > (Month_price>Month_price1<Month_price2): 
-    if (rsi_Month26 > Month_price25 < rsi_Month24) < 50>=(rsi_Month > Month_price1 < rsi_Month2)<=30:
+    if (rsi_Month26 > rsi_Month25 < rsi_Month24) < 50>=(rsi_Month > rsi_Month1 < rsi_Month2)<=30:
         print ('Buy top price: واگراي مثبت شده rsi')
     else:
         if (today_Final_price>yesterday_Final_price<today_two_Final_price) < (Month_price>Month_price1<Month_price2):
-            if 50>=(rsi_Month26 > Month_price25 < rsi_Month24)<=30 > (rsi_Month > Month_price1 < rsi_Month2):
+            if 50>=(rsi_Month26 > rsi_Month25 < rsi_Month24)<=30 > (rsi_Month > rsi_Month1 < rsi_Month2):
                 print ('Buy top price: واگراي مثبت شده rsi')
         
 
@@ -997,7 +1013,29 @@ else:
     if min_price_b2 > min_price_b4 < min_price_b6 < today_price_max > yesterday_price:
         print ("روند نزولي يکماه صعودي شد")
         print ('-'*20)
-#--------------------------------------------
+
+
+if average_prices4 == average_prices79 == average_prices89 < today_Final_price:
+    print ('قيمت بالاي ميانگين 103 که يکماه فلت شده ميباشد')
+else:
+    if average_prices4 == average_prices79 == average_prices89 > today_Final_price:
+        print ('قيمت پايين ميانگين 103 که يکماه فلت شده ميباشد')
+
+
+if average_prices4 == average_prices99 == average_prices94 < today_Final_price:
+    print ('قيمت بالاي ميانگين 103 که 10 روزفلت شده')
+else:
+    if average_prices4 == average_prices99 == average_prices94 > today_Final_price:
+        print ('قيمت پايين ميانگين 103 که 10 روزفلت شده')
+
+
+if average_prices4 == average_prices94 == average_prices84 < today_Final_price:
+    print ('قيمت بالاي ميانگين 103 که 15 روزفلت شده')
+else:
+    if average_prices4 == average_prices94 == average_prices84 > today_Final_price:
+        print ('قيمت پايين ميانگين 103 که 15 روزفلت شده')
+#-------------------------------------------
+# بدست آوردن ميانگين هاي 3و10و20 روزه
 ma3 = (math.ceil(average_prices7))
 ma10 = (math.ceil(average_price))
 ma20 = (math.ceil(average_prices8))
@@ -1246,21 +1284,21 @@ print(rsi.tail(3))
 
 # واگرايي منفي درفله ها
 if (ticker.last_price<ticker.yesterday_price>today_two_Final_price) > (Month_price<Month_price1>Month_price2): 
-    if (rsi_Month26 < Month_price25 > rsi_Month24) < 50<=(rsi_Month < Month_price1 > rsi_Month2)>=70:
+    if (rsi_Month26 < rsi_Month25 > rsi_Month24) < 50<=(rsi_Month < rsi_Month1 > rsi_Month2)>=70:
         print ('sell down price : واگرايي منفي rsi')
     else:
         if (ticker.last_price<ticker.yesterday_price>today_two_Final_price) < (Month_price<Month_price1>Month_price2):
-            if 50<=(rsi_Month26 < Month_price25 > rsi_Month24)>=70 > (rsi_Month < Month_price1 > rsi_Month2):
+            if 50<=(rsi_Month26 < rsi_Month25 > rsi_Month24)>=70 > (rsi_Month < rsi_Month1 > rsi_Month2):
                 print ('sell down price : واگرايي منفي rsi')
                 
 
 #واگرايي مثبت دردره ها
 if (ticker.last_price>ticker.yesterday_price<today_two_Final_price) > (Month_price>Month_price1<Month_price2): 
-    if (rsi_Month26 > Month_price25 < rsi_Month24) < 50>=(rsi_Month > Month_price1 < rsi_Month2)<=30:
+    if (rsi_Month26 > rsi_Month25 < rsi_Month24) < 50>=(rsi_Month > rsi_Month1 < rsi_Month2)<=30:
         print ('Buy top price: واگراي مثبت شده rsi')
     else:
         if (ticker.last_price>ticker.yesterday_price<today_two_Final_price) < (Month_price>Month_price1<Month_price2):
-            if 50>=(rsi_Month26 > Month_price25 < rsi_Month24)<=30 > (rsi_Month > Month_price1 < rsi_Month2):
+            if 50>=(rsi_Month26 > rsi_Month25 < rsi_Month24)<=30 > (rsi_Month > rsi_Month1 < rsi_Month2):
                 print ('Buy top price: واگراي مثبت شده rsi')
 
 
@@ -1682,6 +1720,8 @@ if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
 else:
     if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
         print (' ميانگين هاوقيمت همه صعودي شدن')
+
+        
 #==========================================================
 print (30*'=','kanal ',sahame,)
 
@@ -1699,6 +1739,28 @@ else:
     if ticker.low_price < Month103_mean > ticker.yesterday_price:
         print ('حداقل قيمت امروززير ميانگين  103')
         print ('-'*20)
+
+
+if average_prices4 == average_prices79 == average_prices89 < ticker.last_price:
+    print ('قيمت بالاي ميانگين 103 که يکماه فلت شده ميباشد')
+else:
+    if average_prices4 == average_prices79 == average_prices89 > ticker.last_price:
+        print ('قيمت پايين ميانگين 103 که يکماه فلت شده ميباشد')
+
+
+if average_prices4 == average_prices99 == average_prices94 < ticker.last_price:
+    print ('قيمت بالاي ميانگين 103 که 10 روزفلت شده')
+else:
+    if average_prices4 == average_prices99 == average_prices94 > ticker.last_price:
+        print ('قيمت پايين ميانگين 103 که 10 روزفلت شده')
+
+
+if average_prices4 == average_prices94 == average_prices84 < ticker.last_price:
+    print ('قيمت بالاي ميانگين 103 که 15 روزفلت شده')
+else:
+    if average_prices4 == average_prices94 == average_prices84 > ticker.last_price:
+        print ('قيمت پايين ميانگين 103 که 15 روزفلت شده')
+
 
        
 if Month103_mean < ticker.last_price < ticker.yesterday_price < today_two_price:
@@ -1908,9 +1970,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3185
+     p=3161
      s=0
-     v=72000
+     v=75000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
