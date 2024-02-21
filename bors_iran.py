@@ -119,11 +119,8 @@ average_min_price2 = min_price2.mean() #ميانگين پايين ترين قي�
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
 average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
 
-
-
 #print (" (220روزه)مقدارسودوزيان حاصل ازخريد اول وقت وفروش آخروقت")
 #print (DF["Close"].head(220).sum())
-
 #=====================================================
 print(30*"-")
 print(10*" ","rsi value")
@@ -331,12 +328,6 @@ twenty_six_day_average = DF['Close'].rolling(26).mean()
 today_twenty_six_day_average = twenty_six_day_average.iloc[-1]         
 # Compare the average price to today's price      
           
-if today_price > average_prices3 :
-     print (' EM_3 > EM_50 ')
-else:
-     if today_price < average_prices3 :
-          print (' EM_3 < EM_50 ')
-          
 
 if average_prices7 > average_price :
      print (' EM_3 > Em_10 ')
@@ -350,6 +341,34 @@ if average_prices7 < average_prices8:
 else:
      if average_prices7 > average_prices8:
           print (" EM_3 > EM_20")
+
+
+if today_price > average_prices3 :
+     print (' EM_10 > EM_50 ')
+else:
+     if today_price < average_prices3 :
+          print (' EM_10 < EM_50 ')
+
+
+if today_price > average_prices4 :
+     print (' EM_10 > EM_103 ')
+else:
+     if today_price < average_prices4 :
+          print (' EM_10 < EM_103 ')
+
+
+if today_price<=today_Final_price > average_price > yesterday_price:
+    print (' price > sma_10 : موقع خريده')
+else:
+    if today_price>=today_Final_price < average_price < yesterday_price:
+        print (' price < sma_10 : موقع فروشه')
+
+
+if average_prices7<average_price >today_Final_price <yesterday_price:
+    print (' ميانگين ها وقيمت همه نزولي شدن')
+else:
+    if average_prices7>average_price <today_Final_price >yesterday_price:
+        print (' ميانگين هاوقيمت همه صعودي شدن')
 
 #==================================================
 print(40*"=",nam,"One year support and resistance")
@@ -1714,11 +1733,12 @@ buy_signals = (
 print(buy_signals.tail(2))
 #=======================================================
 print (30*'=','  moving',sahame,)
-if ticker.last_price < ma10 :
-    print (' قيمت زيرميانگين 10 روزه')
+
+if ticker.adj_close<=ticker.last_price > ma10 > ticker.yesterday_price:
+    print (' price > sma_10 : موقع خريده')
 else:
-    if ticker.last_price > ma10 :
-        print (' قيمت بالاي ميانگين 10 روزه')
+    if ticker.adj_close>=ticker.last_price < ma10 < ticker.yesterday_price:
+        print (' price < sma_10 : موقع فروشه')
 
 
 if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
@@ -1730,6 +1750,13 @@ else:
         
 #==========================================================
 print (30*'=','kanal ',sahame,)
+
+if ticker.adj_close > average_price :
+     print (' price > Em_10 ')
+else:
+     if ticker.adj_close < average_price :
+         print (' price < Em_10 ')
+
 
 if ticker.adj_close > ticker.max_year :
      print (' مقاومت يک ساله شکسته شد')
