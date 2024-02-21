@@ -203,17 +203,26 @@ else:
          print (' RSI  <  30')
 
 print(30*"-")
-#================================================
-# EMA_3,10,20 نمايش نمودارقيمت و
-DF.index = DF['Date']
-mplf.plot(DF[-100:], type='candle', mav=(3, 10, 20))
-plt.show()
+#===============================================
+txt = int(input("   باسلام آياميخواهيد نمودارميانگين متحرکهارورسم کنم ,بله 1 ونه 2 :  "))
 
-# Calculate the average price for ten days
-ten_day_average = DF['Close'].rolling(10).mean()
-today_price_scalar = today_price.item()
-#================================================
-
+if txt == 1 :
+    print ("="*15,"Drawing moving average charts" , nam,"="*15)
+    print ()
+#===============================================
+   # EMA_3,10,20 نمايش نمودارقيمت و
+    DF.index = DF['Date']
+    mplf.plot(DF[-100:], type='candle', mav=(3, 10, 20))
+    plt.show()
+   # Calculate the average price for ten days
+    ten_day_average = DF['Close'].rolling(10).mean()
+    today_price_scalar = today_price.item()
+else:
+    if txt == 2 :
+        print ()
+        print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
+        print ()
+#-----------------------------------------------
 # First row information اطلاعات کامل رديف اول سهم
 nemone = DF.iloc[-1]
 print (nemone)
@@ -825,8 +834,9 @@ if omc < today_price < yesterday_price <= max_price_b1:
     print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
      
     
-print(max_price_b1,": بالاترين قيمت هفتگي ")
-print(min_price_b2,": پايين ترين قيمت هفتگي")
+    print(max_price_b1,": بالاترين قيمت هفتگي ")
+    print(min_price_b2,": پايين ترين قيمت هفتگي")
+
 #================================================================
 print(20*"=",nam,"How the share trend and now Stock information")
 # بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
@@ -2211,12 +2221,12 @@ if index<=14 and p > 0:
           print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
           print(20*"-" )
      else:
-          if pk > today_price :
+          if pk > (today_price * vol) :
               print("Price to limit")
               print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
               print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
               print(20*"-" )
-          if pk < today_price :
+          if pk < (today_price * vol) :
               print("Price to limit")
               print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
               print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
