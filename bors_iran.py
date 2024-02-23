@@ -740,7 +740,7 @@ else:
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ('-'*30)
 #===============================================
-txt = int(input("  بله 1 , خير 2   bmo and omc محاسبات :  "))
+txt = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
 print ('       ','-'*30)
 
 if txt == 1 :
@@ -1377,6 +1377,19 @@ else:
     if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<30:
          print (' RSI  <  30')
 
+print ('-'*20)
+#===============================================
+txt = int(input("   لطفامشخص کنيد ادامه ميدهيد ياخير ,  بله  1 , خير2  :   "))
+
+if txt == 1 :
+    print ()
+    print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
+#===============================================
+else:
+    if txt == 2 :
+        print ()
+        print ('-'*10," Thanks for the explanation " , nam,'-'*10)
+        EXIT
 #=====================================================
 print ('='*30,' candel DOje')
 DOje1= (ticker.high_price+ticker.low_price)/2
@@ -1620,96 +1633,112 @@ else:
     if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
-print(40*"=",sahame,"bmi محاسبه")
-# تعریف یک تابع برای محاسبه بی ام آی
-def bmi(last_price, adj_close):
 
-     bmi = (adj_close + (last_price*2))/3
+txt = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
+print ('       ','-'*30)
+
+if txt == 1 :
+    print ("="*15,"Drawing moving average charts" , nam,"="*15)
+    print ()
+#===============================================
+    print(40*"=",sahame,"bmi محاسبه")
+    # تعریف یک تابع برای محاسبه بی ام آی
+    def bmi(last_price, adj_close):
+
+        bmi = (adj_close + (last_price*2))/3
      
-    # برگرداندن بی ام آی به عنوان خروجی تابع
-     return bmi
+        # برگرداندن بی ام آی به عنوان خروجی تابع
+        return bmi
 
-# دريافت قيمت پاياني  وآخرين قيمت
-last_price = ticker.last_price
-adj_close = ticker.adj_close
-# فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
-bmi = bmi(last_price, adj_close)
-# نمایش بی ام آی کاربر
-print(f" بی ام آی شما {bmi:.2f} است ")
+    # دريافت قيمت پاياني  وآخرين قيمت
+    last_price = ticker.last_price
+    adj_close = ticker.adj_close
+    # فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
+    bmi = bmi(last_price, adj_close)
+    # نمایش بی ام آی کاربر
+    print(f" بی ام آی شما {bmi:.2f} است ")
 
-# شروع شرط براي محاسبه 
-if ticker.open_price < bmi < ticker.adj_close:
-    print("امکان داره قيمت پايين تربره")
-elif ticker.open_price > bmi > ticker.adj_close:
-    print("امکان داره قيمت برگرده")
-elif bmi == adj_close:
-    print("قيمت درجاميزنه گيجه")
-elif ticker.adj_close <= bmi < ticker.yesterday_price:
-    print ("احتمال ريزش شديدخارج شو")
-else:
-    print("مراقب باش معامله نکن")
+    # شروع شرط براي محاسبه 
+    if ticker.open_price < bmi < ticker.adj_close:
+        print("امکان داره قيمت پايين تربره")
+    elif ticker.open_price > bmi > ticker.adj_close:
+          print("امکان داره قيمت برگرده")
+    elif bmi == adj_close:
+          print("قيمت درجاميزنه گيجه")
+    elif ticker.adj_close <= bmi < ticker.yesterday_price:
+         print ("احتمال ريزش شديدخارج شو")
+    else:
+         print("مراقب باش معامله نکن")
     
 
-if ticker.yesterday_price > ticker.open_price:
-    print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
-else:
-    if ticker.yesterday_price < ticker.open_price:
-        print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
+    if ticker.yesterday_price > ticker.open_price:
+         print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
+    else:
+        if ticker.yesterday_price < ticker.open_price:
+            print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
           
 
-if ticker.sta_max == ticker.high_price:
-    print(' صف خريدشده')
-else:
-    if ticker.sta_min == ticker.low_price:
-        print (' صف فروش شده')
+    if ticker.sta_max == ticker.high_price:
+         print(' صف خريدشده')
+    else:
+        if ticker.sta_min == ticker.low_price:
+             print (' صف فروش شده')
 
 #-------------------------------------
-print(40*"=",sahame,"omc محاسبه")
-# تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-def cmo(open_price, price_min):
+             print(40*"=",sahame,"omc محاسبه")
+             # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
+             def cmo(open_price, price_min):
 
-     omc = (((ticker.high_price *2 )+ price_min)/3)-(ticker.adj_close - yesterday_price)
+                 omc = (((ticker.high_price *2 )+ price_min)/3)-(ticker.adj_close - yesterday_price)
      
-    # برگرداندن او ام سي براي خروجي تابع
-     return omc
+                 # برگرداندن او ام سي براي خروجي تابع
+                 return omc
 
-# دريافت قيمت بازشدن با پايين ترين قيمت امروز
-open_price = ticker.open_price
-price_min = ticker.low_price
-price_max = ticker.high_price
-yesterday_price = ticker.yesterday_price # قيمت ديروز
-#فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-omc = cmo(open_price, price_min)
-# نمايش اوام سي به کاربر
-print(f" او ام سي شما {omc:.2f} است ")
-print ('-'*15)
-# شروع شرط براي ادامه کار
+             # دريافت قيمت بازشدن با پايين ترين قيمت امروز
+             open_price = ticker.open_price
+             price_min = ticker.low_price
+             price_max = ticker.high_price
+             yesterday_price = ticker.yesterday_price # قيمت ديروز
+             #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
+             omc = cmo(open_price, price_min)
+             # نمايش اوام سي به کاربر
+             print(f" او ام سي شما {omc:.2f} است ")
+             print ('-'*15)
+             # شروع شرط براي ادامه کار
 
-if omc >= price_max :
-    print ('صبرکن وآماده خريد باش')
-elif omc < price_min < yesterday_price :
-     print (' شروع ريزش هفتگي ميتوني بفروشي')
-elif omc > open_price > yesterday_price :     
-     print ('ميتوني نگهداري اگرمنفي زدبفروشي')
+             if omc >= price_max :
+                 print ('صبرکن وآماده خريد باش')
+             elif omc < price_min < yesterday_price :
+                  print (' شروع ريزش هفتگي ميتوني بفروشي')
+             elif omc > open_price > yesterday_price :     
+                  print ('ميتوني نگهداري اگرمنفي زدبفروشي')
 
 
-if ticker.last_price == price_max:
-     print('صف خريدشده')
+             if ticker.last_price == price_max:
+                 print('صف خريدشده')
      
-if ticker.last_price == price_min:
-     print ('صف فروش شده')     
-
-if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
-    print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
-if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
-    print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
+             if ticker.last_price == price_min:
+                 print ('صف فروش شده')
 
 
-if omc < bmi :
-    print ('به احتمال زيادفردا قيمت بالاترازامروزه')
+             if omc < bmi :
+                print ('به احتمال زيادفردا قيمت بالاترازامروزه')
+        else:
+             if omc > bmi :
+                print ('به احتمال زيادفردا قيمت پايين ترازامروزه')
+
+
+
+             if omc > ticker.adj_close > yesterday_price <= ticker.min_week:
+                 print (ticker.max_week,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
+             if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
+                 print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
+
 else:
-    if omc > bmi :
-        print ('به احتمال زيادفردا قيمت پايين ترازامروزه')
+    if txt == 2 :
+        print ()
+        print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
+        print ()
 #======================================================
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
@@ -2193,7 +2222,7 @@ if index<=14 and p > 0:
      # قيمت امروزسهم Today's stock price
      today_price = (math.ceil(ticker.adj_close))     
      price_kharid= (-0.004 * price)  #کارمزد خريد
-     price_forosh= (-0.009 * today_price) #کارمزد فروش محاسبه باقيمت امروز
+     price_forosh= (-0.006 * today_price) #کارمزد فروش محاسبه باقيمت امروز
      pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
      pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
      sl = 0.03 # حدضرر3درصد
