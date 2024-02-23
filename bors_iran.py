@@ -1,5 +1,8 @@
-  
-# برسي سهام فقط باتايپ نام سهم
+
+# برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
+# وبازدن اينتر محاسبات راانجام داده وبه شمانشان ميدهد
+# درمرحله دوم نام سهام انتخاب شده ازتي ام سي ونوشته فارسي آن کپي شده
+# شماهم ميتوانيد هرسهمي راکه ميخواهيد نام آن رابراي مرحله دوم کپي کنيد
 # محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts
 import math
 import numpy as np
@@ -212,7 +215,25 @@ print (nemone)
 #print ()
  # نمايش واريانس وديسکرايو و...
 #print (DF.describe())
-#===============================================
+#============================================
+print(30*"-")
+print ('محاسبه 5روزمتوالي ميانگين 103')
+
+def moving_average(symbol, window_size):
+
+
+    moving_averages = DF["Close"].rolling(window_size).mean()
+
+    return moving_averages
+
+# Example usage:
+symbol = nam  # Iran Fara Bourse Index
+window_size = 103
+moving_averages = moving_average(symbol, window_size)
+print(moving_averages.tail(5)) 
+print(30*"-") 
+#==============================================
+
 txt = int(input("   آياميخواهيدنمودارميانگينهارورسم کنم, بله 1 \n ياميخواهيد کانالهاومحاسباتشان راببينيد, بله 2 :  "))
 
 if txt == 1 :
@@ -221,7 +242,7 @@ if txt == 1 :
 #===============================================
    # EMA_3,10,20 نمايش نمودارقيمت و
     DF.index = DF['Date']
-    mplf.plot(DF[-100:], type='candle', mav=(3, 10, 20))
+    mplf.plot(DF[-200:], type='candle', mav=(50, 10, 20))
     plt.show()
    # Calculate the average price for ten days
     ten_day_average = DF['Close'].rolling(10).mean()
