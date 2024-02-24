@@ -217,7 +217,7 @@ print (nemone)
 #print (DF.describe())
 #============================================
 print(30*"-")
-print ('محاسبه 5روزمتوالي ميانگين 103')
+print ('محاسبه 10روزمتوالي ميانگين 103')
 
 def moving_average(symbol, window_size):
 
@@ -230,7 +230,7 @@ def moving_average(symbol, window_size):
 symbol = nam  # Iran Fara Bourse Index
 window_size = 103
 moving_averages = moving_average(symbol, window_size)
-print(moving_averages.tail(5)) 
+print(moving_averages.tail(10)) 
 print(30*"-") 
 #==============================================
 
@@ -761,10 +761,10 @@ else:
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ('-'*30)
 #===============================================
-txt = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
+txt_b = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
 print ('       ','-'*30)
 
-if txt == 1 :
+if txt_b == 1 :
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
     print ()
     print(20*"-",nam,"bmi محاسبه")
@@ -856,11 +856,10 @@ if txt == 1 :
         print(max_price_b1,": بالاترين قيمت هفتگي ")
         print(min_price_b2,": پايين ترين قيمت هفتگي")
 else:
-    if txt == 2 :
+    if txt_b == 2 :
         print ()
         print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
         print ()
-#-----------------------------------------------
 
 #================================================================
 print(20*"=",nam,"How the share trend and now Stock information")
@@ -1253,7 +1252,8 @@ if today_two_price_max < yesterday_price_max > today_price_max:
                 print ("EngulFing Resistance level")
                 print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
                 print ("-"*10)
-                
+
+
 #=======================================================
 print("          "," Time information")
 import pytse_client as tse
@@ -1400,17 +1400,17 @@ else:
 
 print ('-'*20)
 #===============================================
-txt = int(input("   لطفامشخص کنيد ادامه ميدهيد ياخير ,  بله  1 , خير2  :   "))
+txt_c = int(input("   لطفامشخص کنيد ادامه ميدهيد ياخير ,  بله  1 , خير2  :   "))
 
-if txt == 1 :
+if txt_c == 1 :
     print ()
     print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
 #===============================================
 else:
-    if txt == 2 :
-        print ()
-        print ('-'*10," Thanks for the explanation " , nam,'-'*10)
-        EXIT
+    if txt_c == 2 :
+        print("Exiting the program...")
+        exit()
+              
 #=====================================================
 print ('='*30,' candel DOje')
 DOje1= (ticker.high_price+ticker.low_price)/2
@@ -1655,10 +1655,10 @@ else:
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
 
-txt = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
+txt_d = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
 print ('       ','-'*30)
 
-if txt == 1 :
+if txt_d == 1 :
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
     print ()
 #===============================================
@@ -1756,7 +1756,7 @@ if txt == 1 :
                  print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
 else:
-    if txt == 2 :
+    if txt_d == 2 :
         print ()
         print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
         print ()
