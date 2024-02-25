@@ -16,6 +16,8 @@ import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
 
+print ("="*15,"برسي سهام در بورس ايران","="*15)
+
 nam = input ("Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
 
 DF = tse.Get_Price_History(stock=nam,
@@ -234,7 +236,12 @@ print(moving_averages.tail(10))
 print(30*"-") 
 #==============================================
 
-txt = int(input("   آياميخواهيدنمودارميانگينهارورسم کنم, بله 1 \n ياميخواهيد کانالهاومحاسباتشان راببينيد, بله 2 :  "))
+txt = int(input("   رسم نمودارميانگين هاي 10,20,50 .1 \n انجام محاسبات حجم وکانال سهام شما .2 \n چنانچه منصرف شده ايد  .0 :  "))
+
+if txt == 0:
+    print ("Error! Division by zero is not allowed.")
+    exit()
+
 
 if txt == 1 :
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
@@ -761,7 +768,7 @@ else:
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ('-'*30)
 #===============================================
-txt_b = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
+txt_b = int(input("  1 . bmi and omc انجام محاسبات \n محاسبات روند,کف وسقفها  . 2 :  "))
 print ('       ','-'*30)
 
 if txt_b == 1 :
@@ -1291,7 +1298,7 @@ for i, row in enumerate(rows):
 
 
 # Ask the user to enter a valid index
-index = int(input("Please write down the selected share number : "))
+index = int(input("Please write down the selected share number \n لطفا فقط شماره مقابل سهم انتخابي رابنويسيد  : "))
 # Run Python for the selected stock    
 stock = namad[index-1]
 
@@ -1400,7 +1407,7 @@ else:
 
 print ('-'*20)
 #===============================================
-txt_c = int(input("   لطفامشخص کنيد ادامه ميدهيد ياخير ,  بله  1 , خير2  :   "))
+txt_c = int(input("   کانالها وکندلها وحجم امروز . 1  \n انصراف ازادامه برسي . 2 :   "))
 
 if txt_c == 1 :
     print ()
@@ -1654,8 +1661,9 @@ else:
     if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
+print(40*"=")
 
-txt_d = int(input("  بله 1 , خير 2   bmi and omc محاسبات :  "))
+txt_d = int(input("  1 . bmi and omc انجام محاسبات \n 2 .  Moving 103 ,محاسبه سودوزيان  :  "))
 print ('       ','-'*30)
 
 if txt_d == 1 :
@@ -2413,4 +2421,6 @@ print (h10 , ' :Descending   روند نزولي')
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 
-
+play_again = input("Do you want to perform another operation? (y / n): ")
+if play_again.lower() != "y":
+    exit ()
