@@ -16,17 +16,22 @@ import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
 
-print ("="*15,"برسي سهام در بورس ايران","="*15)
 
+
+print ("="*20,"برسي سهام در بورس ايران","="*20)
+print ()
+
+        
 nam = input ("Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
 
 DF = tse.Get_Price_History(stock=nam,
-                             start_date='1401-05-01',
-                             end_date='1402-12-07',
-                             ignore_date=True,
-                             adjust_price=True,
-                             show_weekday=True,
-                             double_date=True)
+                            start_date='1401-05-01',
+                            end_date='1402-12-07',
+                            ignore_date=True,
+                            adjust_price=True,
+                            show_weekday=True,
+                            double_date=True)
+
 
 DropList = ['Open', 'High', 'Low', 'Close', 'Final']
 
@@ -2421,6 +2426,10 @@ print (h10 , ' :Descending   روند نزولي')
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 
-play_again = input("Do you want to perform another operation? (y / n): ")
-if play_again.lower() != "y":
+response = input("Do you want to perform another operation? \n آياميخواهيد دوباره شروع کنيد  (y / n) : ") 
+if response.lower() != "y":
+    __nam__ () == "y"
+
+else:    
     exit ()
+
