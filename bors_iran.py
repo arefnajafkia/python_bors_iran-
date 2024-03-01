@@ -4,6 +4,7 @@
 # درمرحله دوم نام سهام انتخاب شده ازتي ام سي ونوشته فارسي آن کپي شده
 # شماهم ميتوانيد هرسهمي راکه ميخواهيد نام آن رابراي مرحله دوم کپي کنيد
 # محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
+import time
 import math
 import numpy as np
 import pandas as pd
@@ -20,8 +21,7 @@ from datetime import date
 
 print ("="*20,"برسي سهام در بورس ايران","="*20)
 print ()
-
-        
+       
 nam = input ("Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
 
 DF = tse.Get_Price_History(stock=nam,
@@ -214,6 +214,8 @@ else:
 
 print(30*"-")
 #-----------------------------------------------
+time.sleep(3)
+
 # First row information اطلاعات کامل رديف اول سهم
 nemone = DF.iloc[-1]
 print (nemone)
@@ -223,6 +225,8 @@ print (nemone)
  # نمايش واريانس وديسکرايو و...
 #print (DF.describe())
 #============================================
+time.sleep(3)
+
 print(30*"-")
 print ('محاسبه 10روزمتوالي ميانگين 103')
 
@@ -240,6 +244,7 @@ moving_averages = moving_average(symbol, window_size)
 print(moving_averages.tail(10)) 
 print(30*"-") 
 #==============================================
+time.sleep(3)
 
 txt = int(input("   رسم نمودارميانگين هاي 10,20,50 .1 \n انجام محاسبات حجم وکانال سهام شما .2 \n چنانچه منصرف شده ايد  .0 :  "))
 
@@ -295,6 +300,8 @@ else:
         print (' candle marabozo Red')
     
 #=================================================
+time.sleep(3)        
+        
 print(40*"=",nam,"Volume")
 
 if today_Volume > (math.ceil(average_Volume_Month)):
@@ -333,6 +340,8 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 #================================================
+time.sleep(3)
+          
 print(40*"=",nam,"order sell and buy")
 if today_Volume > today_Volume_yesterday and today_price < yesterday_price :
     print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
@@ -360,6 +369,8 @@ print (today_Volume_yesterday , 'حجم ديروز')
 print (today_price , 'قيمت امروز')
 print (yesterday_price , 'قيمت ديروز')
 #==================================================
+time.sleep(3)
+
 print(40*"=",nam,"Moving Average")
 # Calculate the average price for ten days
 ten_day_average = DF['Close'].rolling(10).mean()
@@ -412,6 +423,8 @@ else:
         print (' ميانگين هاوقيمت همه صعودي شدن')
 
 #==================================================
+time.sleep(3)
+        
 print(40*"=",nam,"One year support and resistance")
 # Engulfing Calculations  محاسبات اينگل فينگ
 today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
@@ -592,6 +605,8 @@ if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
 #==================================================
+time.sleep(3)
+    
 print(40*"=",nam,"Engulfing Calculations")
 # Engulfing  ascending صعودي
 h1 = today_price > today_Open_price
@@ -635,6 +650,8 @@ print ('روند False يا True دقت کنيدبه')
 print (h5,': ascending روند صعودي ')
 print (h10 ,': Descending روند نزولي')
 #=====================================================
+time.sleep(3)
+
 print(45*"=",nam,"ichimoku")
 
 today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
@@ -773,6 +790,8 @@ else:
           print (" قيمت داره ميره بالاي ابرقرمز ")
 print ('-'*30)
 #===============================================
+time.sleep(3)
+
 txt_b = int(input("  1 . bmi and omc انجام محاسبات \n محاسبات روند,کف وسقفها  . 2 :  "))
 print ('       ','-'*30)
 
@@ -874,6 +893,8 @@ else:
         print ()
 
 #================================================================
+time.sleep(3)
+        
 print(20*"=",nam,"How the share trend and now Stock information")
 # بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
 max_price_b1 = max(DF['High'][-7:]) # max_price day7
@@ -1146,6 +1167,8 @@ else:
         print (' روند قيمت وميانگين ها صعودي شده')
         
 #------------------------------------------------
+time.sleep(3)
+        
 print(20*"=",nam,"price_max,min,Close  6yers")
 # محاسبه بالاترين وپايين ترين قيمت شش روزمتوالي
 today_price_max1 = DF['High'].iloc[-1]
@@ -1267,6 +1290,8 @@ if today_two_price_max < yesterday_price_max > today_price_max:
 
 
 #=======================================================
+time.sleep(5)
+                
 print("          "," Time information")
 import pytse_client as tse
 #درج تاريخ ميلادي
@@ -1342,6 +1367,8 @@ print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()
+time.sleep(3)
+
 print(30*"=",sahame,"RSI value")
 DF.rename(columns=RenameDict, inplace=True)
 rsi = ta.momentum.rsi(DF['Close'], length=14)
@@ -1412,6 +1439,8 @@ else:
 
 print ('-'*20)
 #===============================================
+time.sleep(3)
+
 txt_c = int(input("   کانالها وکندلها وحجم امروز . 1  \n انصراف ازادامه برسي . 2 :   "))
 
 if txt_c == 1 :
@@ -1486,6 +1515,8 @@ else:
           print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
           
 #====================================================
+time.sleep(3)
+          
 print(35*"=",nam,"Process Stock trends")
 if ticker.last_price > week7_mean:
     print (" قيمت ازميانگين هفتگي بالاتره")
@@ -1584,6 +1615,8 @@ else:
         print (" امروزتيک نزولي داريم")
     
 #===============================================
+time.sleep(3)
+        
 print (35*'=',sahame,'volume',"and order sell and buy")
 print (ticker.volume ,'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
@@ -1617,6 +1650,8 @@ if ticker.volume > 4*(average_Volume_week):
     print (" حجم امروز 4برابر حجم هفتگي ميباشد")
 
 #===============================================
+time.sleep(3)
+    
 print(35*"=",sahame,"price_max,min,Close  6yers")
                 
 if today_price_min9 < ticker.low_price > today_price_min6 :
@@ -1774,6 +1809,8 @@ else:
         print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
         print ()
 #======================================================
+time.sleep(3)
+        
 print(30*"=",sahame," True and False مقادير sma3-10")          
 
 history = ticker.history
@@ -1809,6 +1846,8 @@ buy_signals = (
 )
 print(buy_signals.tail(2))
 #=======================================================
+time.sleep(3)
+
 print (30*'=','  moving',sahame,)
 
 if ticker.adj_close<=ticker.last_price > ma10 > ticker.yesterday_price:
@@ -1826,6 +1865,8 @@ else:
 
         
 #==========================================================
+time.sleep(3)
+        
 print (30*'=','kanal ',sahame,)
 
 if ticker.adj_close > average_price :
@@ -1974,6 +2015,8 @@ else:
         print (ticker.last_price,' قيمت امروزبه سمت پايين درحرکت است')
 
 #========================================================
+time.sleep(3)
+        
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
 if index == 1:
@@ -2322,6 +2365,8 @@ if index<=14 and p > 0:
           print ('-------')
 
 #=====================================================
+time.sleep(3)
+          
 print ('='*10,sahame,'fibonacci')
 #کد برنامه نویسی در پایتون برای سری فیبوناچی
 
@@ -2380,6 +2425,8 @@ if today_two_price_max < yesterday_price_max > ticker.high_price:
 
 
 #==================================================
+time.sleep(3)
+                
 print(40*"=",nam,"Engulfing Calculations")
 # Engulfing  ascending صعودي
 # Bullish Engulfing Support level
@@ -2422,13 +2469,15 @@ print ('روند False يا True دقت کنيدبه')
 print (h5, ' :ascending   روند صعودي ')
 print (h10 , ' :Descending   روند نزولي')
                
-#=======================================================         
+#=======================================================
+time.sleep(3)
+
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 
 response = input("Do you want to perform another operation? \n آياميخواهيد دوباره شروع کنيد  (y / n) : ") 
 if response.lower() != "y":
-    __nam__ () == "y"
+    __nam__ () == nam
 
 else:    
     exit ()
