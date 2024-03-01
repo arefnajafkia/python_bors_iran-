@@ -4,6 +4,7 @@
 # درمرحله دوم نام سهام انتخاب شده ازتي ام سي ونوشته فارسي آن کپي شده
 # شماهم ميتوانيد هرسهمي راکه ميخواهيد نام آن رابراي مرحله دوم کپي کنيد
 # محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
+
 import time
 import math
 import numpy as np
@@ -16,7 +17,8 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
-
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 print ("="*20,"برسي سهام در بورس ايران","="*20)
