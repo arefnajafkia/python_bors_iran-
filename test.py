@@ -413,17 +413,21 @@ rint(40*"=",sahame,"For order")
 nimeh_price = ((ticker.high_price + ticker.low_price)/2)
 nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
 
+
 if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
     print ("ميتوني خريد کني فردا قيمت بالاترميره")
+else:
+    if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
+        print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
+
+        
 
 if bmi > omc :
     print ('bmi > omc',': for buy')
-if bmi < omc :
-    print ('bmi < omc',': for sell')
+else:
+    if bmi < omc :
+        print ('bmi < omc',': for sell')
     
-
-if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
-    print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
 
 #------------------------------------------------
 print(30*"=",sahame," True and False مقادير sma10-20")          
