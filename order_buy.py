@@ -1,6 +1,7 @@
 # بازدن شماره سهم دستور خريد يا فروش صادرميشود
 # ودلايل خريد يافروش روهم مينويسد  order_buy
 
+import time
 import math
 import numpy as np
 import pandas as pd
@@ -12,6 +13,14 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
+
+def main_menu():
+    print ()
+    
+    
+def plot_Information_repeat_again():
+    # 1 . دوباره تکرار کنيم
+    pass
 
 #===================================================
 print(25*"=","order buy and sell stock",25*"=")
@@ -27,16 +36,15 @@ print("date and time =", dt_string)
 print ('-'*30,)
 #-------------------------------------------
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
-namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا",
-        "ثبهساز","تاپیکو","دسبحان","کگل","فصبا","حتوکا",
-        "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
-        "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
-        "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
-        "ومعادن","داتام","نخريس","پاکشو"]
+namad =["چکارن","تلیسه","غمینو","وسپه","غکورش",
+        "شپاکسا","ثبهساز","تاپیکو","دسبحان","ومعادن",
+        "فصبا","حتوکا","خگستر","فولاد","شپنا",
+        "فملی","حتاید","پی پاد","خودرو","تیپیکو",
+        "خساپا","سرچشمه","نیان","ختور","فپنتا",
+        "شبندر","فارس","غفارس","وبصادر","کچاد",
+        "کگل","داتام","نخريس","پاکشو","درازك",
+        "قشكر","شخارك"]
 
-# Print the list of stocks and their indices
-#for i, n in enumerate(namad):
-     #print(f"{i+1}. {n}")
 
 # Divide the list into three rows
 rows = [namad[i:i+5] for i in range(0, len(namad), 5)]
@@ -69,60 +77,18 @@ print(ticker.state,ticker.flow,ticker.group_name)
 print(ticker.fiscal_year,' : سال مالی ')  
 print(ticker.eps ,'  :  EPS  ')  
 print(ticker.p_e_ratio ,' :   P/E')  
-print(ticker.group_p_e_ratio, '  :  group P/E ')  
+print(ticker.group_p_e_ratio, '  :  group P/E ')
+print()
 print(ticker.float_shares,' : درصد سهام شناور')   
 print(ticker.base_volume,' : حجم مبنا ')
+print(ticker.volume,' : حجم معاملات امروز ')
+print(ticker.month_average_volume,' : میانگین حجم ماه')
 print()  
 print(ticker.last_price,' : آخرین معامله ')  
-print(ticker.adj_close,' : قیمت پایانی ')
-print(ticker.best_demand_price," : آخرين تقاضاي خريد")
+print(ticker.adj_close,' : قیمت پایانی ')  
 print(ticker.yesterday_price,' : قیمت دیروز ')
 print(ticker.open_price,' : قيمت بازشدن')   
 print()
-print(ticker.high_price,' : حداکثرقيمت امروز')  
-print(ticker.low_price,' : حداقل قيمت امروز')
-print(ticker.sta_max,' : حداکثر قیمت مجاز')  
-print(ticker.sta_min,' : حداقل قیمت مجاز')
-print()
-print(ticker.count,' : تعداد معاملات ')
-print(ticker.volume,' : حجم معاملات امروز ')
-print(ticker.month_average_volume,' : میانگین حجم ماه')
-print()
-
-#======================================================
-if rsi_diff.iloc[-1] >= 50 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
-     print(" Rsi : ورود به بالاي 50 ")
-else:
-     if rsi_diff.iloc[-1] <= 50 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
-          print(" Rsi : ريزش به زير50 ")
-                
-
-if rsi_diff.iloc[-1] <= 30 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:      
-     print(" Rsi : ورود به منطقه اشباع فروش ")
-else:
-     if rsi_diff.iloc[-1] >= 70 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:
-          print(" Rsi : ورود به منطقه اشباع خريد")
-                
-
-if rsi_diff.iloc[-1] >= 30 and rsi_diff.iloc[-2] < rsi_diff.iloc[-1]:      
-     print(" Rsi : خروج ازمنطقه اشباع فروش ")
-else:
-     if rsi_diff.iloc[-1] <= 70 and rsi_diff.iloc[-2] > rsi_diff.iloc[-1]:
-          print(" Rsi : خروج ازمنطقه اشباع خريد")
-
-
-if (rsi_diff.iloc[-1])>70 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3]) and (rsi_diff.iloc[-2])>70:
-     print (' RSI  >  70')
-if (rsi_diff.iloc[-1])<70 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<70:
-     print (' RSI  <  70')
-if (rsi_diff.iloc[-1])>50 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>50:
-     print (' RSI  >  50')
-if (rsi_diff.iloc[-1])<50 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<50:
-     print (' RSI  <  50')
-if (rsi_diff.iloc[-1])>30 and (rsi_diff.iloc[-2])>(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])>30:
-     print (' RSI  >  30')
-if (rsi_diff.iloc[-1])<30 and (rsi_diff.iloc[-2])<(rsi_diff.iloc[-3])and (rsi_diff.iloc[-2])<30:
-     print (' RSI  <  30')
 
 #=====================================================
 print ('='*30,' candel DOje')
@@ -479,6 +445,9 @@ if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
           
 #----------------------------------
 print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
+time.sleep(3)
+        
+print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
 if index == 1:
      p=0
@@ -490,12 +459,13 @@ if index == 1:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-    
+          
+          
 # تليسه
 if index == 2:
-     p=4331
-     s=4431
-     v=75000
+     p=4290
+     s=0
+     v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -518,7 +488,8 @@ if index == 2:
          print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
      if 9918>ticker.adj_close>8839:
          print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
-
+         
+          
 # غمينو
 if index == 3:
      p=11181
@@ -530,12 +501,13 @@ if index == 3:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
- 
+          
+          
 # وسپه
 if index == 4:
-     p=2981
+     p=4543
      s=0
-     v=4000
+     v=25000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -561,13 +533,14 @@ if index == 4:
      if 6810>ticker.adj_close>6146:
          print ("مابين حمايت 6146 ومقاومت 6810 هستيم درميانه 6461 روداريم")
      if 7473>ticker.adj_close>6810:
-         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")          
-    
+         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")  
+         
+         
 # غکورش
 if index == 5:
-     p=9435
+     p=9352
      s=0
-     v=25000
+     v=26000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -586,12 +559,13 @@ if index == 5:
          print ("مابين حمايت 8788 ومقاومت 9977 هستيم درميانه 9383 روداريم")
      if 11160>ticker.adj_close>9977:
          print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم") 
-
+         
+         
 # شپاکسا
 if index == 6:
-     p=3022
+     p=3161
      s=0
-     v=85000
+     v=75000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -610,11 +584,12 @@ if index == 6:
          print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
      if 5591>ticker.adj_close>4834:
          print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
-
+         
+          
 # ثبهساز
 if index == 7:
      p=3207
-     s=0
+     s=3324
      v=30000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -622,7 +597,20 @@ if index == 7:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-
+     if 2381>ticker.adj_close>1891:
+         print ("مابين حمايت 1891 ومقاومت 2381 هستيم درميانه 2133 روداريم")
+     if 2865>ticker.adj_close>2381:
+         print ("مابين حمايت 2381 ومقاومت 2865 هستيم درميانه 2569 روداريم")
+     if 3355>ticker.adj_close>2865:
+         print ("مابين حمايت 2865 ومقاومت 3355 هستيم درميانه 3118 روداريم")
+     if 3835>ticker.adj_close>3355:
+         print ("مابين حمايت 3355 ومقاومت 3835 هستيم درميانه 3588 روداريم")
+     if 4320>ticker.adj_close>3835:
+         print ("مابين حمايت 3835 ومقاومت 4320 هستيم درميانه 4067 روداريم")
+     if 4807>ticker.adj_close>4320:
+         print ("مابين حمايت 4320 ومقاومت 4807 هستيم درميانه 4565 روداريم")          
+         
+         
 # تاپيکو
 if index == 8:
      p=0
@@ -634,7 +622,8 @@ if index == 8:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-
+          
+          
 # دسبحان
 if index == 9:
      p=0
@@ -646,23 +635,31 @@ if index == 9:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-
-# کگل
+          
+          
+# ومعادن
 if index == 10:
-     p=0
-     s=7050
-     v=4000
+     p=4874
+     s=4844
+     v=47000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 4066>ticker.adj_close>2526:
+          print ("مابين حمايت 2526 ومقاومت 4066 هستيم درميانه 3198 روداريم") 
+     if 5610>ticker.adj_close>4066:
+          print ("مابين حمايت  4066 ومقاومت 5610 هستيم درميانه  4763 روداريم")
+     if 7184>ticker.adj_close>5610:
+          print ("مابين حمايت 5610 ومقاومت 7184 هستيم درميانه  6343  روداريم")
+          
 
 # فصبا
 if index == 11:
      p=4893
-     s=0
+     s=4992
      v=3000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -670,11 +667,12 @@ if index == 11:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-
+          
+          
 # حتوکا
 if index == 12:
-     p=0
-     s=3705
+     p=0 
+     s=3400
      v=5000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -684,21 +682,54 @@ if index == 12:
           print (v ,': تعدادسهام فروخته شده')
 
 
-if index >= 13 : 
+# خگستر
+if index == 13:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+
+
+# فولاد
+if index == 14:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+
+
+          
+if ticker.yesterday_price < ticker.last_price :
+    print (' بطرف مقاومت ميرويم')
+else:
+    if ticker.yesterday_price > ticker.last_price :
+        print (' بطرف حمايت ميرويم')
+          
+
+if index >= 15 : 
      print (sahame ,'  :  شماازاين سهم خريد نداريد')
 
      
-         
 import sys
 
-if index<=12 and p > 0:
+if index<=14 and p > 0:
      price=p
      price_s=s
      vol=v
      # قيمت امروزسهم Today's stock price
      today_price = (math.ceil(ticker.adj_close))     
      price_kharid= (-0.004 * price)  #کارمزد خريد
-     price_forosh= (-0.009 * today_price) #کارمزد فروش محاسبه باقيمت امروز
+     price_forosh= (-0.006 * today_price) #کارمزد فروش محاسبه باقيمت امروز
      pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
      pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
      sl = 0.03 # حدضرر3درصد
@@ -709,7 +740,7 @@ if index<=12 and p > 0:
      take_profit = price * (1+tp)
      pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
      sz= pf-pk 
-     print(40*"-" )
+     print(20*"-" )
      
      if today_price > take_profit:
           profit = str ( pf - pk )
@@ -730,12 +761,12 @@ if index<=12 and p > 0:
           print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
           print(20*"-" )
      else:
-          if pk > today_price :
+          if pk > (today_price * vol) :
               print("Price to limit")
               print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
               print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
               print(20*"-" )
-          if pk < today_price :
+          if pk < (today_price * vol) :
               print("Price to limit")
               print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
               print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
@@ -754,7 +785,7 @@ if index<=12 and p > 0:
           print (hs3,'حدسود5درصد') 
           print (hz,'حدضرر 3درصد')
           print (hs4,'قيمت سربه سربراي فروش')
-          print(ticker.adj_close,' : قيمت بسته شدن امروز')
+          print (ticker.adj_close,' : قيمت بسته شدن امروز')
           print (ticker.last_price,' : قيمت آخرين معامله امروز')
           print ('-'*20)
 
@@ -762,27 +793,39 @@ if index<=12 and p > 0:
      if pk == pf :
           print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
           print ('-------')
-#=====================================================
-print ('='*30,sahame,'fibonacci')
-#کد برنامه نویسی در پایتون برای سری فیبوناچی
 
-def fibonacci(n):
-    fib_series = [ticker.adj_close, ticker.yesterday_price]
-    while len(fib_series) < n:
-        fib_series.append(fib_series[-1] + fib_series[-2])
-    return fib_series
-num_terms = 7
-#num_terms = int(input("Enter the number of Fibonacci terms to generate: "))
-print(fibonacci(num_terms))
-
-print ('-'*10)
 #=====================================================
-print ("نکته مهم : " , "اگرحجم وقيمت هم جهت هم بودند بخر")
-print ("اگرصعودي بوداول حرکت واگرنزولي بودآخراي حرکت بخر")
-print ('-'*10)
-print ("نکته کليدي : " , "اگر حجم وقيمت مخالف هم حرکت ميکردند بفروش")
-print ("اگر صعودي بودآخراي حرکت واگرنزولي بوداول حرکت بفروش")
-print ('-'*10)
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 
+print ()
+time.sleep(3)
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+    
+print ()
+print ("1 . دوباره تکرار کنيم ")
+print ()
+print ("2 . ياازبرنامه خارج شويم")
+
+
+def Or_leave_the_program():
+    # 2 . ياازبرنامه خارج شيم
+    pass
+
+
+
+while True:
+    main_menu()
+    user_input = input("Enter 1 or 2 : ")
+
+    if user_input == "1":
+        plot_Information_repeat_again()
+        
+    elif user_input == "2":
+        Or_leave_the_program()
+        exit ()
 
