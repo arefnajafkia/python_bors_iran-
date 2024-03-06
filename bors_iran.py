@@ -20,11 +20,23 @@ from datetime import date
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+sentence1 = " \\\\\\\\\\\\\\\\ برسي سهام بورس ايران  ///////////////"
+sentence2 = "Please write the name of the stock you want : "
 
-print ("="*20,"برسي سهام در بورس ايران","="*20)
+for sentence in [sentence1, sentence2]:
+    words = sentence.split()
+
+    for word in words:
+        for char in word:
+            print(char, end="")
+            time.sleep(0.1)
+        print(" ", end="")
+        
+
+    print()
+nam = input ("لطفا نام سهام موردنظرتان رابنويسسد :")
+
 print ()
-       
-nam = input ("Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
 
 DF = tse.Get_Price_History(stock=nam,
                             start_date='1401-05-01',
@@ -48,7 +60,6 @@ RenameDict = {'Adj Open': 'Open',
 
 DF.rename(columns=RenameDict, inplace=True)
 
-#print(DF.head())
 # Get today's price قيمتهاي روزانه 
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
@@ -131,14 +142,18 @@ average_min_price2 = min_price2.mean() #ميانگين پايين ترين قي�
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
 average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
 
-#print (" (220روزه)مقدارسودوزيان حاصل ازخريد اول وقت وفروش آخروقت")
-#print (DF["Close"].head(220).sum())
 #=====================================================
-print(30*"-")
+sentence = "RSI محاسبات انجام شده براي "
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.7)
+print(20*"-")
 print(10*" ","rsi value")
+time.sleep(2)
 rsi = ta.momentum.rsi(DF['Close'], length=14)
-#rsi_diff = rsi.diff(3)
-#print(rsi.diff())
+
 rsi_diff = rsi
 print(rsi.tail(3))
 
@@ -213,25 +228,40 @@ if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>30:
 else:
     if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<30:
          print (' RSI  <  30')
+         
 
 print(30*"-")
+sentence = " تمام اطلاعات قيمتي سهام شما  "
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.5)
+    
+    
+print(20*"-")
+
 #-----------------------------------------------
 time.sleep(3)
 
 # First row information اطلاعات کامل رديف اول سهم
 nemone = DF.iloc[-1]
 print (nemone)
-#print(30*"-")
-#print ('First:قيمت بازشدن - Value:ارزش کل معاملات امروز- OPENINT:بازده سودروز')
-#print ()
- # نمايش واريانس وديسکرايو و...
-#print (DF.describe())
+
 #============================================
 time.sleep(3)
 
-print(30*"-")
-print ('محاسبه 10روزمتوالي ميانگين 103')
 
+print(30*"-")
+sentence = 'محاسبه 10روزمتوالي ميانگين 103'
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.7)
+print(20*"-")
+
+time.sleep(3)
 def moving_average(symbol, window_size):
 
 
@@ -247,15 +277,36 @@ print(moving_averages.tail(10))
 print(30*"-") 
 #==============================================
 time.sleep(3)
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
 
-txt = int(input("   رسم نمودارميانگين هاي 10,20,50 .1 \n انجام محاسبات حجم وکانال سهام شما .2 \n چنانچه منصرف شده ايد  .0 :  "))
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+print(30*"-")
+print ()
 
-if txt == 0:
-    print ("Error! Division by zero is not allowed.")
-    exit()
+sentence1 = "رسم نمودارميانگين هاي 10,20,50 .1 : "
+sentence2 = "انجام محاسبات حجم وکانال سهام شما .2 : "
+
+# Print the characters of the first prompt with a delay of 0.2 seconds
+for char in sentence1:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Print the characters of the second prompt with a delay of 0.2 seconds
+for char in sentence2:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Get the user's input
+user_input = input("Enter 1 or 2 : ")
 
 
-if txt == 1 :
+# Check if the user wants to plot the stock price
+if user_input == "1":
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
     print ()
 #===============================================
@@ -266,11 +317,18 @@ if txt == 1 :
    # Calculate the average price for ten days
     ten_day_average = DF['Close'].rolling(10).mean()
     today_price_scalar = today_price.item()
-else:
-    if txt == 2 :
+# Check if the user wants to calculate the volume and channel
+elif user_input == "2":
         print ()
-        print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
-        print ()        
+        sentence = "----------Thanks for the explanation about your stock----------"
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+
+print ()
+        
 #=====================================================
 print ('='*30,' candle DOje')
 DOje1= (today_price_max+today_price_min)/2
@@ -302,7 +360,7 @@ else:
         print (' candle marabozo Red')
     
 #=================================================
-time.sleep(3)        
+time.sleep(5)        
         
 print(40*"=",nam,"Volume")
 
@@ -342,7 +400,7 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 #================================================
-time.sleep(3)
+time.sleep(5)
           
 print(40*"=",nam,"order sell and buy")
 if today_Volume > today_Volume_yesterday and today_price < yesterday_price :
@@ -371,7 +429,7 @@ print (today_Volume_yesterday , 'حجم ديروز')
 print (today_price , 'قيمت امروز')
 print (yesterday_price , 'قيمت ديروز')
 #==================================================
-time.sleep(3)
+time.sleep(5)
 
 print(40*"=",nam,"Moving Average")
 # Calculate the average price for ten days
@@ -425,7 +483,7 @@ else:
         print (' ميانگين هاوقيمت همه صعودي شدن')
 
 #==================================================
-time.sleep(3)
+time.sleep(5)
         
 print(40*"=",nam,"One year support and resistance")
 # Engulfing Calculations  محاسبات اينگل فينگ
@@ -607,7 +665,7 @@ if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
 #==================================================
-time.sleep(3)
+time.sleep(5)
     
 print(40*"=",nam,"Engulfing Calculations")
 # Engulfing  ascending صعودي
@@ -652,7 +710,7 @@ print ('روند False يا True دقت کنيدبه')
 print (h5,': ascending روند صعودي ')
 print (h10 ,': Descending روند نزولي')
 #=====================================================
-time.sleep(3)
+time.sleep(5)
 
 print(45*"=",nam,"ichimoku")
 
@@ -794,10 +852,36 @@ print ('-'*30)
 #===============================================
 time.sleep(3)
 
-txt_b = int(input("  1 . bmi and omc انجام محاسبات \n محاسبات روند,کف وسقفها  . 2 :  "))
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
+
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+    
+print ()
+
+sentence1 = "1 . bmi and omc انجام محاسبات : "
+sentence2 = "محاسبات روند,کف وسقفها  . 2 : "
+
+# Print the characters of the first prompt with a delay of 0.2 seconds
+for char in sentence1:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Print the characters of the second prompt with a delay of 0.2 seconds
+for char in sentence2:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Get the user's input
+user_input = input("Enter 1 or 2 : ")
 print ('       ','-'*30)
 
-if txt_b == 1 :
+# Check if the user wants to plot the stock price
+if user_input == "1":
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
     print ()
     print(20*"-",nam,"bmi محاسبه")
@@ -888,11 +972,13 @@ if txt_b == 1 :
     
         print(max_price_b1,": بالاترين قيمت هفتگي ")
         print(min_price_b2,": پايين ترين قيمت هفتگي")
-else:
-    if txt_b == 2 :
-        print ()
-        print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
-        print ()
+
+
+# Check if the user wants to calculate the volume and channel
+elif user_input == "2":
+    print ()
+    print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
+    print ()
 
 #================================================================
 time.sleep(3)
@@ -1122,6 +1208,9 @@ if average_prices4 == average_prices94 == average_prices84 < today_Final_price:
 else:
     if average_prices4 == average_prices94 == average_prices84 > today_Final_price:
         print ('قيمت پايين ميانگين 103 که 15 روزفلت شده')
+
+
+time.sleep(3)
 #-------------------------------------------
 # بدست آوردن ميانگين هاي 3و10و20 روزه
 ma3 = (math.ceil(average_prices7))
@@ -1249,6 +1338,8 @@ if today_price_max2<today_price_max1 and today_Volume > today_Volume_yesterday a
 print (40*'=')
 print()
 #===================================================
+
+time.sleep(5)
 #هرموقع باريش هارامي صعودي يانزولي صورت بگيرد پرينت ميکند درغيراين
 #صورت چيزي نشان نميدهد 
 # Bullish Harami EngulFing support or Resistance level
@@ -1290,6 +1381,16 @@ if today_two_price_max < yesterday_price_max > today_price_max:
                 print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
                 print ("-"*10)
 
+#-------------------------
+
+def main_menu():
+    print ()   
+
+
+def plot_Information_repeat_again():
+    # 1 . دوباره تکرار کنيم
+    pass
+                
 
 #=======================================================
 time.sleep(5)
@@ -1312,7 +1413,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
         "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
-        "کگل","داتام","نخريس","پاکشو"]
+        "کگل","داتام","نخريس","پاکشو","درازك"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -1443,16 +1544,39 @@ print ('-'*20)
 #===============================================
 time.sleep(3)
 
-txt_c = int(input("   کانالها وکندلها وحجم امروز . 1  \n انصراف ازادامه برسي . 2 :   "))
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
 
-if txt_c == 1 :
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+    
+print ()
+
+sentence1 = "کانالها وکندلها وحجم امروز . 1 : "
+sentence2 = "2 . گزارش وضعيت حجم وقيمت سهام انتخابي : "
+
+# Print the characters of the first prompt with a delay of 0.2 seconds
+for char in sentence1:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Print the characters of the second prompt with a delay of 0.2 seconds
+for char in sentence2:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Get the user's input
+user_input = input("Enter 1 or 2 : ")
+print ('       ','-'*30)
+#-------------------
+# Check if the user wants to plot the stock price
+if user_input == "1":
+    print ("="*15,"Performing BMO and OMC calculations" , sahame,"="*15)
     print ()
-    print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
-#===============================================
-else:
-    if txt_c == 2 :
-        print("Exiting the program...")
-        exit()
+    print(20*"-",sahame,"کانال وکندلهاي امروز")
               
 #=====================================================
 print ('='*30,' candel DOje')
@@ -1615,6 +1739,14 @@ if ticker.last_price > ticker.open_price > ticker.yesterday_price > ticker.low_p
 else:
     if ticker.last_price < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
         print (" امروزتيک نزولي داريم")
+
+
+#-------------------
+# Check if the user wants to calculate the volume and channel
+if user_input == "2":
+    print ()
+    print ('-'*10,"Report on the volume and price of selected stocks" , sahame,'-'*10)
+    print ()
     
 #===============================================
 time.sleep(3)
@@ -1704,13 +1836,40 @@ else:
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 #=================================================
 print(40*"=")
+time.sleep(3)
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
 
-txt_d = int(input("  1 . bmi and omc انجام محاسبات \n 2 .  Moving 103 ,محاسبه سودوزيان  :  "))
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+    
+print ()
+
+sentence1 = "1 . bmi and omc انجام محاسبات : "
+sentence2 = "2 .  Moving 103 ,محاسبه سودوزيان : "
+
+# Print the characters of the first prompt with a delay of 0.2 seconds
+for char in sentence1:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Print the characters of the second prompt with a delay of 0.2 seconds
+for char in sentence2:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Get the user's input
+user_input = input("Enter 1 or 2 : ")
 print ('       ','-'*30)
-
-if txt_d == 1 :
-    print ("="*15,"Drawing moving average charts" , nam,"="*15)
+#-------------------
+# Check if the user wants to plot the stock price
+if user_input == "1":
+    print ("="*15,"Performing BMO and OMC calculations" , sahame,"="*15)
     print ()
+
 #===============================================
     print(40*"=",sahame,"bmi محاسبه")
     # تعریف یک تابع برای محاسبه بی ام آی
@@ -1787,6 +1946,7 @@ if txt_d == 1 :
 
              if ticker.last_price == price_max:
                  print('صف خريدشده')
+
      
              if ticker.last_price == price_min:
                  print ('صف فروش شده')
@@ -1794,7 +1954,8 @@ if txt_d == 1 :
 
              if omc < bmi :
                 print ('به احتمال زيادفردا قيمت بالاترازامروزه')
-        else:
+
+        
              if omc > bmi :
                 print ('به احتمال زيادفردا قيمت پايين ترازامروزه')
 
@@ -1805,11 +1966,13 @@ if txt_d == 1 :
              if omc < ticker.adj_close < yesterday_price <= ticker.max_week:
                  print(ticker.min_week,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")    
 
-else:
-    if txt_d == 2 :
-        print ()
-        print ('-'*10,"Thanks for the explanation about your stock" , nam,'-'*10)
-        print ()
+#-------------------
+
+# Check if the user wants to calculate the volume and channel
+elif user_input == "2":
+    print ()
+    print ('-'*10,"Thanks for the explanation about your stock" ,sahame,'-'*10)
+    print ()
 #======================================================
 time.sleep(3)
         
@@ -2035,9 +2198,9 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=4331
-     s=4431
-     v=74000
+     p=4290
+     s=0
+     v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -2077,9 +2240,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4670
+     p=4543
      s=0
-     v=20000
+     v=25000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -2212,7 +2375,7 @@ if index == 9:
 # ومعادن
 if index == 10:
      p=4874
-     s=0
+     s=4844
      v=47000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -2351,7 +2514,7 @@ if index<=14 and p > 0:
           hs3 = (( p * 0.05 + p )*100)/100 # حدسود5درصد
           hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
           hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
-          print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',nam)
+          print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',sahame)
           print (hs1,'حدسود20درصد')
           print (hs2,'حدسود10درصد')
           print (hs3,'حدسود5درصد') 
@@ -2476,11 +2639,38 @@ time.sleep(3)
 
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
+print ()
+time.sleep(3)
+sentence = 'لطفا انتخاب کنيد'
+words = sentence.split()
 
-response = input("Do you want to perform another operation? \n آياميخواهيد دوباره شروع کنيد  (y / n) : ") 
-if response.lower() != "y":
-    __nam__ () == nam
+for word in words:
+    print(word, end=" ")
+    time.sleep(0.8)
+    
+print ()
+print ("1 . دوباره تکرار کنيم ")
+print ()
+print ("2 . ياازبرنامه خارج شويم")
 
-else:    
-    exit ()
+
+def Or_leave_the_program():
+    # 2 . ياازبرنامه خارج شيم
+    pass
+
+
+
+while True:
+    main_menu()
+    user_input = input("Enter 1 or 2 : ")
+
+    if user_input == "1":
+        plot_Information_repeat_again()
+        
+    elif user_input == "2":
+        Or_leave_the_program()
+        exit ()
+        
+
+
 
