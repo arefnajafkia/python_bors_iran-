@@ -16,25 +16,28 @@ import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
 
-print(10*"-" , '\\\\\ لطفا انتخاب کنيد /////',10*"-")
+print(10*"-" , '\\\\\ برسي سهام بورس ايران /////',10*"-")
 print()   
-print("1 . لطفابراي انتخاب سهم مورد نظرتان اول يک رابزنيد : ")
-
+print("1 . براي انتخاب سهم موردنظرتان اول  : ")
+print (30*'=')
 
 def main_menu():
     print()
     print(5*"-" ,'\\\\\ براي انتخاب مجددسهم شماره يک رابزنيد /////',5*"-")
-    print()
-    print(5*"-" ,'\\\\\ درغيراين صورت محاسباتتان راانتخاب کنيد /////',5*"-")
+    print(5*"-" ,' درغيراين صورت شماره هاي ديگرراانتخاب کنيد ',5*"-")
     print()
     print("2 . نوع کندل امروزودرصدفاصله بالاوپايين کندل : ")
+    print (20*'-')
     print("3 . حجم ومحاسبات قيمت ها : ")
+    print (20*'-')
     print("4 . bmi and omc انجام محاسبات با : ")
+    print (20*'-')
     print("5 . True and False مقادير sma3-10 and sma3-10 : ")
+    print (20*'-')
     print("6 . محاسبات سودوزيان خريد باقيمت امروز : ")
-    print("7 . bmi and omc انجام محاسبات با : ")
-    print("8 . نتيجه محاسبات ميانگين 103وکانالها : ")
-    print("9 . EXIT براي خروج")
+    print (20*'-')
+    print("7 . EXIT براي خروج")
+    print()
 
 
 def plot_Information_RSI():
@@ -61,24 +64,17 @@ def Calculations_Ichimoku_Engulfing():
     # 6 . محاسبات سودوزيان خريد باقيمت امروز
     pass
 
-def Calculations_omc_bmi():
-    # 7 . bmi and omc انجام محاسبات با
-    pass
-
-def Result_Average_channels():
-    # 8 . نتيجه محاسبات ميانگين 103وکانالها
-    pass
-
 
 while True:
     main_menu()
-    user_input = input("Enter 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 : ")
+    user_input = input("Enter 1 or 2 or 3 or 4 or 5 or 6 or 7 : ")
 
     if user_input == "1":
         plot_Information_RSI()   
         #===================================================
         print ()
-        print(25*"=","order buy and sell stock",25*"=")
+        print(22*"=","Stock and OTC symbols of Iran",22*"=")
+        print()
         import pytse_client as tse
         #درج تاريخ ميلادي
         import jdatetime
@@ -111,9 +107,9 @@ while True:
                 print(f"{stock_number}. {stock}", end="\t")
             print()
 
-
+        print ('-'*20) 
         # Ask the user to enter a valid index
-        index = int(input("Please write the name of the stock you want : \n write in namad :"))
+        index = int(input(" Overwrite the symbol number :"))
         # Run Python for the selected stock    
         stock = namad[index-1]
 
@@ -125,6 +121,7 @@ while True:
                      adjust=True)
         ticker = tse.Ticker(sahame)
 
+        print()
         print(ticker.last_date,': تاريخ وساعت آخرين اطلاعات قيمت پاياني ومعاملاتي')
         print ('-'*20)
         print(ticker.title,' : نام شرکت ')
@@ -145,6 +142,8 @@ while True:
         print(ticker.open_price,' : قيمت بازشدن')   
         print()
 
+
+        print (20*'*','End of this episode',20*'*',sahame)      
         #=====================================================
     elif user_input == "2":
         calculate_Average_the_chart()
@@ -155,21 +154,21 @@ while True:
         DOje2= DOje1 + 20
         DOje3= DOje1 - 20
 
-        if ticker.last_price == DOje1 :
+        if ticker.last_price == DOje1>DOje3<DOje2 :
             print (' کندل دوجي شکل گرفته')
 
 
-        if ticker.high_price > ticker.last_price >= DOje2:
+        if ticker.high_price > ticker.last_price >= DOje1:
             print (' کندل دوجي سبزشکل گرفته')
         else:
-            if ticker.low_price < ticker.last_price <= DOje3:
+            if ticker.low_price < ticker.last_price <= DOje1:
                 print (' کندل دوجي قرمزشکل گرفته')
                 
 
-        if ticker.open_price < ticker.last_price > DOje1:
+        if ticker.open_price < ticker.last_price > DOje2:
             print (' candle Green')
         else:
-            if ticker.open_price > ticker.last_price < DOje1:
+            if ticker.open_price > ticker.last_price < DOje3:
                 print (' candle Red')
 
 
@@ -229,6 +228,9 @@ while True:
              if (ticker.last_price) < (ticker.adj_close):
                   print ((math.floor(Percent_last)),'% : رنج قيمتي فردا منفي است')
 
+
+        print()
+        print (20*'*','End of this episode',20*'*',sahame)
         #==============================================
     elif user_input == "3":
         Condition_candle_take_stock()
@@ -345,22 +347,15 @@ while True:
         print(ticker.min_year,' : حداقل قیمت بازه سال')
 
 
-        if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
-            print (tik_ascending , ' : تيک صعودي')
-
-            
-        if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
-            print (tik_Descending , ' : تيک نزولي')
-
-                       
-
-        if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+        if ticker.last_price > ticker.open_price > ticker.yesterday_price > ticker.low_price:
             print (" امروزتيک صعودي داريم")
+        else:
+            if ticker.last_price < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+                print (" امروزتيک نزولي داريم")
 
-             
-        if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
-            print (" امروزتيک نزولي داريم")
-
+                
+        print()
+        print (20*'*','End of this episode',20*'*',sahame)
         #===============================================
     elif user_input == "4":
         Condition_candle_Volume_stock()
@@ -473,6 +468,10 @@ while True:
         if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
             print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")  
             print ()
+
+
+        print()
+        print (20*'*','End of this episode',20*'*',sahame)
         #======================================================
     elif user_input == "5":
         Condition_Protection_resistance()
@@ -512,6 +511,9 @@ while True:
                 (sma_20.shift(1) > sma_3.shift(1)))
         print(buy_signals.tail(2))
         print ()
+
+
+        print (20*'*','End of this episode',20*'*',sahame)
         #------------------------------------------------
     elif user_input == "6":
         Calculations_Ichimoku_Engulfing()
@@ -867,18 +869,12 @@ while True:
                   print ('-------')
 
         #=====================================================
+        print()          
         print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
         print ()
+        print (20*'*','End of this episode',20*'*',sahame)
         #=====================================================
     elif user_input == "7":
-        Calculations_omc_bmi()
-        print ()
-        print ('-'*10,"Performing BMO and OMC calculations" ,'-'*10)
-    elif user_input == "8":
-        Result_Average_channels()
-        print ()
-        print ('-'*10,"The result of 103 average calculations and channels" ,'-'*10)
-    elif user_input == "9":
         break
     else:
         print ()
