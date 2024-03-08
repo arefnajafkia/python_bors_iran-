@@ -142,7 +142,7 @@ while True:
         print(ticker.open_price,' : قيمت بازشدن')   
         print()
 
-
+        
         print (20*'*','End of this episode',20*'*',sahame)      
         #=====================================================
     elif user_input == "2":
@@ -875,6 +875,7 @@ while True:
         print (20*'*','End of this episode',20*'*',sahame)
         #=====================================================
     elif user_input == "7":
+        print ('===  You have exited the program  ===')
         break
     else:
         print ()
@@ -882,4 +883,4 @@ while True:
         print("Invalid input. Please try again.")
         print ('-'*10)
 
-#===============================================================
+
