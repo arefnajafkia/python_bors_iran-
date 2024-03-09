@@ -16,12 +16,17 @@ import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
 
-print(10*"-" , '\\\\\ برسي سهام بورس ايران /////',10*"-")
-print()   
-print("1 . براي انتخاب سهم موردنظرتان اول  : ")
-print (30*'=')
 
-def main_menu():
+print(10*"-", ' \\\\\  برسي سهام بورس ايران  ///// ' ,10*"-")
+print()   
+print("1 . براي انتخاب سهم مورد نظرتان قبل ازهمه شماره رابزنيد  : ")
+print (30*'=')      
+
+
+print()
+time.sleep(4)
+
+def main_menu(): 
     print()
     print(5*"-" ,'\\\\\ براي انتخاب مجددسهم شماره يک رابزنيد /////',5*"-")
     print(5*"-" ,' درغيراين صورت شماره هاي ديگرراانتخاب کنيد ',5*"-")
@@ -143,7 +148,7 @@ while True:
         print()
 
         
-        print (20*'*','End of this episode',20*'*',sahame)      
+        print (20*'*','End of this episode (1)',20*'*',sahame)      
         #=====================================================
     elif user_input == "2":
         calculate_Average_the_chart()
@@ -230,7 +235,7 @@ while True:
 
 
         print()
-        print (20*'*','End of this episode',20*'*',sahame)
+        print (20*'*','End of this episode (2)',20*'*',sahame)
         #==============================================
     elif user_input == "3":
         Condition_candle_take_stock()
@@ -355,7 +360,7 @@ while True:
 
                 
         print()
-        print (20*'*','End of this episode',20*'*',sahame)
+        print (20*'*','End of this episode (3)',20*'*',sahame)
         #===============================================
     elif user_input == "4":
         Condition_candle_Volume_stock()
@@ -471,7 +476,7 @@ while True:
 
 
         print()
-        print (20*'*','End of this episode',20*'*',sahame)
+        print (20*'*','End of this episode (4)',20*'*',sahame)
         #======================================================
     elif user_input == "5":
         Condition_Protection_resistance()
@@ -490,8 +495,7 @@ while True:
         sma_10 = sma(history.close, 10)
         buy_signals = (
                 (sma_3 > sma_10) &
-                (sma_10.shift(1) > sma_3.shift(1))
-        )
+                (sma_10.shift(1) > sma_3.shift(1)))
         print(buy_signals.tail(2))
 
         #-------------------------------------------
@@ -511,9 +515,9 @@ while True:
                 (sma_20.shift(1) > sma_3.shift(1)))
         print(buy_signals.tail(2))
         print ()
-
-
-        print (20*'*','End of this episode',20*'*',sahame)
+     
+        #-----------------------------------------------------
+        print (20*'*','End of this episode (5)',20*'*',sahame)
         #------------------------------------------------
     elif user_input == "6":
         Calculations_Ichimoku_Engulfing()
@@ -872,7 +876,7 @@ while True:
         print()          
         print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
         print ()
-        print (20*'*','End of this episode',20*'*',sahame)
+        print (20*'*','End of this episode (6)',20*'*',sahame)
         #=====================================================
     elif user_input == "7":
         print ('===  You have exited the program  ===')
