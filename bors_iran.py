@@ -21,6 +21,7 @@ import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 sentence1 = " \\\\\\\\\\\\\\\\ برسي سهام بورس ايران  ///////////////"
+print()
 sentence2 = "Please write the name of the stock you want : "
 
 for sentence in [sentence1, sentence2]:
@@ -114,6 +115,7 @@ Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
 today_Volume = DF['Volume'].iloc[-1] # حجم امروز
 today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
 
 # Calculate the average price محاسبه ميانگين هاي 10 و 26
 average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
@@ -423,11 +425,29 @@ if today_price_max>today_price_max4>today_price_max8>today_price_max12:
 else:
     if today_price_min<today_price_min4<today_price_min8<today_price_min12:
         print ("دوازده روزه کف جديد پايين ترميزنه")
+
+
+if today_Volume_yesterday2 < today_Volume_yesterday < today_Volume :
+    print ('سه روزحجم داره ميره بالا')
+else:
+    if today_Volume_yesterday2 > today_Volume_yesterday > today_Volume :
+        print ('سه روزحجم داره ميره پايين')
+
+
+if today_price > yesterday_price > today_two_price :
+    print ('سه روز قيمت داره ميره بالا')
+else:
+    if today_price < yesterday_price < today_two_price :
+        print ('سه روز قيمت داره ميره پايين')
+
+print ()       
 #==================================================               
 print (today_Volume , 'حجم امروز')
 print (today_Volume_yesterday , 'حجم ديروز')
+print (today_Volume_yesterday2 , 'حجم پريروز')
 print (today_price , 'قيمت امروز')
 print (yesterday_price , 'قيمت ديروز')
+print (today_two_price , 'قيمت پريروز')
 #==================================================
 time.sleep(5)
 
@@ -1413,7 +1433,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "خگستر","فولاد","شپنا","فملی","حتاید","پی پاد",
         "خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور",
         "فپنتا","شبندر","فارس","غفارس","وبصادر","کچاد",
-        "کگل","داتام","نخريس","پاکشو","درازك"]
+        "کگل","داتام","نخريس","پاکشو","درازک"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
