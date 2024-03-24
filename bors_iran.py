@@ -1,4 +1,5 @@
 
+
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # وبازدن اينتر محاسبات راانجام داده وبه شمانشان ميدهد
 # درمرحله دوم نام سهام انتخاب شده ازتي ام سي ونوشته فارسي آن کپي شده
@@ -1389,7 +1390,7 @@ if today_two_price_max < yesterday_price_max < today_price_max:
         if today_two_price < yesterday_price < today_price:
             if lowest_price_7 or lowest_price_30 or lowest_price_90 <= yesterday_price_min:
                 print ("EngulFing support level")
-                print ("----- اینگل فینگ صعودی رخ داده خریدکن-----")
+                print ("----- اينگل فينگ صعودي شده خريدکن-----")
                 print ("-"*10)
 
 
@@ -1398,7 +1399,7 @@ if today_two_price_max < yesterday_price_max > today_price_max:
         if today_two_price > yesterday_price > today_price:
             if highest_price_7 or highest_price_30 or highest_price_90 >= yesterday_price_min:
                 print ("EngulFing Resistance level")
-                print ("----- اینگل فینگ نزولی زخ داده بفروش -----")
+                print ("----- اينگل فينگ نزولي شده بفروش -----")
                 print ("-"*10)
 
 #-------------------------
@@ -2260,9 +2261,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4543
+     p=4408
      s=0
-     v=25000
+     v=80000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -2318,9 +2319,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3161
+     p=2905
      s=0
-     v=75000
+     v=100000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
