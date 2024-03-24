@@ -123,7 +123,7 @@ else:
     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
         print (' candle marabozo Red')
     
-#======================================================print('-*'*20)   
+#======================================================   
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
@@ -408,28 +408,8 @@ buy_signals = (
         (sma_20.shift(1) > sma_3.shift(1))
 )
 print(buy_signals.tail(2))
-#---------------------------------------------
-rint(40*"=",sahame,"For order")
-nimeh_price = ((ticker.high_price + ticker.low_price)/2)
-nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
-
-
-if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
-    print ("ميتوني خريد کني فردا قيمت بالاترميره")
-else:
-    if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
-        print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
-
-        
-
-if bmi > omc :
-    print ('bmi > omc',': for buy')
-else:
-    if bmi < omc :
-        print ('bmi < omc',': for sell')
-    
-
-#------------------------------------------------
+print ()
+#--------------------------------------------
 print(30*"=",sahame," True and False مقادير sma10-20")          
 
 history = ticker.history
@@ -446,6 +426,31 @@ buy_signals = (
         (sma_20.shift(1) > sma_10.shift(1))
 )
 print(buy_signals.tail(2))
+
+print ()          
+#----------------------------------
+
+print(40*"=",sahame,"For order")
+nimeh_price = ((ticker.high_price + ticker.low_price)/2)
+nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
+
+
+if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
+    print ("ميتوني خريد کني فردا قيمت بالاترميره")
+else:
+    if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
+        print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
+
+        
+
+if bmi > omc :
+    print ('bmi > omc',': for buy','   = موقعيت خريد')
+else:
+    if bmi < omc :
+        print ('bmi < omc',': for sell','   = موقعيت فروش')
+
+#-------------------------------------
+
 
           
 #----------------------------------
@@ -504,9 +509,9 @@ if index == 3:
  
 # وسپه
 if index == 4:
-     p=2981
+     p=4408
      s=0
-     v=4000
+     v=80000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -560,9 +565,9 @@ if index == 5:
 
 # شپاکسا
 if index == 6:
-     p=3022
+     p=2905
      s=0
-     v=85000
+     v=100000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
