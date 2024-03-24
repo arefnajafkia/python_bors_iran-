@@ -13,6 +13,8 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 print ("="*15,"برسي سهام در بورس ايران","="*15)
@@ -22,7 +24,7 @@ nam = input ("Hello,Please write the name of the stock you want : \n لطفا ن
 
 DF = tse.Get_Price_History(stock=nam,
                              start_date='1401-05-01',
-                             end_date='1402-05-08',
+                             end_date='1402-12-20',
                              ignore_date=True,
                              adjust_price=True,
                              show_weekday=True,
@@ -94,6 +96,7 @@ Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
 Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
 today_Volume = DF['Volume'].iloc[-1] # حجم امروز
 today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
 average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيانه
 
@@ -367,6 +370,22 @@ if today_Volume > (math.ceil(average_Volume_Month))*3 :
 
 if today_price > 4*(average_Volume_week):
     print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+
+if today_Volume_yesterday2 < today_Volume_yesterday < today_Volume :
+    print ('سه روزحجم داره ميره بالا')
+else:
+    if today_Volume_yesterday2 > today_Volume_yesterday > today_Volume :
+        print ('سه روزحجم داره ميره پايين')
+
+
+if today_price > yesterday_price > today_two_price :
+    print ('سه روز قيمت داره ميره بالا')
+else:
+    if today_price < yesterday_price < today_two_price :
+        print ('سه روز قيمت داره ميره پايين')
+
+print ()  
 
 #================================================
 print(25*"-")     
@@ -1505,9 +1524,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=5405
+     p=4408
      s=0
-     v=2206
+     v=80000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1538,9 +1557,9 @@ if index == 4:
          
 # غکورش
 if index == 5:
-     p=9435
+     p=9352
      s=0
-     v=25000
+     v=26000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1563,9 +1582,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3185
+     p=2905
      s=0
-     v=72000
+     v=100000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1653,7 +1672,7 @@ if index == 10:
 # فصبا
 if index == 11:
      p=4893
-     s=0
+     s=4992
      v=3000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1867,26 +1886,5 @@ print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 
 
-# قدرت سهم (Market Capitalization)
-market_capitalization = shares_outstanding * ticker.adj_close
-print (market_capitalization)
 
-# سرانه خرید (Average Cost Basis)
-total_purchase_price = sum([purchase_price_1, purchase_price_2, ..., purchase_price_n])
-average_cost_basis = total_purchase_price / number_of_shares_purchased
-print (average_cost_basis)
-
-# سرانه فروش (Average Selling Price)
-total_selling_price = sum([selling_price_1, selling_price_2, ..., selling_price_n])
-average_selling_price = total_selling_price / ticker.count
-print (average_selling_price)
-
-# قدرت سهم بازار (Market Capitalization)
-market_capitalization = 1000000 * shares_outstanding * ticker.adj_close
-print (market_capitalization)
-
-# سرانه سود (Profit or Loss)
-total_profit_loss = sum([(selling_price_1 - purchase_price_1) * shares_sold_1, (selling_price_2 - purchase_price_2) * shares_sold_2, ..., (selling_price_n - purchase_price_n) * shares_sold_n])
-average_profit_loss = total_profit_loss / ticker.count
-print (average_profit_loss)
 
