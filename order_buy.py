@@ -13,15 +13,8 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
-
-def main_menu():
-    print ()
+   
     
-    
-def plot_Information_repeat_again():
-    # 1 . دوباره تکرار کنيم
-    pass
-
 #===================================================
 print(25*"=","order buy and sell stock",25*"=")
 import pytse_client as tse
@@ -441,8 +434,7 @@ if bmi < omc :
 
 if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
     print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
-
-          
+        
 #----------------------------------
 print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
 time.sleep(3)
@@ -505,9 +497,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4543
+     p=4408
      s=0
-     v=25000
+     v=80000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -563,9 +555,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=3161
+     p=2905
      s=0
-     v=75000
+     v=100000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -797,35 +789,5 @@ if index<=14 and p > 0:
 #=====================================================
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 
-print ()
-time.sleep(3)
-sentence = 'لطفا انتخاب کنيد'
-words = sentence.split()
 
-for word in words:
-    print(word, end=" ")
-    time.sleep(0.8)
-    
-print ()
-print ("1 . دوباره تکرار کنيم ")
-print ()
-print ("2 . ياازبرنامه خارج شويم")
-
-
-def Or_leave_the_program():
-    # 2 . ياازبرنامه خارج شيم
-    pass
-
-
-
-while True:
-    main_menu()
-    user_input = input("Enter 1 or 2 : ")
-
-    if user_input == "1":
-        plot_Information_repeat_again()
-        
-    elif user_input == "2":
-        Or_leave_the_program()
-        exit ()
 
