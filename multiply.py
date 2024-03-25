@@ -3,6 +3,9 @@
 # ضرب ميکند وجواب راميدهد ميتوان چهارعمل رياضيات راباپرسيدن ازکاربرامجام داد
 # واين هرچندبارکه بخواهد ميتواند تکرارکند
 
+def mdarsad(a, b):
+    percents = (a * b)/100
+    return ("{:.0f}".format(percents))
 
 def darsad(a, b):
     percent = (a * 100)/b
@@ -27,7 +30,7 @@ def Calculations():
     while True:
         print ("="*15,"ومحاسبه درصددوعدد انجام چهارعمل اصلي","="*15)
         print ()
-        txt = int(input(" 1. ضرب دوعدد \n 2. جمع دوعدد \n 3. تقسيم دوعدد \n 4. تفريق دوعدد \n 5. محاسبه درصددوعدد :  "))
+        txt = int(input(" 1. ضرب دوعدد \n 2. جمع دوعدد \n 3. تقسيم دوعدد \n 4. تفريق دوعدد \n 5. عدداول چنددرصددوميه \n 6. درصد دومي چقدرميشه n:  "))
 
         if txt == 1 :
             print ("="*15,"ضرب دوعدد","="*15)
@@ -71,6 +74,15 @@ def Calculations():
             b = int(input("Enter the second number \n حالا دومين عدد رابنويس : "))
 
             result = darsad(a, b)
+
+            print("The result is \n جواب ميشود :", result)
+
+        elif txt == 6 :
+            print ("="*15," درصد دومي چقدرميشه n","="*15)
+            a = int(input("Enter the first number \n اولين عدد رابنويس : "))
+            b = int(input("Enter the second number \n حالا دومين عدد رابنويس : "))
+
+            result = mdarsad(a, b)
 
             print("The result is \n جواب ميشود :", result) 
 
