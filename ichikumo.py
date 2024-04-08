@@ -40,7 +40,7 @@ rsi = ta.momentum.rsi(DF['Close'], length=14)
 #rsi_diff = rsi.diff()
 rsi_diff = rsi
 print(rsi.tail(3))
-    
+#-----------------------------------------    
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
@@ -87,7 +87,7 @@ average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
 average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
 average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
 average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
-
+#-----------------------------------------------
 print (20*"-",nam,": نمايش قيمت")
 print (today_Open_price," : قيمت بازشدن امروز")
 print (today_price," : قيمت بسته شدن امروز")
