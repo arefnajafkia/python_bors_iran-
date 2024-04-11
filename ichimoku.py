@@ -84,11 +84,9 @@ today_price_min8 = DF['Low'].iloc[-8]       #پ8#
 today_price_max12 = DF['High'].iloc[-12]    #ب12#
 today_price_min12 = DF['Low'].iloc[-12]     #پ12#
 
-print (today_Open_price ,': قيمت بازشدن امروز')
-print (today_price ,': قيمت بسته شدن امروز')
-print (today_price_max ,': بالاترين قيمت امروز')
-print (today_price_min ,': پايين ترين قيمت امروز')
-print (today_Final_price ,': قيمت آخرين معامله امروز')
+print(f"today_Open_price: {today_Open_price}  ,  today_price : {today_price}")
+print(f"today_price_max: {today_price_max}  ,  today_price_min : {today_price_min}")
+print(f"today_Final_price: {today_Final_price}  ")
 print ()
 
 yesterday_price_max = DF['High'].iloc[-2] # بالاترين قيمت ديروز
@@ -97,11 +95,9 @@ yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
 yesterday_price = DF['Close'].iloc[-2] # قيمت بسته شده ديروز
 yesterday_Final_price = DF['Final'].iloc[-2] #قيمت آخرين معامله ديروز
 
-print (yesterday_Open_price ,': قيمت بازشدن ديروز')
-print (yesterday_price ,': قيمت بسته شده ديروز')
-print (yesterday_price_max ,': بالاترين قيمت ديروز')
-print (yesterday_price_min ,': پايين ترين قيمت ديروز')
-print (yesterday_Final_price ,': قيمت آخرين معامله ديروز')
+print(f"yesterday_Open_price: {yesterday_Open_price}  ,  yesterday_price : {yesterday_price}")
+print(f"yesterday_price_max: {yesterday_price_max}  ,  yesterday_price_min : {yesterday_price_min}")
+print(f"yesterday_Final_price: {yesterday_Final_price}  ")
 print ()
 
 #================================================     
@@ -190,6 +186,7 @@ rsi = ta.momentum.rsi(DF['Close'], length=14)
 rsi_diff = rsi
 print(rsi.tail(3))
 
+print ()
 Month_price = DF['Final'].iloc[-26] # آخرين قيمت 30روزقبل
 Month_price1 = DF['Final'].iloc[-25] # آخرين قيمت 29روزقبل
 Month_price2 = DF['Final'].iloc[-24] # آخرين قيمت 28روزقبل
@@ -296,6 +293,7 @@ else:
 #=====================================================
 print()
 print(40*"=",nam,"Volume")
+
 
 if today_Volume > (math.ceil(average_Volume_Month)):
      print ('حجم امروزبيشترازحجم ماهيانه شده')
@@ -489,8 +487,10 @@ else:
     
 if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
-        
-        
+
+print ('-'*20)
+print(f"Monthly support: {lowest_price_30}  ,  Monthly resistance : {highest_price_30}")
+                
 print ()
 #=====================================================
 # today_price   -  yesterday_price  -  today_two_price قيمت بسته شدن سه روز
@@ -500,43 +500,45 @@ print(30*"=",nam,"ichimoku Signals for buying and selling  ")
 DF.sort_values('Date', inplace=True)
 
 # محاسبات تنکانسن8 روزه به قبل
-# Calculate the highest and lowest price over the past 26 days
-window_size = 8
-past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-ten8 = (past_8_days_high + past_8_days_low)/2
-
-window_size = 9
-past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_9_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-ten9 = (past_9_days_high + past_9_days_low)/2
-
-window_size = 10
-past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-ten10 = (past_10_days_high + past_10_days_low)/2
-
-window_size = 11
-past_11_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_11_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-ten11 = (past_11_days_high + past_11_days_low)/2
+# Calculate the highest and lowest price over the past 26 day
 
 window_size = 12
 past_12_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_12_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten12 = (past_12_days_high + past_12_days_low)/2
 
+window_size = 11
+past_11_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_11_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten11 = (past_11_days_high + past_11_days_low)/2
+
+window_size = 10
+past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten10 = (past_10_days_high + past_10_days_low)/2
+
+window_size = 9
+past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_9_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten9 = (past_9_days_high + past_9_days_low)/2
+
+window_size = 8
+past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten8 = (past_8_days_high + past_8_days_low)/2
+
 #print(f"ten8_max: {past_8_days_high}")
 #print(f"ten8_min: {past_8_days_low}")
-print ('ten8 :',(math.ceil(ten8)))
-print ('ten9 :',(math.ceil(ten9)))
-print ('ten10 :',(math.ceil(ten10)))
-print ('ten11 :',(math.ceil(ten11)))
 print ('ten12 :',(math.ceil(ten12)))
+print ('ten11 :',(math.ceil(ten11)))
+print ('ten10 :',(math.ceil(ten10)))
+print ('ten9 :',(math.ceil(ten9)))
+print ('ten8 :',(math.ceil(ten8)))
 print ()
 
 # محاسبات کيجونسن26 روزه به قبل
 # Calculate the highest and lowest price over the past 26 days
+
 window_size = 26
 past_26_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_26_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
@@ -579,49 +581,59 @@ past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
-window_size = 53
-past_53_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_53_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-komu53_max = (math.ceil(past_53_days_high))
-komu53_min = (math.ceil(past_53_days_low))
-
-window_size = 54
-past_54_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_54_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-komu54_max = (math.ceil(past_54_days_high))
-komu54_min = (math.ceil(past_54_days_low))
-
-window_size = 55
-past_55_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_55_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-komu55_max = (math.ceil(past_55_days_high))
-komu55_min = (math.ceil(past_55_days_low))
-
-window_size = 56
-past_56_days_high = DF['High'].rolling(window_size).max().iloc[-1]
-past_56_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-komu56_max = (math.ceil(past_56_days_high))
-komu56_min = (math.ceil(past_56_days_low))
-
 print(f"komu52_max: {komu52_max}")
 print(f"komu52_min: {komu52_min}")
 print ()
 
 if kij27==kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
     print ('Signal buy : تنکانسن بالاي کيجونسن رفت')
+else :
+    if kij27==kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume< today_Volume_yesterday:
+        print ('Signal sell : تنکانسن پايين کيجونسن رفت')
 
 
-if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu56_max:
+if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_max:
     print ('قيمت بالاي ابرسبزميباشد وروندصعودي شده')
+else :
+    if kij27>kij26 >ten8 <ten9>today_price< yesterday_price <komu52_min:
+        print ('قيمت پايين ابرقرمزه وروندنزولي شده')
+
+
+if komu52_max > kij30==kij29==kij28==kij27==kij26 <ten8<= today_price>yesterday_price>=today_two_price :
+    print ('قيمت زيرابرقرمزوفلت کيجونسن رو روبه بالاقطع کرد')
+    print ('--- Signal buy : قوي ---')
+else:
+    if komu52_min < kij30==kij29==kij28==kij27==kij26 >ten8>= today_price<yesterday_price<=today_two_price :
+        print ('قيمت بالاي ابرسبز وفلت کيجونسن رو روبه پايين قطع کرد')
+        print ('--- Signal sell : قوي ---')
+        
+
+if komu52_min<kij29<=kij28==kij27==kij26<ten8<=ten9==ten10 >today_price<yesterday_price :
+    print ('فلت کيجونسن بالاي ابر،وقيمت تنکانسن رو روبه پايين قطع کرده')
+    print ('--- Signal sell : بسيارقوي ---')
+else:
+    if komu52_min>kij29>=kij28==kij27==kij26<ten8>=ten9==ten10 <today_price<yesterday_price :
+        print ('فلت کيجونسن زيرابر،وقيمت تنکانسن رو روبه بالاقطع کرده')
+        print ('--- Signal buy : بسيارقوي ---')
+
+
     
 
-if kij27==kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume< today_Volume_yesterday:
-    print ('Signal sell : تنکانسن پايين کيجونسن رفت')
+print ()
+#=================================================
+print ('-'*20)
+#ميانگين قيمت 10 و20 روزسهم
+# Calculate the 10-day moving average
+avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
+avg_20_days = DF['Close'].rolling(window=20).mean().iloc[-1]
+movind10 = (math.ceil(avg_10_days))
+movind20 = (math.ceil(avg_20_days))
 
+# Print the most recent price and the 10-day moving average
+print(f"price_close: {DF['Close'].iloc[-1]} ,  moving_price10_day : {movind10}")
+print(f"price_close: {DF['Close'].iloc[-1]} ,  moving_price20_day : {movind20}")
 
-if kij27>kij26 >ten8 <ten9>today_price< yesterday_price <komu56_min:
-    print ('قيمت پايين ابرقرمزه وروندنزولي شده')
-    
+print ()
 #================================================
 print(40*"=",nam,"Charts EMA_3,10,20 ")
 # EMA_3,10,20 نمايش نمودارقيمت و
@@ -709,33 +721,32 @@ print(buy_signals[['Date', 'Open', 'High', 'Low', 'Close']])
 print("\nSell Signals:")
 print(sell_signals[['Date', 'Open', 'High', 'Low', 'Close']])
 
-#==================================================================
-#ميانگين قيمت 10 و20 روزسهم
-# Calculate the 10-day moving average
-avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
-avg_20_days = DF['Close'].rolling(window=20).mean().iloc[-1]
-
-# Print the most recent price and the 10-day moving average
-print(f"price_close: {DF['Close'].iloc[-1]}, moving_price10_day : {avg_10_days}")
-print(f"price_close: {DF['Close'].iloc[-1]}, moving_price20_day : {avg_20_days}")
-
 print ()
-#======================================================
+#==========================================================
 # ميانگين حجم 7 وچندروزه سهم
 # Calculate the 7-day moving average of the volume
+avg_1_days = DF['Volume'].rolling(window=1).mean().iloc[-1]
 avg_2_days = DF['Volume'].rolling(window=2).mean().iloc[-1]
 avg_3_days = DF['Volume'].rolling(window=3).mean().iloc[-1]
 avg_4_days = DF['Volume'].rolling(window=4).mean().iloc[-1]
-avg_8_days = DF['Volume'].rolling(window=8).mean().iloc[-1]
+avg_5_days = DF['Volume'].rolling(window=5).mean().iloc[-1]
+avg_9_days = DF['Volume'].rolling(window=9).mean().iloc[-1]
 avg_26_days = DF['Volume'].rolling(window=26).mean().iloc[-1]
+moving_volume1 = (math.ceil(avg_1_days))
+moving_volume2 = (math.ceil(avg_2_days))
+moving_volume3 = (math.ceil(avg_3_days))
+moving_volume4 = (math.ceil(avg_4_days))
+moving_volume5 = (math.ceil(avg_5_days))
+moving_volume9 = (math.ceil(avg_9_days))
+moving_volume26 = (math.ceil(avg_26_days))
 
 # Print the most recent volume and the 7-day moving average
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume2_day: {avg_2_days}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume3_day: {avg_3_days}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume4_day: {avg_4_days}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume8_day: {avg_8_days}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume26_day: {avg_26_days}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume1_day: {moving_volume1}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume2_day: {moving_volume2}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume3_day: {moving_volume3}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume4_day: {moving_volume4}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume5_day: {moving_volume5}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume9_day: {moving_volume9}")
+print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume26_day: {moving_volume26}")
 
-#========================================================
-
-
+#===========================================================
