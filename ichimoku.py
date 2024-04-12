@@ -459,7 +459,10 @@ else:
 if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
-print ('-'*20)
+    
+print ()
+print ('-'*20,' حمايت ومقاومت هاي هفتگي وماهيانه')
+print ()
 print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
 print(f"Monthly support : {lowest_price_30}  ,    Monthly resistance : {highest_price_30}")
                 
@@ -599,11 +602,18 @@ else:
         print ('/// Signal sell : بفروش ////')
 
 
-    
+if komu52_max>kij30==kij29==kij28==kij27==kij26<ten8>ten9<=today_price>yesterday_price:
+    print ('زيرابرکوموهو قيمت وتنکانسن هردوفلت کيجونسن رو روبه بالاقطع کردن')
+    print ('/// Signal buy : بااحتياط خريدکن ////')
+else:
+    if komu52_min<kij30==kij29==kij28==kij27==kij26>ten8<ten9>=today_price<yesterday_price:
+        print ('بالاي ابرکوموهو قيمت وتنکانسن هردو فلت کيجونسن رو روبه پايين قطع کردن')
+        print ('/// Signal sell : بااحتياط بفروش ////')
+   
 
 print ()
 #=================================================
-print ('-'*20)
+print ('-'*20,' ميانگين قيمت')
 #ميانگين قيمت 10 و20 روزسهم
 # Calculate the 10-day moving average
 avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
@@ -612,8 +622,23 @@ movind10 = (math.ceil(avg_10_days))
 movind20 = (math.ceil(avg_20_days))
 
 # Print the most recent price and the 10-day moving average
-print(f"today_price : {DF['Close'].iloc[-1]}      ,   moving_price10_day : {movind10}")
-print(f"yesterday_price : {DF['Close'].iloc[-2]}  ,   moving_price20_day : {movind20}")
+print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_price10_day : {movind10}")
+print(f"yesterday_price : {DF['Close'].iloc[-2]}   ,   moving_price20_day : {movind20}")
+print ()
+
+if today_price>movind10>yesterday_price>today_two_price:
+    print ('قيمت امروزرفت بالاي ميانگين ده روزه')
+else:
+    if today_price>yesterday_price>movind10:
+        print ('قيمت هنوزبالاي ميانگين ده روزه است')
+        
+
+if today_price<movind10<yesterday_price<today_two_price:
+    print ('قيمت امروزرفت پايين ميانگين ده روزه')
+else:
+    if today_price<yesterday_price<movind10:
+        print ('قيمت هنوزپايين ميانگين ده روزه است')
+
 
 print ()
 #================================================
@@ -675,7 +700,7 @@ plt.show()
 print (' The Ichimoku diagram was drawn .')
 print ()
 #==========================================================
-print ('-'*20)
+print ('-'*20,' ميانگين حجم')
 # ميانگين حجم 7 وچندروزه سهم
 # Calculate the 7-day moving average of the volume
 avg_1_days = DF['Volume'].rolling(window=1).mean().iloc[-1]
@@ -688,9 +713,24 @@ moving_volume5 = (math.ceil(avg_5_days))
 moving_volume26 = (math.ceil(avg_26_days))
 
 # Print the most recent volume and the 7-day moving average
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume2_day: {moving_volume2}")
-print(f"moving_volume5_day: {moving_volume5}, moving_volume26_day: {moving_volume26}")
+print(f"moving_volume1_day : {moving_volume1}  ,   moving_volume2_day: {moving_volume2}")
+print(f"moving_volume5_day : {moving_volume5}  ,   moving_volume26_day: {moving_volume26}")
+print ()
 
 
+if moving_volume1>moving_volume2:
+    print ('حجم روزانه افزايشي است')
+else:
+    if moving_volume1<moving_volume2:
+        print ('حجم روزانه کاهشي است')
+
+
+if moving_volume5>moving_volume26:
+    print ('حجم هفتگي نسبت به ماهيانه افزايشي است')
+else:
+    if moving_volume5<moving_volume26:
+        print ('حجم هفتگي نسبت به ماهيانه کاهشي است')
 
 #===========================================================
+
+
