@@ -19,33 +19,11 @@ from datetime import date
 import warnings
 warnings.filterwarnings("ignore", category=FutureWarning)
 
-def print_with_delay(sentence):
-    words = sentence.split()
-    for word in words:
-        for char in word:
-            print(char, end="")
-            time.sleep(0.1)
-        print(" ", end="")
-    print()
-
-sentence1 = " \\\\\\\\\\\\\\\\ برسي سهام با محاسبات ايچيموکو  ///////////////"
-print()
-sentence2 = "Please write the name of the stock you want : "
-
-for sentence in [sentence1, sentence2]:
-    words = sentence.split()
-
-    for word in words:
-        for char in word:
-            print(char, end="")
-            time.sleep(0.1)
-        print(" ", end="")
-        
-
-    print()
-nam = input ("لطفا نام سهام موردنظرتان رابنويسسد :")
-
+print ("="*15,"برسي سهام دربورس ايران باايچيموکو","="*15)
 print ()
+
+nam = input ("Hello,Please write the name of the stock you want : \n لطفا نام سهام موردنظرتان رابنويسسد :")
+
 
 DF = tse.Get_Price_History(stock=nam,
                             start_date='1401-01-01',
@@ -83,7 +61,7 @@ today_price_max8 = DF['High'].iloc[-8]     #ب8#
 today_price_min8 = DF['Low'].iloc[-8]       #پ8#
 today_price_max12 = DF['High'].iloc[-12]    #ب12#
 today_price_min12 = DF['Low'].iloc[-12]     #پ12#
-
+print ()
 print(f"today_Open_price: {today_Open_price}  ,  today_price : {today_price}")
 print(f"today_price_max: {today_price_max}  ,  today_price_min : {today_price_min}")
 print(f"today_Final_price: {today_Final_price}  ")
@@ -172,15 +150,8 @@ average_min_price2 = min_price2.mean() #ميانگين پايين ترين قي�
 average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
 average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
 #=====================================================
-sentence = "RSI محاسبات انجام شده براي "
-words = sentence.split()
+print ('='*20 ,"Calculations done RSI  ")
 
-for word in words:
-    print(word, end=" ")
-    time.sleep(0.7)
-print(20*"-")
-print(10*" ","rsi value")
-time.sleep(2)
 rsi = ta.momentum.rsi(DF['Close'], length=14)
 
 rsi_diff = rsi
@@ -489,7 +460,8 @@ if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
 print ('-'*20)
-print(f"Monthly support: {lowest_price_30}  ,  Monthly resistance : {highest_price_30}")
+print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
+print(f"Monthly support : {lowest_price_30}  ,    Monthly resistance : {highest_price_30}")
                 
 print ()
 #=====================================================
@@ -585,6 +557,7 @@ print(f"komu52_max: {komu52_max}")
 print(f"komu52_min: {komu52_min}")
 print ()
 
+
 if kij27==kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
     print ('Signal buy : تنکانسن بالاي کيجونسن رفت')
 else :
@@ -617,6 +590,15 @@ else:
         print ('--- Signal buy : بسيارقوي ---')
 
 
+if yesterday_price <today_price>komu52_max <ten8>ten9 >=kij27<kij26 :
+    print ('تنکانسن وکيجونسن وقيمت ابر رو روبه بالاقطع کردند')
+    print ('/// Signal buy : خريدکن ////')
+else:
+    if yesterday_price >today_price<komu52_max >ten8<ten9 <=kij27>kij26 :
+        print ('تنکانسن وکيجونسن وقيمت ابر رو روبه پايين قطع کردند')
+        print ('/// Signal sell : بفروش ////')
+
+
     
 
 print ()
@@ -630,8 +612,8 @@ movind10 = (math.ceil(avg_10_days))
 movind20 = (math.ceil(avg_20_days))
 
 # Print the most recent price and the 10-day moving average
-print(f"price_close: {DF['Close'].iloc[-1]} ,  moving_price10_day : {movind10}")
-print(f"price_close: {DF['Close'].iloc[-1]} ,  moving_price20_day : {movind20}")
+print(f"today_price : {DF['Close'].iloc[-1]}      ,   moving_price10_day : {movind10}")
+print(f"yesterday_price : {DF['Close'].iloc[-2]}  ,   moving_price20_day : {movind20}")
 
 print ()
 #================================================
@@ -692,61 +674,23 @@ plt.show()
 
 print (' The Ichimoku diagram was drawn .')
 print ()
-#===============================================
-# نمونه سيکنالهاي داده شده براي خريد يافروش
-print(30*"=",nam,"Signals given for buying and selling ")
-
-DF['tenkan_sen'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
-DF['kijun_sen'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
-
-DF['tenkan_kiju_cross'] = np.NaN
-DF['tenkan_kiju_cross'] = np.where((DF['tenkan_sen'].shift(1) <= DF['kijun_sen'].shift(1)) & (DF['tenkan_sen'] > DF['kijun_sen']), 1, DF['tenkan_kiju_cross'])
-DF['tenkan_kiju_cross'] = np.where((DF['tenkan_sen'].shift(1) >= DF['kijun_sen'].shift(1)) & (DF['tenkan_sen'] < DF['kijun_sen']), -1, DF['tenkan_kiju_cross'])
-
-DF['price_tenkan_cross'] = np.NaN
-DF['price_tenkan_cross'] = np.where((DF['Open'].shift(1) <= DF['tenkan_sen'].shift(1)) & (DF['Open'] > DF['tenkan_sen']), 1, DF['price_tenkan_cross'])
-DF['price_tenkan_cross'] = np.where((DF['Open'].shift(1) >= DF['tenkan_sen'].shift(1)) & (DF['Open'] < DF['tenkan_sen']), -1, DF['price_tenkan_cross'])
-
-DF['buy_signal'] = np.where((DF['tenkan_kiju_cross'].shift(1) == 1) & (DF['price_tenkan_cross'].shift(1) == 1), 1, 0)
-DF['sell_signal'] = np.where((DF['tenkan_kiju_cross'].shift(1) == -1) & (DF['price_tenkan_cross'].shift(1) == -1), -1, 0)
-
-DF['buy_signal'] = DF['buy_signal'].cumsum()
-DF['sell_signal'] = DF['sell_signal'].cumsum()
-
-buy_signals = DF.loc[DF['buy_signal'] > 0]
-sell_signals = DF.loc[DF['sell_signal'] < 0]
-
-print("Buy Signals:")
-print(buy_signals[['Date', 'Open', 'High', 'Low', 'Close']])
-print("\nSell Signals:")
-print(sell_signals[['Date', 'Open', 'High', 'Low', 'Close']])
-
-print ()
 #==========================================================
+print ('-'*20)
 # ميانگين حجم 7 وچندروزه سهم
 # Calculate the 7-day moving average of the volume
 avg_1_days = DF['Volume'].rolling(window=1).mean().iloc[-1]
 avg_2_days = DF['Volume'].rolling(window=2).mean().iloc[-1]
-avg_3_days = DF['Volume'].rolling(window=3).mean().iloc[-1]
-avg_4_days = DF['Volume'].rolling(window=4).mean().iloc[-1]
 avg_5_days = DF['Volume'].rolling(window=5).mean().iloc[-1]
-avg_9_days = DF['Volume'].rolling(window=9).mean().iloc[-1]
 avg_26_days = DF['Volume'].rolling(window=26).mean().iloc[-1]
 moving_volume1 = (math.ceil(avg_1_days))
 moving_volume2 = (math.ceil(avg_2_days))
-moving_volume3 = (math.ceil(avg_3_days))
-moving_volume4 = (math.ceil(avg_4_days))
 moving_volume5 = (math.ceil(avg_5_days))
-moving_volume9 = (math.ceil(avg_9_days))
 moving_volume26 = (math.ceil(avg_26_days))
 
 # Print the most recent volume and the 7-day moving average
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume1_day: {moving_volume1}")
 print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume2_day: {moving_volume2}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume3_day: {moving_volume3}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume4_day: {moving_volume4}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume5_day: {moving_volume5}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume9_day: {moving_volume9}")
-print(f"volume_day : {DF['Volume'].iloc[-1]}, moving_volume26_day: {moving_volume26}")
+print(f"moving_volume5_day: {moving_volume5}, moving_volume26_day: {moving_volume26}")
+
+
 
 #===========================================================
