@@ -382,57 +382,51 @@ else:
 
 
 #قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
-if today_price < lowest_price_7 > yesterday_price:
-    print ('قيمت حمايت هفتگي راردکرد')
+if today_price < highest_price_7 < yesterday_price:
+     print ('قيمت مقاومت هفتگي رو بطرف پايين شکست')
 else:
-    if today_price > highest_price_7 < yesterday_price:
-        print ('قيمت مقاومت هفتگي رو ردکرد')
+    if today_price > highest_price_7 > yesterday_price:
+        print ('قيمت مقاومت هفتگي روبطرف بالاشکست')
 
 
-if today_price < lowest_price_30 > yesterday_price:
-    print ('قيمت حمايت ماهيانه راردکرد')
+if today_price < lowest_price_7 < yesterday_price:
+    print ('قيمت حمايت هفتگي روبطرف پايين شکست')
 else:
-    if today_price > highest_price_30 < yesterday_price:
-        print ('قيمت مقاومت ماهيانه راردکرد')
+     if today_price > lowest_price_7 > yesterday_price:
+         print ('قيمت حمايت هفتگي روبطرف بالاشکست')
 
 
-if today_price < lowest_price_280 > yesterday_price:
-    print ('قيمت حمايت ساليانه راازدست داد')
+if today_price < highest_price_30 < yesterday_price:
+     print ('قيمت مقاومت ماهيانه روبطرف پايين شکست')
 else:
-    if today_price > highest_price_280 < yesterday_price:
-        print ('قيمت مقاومت ساليانه راازدست داد')
+    if today_price > highest_price_30 > yesterday_price:
+        print ('قيمت مقاومت ماهيانه روبطرف بالا شکست')
 
 
-if highest_price_30 < highest_price_33 :
-    print ("مقاومت يکماه شروع کرده روبه بالابره")
+if today_price < lowest_price_30 < yesterday_price:
+    print ('قيمت حمايت ماهيانه روبطرف پايين شکست')
 else:
-    if highest_price_30 > highest_price_33 :
-        print ("مقاومت يکماهه شروع کرده روبه پايين بره")
+     if today_price > lowest_price_30 > yesterday_price:
+         print ('قيمت حمايت ماهيانه روبطرف بالا شکست')
 
 
-if highest_price_7 < highest_price_10:
-    print ("مقاومت هفتگي شروع کرده روبه بالابره")
+if today_price < highest_price_280 < yesterday_price:
+     print ('قيمت مقاومت يکساله رابطرف پايين شکست')
 else:
-    if highest_price_7 > highest_price_10:
-        print ("مقاومت هفتگي شروع کرده روبه پايين بره")
+    if today_price > highest_price_280 > yesterday_price:
+        print ('قيمت مقاومت يکساله روبطرف بالاشکست')
+
+
+if today_price < lowest_price_280 < yesterday_price:
+    print ('قيمت حمايت يکساله روبطرف پايين شکست')
+else:
+     if today_price > lowest_price_280 > yesterday_price:
+         print ('قيمت حمايت يکساله روبطرف بالاشکست')
 
 
 if highest_price_30 == highest_price_7 :
     print (highest_price_7 , ": مقاومت هفتگي باماهيانه برابرشده")
-    
 
-if lowest_price_30 < lowest_price_33 :
-    print ("حمايت يکماه شروع کرده روبه بالابره")
-else:
-    if lowest_price_30 > lowest_price_33 :
-        print ("حمايت يکماه شروع کرده روبه  پايين بره")
-
-
-if lowest_price_7 < lowest_price_10 :
-    print ("حمايت هفتگي شروع کرده روبه بالابره")
-else:
-    if lowest_price_7 > lowest_price_10 :
-        print ("حمايت هفتگي شروع کرده روبه پايين بره")
 
 
 if highest_price_180>highest_price_90>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_90<lowest_price_180:
@@ -609,6 +603,13 @@ else:
     if komu52_min<kij30==kij29==kij28==kij27==kij26>ten8<ten9>=today_price<yesterday_price:
         print ('بالاي ابرکوموهو قيمت وتنکانسن هردو فلت کيجونسن رو روبه پايين قطع کردن')
         print ('/// Signal sell : بااحتياط بفروش ////')
+
+
+if today_price>yesterday_price >= ten8>ten9 >= kij26>kij27:
+    print ('روند صعودي است چون قيمت بالاي تنکانسن وکيجونسن است')
+else:
+    if today_price<yesterday_price <= ten8<ten9 <= kij26<kij27:
+        print ('روند نزولي است چون قيمت پايين تنکانسن وکيجونسن است')
    
 
 print ()
@@ -629,14 +630,14 @@ print ()
 if today_price>movind10>yesterday_price>today_two_price:
     print ('قيمت امروزرفت بالاي ميانگين ده روزه')
 else:
-    if today_price>yesterday_price>movind10:
+    if yesterday_price < today_price > movind10:
         print ('قيمت هنوزبالاي ميانگين ده روزه است')
         
 
 if today_price<movind10<yesterday_price<today_two_price:
     print ('قيمت امروزرفت پايين ميانگين ده روزه')
 else:
-    if today_price<yesterday_price<movind10:
+    if yesterday_price > today_price < movind10:
         print ('قيمت هنوزپايين ميانگين ده روزه است')
 
 
