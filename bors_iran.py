@@ -733,142 +733,166 @@ print (h10 ,': Descending روند نزولي')
 #=====================================================
 time.sleep(5)
 
-print(45*"=",nam,"ichimoku")
+#=====================================================
+# today_price   -  yesterday_price  -  today_two_price قيمت بسته شدن سه روز
+# today_Volume  -  today_Volume_yesterday  -  today_Volume_yesterday2 حجم سه روز
+print(30*"=",nam,"ichimoku Signals for buying and selling  ")
+# Ensure the DataFrame is sorted by date
+DF.sort_values('Date', inplace=True)
 
-today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
-today_Volume = DF['Volume'].iloc[-1] # حجم امروز
-today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+# محاسبات تنکانسن8 روزه به قبل
+# Calculate the highest and lowest price over the past 26 day
 
-highest_price_9 = max(DF['Close'][-9:]) #  ten_max_9
-lowest_price_9 = min(DF['Close'][-9:])  #  ten_min_9
-ten_list_max_9 = [highest_price_9]
-ten_list_min_9 = [lowest_price_9]
+window_size = 12
+past_12_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_12_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten12 = (past_12_days_high + past_12_days_low)/2
 
-highest_price_10 = max(DF['Close'][-10:]) #  ten_max_10
-lowest_price_10 = min(DF['Close'][-10:])  #  ten_min_10
-ten_list_max_10 = [highest_price_10]
-ten_list_min_10 = [lowest_price_10]
+window_size = 11
+past_11_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_11_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten11 = (past_11_days_high + past_11_days_low)/2
 
-highest_price_11 = max(DF['Close'][-11:]) #  ten_max_11
-lowest_price_11 = min(DF['Close'][-11:])  #  ten_min_11
-ten_list_max_11 = [highest_price_11]
-ten_list_min_11 = [lowest_price_11]
+window_size = 10
+past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten10 = (past_10_days_high + past_10_days_low)/2
 
-highest_price_26 = max(DF['Close'][-26:]) #  kij_max_26
-lowest_price_26 = min(DF['Close'][-26:])  #  kij_min_26
-kij_list_max_26 = [highest_price_26]
-kij_list_min_26 = [lowest_price_26]
+window_size = 9
+past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_9_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten9 = (past_9_days_high + past_9_days_low)/2
 
-highest_price_27 = max(DF['Close'][-27:]) #  kij_max_27
-lowest_price_27 = min(DF['Close'][-27:])  #  kij_min_27
-kij_list_max_27 = [highest_price_27]
-kij_list_min_27 = [lowest_price_27]
+window_size = 8
+past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+ten8 = (past_8_days_high + past_8_days_low)/2
 
-highest_price_28 = max(DF['Close'][-28:]) #  kij_max_28
-lowest_price_28 = min(DF['Close'][-28:])  #  kij_min_28
-kij_list_max_28 = [highest_price_28]
-kij_list_min_28 = [lowest_price_28]
+#print(f"ten8_max: {past_8_days_high}")
+#print(f"ten8_min: {past_8_days_low}")
+print ('ten12 :',(math.ceil(ten12)))
+print ('ten11 :',(math.ceil(ten11)))
+print ('ten10 :',(math.ceil(ten10)))
+print ('ten9 :',(math.ceil(ten9)))
+print ('ten8 :',(math.ceil(ten8)))
+print ()
 
-# محاسبات تنکنسن ten_1
-for ich_ten_1 in range (18):
-    ich_ten_1 = (ten_list_max_9,ten_list_min_9)
-    t1 = ((highest_price_9)+(lowest_price_9))
-    ten_1 = (t1 / 2)
-    
+# محاسبات کيجونسن26 روزه به قبل
+# Calculate the highest and lowest price over the past 26 days
 
-# محاسبات تنکنسن ten_2
-for ich_ten_2 in range (20):
-    ich_ten_2 = (ten_list_max_10,ten_list_min_10)
-    t2 = ((highest_price_10)+(lowest_price_10))
-    ten_2 = (t2 / 2)
-    
+window_size = 26
+past_26_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_26_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij26 = (past_26_days_high + past_26_days_low)/2
 
-# محاسبات تنکنسن ten_3
-for ich_ten_3 in range (22):
-    ich_ten_3 = (ten_list_max_11,ten_list_min_11)
-    t3 = ((highest_price_11)+(lowest_price_11))
-    ten_3 = (t3 / 2)
-    
+window_size = 27
+past_27_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_27_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij27 = (past_27_days_high + past_27_days_low)/2
 
-# محاسبات کيجونسن kij_1
-for ich_kij_1 in range (52):
-    ich_kij_1 = (kij_list_max_26,kij_list_min_26)
-    kj1 = ((highest_price_26)+(lowest_price_26))
-    kij_1 = (kj1 / 2)
-    
+window_size = 28
+past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij28 = (past_28_days_high + past_28_days_low)/2
 
-# محاسبات کيجونسن kij_2
-for ich_kij_2 in range (54):
-    ich_kij_2 = (kij_list_max_27,kij_list_min_27)
-    kj2 = ((highest_price_27)+(lowest_price_27))
-    kij_2 = (kj2 / 2)
-    
+window_size = 29
+past_29_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_29_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij29 = (past_29_days_high + past_29_days_low)/2
 
-# محاسبات کيجونسن kij_3
-for ich_kij_3 in range (56):
-    ich_kij_3 = (kij_list_max_28,kij_list_min_28)
-    kj3 = ((highest_price_28)+(lowest_price_28))
-    kij_3 = (kj3 / 2)
+window_size = 30
+past_30_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij30 = (past_30_days_high + past_30_days_low)/2
 
+#print(f"kij26_max: {past_26_days_high}")
+#print(f"kij26_min: {past_26_days_low}")
+print ('kij26 :',(math.ceil(kij26)))
+print ('kij27 :',(math.ceil(kij27)))
+print ('kij28 :',(math.ceil(kij28)))
+print ('kij29 :',(math.ceil(kij29)))
+print ('kij30 :',(math.ceil(kij30)))
+print ()
 
-# برسي محاسبات تنکنسن وکيجونسن
-if yesterday_price < today_price >= ten_2<ten_1>=kij_1>kij_2:
-    print (" buy : کراس تنکنس وکيجونسن روبه بالا ")
+# محاسبات ابرکومو52 روزه به قبل
+# Calculate the highest and lowest price over the past 26 days
+window_size = 52
+past_52_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+komu52_max = (math.ceil(past_52_days_high))
+komu52_min = (math.ceil(past_52_days_low))
 
-
-if yesterday_price > today_price <= ten_2>ten_1>=kij_1<kij_2:
-    print (" sell : کراس تنکنسن وکسجونسن رو به پايين ")
-
-
-if  yesterday_price<today_price > ten_1>ten_2 >=kij_1>kij_2 :
-    c= 'اگه داري نگهدار'
-    print (c , ' \n ascending buy  !  صعودي ادامه دار')
-
-
-if  yesterday_price>today_price < ten_1<ten_2 <=kij_1<kij_2:
-    c1 = ('اگه داري بفروش ')
-    print (c1 , ' \n Descending sell !  نزولي ادامه دار')
+print(f"komu52_max: {komu52_max}")
+print(f"komu52_min: {komu52_min}")
+print ()
 
 
-if  yesterday_price<today_price > ten_2 <ten_1>kij_1 :
-    c2 = (' price > ten > kij :')
-    print (c2 , ' \n ascending !  صعودي شد') 
+if kij28<=kij27<=kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
+    print ('Signal buy : تنکانسن بالاي کيجونسن رفت')
+else :
+    if kij28>=kij27>=kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume> today_Volume_yesterday:
+        print ('Signal sell : تنکانسن پايين کيجونسن رفت')
 
 
-if  yesterday_price>today_price < ten_2 >ten_1<kij_1 :
-    c3 = (' price < ten < kij :')
-    print (c3 , ' \n Descending !  نزولي شد')
+if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_min:
+    print ('قيمت بالاي ابرسبزميباشد وروندصعودي شده')
+else :
+    if kij27>kij26 >ten8 <ten9>today_price< yesterday_price <komu52_min:
+        print ('قيمت پايين ابرقرمزه وروندنزولي شده')
 
 
-if yesterday_price>today_price <= ten_1 <ten_2 < ten_3 < kij_1==kij_2 ==kij_3 :
-     c4 = (' price > ten < kij_1=kij_2=kij_3 : ')
-     print (c4 , ' \n Buy Equilibrium ')
-     print ((int(kij_1))," : احتمال صعود تا")
-
-
-if yesterday_price<today_price >= ten_1 >ten_2 > ten_3 > kij_1==kij_2 ==kij_3  :
-     c5 = (' price < ten > kij_1=kij_2 = kij_3: ')
-     print (c5 , ' \n Sell Equilibrium ')
-     print ((int(kij_1))," : احتمال ريزش تا")
-
-senk_sa1 = (kij_1+ten_1)/2    # senkou aسنکو
-senk_sa2 = (kij_2+ten_2)/2    # senkou aسنکو
-senk_ab1 = (max(DF['Close'][-52:])+min(DF['Close'][-52:]))/2  #senkou  bسنکو
-senk_ab2 = (max(DF['Close'][-54:])+min(DF['Close'][-54:]))/2  #senkou  bسنکو
-
-
-if senk_sa2 > senk_sa1 <= senk_ab1 > senk_ab2 :
-     print (" ابرکوموآينده قرمزه")
+if komu52_max > kij30>=kij29>=kij28>=kij27>=kij26 <ten8>ten9< today_price>yesterday_price>=today_two_price :
+    print ('قيمت زيرابرقرمزوفلت کيجونسن رو روبه بالاقطع کرد')
+    print ('--- Signal buy : قوي ---')
 else:
-     if senk_sa2 < senk_sa1 >= senk_ab1 < senk_ab2 :
-          print (" ابرکومو آينده سبزه")
+    if komu52_min < kij30<=kij29<=kij28<=kij27<=kij26 >ten8<ten9> today_price<yesterday_price<=today_two_price :
+        print ('قيمت بالاي ابرسبز وفلت کيجونسن رو روبه پايين قطع کرد')
+        print ('--- Signal sell : قوي ---')
+        
+
+if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26<ten8>=ten9>=ten10>=ten11>=ten12 >today_price<yesterday_price :
+    print ('فلت کيجونسن بالاي ابر،وقيمت تنکانسن رو روبه پايين قطع کرده')
+    print ('--- Signal sell : بسيارقوي ---')
+else:
+    if komu52_min>kij30>=kij29>=kij28>=kij27>=kij26>ten8<=ten9<=ten10>=ten11>=ten12 <today_price>yesterday_price :
+        print ('فلت کيجونسن زيرابر،وقيمت تنکانسن رو روبه بالاقطع کرده')
+        print ('--- Signal buy : بسيارقوي ---')
+
+
+if yesterday_price <today_price>komu52_max <ten8>ten9 >=kij27<kij26 :
+    print ('تنکانسن وکيجونسن وقيمت ابر رو روبه بالاقطع کردند')
+    print ('/// Signal buy : خريدکن ////')
+else:
+    if yesterday_price >today_price<komu52_max >ten8<ten9 <=kij27>kij26 :
+        print ('تنکانسن وکيجونسن وقيمت ابر رو روبه پايين قطع کردند')
+        print ('/// Signal sell : بفروش ////')
+
+
+if komu52_max>kij30==kij29==kij28==kij27==kij26<ten8>ten9<=today_price>yesterday_price:
+    print ('زيرابرکوموهو قيمت وتنکانسن هردوفلت کيجونسن رو روبه بالاقطع کردن')
+    print ('/// Signal buy : بااحتياط خريدکن ////')
+else:
+    if komu52_min<kij30==kij29==kij28==kij27==kij26>ten8<ten9>=today_price<yesterday_price:
+        print ('بالاي ابرکوموهو قيمت وتنکانسن هردو فلت کيجونسن رو روبه پايين قطع کردن')
+        print ('/// Signal sell : بااحتياط بفروش ////')
+
+
+if today_price>yesterday_price > ten8>ten9 > kij26>kij27:
+    print ('روند صعودي است چون قيمت بالاي تنکانسن وکيجونسن است')
+else:
+    if today_price<yesterday_price < ten8<ten9 < kij26<kij27:
+        print ('روند نزولي است چون قيمت پايين تنکانسن وکيجونسن است')
+
+
+if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten12 :
+     print ('قيمت زيرتنکانسن ميباشد وبطرف کيجونسن ميرود')
+else:
+    if kij30>=kij29>=kij28>=kij27>=kij26 >today_price> ten8<=ten9<=ten10<=ten11<=ten12 :
+         print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
+   
+
+
           
-
-if senk_sa2 > senk_sa1 <= senk_ab1 > senk_ab2 > today_price<yesterday_price :
-     print (" قيمت داره ميره زيرابرقرمز ")
-else:
-     if senk_sa2 < senk_sa1 >= senk_ab1 < senk_ab2 < today_price>yesterday_price :  
-          print (" قيمت داره ميره بالاي ابرقرمز ")
 print ('-'*30)
 #===============================================
 time.sleep(3)
@@ -2319,9 +2343,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=2905
+     p=2316
      s=0
-     v=100000
+     v=130039
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -2670,11 +2694,62 @@ for word in words:
     time.sleep(0.8)
     
 print ()
-print ("1 . دوباره تکرار کنيم ")
+print ("1 . رسم نمودارايچيموکو ")
 print ()
 print ("2 . ياازبرنامه خارج شويم")
+def main_menu():
+    print ()   
 
 
+def plot_Information_repeat_again():
+    # 1 . رسم نمودارايچيموکو
+    
+    print(40*"=",nam,"Charts ichimoku ")
+    # Convert the 'Date' column to a datetime object
+    DF['Date'] = pd.to_datetime(DF['Date'])
+
+    # Calculate the conversion line (Tenkan-sen)
+    DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
+
+    # Calculate the base line (Kijun-sen)
+    DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
+
+    # Calculate the leading span A (Senkou Span A)
+    DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
+    DF['leading_span_a'] = DF['leading_span_a'].shift(9)
+
+    # Calculate the leading span B (Senkou Span B)
+    DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
+    DF['leading_span_b'] = DF['leading_span_b'].shift(26)
+
+    # Calculate the lagging span (Chikou Span)
+    DF['lagging_span'] = DF['Close'].shift(-26)
+
+    # Plot the Ichimoku cloud
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
+    ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
+    ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
+    ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
+    ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
+    ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
+
+    ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
+
+    plt.title('Ichimoku Cloud for {}'.format(nam))
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+    print (' The Ichimoku diagram was drawn .')
+    print ()
+
+              
 def Or_leave_the_program():
     # 2 . ياازبرنامه خارج شيم
     pass
