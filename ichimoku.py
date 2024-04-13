@@ -308,11 +308,11 @@ else:
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
 
 
-if today_price_max>today_price_max4>today_price_max8>today_price_max12:
-    print ("دوازده روزه سقف جديد بالاترميزنه")
+if today_price>today_price_max4>today_price_max8>today_price_max12:
+    print ("بعدازدوازده روزسقف جديدزديم")
 else:
-    if today_price_min<today_price_min4<today_price_min8<today_price_min12:
-        print ("دوازده روزه کف جديد پايين ترميزنه")
+    if today_price<today_price_min4<today_price_min8<today_price_min12:
+        print ("بعدازدوازده روز کف جديدزديم")
 
 
 if today_Volume_yesterday2 < today_Volume_yesterday < today_Volume :
@@ -555,34 +555,34 @@ print(f"komu52_min: {komu52_min}")
 print ()
 
 
-if kij27==kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
+if kij28<=kij27<=kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
     print ('Signal buy : تنکانسن بالاي کيجونسن رفت')
 else :
-    if kij27==kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume< today_Volume_yesterday:
+    if kij28>=kij27>=kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume> today_Volume_yesterday:
         print ('Signal sell : تنکانسن پايين کيجونسن رفت')
 
 
-if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_max:
+if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_min:
     print ('قيمت بالاي ابرسبزميباشد وروندصعودي شده')
 else :
     if kij27>kij26 >ten8 <ten9>today_price< yesterday_price <komu52_min:
         print ('قيمت پايين ابرقرمزه وروندنزولي شده')
 
 
-if komu52_max > kij30==kij29==kij28==kij27==kij26 <ten8<= today_price>yesterday_price>=today_two_price :
+if komu52_max > kij30>=kij29>=kij28>=kij27>=kij26 <ten8>ten9< today_price>yesterday_price>=today_two_price :
     print ('قيمت زيرابرقرمزوفلت کيجونسن رو روبه بالاقطع کرد')
     print ('--- Signal buy : قوي ---')
 else:
-    if komu52_min < kij30==kij29==kij28==kij27==kij26 >ten8>= today_price<yesterday_price<=today_two_price :
+    if komu52_min < kij30<=kij29<=kij28<=kij27<=kij26 >ten8<ten9> today_price<yesterday_price<=today_two_price :
         print ('قيمت بالاي ابرسبز وفلت کيجونسن رو روبه پايين قطع کرد')
         print ('--- Signal sell : قوي ---')
         
 
-if komu52_min<kij29<=kij28==kij27==kij26<ten8<=ten9==ten10 >today_price<yesterday_price :
+if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26<ten8>=ten9>=ten10>=ten11>=ten12 >today_price<yesterday_price :
     print ('فلت کيجونسن بالاي ابر،وقيمت تنکانسن رو روبه پايين قطع کرده')
     print ('--- Signal sell : بسيارقوي ---')
 else:
-    if komu52_min>kij29>=kij28==kij27==kij26<ten8>=ten9==ten10 <today_price<yesterday_price :
+    if komu52_min>kij30>=kij29>=kij28>=kij27>=kij26>ten8<=ten9<=ten10>=ten11>=ten12 <today_price>yesterday_price :
         print ('فلت کيجونسن زيرابر،وقيمت تنکانسن رو روبه بالاقطع کرده')
         print ('--- Signal buy : بسيارقوي ---')
 
@@ -605,11 +605,18 @@ else:
         print ('/// Signal sell : بااحتياط بفروش ////')
 
 
-if today_price>yesterday_price >= ten8>ten9 >= kij26>kij27:
+if today_price>yesterday_price > ten8>ten9 > kij26>kij27:
     print ('روند صعودي است چون قيمت بالاي تنکانسن وکيجونسن است')
 else:
-    if today_price<yesterday_price <= ten8<ten9 <= kij26<kij27:
+    if today_price<yesterday_price < ten8<ten9 < kij26<kij27:
         print ('روند نزولي است چون قيمت پايين تنکانسن وکيجونسن است')
+
+
+if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten12 :
+     print ('قيمت زيرتنکانسن ميباشد وبطرف کيجونسن ميرود')
+else:
+    if kij30>=kij29>=kij28>=kij27>=kij26 >today_price> ten8<=ten9<=ten10<=ten11<=ten12 :
+         print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
    
 
 print ()
@@ -619,12 +626,15 @@ print ('-'*20,' ميانگين قيمت')
 # Calculate the 10-day moving average
 avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
 avg_20_days = DF['Close'].rolling(window=20).mean().iloc[-1]
+avg_103_days = DF['Close'].rolling(window=103).mean().iloc[-1]
 movind10 = (math.ceil(avg_10_days))
 movind20 = (math.ceil(avg_20_days))
+movind103 = (math.ceil(avg_103_days))
 
 # Print the most recent price and the 10-day moving average
 print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_price10_day : {movind10}")
 print(f"yesterday_price : {DF['Close'].iloc[-2]}   ,   moving_price20_day : {movind20}")
+print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_price103_day : {movind103}")
 print ()
 
 if today_price>movind10>yesterday_price>today_two_price:
@@ -639,6 +649,20 @@ if today_price<movind10<yesterday_price<today_two_price:
 else:
     if yesterday_price > today_price < movind10:
         print ('قيمت هنوزپايين ميانگين ده روزه است')
+
+
+if today_price>movind103>yesterday_price>today_two_price:
+    print ('قيمت امروزرفت بالاي ميانگين 103')
+else:
+    if yesterday_price < today_price > movind103:
+        print ('قيمت هنوزبالاي ميانگين 103')
+        
+
+if today_price<movind103<yesterday_price<today_two_price:
+    print ('قيمت امروزرفت پايين ميانگين 103')
+else:
+    if yesterday_price > today_price < movind103:
+        print ('قيمت هنوز پايين ميانگين 103')
 
 
 print ()
