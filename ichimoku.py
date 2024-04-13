@@ -654,19 +654,70 @@ else:
 if today_price>movind103>yesterday_price>today_two_price:
     print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
-    if yesterday_price < today_price > movind103:
+    if yesterday_price <= today_price > movind103:
         print ('قيمت هنوزبالاي ميانگين 103')
         
 
 if today_price<movind103<yesterday_price<today_two_price:
     print ('قيمت امروزرفت پايين ميانگين 103')
 else:
-    if yesterday_price > today_price < movind103:
+    if yesterday_price >= today_price < movind103:
         print ('قيمت هنوز پايين ميانگين 103')
 
 
 print ()
 #================================================
+print(40*"=",nam,"bmi and omc محاسبه")
+# تعریف یک تابع برای محاسبه بی ام آی
+def bmi(last_price, adj_close):
+
+     bmi = (adj_close + (last_price*2))/3
+     
+     # برگرداندن بی ام آی به عنوان خروجی تابع
+     return bmi
+
+# دريافت قيمت پاياني  وآخرين قيمت
+last_price = today_Final_price
+adj_close = today_price
+# فراخواني تابع بي ام آي با قيمت پاياني وآخرين قيمت
+bmi = bmi(last_price, adj_close)
+# نمایش بی ام آی کاربر
+print(f" بی ام آی شما {bmi:.2f} است ")
+#------------------------------------
+print(20*"-")
+# تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
+def cmo(open_price, price_min):
+
+     omc = (((today_price_max *2 )+ price_min)/3)-(today_price - yesterday_price)
+     
+     # برگرداندن او ام سي براي خروجي تابع
+     return omc
+
+# دريافت قيمت بازشدن با پايين ترين قيمت امروز
+open_price = today_Open_price
+price_min = today_price_min
+price_max = today_price_max
+#فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
+omc = cmo(open_price, price_min)
+# نمايش اوام سي به کاربر
+print(f" او ام سي شما {omc:.2f} است ")
+print(20*"-")
+
+if today_Final_price == price_max:
+     print('صف خريدشده')
+else:
+     if today_Final_price == price_min:
+          print ('صف فروش شده')
+
+
+if omc < bmi :
+     print ('omc < bmi : به احتمال زيادفردا قيمت بالاترازامروزه')
+else:
+    if omc > bmi :
+         print ('omc > bmi : به احتمال زيادفردا قيمت پايين ترازامروزه')
+         
+        
+#===============================================
 print(40*"=",nam,"Charts EMA_3,10,20 ")
 # EMA_3,10,20 نمايش نمودارقيمت و
 DF.index = DF['Date']
