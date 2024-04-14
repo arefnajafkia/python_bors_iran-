@@ -617,6 +617,20 @@ if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten
 else:
     if kij30>=kij29>=kij28>=kij27>=kij26 >today_price> ten8<=ten9<=ten10<=ten11<=ten12 :
          print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
+
+
+if yesterday_price <kij30>=kij29>=kij28>=kij27>=kij26 < today_price :
+     print ('--- Signal buy :خيلي خيلي مهم : قيمت کيجونسن رو روبه بالا قطع کرد ---')
+else:
+     if yesterday_price >kij30<=kij29<=kij28<=kij27<=kij26 > today_price :
+          print ('--- Signal sell :خيلي خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
+
+
+if kij30>=kij29>=kij28>=kij27>=kij26 > today_price>=yesterday_price>=today_two_price :
+     print ('احتمال صعود: قيمت سه روزه روبه بالا وبه سمت کيجونسن درحرکت است')
+else:
+     if kij30<=kij29<=kij28<=kij27<=kij26 < today_price<=yesterday_price<=today_two_price :
+          print ('احتمال ريزش شديد: قيمت سه روزه روبه پايين وبه سمت کيجونسن درحرکت است')
    
 
 print ()
