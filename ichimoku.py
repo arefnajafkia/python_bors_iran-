@@ -85,6 +85,12 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
+
+n1=today_price-yesterday_price
+n2=(today_price+yesterday_price)/2
+j1=n1/n2
+j2=j1*100
+print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
 print()          
 #===========================================================
 today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
@@ -621,11 +627,11 @@ else:
 
 
 
-if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten12 :
-     print ('قيمت زيرتنکانسن ميباشد وبطرف کيجونسن ميرود')
+if kij30<=kij29<=kij28<=kij27<=kij26 >today_price>yesterday_price< ten8<=ten9<=ten10<=ten11<=ten12 :
+     print ('قيمت زيرتنکانسن ميباشد وروبه بالابطرف کيجونسن ميرود')
 else:
-    if kij30>=kij29>=kij28>=kij27>=kij26 >today_price> ten8<=ten9<=ten10<=ten11<=ten12 :
-         print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
+    if kij30>=kij29>=kij28>=kij27>=kij26 <today_price<yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
+         print ('قيمت بالاي تنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
 
 
 
