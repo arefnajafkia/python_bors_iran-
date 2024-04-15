@@ -84,6 +84,7 @@ if today_price > yesterday_price:
 else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
+
 print()          
 #===========================================================
 today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
@@ -265,6 +266,8 @@ else:
 print()
 print(40*"=",nam,"Volume")
 
+print(f"today_Volume : {today_Volume}    ,    oday_Volume_yesterday : {today_Volume_yesterday}")
+print (20*'-')
 
 if today_Volume > (math.ceil(average_Volume_Month)):
      print ('حجم امروزبيشترازحجم ماهيانه شده')
@@ -809,17 +812,17 @@ print ()
 
 
 if moving_volume1>moving_volume2:
-    print ('حجم روزانه افزايشي است')
+    print ('ميانگين حجم روزانه افزايشي است')
 else:
     if moving_volume1<moving_volume2:
-        print ('حجم روزانه کاهشي است')
+        print ('ميانگين حجم روزانه کاهشي است')
 
 
 if moving_volume5>moving_volume26:
-    print ('حجم هفتگي نسبت به ماهيانه افزايشي است')
+    print ('ميانگين حجم هفتگي نسبت به ماهيانه افزايشي است')
 else:
     if moving_volume5<moving_volume26:
-        print ('حجم هفتگي نسبت به ماهيانه کاهشي است')
+        print ('ميانگين حجم هفتگي نسبت به ماهيانه کاهشي است')
 
 #===========================================================
 
