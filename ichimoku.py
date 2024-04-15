@@ -499,11 +499,10 @@ past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten8 = (past_8_days_high + past_8_days_low)/2
 
-#print(f"ten8_max: {past_8_days_high}")
-#print(f"ten8_min: {past_8_days_low}")
-print ('ten12 :',(math.ceil(ten12)))
-print ('ten11 :',(math.ceil(ten11)))
-print ('ten10 :',(math.ceil(ten10)))
+
+#print ('ten12 :',(math.ceil(ten12)))
+#print ('ten11 :',(math.ceil(ten11)))
+#print ('ten10 :',(math.ceil(ten10)))
 print ('ten9 :',(math.ceil(ten9)))
 print ('ten8 :',(math.ceil(ten8)))
 print ()
@@ -536,13 +535,12 @@ past_30_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij30 = (past_30_days_high + past_30_days_low)/2
 
-#print(f"kij26_max: {past_26_days_high}")
-#print(f"kij26_min: {past_26_days_low}")
+
 print ('kij26 :',(math.ceil(kij26)))
 print ('kij27 :',(math.ceil(kij27)))
-print ('kij28 :',(math.ceil(kij28)))
-print ('kij29 :',(math.ceil(kij29)))
-print ('kij30 :',(math.ceil(kij30)))
+#print ('kij28 :',(math.ceil(kij28)))
+#print ('kij29 :',(math.ceil(kij29)))
+#print ('kij30 :',(math.ceil(kij30)))
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -558,11 +556,13 @@ print(f"komu52_min: {komu52_min}")
 print ()
 
 
+
 if kij28<=kij27<=kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
     print ('Signal buy : تنکانسن بالاي کيجونسن رفت')
 else :
     if kij28>=kij27>=kij26> ten8 <ten9<ten10 >today_price< yesterday_price and today_Volume> today_Volume_yesterday:
         print ('Signal sell : تنکانسن پايين کيجونسن رفت')
+
 
 
 if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_min:
@@ -572,6 +572,7 @@ else :
         print ('قيمت پايين ابرقرمزه وروندنزولي شده')
 
 
+
 if komu52_max > kij30>=kij29>=kij28>=kij27>=kij26 <ten8>ten9< today_price>yesterday_price>=today_two_price :
     print ('قيمت زيرابرقرمزوفلت کيجونسن رو روبه بالاقطع کرد')
     print ('--- Signal buy : قوي ---')
@@ -579,6 +580,7 @@ else:
     if komu52_min < kij30<=kij29<=kij28<=kij27<=kij26 >ten8<ten9> today_price<yesterday_price<=today_two_price :
         print ('قيمت بالاي ابرسبز وفلت کيجونسن رو روبه پايين قطع کرد')
         print ('--- Signal sell : قوي ---')
+
         
 
 if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26<ten8>=ten9>=ten10>=ten11>=ten12 >today_price<yesterday_price :
@@ -590,6 +592,7 @@ else:
         print ('--- Signal buy : بسيارقوي ---')
 
 
+
 if yesterday_price <today_price>komu52_max <ten8>ten9 >=kij27<kij26 :
     print ('تنکانسن وکيجونسن وقيمت ابر رو روبه بالاقطع کردند')
     print ('/// Signal buy : خريدکن ////')
@@ -597,6 +600,7 @@ else:
     if yesterday_price >today_price<komu52_max >ten8<ten9 <=kij27>kij26 :
         print ('تنکانسن وکيجونسن وقيمت ابر رو روبه پايين قطع کردند')
         print ('/// Signal sell : بفروش ////')
+
 
 
 if komu52_max>kij30==kij29==kij28==kij27==kij26<ten8>ten9<=today_price>yesterday_price:
@@ -608,11 +612,13 @@ else:
         print ('/// Signal sell : بااحتياط بفروش ////')
 
 
+
 if today_price>yesterday_price > ten8>ten9 > kij26>kij27:
     print ('روند صعودي است چون قيمت بالاي تنکانسن وکيجونسن است')
 else:
     if today_price<yesterday_price < ten8<ten9 < kij26<kij27:
         print ('روند نزولي است چون قيمت پايين تنکانسن وکيجونسن است')
+
 
 
 if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten12 :
@@ -622,6 +628,7 @@ else:
          print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
 
 
+
 if yesterday_price <kij30>=kij29>=kij28>=kij27>=kij26 < today_price :
      print ('--- Signal buy :خيلي خيلي مهم : قيمت کيجونسن رو روبه بالا قطع کرد ---')
 else:
@@ -629,16 +636,26 @@ else:
           print ('--- Signal sell :خيلي خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
 
 
+
 if kij30>=kij29>=kij28>=kij27>=kij26 > today_price>=yesterday_price>=today_two_price :
      print ('احتمال صعود: قيمت سه روزه روبه بالا وبه سمت کيجونسن درحرکت است')
 else:
      if kij30<=kij29<=kij28<=kij27<=kij26 < today_price<=yesterday_price<=today_two_price :
           print ('احتمال ريزش شديد: قيمت سه روزه روبه پايين وبه سمت کيجونسن درحرکت است')
+
    
+
+if today_price >= yesterday_price >= today_two_price > kij26 >= kij27 >= kij28 :
+     print ('***همچنان قيمت بالاي کيجونسن ميباشدواحتمالاروندصعودي است***')
+else:
+     if today_price <= yesterday_price <= today_two_price < kij26 <= kij27 <= kij28 :
+          print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
+
+          
 
 print ()
 #=================================================
-print ('-'*20,' ميانگين قيمت')
+print ('='*40,' ميانگين قيمت')
 #ميانگين قيمت 10 و20 روزسهم
 # Calculate the 10-day moving average
 avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
