@@ -85,7 +85,7 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
-
+#بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
 n1=today_price-yesterday_price
 n2=(today_price+yesterday_price)/2
 j1=n1/n2
@@ -609,11 +609,11 @@ else:
 
 
 
-if komu52_max>kij30==kij29==kij28==kij27==kij26<ten8>ten9<=today_price>yesterday_price:
+if komu52_max>kij30>=kij29>=kij28>=kij27>=kij26<ten8>ten9<=today_price>yesterday_price:
     print ('زيرابرکوموهو قيمت وتنکانسن هردوفلت کيجونسن رو روبه بالاقطع کردن')
     print ('/// Signal buy : بااحتياط خريدکن ////')
 else:
-    if komu52_min<kij30==kij29==kij28==kij27==kij26>ten8<ten9>=today_price<yesterday_price:
+    if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26>ten8<ten9>=today_price<yesterday_price:
         print ('بالاي ابرکوموهو قيمت وتنکانسن هردو فلت کيجونسن رو روبه پايين قطع کردن')
         print ('/// Signal sell : بااحتياط بفروش ////')
 
@@ -635,10 +635,10 @@ else:
 
 
 
-if yesterday_price <kij30>=kij29>=kij28>=kij27>=kij26 < today_price :
+if kij30>=kij29>=kij28>=kij27>=kij26>yesterday_price and kij26 < today_price :
      print ('--- Signal buy :خيلي خيلي مهم : قيمت کيجونسن رو روبه بالا قطع کرد ---')
 else:
-     if yesterday_price >kij30<=kij29<=kij28<=kij27<=kij26 > today_price :
+     if kij30<=kij29<=kij28<=kij27<=kij26<yesterday_price and kij26> today_price :
           print ('--- Signal sell :خيلي خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
 
 
