@@ -85,11 +85,12 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
-#بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
+#بدست آوردن درصدنوسان قيمتي امروز
 nv1=today_price_max-today_price_min
 nv2=(today_price_max+today_price_min)/2
 jnv=nv1/nv2
 jnv1=jnv*100
+#بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
 n1=today_price-yesterday_price
 n2=(today_price+yesterday_price)/2
 j1=n1/n2
@@ -670,6 +671,44 @@ else:
           
 
 print ()
+#================================================
+print(40*"=",nam,"Engulfing Calculations")
+# Engulfing  ascending صعودي
+h1 = today_price > today_Open_price
+h2 = yesterday_Open_price > yesterday_price
+h3 = yesterday_price > today_Open_price
+h4 = today_price > yesterday_Open_price
+
+h_ascending = h1 and h2 and h3 and h4
+h5 = (today_price - today_Open_price) > 5*(yesterday_Open_price - yesterday_price) 
+
+# Engulfing  Descending نزولي
+h6 = today_price < today_Open_price
+h7 = yesterday_Open_price < yesterday_price
+h8 = yesterday_price < today_Open_price
+h9 = today_price < yesterday_Open_price
+
+h_Descending = h6 and h7 and h8 and h9
+h10 = (today_price - today_Open_price) < 5*(yesterday_Open_price - yesterday_price)
+
+
+     
+if  h5:
+    c = "Engulfing :"
+    print (c , "hemer ascending !  صعودي مناسب خريد" )
+elif  h10 :
+    c = "Engulfing :"
+    print (c , "hemer Descending !  نزولي وقت فروش" )
+else:
+    c = "hold :"
+    print (c , "not Engulfing !")
+    print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
+    
+print ('~'*10)
+print ('بودن روند False يا True دقت کنيدبه')
+print (h5,': ascending روند صعودي ')
+print (h10 ,': Descending روند نزولي')
+
 #=================================================
 print ('='*40,' ميانگين قيمت')
 #ميانگين قيمت 10 و20 روزسهم
@@ -686,6 +725,7 @@ print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_price10_day : {mov
 print(f"yesterday_price : {DF['Close'].iloc[-2]}   ,   moving_price20_day : {movind20}")
 print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_price103_day : {movind103}")
 print ()
+
 
 if today_price>movind10>yesterday_price>today_two_price:
     print ('قيمت امروزرفت بالاي ميانگين ده روزه')
