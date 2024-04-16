@@ -402,11 +402,19 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
+#بدست آوردن درصدنوسان قيمتي امروز
+nv1=today_price_max-today_price_min
+nv2=(today_price_max+today_price_min)/2
+jnv=nv1/nv2
+jnv1=jnv*100
+#بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
 n1=today_price-yesterday_price
 n2=(today_price+yesterday_price)/2
 j1=n1/n2
 j2=j1*100
 print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
+print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 
 #================================================
 time.sleep(5)
@@ -1534,6 +1542,19 @@ print(ticker.count,' : تعداد معاملات ')
 print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
+#بدست آوردن درصدنوسان قيمتي امروز
+nv1=ticker.high_price-ticker.low_price
+nv2=(ticker.high_price+ticker.low_price)/2
+jnv=nv1/nv2
+jnv1=jnv*100
+#بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
+n1=ticker.adj_close-ticker.yesterday_price
+n2=(ticker.adj_close+ticker.yesterday_price)/2
+j1=n1/n2
+j2=j1*100
+print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
+print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 print()
 time.sleep(3)
 

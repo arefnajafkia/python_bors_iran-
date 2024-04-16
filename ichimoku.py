@@ -86,11 +86,17 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 #بدست آوردن تفاوت درصدي قيمت ديروزبه امروز
+nv1=today_price_max-today_price_min
+nv2=(today_price_max+today_price_min)/2
+jnv=nv1/nv2
+jnv1=jnv*100
 n1=today_price-yesterday_price
 n2=(today_price+yesterday_price)/2
 j1=n1/n2
 j2=j1*100
 print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
+print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 print()          
 #===========================================================
 today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
@@ -248,11 +254,13 @@ if today_Final_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
+
 if today_price_max > today_Final_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
     if today_price_min < today_Final_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
+
 
 
 if today_Open_price < today_Final_price > DOje1:
@@ -262,11 +270,13 @@ else:
         print (' candle Red')
 
 
+
 if today_Open_price < today_Final_price == today_price_max > (today_price_min+150):
     print (' candle marabozo Green')
 else:
     if today_Open_price > today_Final_price == today_price_min < (today_price_max-150):
         print (' candle marabozo Red')
+
 
 #=====================================================
 print()
