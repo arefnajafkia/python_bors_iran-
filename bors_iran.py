@@ -402,6 +402,12 @@ else :
      if today_price < yesterday_price:
           print (' قيمت امروزپايين ترازديروزه ')
 
+n1=today_price-yesterday_price
+n2=(today_price+yesterday_price)/2
+j1=n1/n2
+j2=j1*100
+print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+
 #================================================
 time.sleep(5)
           
