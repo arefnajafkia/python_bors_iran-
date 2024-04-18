@@ -386,19 +386,30 @@ mohasebeh = (highest_price_360 + lowest_price_360)/2
 mohasebeh1= (mohasebeh + highest_price_360)/2
 # محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
 mohasebeh2= (mohasebeh + lowest_price_360)/2
+# محاسبه کمي کمترازسقف کانال سه ماهه
+kh_3=highest_price_90-50
+# محاسبه کمي بيشترازکف کانال سه ماهه
+kL_3=lowest_price_90+50
 
 if today_price > yesterday_price > today_two_price:
     print (today_price,' قيمت سه روزه افزايشي ميباشد')
 else:
     if today_price < yesterday_price < today_two_price:
         print (today_price,' قيمت سه روزه کاهشي ميباشد')
+        
+        
 
 #تشخيص روند
-if highest_price_90>=highest_price_60>=highest_price_30>=today_price_max>=lowest_price_90<=lowest_price_60<=lowest_price_30:
+if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
     print (' کانال سه ماه رنج شده')
-else:
-    if highest_price_60>=highest_price_30>=today_price_max>=lowest_price_60<=lowest_price_30:
-        print (' کانال ماهيانه رنج شده') 
+elif highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
+     print (' کانال ماهيانه رنج شده')
+else :
+     if kh_3 <= today_price <= highest_price_90:
+          print ('قيمت به سقف کانال سه ماه رسيده')
+     elif kL_3 >= today_price >= lowest_price_90 :
+          print ('قيمت به کف کانال سه ماه رسيده')
+          
 
 
 #قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
@@ -411,17 +422,19 @@ else:
          print ('قيمت حمايت هفتگي روبطرف پايين شکست')
      elif today_price > lowest_price_7 > yesterday_price:
           print ('قيمت حمايت هفتگي روبطرف بالاشکست')
+          
 
 
-if today_price < highest_price_30 < yesterday_price:
+if today_price < highest_price_60 < yesterday_price:
      print ('قيمت مقاومت ماهيانه روبطرف پايين شکست')
-elif today_price > highest_price_30 > yesterday_price:
+elif today_price > highest_price_60 > yesterday_price:
      print ('قيمت مقاومت ماهيانه روبطرف بالا شکست')
 else:
-     if today_price < lowest_price_30 < yesterday_price:
+     if today_price < lowest_price_60 < yesterday_price:
          print ('قيمت حمايت ماهيانه روبطرف پايين شکست')
-     elif today_price > lowest_price_30 > yesterday_price:
+     elif today_price > lowest_price_60 > yesterday_price:
           print ('قيمت حمايت ماهيانه روبطرف بالا شکست')
+          
 
 
 if today_price < highest_price_280 < yesterday_price:
@@ -445,27 +458,29 @@ else:
           print ('قيمت بالاي حمايت هفتگي ميباشد')
      elif today_price < lowest_price_7 :
           print ('قيمت پايين حمايت هفتگي ميباشد')
+          
 
 
-if today_price > highest_price_30 :
+if highest_price_7<today_price > highest_price_60 :
      print ('قيمت بالاي مقاومت ماهيانه ميباشد')
-elif today_price < highest_price_30 :
+elif highest_price_7>today_price < highest_price_60 :
      print ('قيمت پايين مقاومت ماهيانه ميباشد')
 else:
-     if today_price > lowest_price_30 :
+     if lowest_price_7<today_price > lowest_price_60 :
           print ('قيمت بالاي حمايت ماهيانه ميباشد')
-     elif today_price < lowest_price_30 :
+     elif lowest_price_7>today_price < lowest_price_60 :
           print ('قيمت پايين حمايت ماهيانه ميباشد')
+          
 
 
-if today_price > highest_price_280 :
+if highest_price_60 <today_price > highest_price_280 :
      print ('قيمت بالاي مقاومت ساليانه ميباشد')
-elif today_price < highest_price_280 :
+elif highest_price_60>today_price < highest_price_280 :
      print ('قيمت پايين مقاومت ساليانه ميباشد')
 else:
-     if today_price > lowest_price_280 :
+     if lowest_price_60<today_price > lowest_price_280 :
           print ('قيمت بالاي حمايت ساليانه ميباشد')
-     elif today_price < lowest_price_280 :
+     elif lowest_price_60>today_price < lowest_price_280 :
           print ('قيمت پايين حمايت ساليانه ميباشد')
 
 
@@ -475,6 +490,7 @@ if highest_price_180>highest_price_90>highest_price_30>=today_price_max>=lowest_
 else:
     if highest_price_180<highest_price_90<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_90>lowest_price_180:
          print ("کانال افزايشي يکساله داريم")
+         
 
 
 if highest_price_90>highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60<lowest_price_90:
@@ -482,6 +498,7 @@ if highest_price_90>highest_price_60>highest_price_30>=today_price_max>=lowest_p
 else:
     if highest_price_90<highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60>lowest_price_90:
          print ("کانال افزايشي 90روزه داريم")
+         
 
 
 if highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60  :
@@ -489,6 +506,7 @@ if highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_pr
 else:
     if highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60 :
          print ("کانال افزايشي ماهيانه داريم")
+         
 
     
 if highest_price_90 <=  lowest_price_90 :
