@@ -49,23 +49,20 @@ DF.rename(columns=RenameDict, inplace=True)
 
 #=====================================================
 # Get today's price قيمتهاي روزانه
-
+print ()
 today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
 today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
 today_price = DF['Close'].iloc[-1] # قيمت بسته شدن امروز
 today_Final_price = DF['Final'].iloc[-1] # قيمت آخرين معامله امروز
+
 today_price_max4 = DF['High'].iloc[-4]    #بالاترين قيمت 4روزپيش
 today_price_min4 = DF['Low'].iloc[-4]      #پايين ترين قيمت 4روزپيش
+today_two_price_min6 = DF['Low'].iloc[-6]  # پايين ترين قيمت 6روزقبل
 today_price_max8 = DF['High'].iloc[-8]     #ب8#
 today_price_min8 = DF['Low'].iloc[-8]       #پ8#
 today_price_max12 = DF['High'].iloc[-12]    #ب12#
 today_price_min12 = DF['Low'].iloc[-12]     #پ12#
-print ()
-print(f"today_Open_price: {today_Open_price}  ,  today_price : {today_price}")
-print(f"today_price_max: {today_price_max}  ,  today_price_min : {today_price_min}")
-print(f"today_Final_price: {today_Final_price}  ")
-print ()
 
 yesterday_price_max = DF['High'].iloc[-2] # بالاترين قيمت ديروز
 yesterday_price_min = DF['Low'].iloc[-2]  # پايين ترين قيمت ديروز
@@ -73,9 +70,18 @@ yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
 yesterday_price = DF['Close'].iloc[-2] # قيمت بسته شده ديروز
 yesterday_Final_price = DF['Final'].iloc[-2] #قيمت آخرين معامله ديروز
 
-print(f"yesterday_Open_price: {yesterday_Open_price}  ,  yesterday_price : {yesterday_price}")
-print(f"yesterday_price_max: {yesterday_price_max}  ,  yesterday_price_min : {yesterday_price_min}")
-print(f"yesterday_Final_price: {yesterday_Final_price}  ")
+today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
+today_two_price_min = DF['Low'].iloc[-3]  # پايين ترين قيمت پريروز
+today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
+today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
+today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
+
+print(f"today_Open_price: {today_Open_price} , yesterday_Open_price: {yesterday_Open_price} , today_two_Open_price: {today_two_Open_price}")
+print(f"today_price: {today_price}      , yesterday_price : {yesterday_price}        , today_two_price: {today_two_price}")
+print(f"today_price_max: {today_price_max}   , yesterday_price_max: {yesterday_price_max}   , today_two_price_max: {today_two_price_max}")
+print(f"today_price_min: {today_price_min}   , yesterday_price_min: {yesterday_price_min}   , today_two_price_min: {today_two_price_min}")
+print(f"today_Final_price: {today_Final_price} , yesterday_Final_price: {yesterday_Final_price} , today_two_Final_price: {today_two_Final_price}")
+
 print ()
 
 #================================================     
@@ -100,12 +106,6 @@ print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
 print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 print()          
 #===========================================================
-today_two_price_max = DF['High'].iloc[-3] # بالاترين قيمت پريروز
-today_two_price_min = DF['Low'].iloc[-3]  # پايين ترين قيمت پريروز
-today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
-today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
-today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
-today_two_price_min6 = DF['Low'].iloc[-6]  # پايين ترين قيمت 6روزقبل
 
 max_price = DF['High'].iloc[-9:] # بالاترين قيمت هاي 9روز ten_max
 min_price = DF['Low'].iloc[-9:]  # پايين ترين قيمت هاي 9روز ten_min
@@ -386,9 +386,9 @@ mohasebeh = (highest_price_360 + lowest_price_360)/2
 mohasebeh1= (mohasebeh + highest_price_360)/2
 # محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
 mohasebeh2= (mohasebeh + lowest_price_360)/2
-# محاسبه کمي کمترازسقف کانال سه ماهه
+# ازمقاومت سه ماهه 50تاکم کرديم براي محاسبات سقف کانال
 kh_3=(highest_price_90)-50
-# محاسبه کمي بيشترازکف کانال سه ماهه
+# به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
 kL_3=(lowest_price_90)+50
 
 if today_price > yesterday_price > today_two_price:
@@ -483,6 +483,7 @@ print ()
 print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
 print(f"Monthly support : {lowest_price_60}  ,    Monthly resistance : {highest_price_60}")
 
+# براي انجام محاسبات مقاومت وحمايتهامقدار20تا کم يازيادکرديم
 m_7=(highest_price_7)-20
 m_30=(highest_price_60)-20
 m_360=(highest_price_360)-20
@@ -508,8 +509,6 @@ else:
              
 print ()
 #=====================================================
-# today_price   -  yesterday_price  -  today_two_price قيمت بسته شدن سه روز
-# today_Volume  -  today_Volume_yesterday  -  today_Volume_yesterday2 حجم سه روز
 print(30*"=",nam,"ichimoku Signals for buying and selling  ")
 # Ensure the DataFrame is sorted by date
 DF.sort_values('Date', inplace=True)
@@ -536,19 +535,16 @@ window_size = 9
 past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_9_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten9 = (past_9_days_high + past_9_days_low)/2
+tenken9 = (math.ceil(ten9))
 
 window_size = 8
 past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten8 = (past_8_days_high + past_8_days_low)/2
+tenken8 = (math.ceil(ten8))
 
-
-#print ('ten12 :',(math.ceil(ten12)))
-#print ('ten11 :',(math.ceil(ten11)))
-#print ('ten10 :',(math.ceil(ten10)))
-print ('ten9 :',(math.ceil(ten9)))
-print ('ten8 :',(math.ceil(ten8)))
-print ()
+#print ('ten9 :',(math.ceil(ten9)))
+#print ('ten8 :',(math.ceil(ten8)))
 
 # محاسبات کيجونسن26 روزه به قبل
 # Calculate the highest and lowest price over the past 26 days
@@ -557,11 +553,13 @@ window_size = 26
 past_26_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_26_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij26 = (past_26_days_high + past_26_days_low)/2
+kijon26 = (math.ceil(kij26))
 
 window_size = 27
 past_27_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_27_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij27 = (past_27_days_high + past_27_days_low)/2
+kijon27 = (math.ceil(kij27))
 
 window_size = 28
 past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -578,12 +576,11 @@ past_30_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij30 = (past_30_days_high + past_30_days_low)/2
 
+#print ('kij26 :',(math.ceil(kij26)))
+#print ('kij27 :',(math.ceil(kij27)))
 
-print ('kij26 :',(math.ceil(kij26)))
-print ('kij27 :',(math.ceil(kij27)))
-#print ('kij28 :',(math.ceil(kij28)))
-#print ('kij29 :',(math.ceil(kij29)))
-#print ('kij30 :',(math.ceil(kij30)))
+print(f"ten8: {tenken8}   ,    kij26 : {kijon26}")
+print(f"ten9: {tenken9}   ,    kij27 : {kijon27}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -594,8 +591,8 @@ past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
-print(f"komu52_max: {komu52_max}")
-print(f"komu52_min: {komu52_min}")
+print(f"komu52_max: {komu52_max}  ,  komu52_min: {komu52_min} ")
+#print(f"komu52_min: {komu52_min}")
 print ()
 
 
