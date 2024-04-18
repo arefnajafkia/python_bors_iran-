@@ -387,9 +387,9 @@ mohasebeh1= (mohasebeh + highest_price_360)/2
 # محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
 mohasebeh2= (mohasebeh + lowest_price_360)/2
 # محاسبه کمي کمترازسقف کانال سه ماهه
-kh_3=highest_price_90-50
+kh_3=(highest_price_90)-50
 # محاسبه کمي بيشترازکف کانال سه ماهه
-kL_3=lowest_price_90+50
+kL_3=(lowest_price_90)+50
 
 if today_price > yesterday_price > today_two_price:
     print (today_price,' قيمت سه روزه افزايشي ميباشد')
@@ -405,7 +405,7 @@ if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_pri
 elif highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
      print (' کانال ماهيانه رنج شده')
 else :
-     if kh_3 <= today_price <= highest_price_90:
+     if kh_3 <= today_price <= highest_price_90 :
           print ('قيمت به سقف کانال سه ماه رسيده')
      elif kL_3 >= today_price >= lowest_price_90 :
           print ('قيمت به کف کانال سه ماه رسيده')
@@ -518,7 +518,22 @@ print ('-'*20,' حمايت ومقاومت هاي هفتگي وماهيانه')
 print ()
 print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
 print(f"Monthly support : {lowest_price_30}  ,    Monthly resistance : {highest_price_30}")
-                
+m_7=(highest_price_7)-20
+m_30=(highest_price_30)-20
+h_7=(lowest_price_7)+20
+h_30=(lowest_price_30)+20
+
+if m_7 <= today_price <= highest_price_7 :
+     print ('قيمت نزديک مقاومت هفتگي ميباشد')
+elif m_30 <= today_price <= highest_price_30 :
+     print ('قيمت نزديک مقاومت ماهيانه ميباشد')
+else:
+     if h_7 >= today_price >= lowest_price_7 :
+          print ('قيمت نزديک حمايت هفتگي ميباشد')
+     elif h_30 >= today_price >= lowest_price_30 :
+          print ('قيمت نزديک حمايت ماهيانه ميباشد')
+          
+             
 print ()
 #=====================================================
 # today_price   -  yesterday_price  -  today_two_price قيمت بسته شدن سه روز
