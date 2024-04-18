@@ -404,44 +404,36 @@ else:
 #قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
 if today_price < highest_price_7 < yesterday_price:
      print ('قيمت مقاومت هفتگي رو بطرف پايين شکست')
+elif today_price > highest_price_7 > yesterday_price:
+     print ('قيمت مقاومت هفتگي روبطرف بالاشکست')
 else:
-    if today_price > highest_price_7 > yesterday_price:
-        print ('قيمت مقاومت هفتگي روبطرف بالاشکست')
-
-
-if today_price < lowest_price_7 < yesterday_price:
-    print ('قيمت حمايت هفتگي روبطرف پايين شکست')
-else:
-     if today_price > lowest_price_7 > yesterday_price:
-         print ('قيمت حمايت هفتگي روبطرف بالاشکست')
+     if today_price < lowest_price_7 < yesterday_price:
+         print ('قيمت حمايت هفتگي روبطرف پايين شکست')
+     elif today_price > lowest_price_7 > yesterday_price:
+          print ('قيمت حمايت هفتگي روبطرف بالاشکست')
 
 
 if today_price < highest_price_30 < yesterday_price:
      print ('قيمت مقاومت ماهيانه روبطرف پايين شکست')
+elif today_price > highest_price_30 > yesterday_price:
+     print ('قيمت مقاومت ماهيانه روبطرف بالا شکست')
 else:
-    if today_price > highest_price_30 > yesterday_price:
-        print ('قيمت مقاومت ماهيانه روبطرف بالا شکست')
-
-
-if today_price < lowest_price_30 < yesterday_price:
-    print ('قيمت حمايت ماهيانه روبطرف پايين شکست')
-else:
-     if today_price > lowest_price_30 > yesterday_price:
-         print ('قيمت حمايت ماهيانه روبطرف بالا شکست')
+     if today_price < lowest_price_30 < yesterday_price:
+         print ('قيمت حمايت ماهيانه روبطرف پايين شکست')
+     elif today_price > lowest_price_30 > yesterday_price:
+          print ('قيمت حمايت ماهيانه روبطرف بالا شکست')
 
 
 if today_price < highest_price_280 < yesterday_price:
      print ('قيمت مقاومت يکساله رابطرف پايين شکست')
+elif today_price > highest_price_280 > yesterday_price:
+     print ('قيمت مقاومت يکساله روبطرف بالاشکست')
 else:
-    if today_price > highest_price_280 > yesterday_price:
-        print ('قيمت مقاومت يکساله روبطرف بالاشکست')
-
-
-if today_price < lowest_price_280 < yesterday_price:
-    print ('قيمت حمايت يکساله روبطرف پايين شکست')
-else:
-     if today_price > lowest_price_280 > yesterday_price:
-         print ('قيمت حمايت يکساله روبطرف بالاشکست')
+     if today_price < lowest_price_280 < yesterday_price:
+         print ('قيمت حمايت يکساله روبطرف پايين شکست')
+     elif today_price > lowest_price_280 > yesterday_price:
+          print ('قيمت حمايت يکساله روبطرف بالاشکست')
+        
 
 
 if today_price > highest_price_7 :
