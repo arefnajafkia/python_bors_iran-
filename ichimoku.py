@@ -449,42 +449,6 @@ else:
         
 
 
-if today_price > highest_price_7 :
-     print ('قيمت بالاي مقاومت هفتگي ميباشد')
-elif today_price < highest_price_7 :
-     print ('قيمت پايين مقاومت هفتگي ميباشد')
-else:
-     if today_price > lowest_price_7 :
-          print ('قيمت بالاي حمايت هفتگي ميباشد')
-     elif today_price < lowest_price_7 :
-          print ('قيمت پايين حمايت هفتگي ميباشد')
-          
-
-
-if highest_price_7<today_price > highest_price_60 :
-     print ('قيمت بالاي مقاومت ماهيانه ميباشد')
-elif highest_price_7>today_price < highest_price_60 :
-     print ('قيمت پايين مقاومت ماهيانه ميباشد')
-else:
-     if lowest_price_7<today_price > lowest_price_60 :
-          print ('قيمت بالاي حمايت ماهيانه ميباشد')
-     elif lowest_price_7>today_price < lowest_price_60 :
-          print ('قيمت پايين حمايت ماهيانه ميباشد')
-          
-
-
-if highest_price_60 <today_price > highest_price_280 :
-     print ('قيمت بالاي مقاومت ساليانه ميباشد')
-elif highest_price_60>today_price < highest_price_280 :
-     print ('قيمت پايين مقاومت ساليانه ميباشد')
-else:
-     if lowest_price_60<today_price > lowest_price_280 :
-          print ('قيمت بالاي حمايت ساليانه ميباشد')
-     elif lowest_price_60>today_price < lowest_price_280 :
-          print ('قيمت پايين حمايت ساليانه ميباشد')
-
-
-
 if highest_price_180>highest_price_90>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_90<lowest_price_180:
     print ("کانال کاهشي يکساله داريم")
 else:
@@ -517,21 +481,29 @@ print ()
 print ('-'*20,' حمايت ومقاومت هاي هفتگي وماهيانه')
 print ()
 print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
-print(f"Monthly support : {lowest_price_30}  ,    Monthly resistance : {highest_price_30}")
+print(f"Monthly support : {lowest_price_60}  ,    Monthly resistance : {highest_price_60}")
+
 m_7=(highest_price_7)-20
-m_30=(highest_price_30)-20
+m_30=(highest_price_60)-20
+m_360=(highest_price_360)-20
 h_7=(lowest_price_7)+20
-h_30=(lowest_price_30)+20
+h_30=(lowest_price_60)+20
+h_360=(lowest_price_360)+20
+
 
 if m_7 <= today_price <= highest_price_7 :
      print ('قيمت نزديک مقاومت هفتگي ميباشد')
-elif m_30 <= today_price <= highest_price_30 :
+elif m_30 <= today_price <= highest_price_60 :
      print ('قيمت نزديک مقاومت ماهيانه ميباشد')
+elif m_360 <= today_price <= highest_price_360 :
+     print ('قيمت نزديک مقاومت ساليانه ميباشد')
 else:
      if h_7 >= today_price >= lowest_price_7 :
           print ('قيمت نزديک حمايت هفتگي ميباشد')
-     elif h_30 >= today_price >= lowest_price_30 :
+     elif h_30 >= today_price >= lowest_price_60 :
           print ('قيمت نزديک حمايت ماهيانه ميباشد')
+     elif h_360 >= today_price >= lowest_price_360 :
+          print ('قيمت نزديک حمايت ساليانه ميباشد')
           
              
 print ()
