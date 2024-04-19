@@ -76,11 +76,11 @@ today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
 today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
 today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
 
-print(f"today_Open_price: {today_Open_price} , yesterday_Open_price: {yesterday_Open_price} , today_two_Open_price: {today_two_Open_price}")
-print(f"today_price: {today_price}      , yesterday_price : {yesterday_price}        , today_two_price: {today_two_price}")
-print(f"today_price_max: {today_price_max}   , yesterday_price_max: {yesterday_price_max}   , today_two_price_max: {today_two_price_max}")
-print(f"today_price_min: {today_price_min}   , yesterday_price_min: {yesterday_price_min}   , today_two_price_min: {today_two_price_min}")
-print(f"today_Final_price: {today_Final_price} , yesterday_Final_price: {yesterday_Final_price} , today_two_Final_price: {today_two_Final_price}")
+print(f"today_Open_price: {today_Open_price}, yesterday_Open_price: {yesterday_Open_price}, today_two_Open_price: {today_two_Open_price}")
+print(f"today_price: {today_price} , yesterday_price : {yesterday_price} , today_two_price: {today_two_price}")
+print(f"today_price_max: {today_price_max}, yesterday_price_max: {yesterday_price_max}, today_two_price_max: {today_two_price_max}")
+print(f"today_price_min: {today_price_min}, yesterday_price_min: {yesterday_price_min}, today_two_price_min: {today_two_price_min}")
+print(f"today_Final: {today_Final_price}   ,  yesterday_Final: {yesterday_Final_price}   ,  today_two_Final: {today_two_Final_price}")
 
 print ()
 
@@ -484,12 +484,12 @@ print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_p
 print(f"Monthly support : {lowest_price_60}  ,    Monthly resistance : {highest_price_60}")
 
 # براي انجام محاسبات مقاومت وحمايتهامقدار20تا کم يازيادکرديم
-m_7=(highest_price_7)-20
-m_30=(highest_price_60)-20
-m_360=(highest_price_360)-20
-h_7=(lowest_price_7)+20
-h_30=(lowest_price_60)+20
-h_360=(lowest_price_360)+20
+m_7=(highest_price_7)-50
+m_30=(highest_price_60)-50
+m_360=(highest_price_360)-50
+h_7=(lowest_price_7)+50
+h_30=(lowest_price_60)+50
+h_360=(lowest_price_360)+50
 
 
 if m_7 <= today_price <= highest_price_7 :
@@ -759,32 +759,27 @@ print ()
 
 if today_price>movind10>yesterday_price>today_two_price:
     print ('قيمت امروزرفت بالاي ميانگين ده روزه')
-else:
-    if today_price > movind10:
-        print ('قيمت هنوزبالاي ميانگين ده روزه است')
-        
-
-if today_price<movind10<yesterday_price<today_two_price:
-    print ('قيمت امروزرفت پايين ميانگين ده روزه')
+elif today_price>movind103>yesterday_price>today_two_price:
+     print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
     if today_price < movind10:
-        print ('قيمت هنوزپايين ميانگين ده روزه است')
+         print ('قيمت هنوزپايين ميانگين ده روزه است')
+    elif today_price < movind103:
+         print ('قيمت هنوز پايين ميانگين 103')        
 
 
-if today_price>movind103>yesterday_price>today_two_price:
-    print ('قيمت امروزرفت بالاي ميانگين 103')
-else:
-    if today_price > movind103:
-        print ('قيمت هنوزبالاي ميانگين 103')
-        
 
-if today_price<movind103<yesterday_price<today_two_price:
-    print ('قيمت امروزرفت پايين ميانگين 103')
-else:
-    if today_price < movind103:
-        print ('قيمت هنوز پايين ميانگين 103')
+if today_price > movind10:
+     print ('قيمت هنوزبالاي ميانگين ده روزه است')
+elif today_price > movind103:
+     print ('قيمت هنوزبالاي ميانگين 103')
+else:     
+    if today_price<movind10<yesterday_price<today_two_price:
+         print ('قيمت امروزرفت پايين ميانگين ده روزه')
+    elif today_price<movind103<yesterday_price<today_two_price:
+         print ('قيمت امروزرفت پايين ميانگين 103')
 
-
+         
 print ()
 #================================================
 print(40*"=",nam,"bmi and omc محاسبه")
