@@ -554,6 +554,16 @@ mohasebeh = (highest_price_360 + lowest_price_360)/2
 mohasebeh1= (mohasebeh + highest_price_360)/2
 # محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
 mohasebeh2= (mohasebeh + lowest_price_360)/2
+# ازمقاومت سه ماهه 50تاکم کرديم براي محاسبات سقف کانال
+kh_3=(highest_price_90)-50
+# به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
+kL_3=(lowest_price_90)+50
+
+if today_price > yesterday_price > today_two_price:
+    print (today_price,' قيمت سه روزه افزايشي ميباشد')
+else:
+    if today_price < yesterday_price < today_two_price:
+        print (today_price,' قيمت سه روزه کاهشي ميباشد')
 
 if highest_price_360 > today_Final_price > mohasebeh1:
     print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' قيمت ميان اين دودرحرکت است')
@@ -576,11 +586,15 @@ else:
         print (today_Final_price,' قيمت امروزبه سمت پايين درحرکت است')
 
 #تشخيص روند
-if highest_price_90>=highest_price_60>=highest_price_30>=today_price_max>=lowest_price_90<=lowest_price_60<=lowest_price_30:
+if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
     print (' کانال سه ماه رنج شده')
-else:
-    if highest_price_60>=highest_price_30>=today_price_max>=lowest_price_60<=lowest_price_30:
-        print (' کانال ماهيانه رنج شده') 
+elif highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
+     print (' کانال ماهيانه رنج شده')
+else :
+     if kh_3 <= today_price <= highest_price_90 :
+          print ('قيمت به سقف کانال سه ماه رسيده')
+     elif kL_3 >= today_price >= lowest_price_90 :
+          print ('قيمت به کف کانال سه ماه رسيده')
 
 
 #قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
@@ -699,6 +713,37 @@ else:
 if highest_price_90 <=  lowest_price_90 :
     print ("حمايت تبديل به مقاومت شد")
 
+
+
+print ()
+print ('-'*20,' حمايت ومقاومت هاي هفتگي وماهيانه')
+print ()
+print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
+print(f"Monthly support : {lowest_price_60}  ,    Monthly resistance : {highest_price_60}")
+
+# براي انجام محاسبات مقاومت وحمايتهامقدار20تا کم يازيادکرديم
+m_7=(highest_price_7)-50
+m_30=(highest_price_60)-50
+m_360=(highest_price_360)-50
+h_7=(lowest_price_7)+50
+h_30=(lowest_price_60)+50
+h_360=(lowest_price_360)+50
+
+
+if m_7 <= today_price <= highest_price_7 :
+     print ('قيمت نزديک مقاومت هفتگي ميباشد')
+elif m_30 <= today_price <= highest_price_60 :
+     print ('قيمت نزديک مقاومت ماهيانه ميباشد')
+elif m_360 <= today_price <= highest_price_360 :
+     print ('قيمت نزديک مقاومت ساليانه ميباشد')
+else:
+     if h_7 >= today_price >= lowest_price_7 :
+          print ('قيمت نزديک حمايت هفتگي ميباشد')
+     elif h_30 >= today_price >= lowest_price_60 :
+          print ('قيمت نزديک حمايت ماهيانه ميباشد')
+     elif h_360 >= today_price >= lowest_price_360 :
+          print ('قيمت نزديک حمايت ساليانه ميباشد')
+
 #==================================================
 time.sleep(5)
     
@@ -748,8 +793,6 @@ print (h10 ,': Descending روند نزولي')
 time.sleep(5)
 
 #=====================================================
-# today_price   -  yesterday_price  -  today_two_price قيمت بسته شدن سه روز
-# today_Volume  -  today_Volume_yesterday  -  today_Volume_yesterday2 حجم سه روز
 print(30*"=",nam,"ichimoku Signals for buying and selling  ")
 # Ensure the DataFrame is sorted by date
 DF.sort_values('Date', inplace=True)
@@ -776,20 +819,16 @@ window_size = 9
 past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_9_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten9 = (past_9_days_high + past_9_days_low)/2
+tenken9 = (math.ceil(ten9))
 
 window_size = 8
 past_8_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_8_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten8 = (past_8_days_high + past_8_days_low)/2
+tenken8 = (math.ceil(ten8))
 
-#print(f"ten8_max: {past_8_days_high}")
-#print(f"ten8_min: {past_8_days_low}")
-print ('ten12 :',(math.ceil(ten12)))
-print ('ten11 :',(math.ceil(ten11)))
-print ('ten10 :',(math.ceil(ten10)))
-print ('ten9 :',(math.ceil(ten9)))
-print ('ten8 :',(math.ceil(ten8)))
-print ()
+#print ('ten9 :',(math.ceil(ten9)))
+#print ('ten8 :',(math.ceil(ten8)))
 
 # محاسبات کيجونسن26 روزه به قبل
 # Calculate the highest and lowest price over the past 26 days
@@ -798,11 +837,13 @@ window_size = 26
 past_26_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_26_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij26 = (past_26_days_high + past_26_days_low)/2
+kijon26 = (math.ceil(kij26))
 
 window_size = 27
 past_27_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_27_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij27 = (past_27_days_high + past_27_days_low)/2
+kijon27 = (math.ceil(kij27))
 
 window_size = 28
 past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -819,13 +860,11 @@ past_30_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij30 = (past_30_days_high + past_30_days_low)/2
 
-#print(f"kij26_max: {past_26_days_high}")
-#print(f"kij26_min: {past_26_days_low}")
-print ('kij26 :',(math.ceil(kij26)))
-print ('kij27 :',(math.ceil(kij27)))
-print ('kij28 :',(math.ceil(kij28)))
-print ('kij29 :',(math.ceil(kij29)))
-print ('kij30 :',(math.ceil(kij30)))
+#print ('kij26 :',(math.ceil(kij26)))
+#print ('kij27 :',(math.ceil(kij27)))
+
+print(f"ten8: {tenken8}   ,    kij26 : {kijon26}")
+print(f"ten9: {tenken9}   ,    kij27 : {kijon27}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -836,9 +875,17 @@ past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
-print(f"komu52_max: {komu52_max}")
-print(f"komu52_min: {komu52_min}")
+print(f"komu52_max: {komu52_max}  ,  komu52_min: {komu52_min} ")
+#print(f"komu52_min: {komu52_min}")
 print ()
+
+
+if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
+     print ('به احتمال زياد سقف روند صعوديه مواظب ريزش باش')
+else:
+     if ten12>ten11>ten10>=ten9>=ten8 > today_two_price>yesterday_price<today_price < kij26==kij27==kij28<=kij29<=kij30 :
+          print ('به احتمال زياد کف روند نزوليه مراقب صعودي شدن روند باش')
+
 
 
 if kij28<=kij27<=kij26< ten8 >ten9>ten10 <today_price> yesterday_price and today_Volume> today_Volume_yesterday:
@@ -848,11 +895,13 @@ else :
         print ('Signal sell : تنکانسن پايين کيجونسن رفت')
 
 
+
 if kij27<kij26 <ten8 >ten9<today_price> yesterday_price >komu52_min:
     print ('قيمت بالاي ابرسبزميباشد وروندصعودي شده')
 else :
     if kij27>kij26 >ten8 <ten9>today_price< yesterday_price <komu52_min:
         print ('قيمت پايين ابرقرمزه وروندنزولي شده')
+
 
 
 if komu52_max > kij30>=kij29>=kij28>=kij27>=kij26 <ten8>ten9< today_price>yesterday_price>=today_two_price :
@@ -862,6 +911,7 @@ else:
     if komu52_min < kij30<=kij29<=kij28<=kij27<=kij26 >ten8<ten9> today_price<yesterday_price<=today_two_price :
         print ('قيمت بالاي ابرسبز وفلت کيجونسن رو روبه پايين قطع کرد')
         print ('--- Signal sell : قوي ---')
+
         
 
 if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26<ten8>=ten9>=ten10>=ten11>=ten12 >today_price<yesterday_price :
@@ -873,6 +923,7 @@ else:
         print ('--- Signal buy : بسيارقوي ---')
 
 
+
 if yesterday_price <today_price>komu52_max <ten8>ten9 >=kij27<kij26 :
     print ('تنکانسن وکيجونسن وقيمت ابر رو روبه بالاقطع کردند')
     print ('/// Signal buy : خريدکن ////')
@@ -882,13 +933,15 @@ else:
         print ('/// Signal sell : بفروش ////')
 
 
-if komu52_max>kij30==kij29==kij28==kij27==kij26<ten8>ten9<=today_price>yesterday_price:
+
+if komu52_max>kij30>=kij29>=kij28>=kij27>=kij26<ten8>ten9<=today_price>yesterday_price:
     print ('زيرابرکوموهو قيمت وتنکانسن هردوفلت کيجونسن رو روبه بالاقطع کردن')
     print ('/// Signal buy : بااحتياط خريدکن ////')
 else:
-    if komu52_min<kij30==kij29==kij28==kij27==kij26>ten8<ten9>=today_price<yesterday_price:
+    if komu52_min<kij30<=kij29<=kij28<=kij27<=kij26>ten8<ten9>=today_price<yesterday_price:
         print ('بالاي ابرکوموهو قيمت وتنکانسن هردو فلت کيجونسن رو روبه پايين قطع کردن')
         print ('/// Signal sell : بااحتياط بفروش ////')
+
 
 
 if today_price>yesterday_price > ten8>ten9 > kij26>kij27:
@@ -898,18 +951,21 @@ else:
         print ('روند نزولي است چون قيمت پايين تنکانسن وکيجونسن است')
 
 
-if kij30<=kij29<=kij28<=kij27<=kij26 <today_price< ten8>=ten9>=ten10>=ten11>=ten12 :
-     print ('قيمت زيرتنکانسن ميباشد وبطرف کيجونسن ميرود')
+
+if kij30<=kij29<=kij28<=kij27<=kij26 >today_price>yesterday_price< ten8<=ten9<=ten10<=ten11<=ten12 :
+     print ('قيمت زيرتنکانسن ميباشد وروبه بالابطرف کيجونسن ميرود')
 else:
-    if kij30>=kij29>=kij28>=kij27>=kij26 >today_price> ten8<=ten9<=ten10<=ten11<=ten12 :
-         print ('قيمت بالاي تنکانسن ميباشد وبطرف کيجونسن ميرود')
+    if kij30>=kij29>=kij28>=kij27>=kij26 <today_price<yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
+         print ('قيمت بالاي تنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
 
 
-if yesterday_price <kij30>=kij29>=kij28>=kij27>=kij26 < today_price :
+
+if kij30>=kij29>=kij28>=kij27>=kij26>yesterday_price and kij26 < today_price :
      print ('--- Signal buy :خيلي خيلي مهم : قيمت کيجونسن رو روبه بالا قطع کرد ---')
 else:
-     if yesterday_price >kij30<=kij29<=kij28<=kij27<=kij26 > today_price :
+     if kij30<=kij29<=kij28<=kij27<=kij26<yesterday_price and kij26> today_price :
           print ('--- Signal sell :خيلي خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
+
 
 
 if kij30>=kij29>=kij28>=kij27>=kij26 > today_price>=yesterday_price>=today_two_price :
@@ -917,8 +973,15 @@ if kij30>=kij29>=kij28>=kij27>=kij26 > today_price>=yesterday_price>=today_two_p
 else:
      if kij30<=kij29<=kij28<=kij27<=kij26 < today_price<=yesterday_price<=today_two_price :
           print ('احتمال ريزش شديد: قيمت سه روزه روبه پايين وبه سمت کيجونسن درحرکت است')
+
    
 
+if today_price >= yesterday_price >= today_two_price > kij26 >= kij27 >= kij28 :
+     print ('***همچنان قيمت بالاي کيجونسن ميباشدواحتمالاروندصعودي است***')
+else:
+     if today_price <= yesterday_price <= today_two_price < kij26 <= kij27 <= kij28 :
+          print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
+   
 
           
 print ('-'*30)
@@ -957,14 +1020,15 @@ print ('       ','-'*30)
 if user_input == "1":
     print ("="*15,"Drawing moving average charts" , nam,"="*15)
     print ()
-    print(20*"-",nam,"bmi محاسبه")
+    #print(20*"-",nam,"bmi محاسبه")
+    print(40*"=",nam,"bmi and omc محاسبه")
     # تعریف یک تابع برای محاسبه بی ام آی
     def bmi(last_price, adj_close):
 
-        bmi = (adj_close + (last_price*2))/3
-     
-        # برگرداندن بی ام آی به عنوان خروجی تابع
-        return bmi
+         bmi = (adj_close + (last_price*2))/3
+         
+         # برگرداندن بی ام آی به عنوان خروجی تابع
+         return bmi
 
     # دريافت قيمت پاياني  وآخرين قيمت
     last_price = today_Final_price
@@ -973,78 +1037,39 @@ if user_input == "1":
     bmi = bmi(last_price, adj_close)
     # نمایش بی ام آی کاربر
     print(f" بی ام آی شما {bmi:.2f} است ")
-
-    # شروع شرط براي محاسبه 
-    if today_Open_price < bmi > today_price:
-        print("امکان داره قيمت پايين تربره")
-    elif today_Open_price > bmi < today_price:
-          print("امکان داره قيمت برگرده")
-    elif bmi == adj_close:
-          print("قيمت درجاميزنه گيجه")
-    elif today_price <= bmi < yesterday_price:
-          print ("احتمال ريزش شديدخارج شو")
-    else:
-         print("مراقب باش معامله نکن")
-         if yesterday_price > today_Open_price:
-             print(" قيمت بازشدن امروزکمترازبسته شدن ديروزاست")
-
-         if yesterday_price < today_Open_price:
-             print(" قيمت بازشدن امروز بيشترازبسته شدن ديروزشده")
-          
-
-         if today_price_max == today_Final_price:
-             print(' صف خريدشده')
-
-         if today_price_min == today_Final_price:
-             print (' صف فروش شده')
-    #---------------------------------
-    # محاسبه بالاترين وپايين ترين قيمت يک هفته پيش    
-    max_price_b1 = max(DF['High'][-7:]) # max_price day7
-    min_price_b2 = min(DF['Low'][-7:])  # min_price day7
-    print(20*"-",nam,"omc محاسبه") 
+    #------------------------------------
+    print(20*"-")
     # تعريف يک تابع براي محاسبه او ام سي (حدس زدن قيمت بسته شدن)
-    def bmi(today_Open_price, today_price_min):
+    def cmo(open_price, price_min):
 
-         omc = (((today_price_max *2 )+ today_price_min)/3)-(today_price - yesterday_price)
-     
+         omc = (((today_price_max *2 )+ price_min)/3)-(today_price - yesterday_price)
+         
          # برگرداندن او ام سي براي خروجي تابع
          return omc
-                
-                
+
+    # دريافت قيمت بازشدن با پايين ترين قيمت امروز
+    open_price = today_Open_price
+    price_min = today_price_min
+    price_max = today_price_max
     #فراخاني تابع او ام سي باقيمت بازشدن وپايين ترين قيمت روز
-    omc = bmi(today_Open_price, today_price_min)
+    omc = cmo(open_price, price_min)
     # نمايش اوام سي به کاربر
     print(f" او ام سي شما {omc:.2f} است ")
+    print(20*"-")
 
-    # شروع شربراي ادامه کار
-    if omc > today_price :
-        print ('قيمت بسته شدن فردا بيشترازبسته شدن امروزميشه')
+    if today_Final_price == price_max:
+         print('صف خريدشده')
+    else:
+         if today_Final_price == price_min:
+              print ('صف فروش شده')
 
-    if omc < today_price :
-        print ('قيمت بسته شدن فرداکمترازبسته شدن امروزميشه')
-     
-    if omc >= today_price_max:
-        print (' صبرکن وآماده خريدباش')
-    elif omc < today_price_min < yesterday_price :
-          print (' شروع ريزش هفتگي ميتوني بفروشي')
-    elif omc > today_Open_price > yesterday_price:
-          print ('ميتوني نگهداري اگرمنفي زدبفروشي')
-     
-     
-    if today_Final_price == today_price_max:
-        print('صف خريدشده')
-     
-    if today_Final_price == today_price_min:
-        print ('صف فروش شده')
 
-    if omc > today_price > yesterday_price <= min_price_b2:
-        print (max_price_b1,": تا قيمت پايين تريامساوي کمترين قيمت هفتگيه وشروع کرده بره بالا")
-    if omc < today_price < yesterday_price <= max_price_b1:
-        print(min_price_b2,": قيمت ازبالاتري قيمت هفتگي پايين ترآمد امکان ريزش تا ")
-     
-    
-        print(max_price_b1,": بالاترين قيمت هفتگي ")
-        print(min_price_b2,": پايين ترين قيمت هفتگي")
+    if omc < bmi :
+         print ('omc < bmi : به احتمال زيادفردا قيمت بالاترازامروزه')
+    else:
+        if omc > bmi :
+             print ('omc > bmi : به احتمال زيادفردا قيمت پايين ترازامروزه')
+
 
 
 # Check if the user wants to calculate the volume and channel
@@ -1542,6 +1567,7 @@ print(ticker.count,' : تعداد معاملات ')
 print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
+print ('-'*20)
 #بدست آوردن درصدنوسان قيمتي امروز
 nv1=ticker.high_price-ticker.low_price
 nv2=(ticker.high_price+ticker.low_price)/2
