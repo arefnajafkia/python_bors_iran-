@@ -47,6 +47,19 @@ RenameDict = {'Adj Open': 'Open',
 
 DF.rename(columns=RenameDict, inplace=True)
 
+#----------------------------------------
+print ()
+print("          "," Time information")
+import pytse_client as tse
+#درج تاريخ ميلادي
+import jdatetime
+from datetime import datetime
+# datetime object containing current date and time
+now = datetime.now()
+# dd/mm/YY H:M:S %d
+dt_string = now.strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
+print("date and time =", dt_string)
+
 #=====================================================
 # Get today's price قيمتهاي روزانه
 print ()
@@ -76,10 +89,10 @@ today_two_Open_price = DF['Open'].iloc[-3] # بازشدن قيمت پريروز
 today_two_price = DF['Close'].iloc[-3] # بسته شدن قيمت پريروز
 today_two_Final_price = DF['Final'].iloc[-3] # قيمت آخرين معامله پريروز
 
-print(f"today_Open_price: {today_Open_price}, yesterday_Open_price: {yesterday_Open_price}, today_two_Open_price: {today_two_Open_price}")
+print(f"today_Open_price:{today_Open_price}, yesterday_Open_price:{yesterday_Open_price}, today_two_Open_price:{today_two_Open_price}")
 print(f"today_price: {today_price} , yesterday_price : {yesterday_price} , today_two_price: {today_two_price}")
-print(f"today_price_max: {today_price_max}, yesterday_price_max: {yesterday_price_max}, today_two_price_max: {today_two_price_max}")
-print(f"today_price_min: {today_price_min}, yesterday_price_min: {yesterday_price_min}, today_two_price_min: {today_two_price_min}")
+print(f"today_price_max: {today_price_max}, yesterday_price_max: {yesterday_price_max}, today_two_price_max:{today_two_price_max}")
+print(f"today_price_min: {today_price_min}, yesterday_price_min: {yesterday_price_min}, today_two_price_min:{today_two_price_min}")
 print(f"today_Final: {today_Final_price}   ,  yesterday_Final: {yesterday_Final_price}   ,  today_two_Final: {today_two_Final_price}")
 
 print ()
@@ -101,9 +114,9 @@ n1=today_price-yesterday_price
 n2=(today_price+yesterday_price)/2
 j1=n1/n2
 j2=j1*100
-print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+print (math.ceil(j2),'% : درصدتفاوت قيمت ديروزبه امروز')
 print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
-print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
+print (math.ceil(jnv1),'% : درصدنوسان قيمتي امروز')
 print()          
 #===========================================================
 
@@ -251,9 +264,13 @@ DOje1= (today_price_max+today_price_min)/2
 DOje2= DOje1 + 20
 DOje3= DOje1 - 20
 
-if today_Final_price == DOje1 :
+if DOje2 >= DOje1>=DOje3 and DOje2 >= today_price>=DOje3:
     print (' کندل دوجي شکل گرفته')
 
+
+if today_Final_price == DOje1 :
+    print (' کندل دوجي قوي شکل گرفته')
+     
 
 
 if today_price_max > today_Final_price >= DOje2:
@@ -264,10 +281,10 @@ else:
 
 
 
-if today_Open_price < today_Final_price > DOje1:
+if today_Open_price < today_price > DOje1:
     print (' candle Green')
 else:
-    if today_Open_price > today_Final_price < DOje1:
+    if today_Open_price > today_price < DOje1:
         print (' candle Red')
 
 
@@ -390,14 +407,25 @@ mohasebeh2= (mohasebeh + lowest_price_360)/2
 kh_3=(highest_price_90)-50
 # به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
 kL_3=(lowest_price_90)+50
+#فاصله قيمت با مقاومت سه ماهه
+fgh_3=highest_price_90 - today_price
+#فاصله قيمت با حمايت سه ماهه
+fgm_3=today_price - lowest_price_90
+
+#درصد تفاوت قيمت امروزبا مقاومت سه ماهه
+nv1=((highest_price_90)-(today_price))
+nv2=((highest_price_90)+(today_price))/2
+jnv=nv1/nv2
+jnv1=(math.ceil(jnv*100)) 
 
 if today_price > yesterday_price > today_two_price:
     print (today_price,' قيمت سه روزه افزايشي ميباشد')
+    print (f"%فاصله قيمت بامقاومت سه ماه به ريا ل ميشود : { fgh_3 } , تفاوت به درصد : { jnv1 }")
 else:
     if today_price < yesterday_price < today_two_price:
         print (today_price,' قيمت سه روزه کاهشي ميباشد')
-        
-        
+        print (fgm_3 ,': فاصله قيمت باحمايت سه ماهه')
+               
 
 #تشخيص روند
 if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
@@ -490,10 +518,16 @@ m_360=(highest_price_360)-50
 h_7=(lowest_price_7)+50
 h_30=(lowest_price_60)+50
 h_360=(lowest_price_360)+50
+#بدست آوردن درصدتفاوت قيمت امروزبه مقاومت هفتگي
+nv1=((highest_price_7)-(today_price))
+nv2=((highest_price_7)+(today_price))/2
+jnv=nv1/nv2
+jnv1=(math.ceil(jnv*100)) 
 
 
 if m_7 <= today_price <= highest_price_7 :
      print ('قيمت نزديک مقاومت هفتگي ميباشد')
+     print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
 elif m_30 <= today_price <= highest_price_60 :
      print ('قيمت نزديک مقاومت ماهيانه ميباشد')
 elif m_360 <= today_price <= highest_price_360 :
@@ -758,26 +792,26 @@ print ()
 
 
 if today_price>movind10>yesterday_price>today_two_price:
-    print ('قيمت امروزرفت بالاي ميانگين ده روزه')
+     print ('قيمت امروزرفت بالاي ميانگين ده روزه')
 elif today_price>movind103>yesterday_price>today_two_price:
      print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
+     if today_price > movind10:
+          print ('قيمت هنوزبالاي ميانگين ده روزه است')
+     elif today_price > movind103:
+           print ('قيمت هنوزبالاي ميانگين 103')       
+
+
+     
+if today_price<movind10<yesterday_price<today_two_price:
+     print ('قيمت امروزرفت پايين ميانگين ده روزه')
+elif today_price<movind103<yesterday_price<today_two_price:
+     print ('قيمت امروزرفت پايين ميانگين 103')
+else:
     if today_price < movind10:
-         print ('قيمت هنوزپايين ميانگين ده روزه است')
+        print ('قيمت هنوزپايين ميانگين ده روزه است')
     elif today_price < movind103:
-         print ('قيمت هنوز پايين ميانگين 103')        
-
-
-
-if today_price > movind10:
-     print ('قيمت هنوزبالاي ميانگين ده روزه است')
-elif today_price > movind103:
-     print ('قيمت هنوزبالاي ميانگين 103')
-else:     
-    if today_price<movind10<yesterday_price<today_two_price:
-         print ('قيمت امروزرفت پايين ميانگين ده روزه')
-    elif today_price<movind103<yesterday_price<today_two_price:
-         print ('قيمت امروزرفت پايين ميانگين 103')
+          print ('قيمت هنوز پايين ميانگين 103')  
 
          
 print ()
