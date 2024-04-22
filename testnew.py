@@ -1129,6 +1129,141 @@ print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 print()
 #=======================================================
 
+print ('='*30,' candel DOje')
+DOje1= (ticker.high_price+ticker.low_price)/2
+DOje2= DOje1 + 20
+DOje3= DOje1 - 20
+
+if ticker.last_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+
+
+if ticker.high_price > ticker.last_price >= DOje2:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+    if ticker.low_price < ticker.last_price <= DOje3:
+        print (' کندل دوجي قرمزشکل گرفته')
+        
+
+if ticker.open_price < ticker.last_price > DOje1:
+    print (' candle Green')
+else:
+    if ticker.open_price > ticker.last_price < DOje1:
+        print (' candle Red')
+
+
+if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+    print (' candle marabozo Green')
+else:
+    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+        print (' candle marabozo Red')
+
+#===============================================
+
+today_price6 = DF['Close'].iloc[-6]
+today_price9 = DF['Close'].iloc[-9]
+Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
+Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
+today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
+average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
+        
+print (35*'=',sahame,'volume')
+print (ticker.volume ,'حجم امروز')
+print (today_Volume_yesterday , 'حجم ديروز')
+          
+if ticker.volume > (math.ceil(average_Volume_Month)):
+     print ('حجم امروزبيشترازحجم ماهيانه شده')
+else:
+     if ticker.volume < (math.ceil(average_Volume_Month)):
+          print ('حجم امروزکمتر ازحجم ماهيانه شده')
+          
+
+if ticker.volume < today_Volume_yesterday < Volume_week:
+     print ('حجم درهفته گذشته کاهشي بود')
+else:
+     if ticker.volume > today_Volume_yesterday > Volume_week:
+         print ('حجم درهفته گذشته افزايشي بود')
+
+          
+if ticker.volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if ticker.volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+
+         
+if ticker.volume > (math.ceil(average_Volume_Month))*3 :
+     print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
+
+
+if ticker.volume > 4*(average_Volume_week):
+    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+
+if ticker.yesterday_price > ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
+else:
+    if ticker.yesterday_price< ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
+
+        
+if ticker.last_price > today_price9 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
+else:
+    if ticker.last_price < today_price9 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
+
+
+#================================================
+print(25*"-")     
+if ticker.adj_close > ticker.yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if ticker.adj_close < ticker.yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
+
+
+if ticker.volume > today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+    print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
+else:
+    if ticker.volume < today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+        print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
+
+
+if ticker.volume > today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+    print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
+else:
+    if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+        print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+        
+
+#=======================================================
+
+closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
+closing_prices = DF['Close'].iloc[-10:]      # قيمت بسته شدن 10روز گذشته
+average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
+average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
+# بدست آوردن ميانگين هاي 3و10و20 روزه
+ma3 = (math.ceil(average_prices7))
+ma10 = (math.ceil(average_price))
+print (30*'=','  moving',sahame,)
+
+if ticker.adj_close<=ticker.last_price > ma10 > ticker.yesterday_price:
+    print (' price > sma_10 : موقع خريده')
+else:
+    if ticker.adj_close>=ticker.last_price < ma10 < ticker.yesterday_price:
+        print (' price < sma_10 : موقع فروشه')
+
+
+if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
+    print (' ميانگين ها وقيمت همه نزولي شدن')
+else:
+    if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
+        print (' ميانگين هاوقيمت همه صعودي شدن')
+
+        
+
 #========================================================        
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
 # چکارن
