@@ -1109,8 +1109,8 @@ print(f"حداکثرقيمت امروز : {ticker.high_price}    ,    حداقل
 print(f"حداکثر قیمت مجاز : {ticker.sta_max}    ,    حداقل قیمت مجاز : {ticker.sta_min}")
 print()
 print(f"تعداد معاملات : {ticker.count}    ,    ارزش معاملات : {ticker.value}")
-print(ticker.volume,' : حجم معاملات امروز ')
-print(f"today_Volume : {today_Volume}    ,    today_Volume_yesterday : {today_Volume_yesterday}")
+print ('-'*20)
+print(f"today_Volume : {ticker.volume}    ,    today_Volume_yesterday : {today_Volume_yesterday}")
 print(ticker.month_average_volume,' : میانگین حجم ماه')
 print ('-'*20)
 #بدست آوردن درصدنوسان قيمتي امروز
@@ -1247,6 +1247,7 @@ average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
 # بدست آوردن ميانگين هاي 3و10و20 روزه
 ma3 = (math.ceil(average_prices7))
 ma10 = (math.ceil(average_price))
+
 print (30*'=','  moving',sahame,)
 
 if ticker.adj_close<=ticker.last_price > ma10 > ticker.yesterday_price:
@@ -1262,6 +1263,100 @@ else:
     if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
         print (' ميانگين هاوقيمت همه صعودي شدن')
 
+        
+#=======================================================
+        
+# بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
+max_price_b1 = max(DF['High'][-7:]) # max_price day7
+min_price_b2 = min(DF['Low'][-7:])  # min_price day7
+max_price_b3 = max(DF['High'][-14:]) # max_price day14
+min_price_b4 = min(DF['Low'][-14:])  # min_price day14
+
+max_price_b5 = max(DF['High'][-30:]) # max_price day30
+min_price_b6 = min(DF['Low'][-30:])  # min_price day30
+max_price_b7 = max(DF['High'][-60:]) # max_price day60
+min_price_b8 = min(DF['Low'][-60:])  # min_price day60
+
+max_price_b9 = max(DF['High'][-103:]) # max_price day103
+min_price_b10 = min(DF['Low'][-103:])  # min_price day103
+
+max_price_b11 = max(DF['High'][-360:]) # max_price day360
+min_price_b12 = min(DF['Low'][-360:])  # min_price day360
+
+closing_price_b9 = DF['High'].iloc[-103:]  # max_price_day103
+closing_price_b10 = DF['Low'].iloc[-103:]  # mix_price_day103
+average_max5 = closing_price_b9.mean()   # average_max_price_day103                  
+average_min5 = closing_price_b10.mean()   # average_mix_price_day103
+# (max 103_mean + min 103_mean) /2
+Month103_mean = (average_max5 + average_min5)/2
+# max Month30 + min Month30 /2
+Month30 = (max_price_b5 + min_price_b6)/2
+        
+print (30*'=','kanal ',sahame,)
+
+if ticker.adj_close > average_price :
+     print (' price > Em_10 ')
+else:
+     if ticker.adj_close < average_price :
+         print (' price < Em_10 ')
+
+
+if ticker.adj_close > Month103_mean < ticker.yesterday_price:
+    print ('قيمت امروز ميانگين 103رو روبه بالاقطع کرد')
+else:
+    if ticker.adj_close < Month103_mean > ticker.yesterday_price:
+        print ('قيمت امروزميانگين 103 رو روبه پايين قطع کرد')
+        
+
+
+if Month103_mean < ticker.adj_close < ticker.yesterday_price < today_two_price:
+    print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
+else:
+    if Month103_mean > ticker.adj_close > ticker.yesterday_price > today_two_price:
+        print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
+        
+
+
+if Month103_mean < ticker.adj_close > ticker.yesterday_price > today_two_price:
+    print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
+else:
+    if Month103_mean > ticker.adj_close < ticker.yesterday_price < today_two_price:
+        print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
+        
+
+
+if ticker.low_price > yesterday_price_min > today_two_price_min6 :
+    print (' کف امروزبالاترازکف 6روزپيش شده ')
+else:
+    if ticker.low_price < yesterday_price_min < today_two_price_min6 :
+        print (' کف امروز پايين ترازکف 6 روزپيش شده')
+        
+
+
+if ticker.high_price > Month30 >= ticker.yesterday_price:
+    print ('Month30 شروع روند افزايشي بااحتياط خريدکن')
+else:
+    if ticker.low_price < Month30 <= ticker.yesterday_price:
+        print ('Month30 شروع روند کاهشي مراقب باش ')
+        
+
+
+if max_price_b1 < max_price_b3 < max_price_b5 < max_price_b7 < max_price_b9 :
+    if ticker.last_price < ticker.yesterday_price:
+        print ("کانال وروند سه ماهه نزولي است")
+    else:
+        if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
+            if ticker.last_price > ticker.yesterday_price:
+                print ("کانال وروند سه ماهه صعودي است ")
+                
+
+
+if max_price_b1 > max_price_b3 > max_price_b5 < ticker.high_price > ticker.yesterday_price:
+    print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
+else:
+    if min_price_b2 < min_price_b4 < min_price_b6 > ticker.high_price < ticker.yesterday_price:
+        print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
+        
         
 
 #========================================================        
@@ -1597,7 +1692,7 @@ if index<=14 and p > 0:
           hs3 = (( p * 0.05 + p )*100)/100 # حدسود5درصد
           hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
           hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
-          print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',sahame)
+          print (' تعيين حدسودوزيان بااحتساب قيمت خريد شمااز  :' ,sahame)
           print(f"حدسود20درصد : {hs1}    ,    حدسود10درصد : {hs2}")
           print(f"حدسود5درصد : {hs3}    ,    حد ضرر سه درصد : {hz}")
           print (hs4,'قيمت سربه سربراي فروش')
