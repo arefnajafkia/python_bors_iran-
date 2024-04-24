@@ -324,7 +324,7 @@ else:
 
 #=====================================================
 print ()         
-print ('='*30,' candle DOje')
+print ('='*30, nam ,'  candle DOje')
 DOje1= (today_price_max+today_price_min)/2
 DOje2= DOje1 + 20
 DOje3= DOje1 - 20
@@ -817,7 +817,24 @@ else:
      if today_price <= yesterday_price <= today_two_price < kij26 <= kij27 <= kij28 :
           print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
 
-          
+
+kij=kij26+60
+kijon=kij<=kij+80
+if ten9<=ten8>kij27<=kij26 and kijon<ten8<today_price:
+     print ('تنکانسن بافاصله بالاي کيجونسن ميباشدوقيمت هم بالاي تنکانسن است')
+else:
+     if ten9<=ten8>today_price>kij27<=kij26 and kijon<ten8<yesterday_price:
+          print ('تنکانسن بافاصله بالاي کيجونسن ميباشد وقيمت تنکانسن راروبه پايين قطع کرد')
+
+
+ten=ten8+60
+tenko=ten<=ten+80
+if ten9>=ten8<kij27>=kij26 and today_price<tenko<kij26:
+     print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت هم پايين تنکانسن است')
+else:
+     if ten9>=ten8<today_price<kij27>=kij26 and yesterday_price<tenko<kij26:
+          print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
+
 
 print ()
 #================================================
@@ -859,7 +876,7 @@ print (h5,': ascending روند صعودي ')
 print (h10 ,': Descending روند نزولي')
 
 #=================================================
-print ('='*40,' ميانگين قيمت')
+print ('='*40, nam ,'  ميانگين قيمت')
 #ميانگين قيمت 10 و20 روزسهم
 # Calculate the 10-day moving average
 avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
@@ -1419,7 +1436,7 @@ if index == 3:
 # وسپه
 if index == 4:
      p=4255
-     s=0
+     s=4525
      v=2000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
