@@ -707,14 +707,22 @@ if kij30<=kij29<=kij28<=kij27<=kij26 >today_price>yesterday_price< ten8<=ten9<=t
 else:
     if kij30>=kij29>=kij28>=kij27>=kij26 <today_price<yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
          print ('قيمت بالاي تنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
+         
+
+
+if kij30>=kij29>=kij28>ten12>=ten11>=ten10<kij27>=kij26>yesterday_price <=ten9<ten8<= today_price :
+     print ('--- Signal buy :خيلي خيلي مهم: قيمت تنکانسن وکيجونسن روروبه بالاقطع کرد ---')
+else:
+     if kij30<=kij29<=kij28<ten12<=ten11<=ten10>kij27<=kij26<yesterday_price >=ten9>ten8>= today_price :
+          print ('--- Signal sell :خيلي خيلي مهم : قيمت تنکانسن وکيجونسن روروبه پايين قطع کرد ---')
 
 
 
 if kij30>=kij29>=kij28>=kij27>=kij26>yesterday_price and kij26 < today_price :
-     print ('--- Signal buy :خيلي خيلي مهم : قيمت کيجونسن رو روبه بالا قطع کرد ---')
+     print ('--- Signal buy :خيلي مهم : قيمت کيجونسن رو روبه بالاقطع کرد ---')
 else:
      if kij30<=kij29<=kij28<=kij27<=kij26<yesterday_price and kij26> today_price :
-          print ('--- Signal sell :خيلي خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
+          print ('--- Signal sell :خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
 
 
 
@@ -732,6 +740,21 @@ else:
      if today_price <= yesterday_price <= today_two_price < kij26 <= kij27 <= kij28 :
           print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
 
+
+kij=kij26+60
+if ten10<=ten9<=ten8>kij28<=kij27<=kij26 and kij<=ten8<today_price:
+     print ('تنکانسن بافاصله بالاي کيجونسن ميباشدوقيمت هم بالاي تنکانسن است')
+else:
+     if ten9<=ten8>today_price>kij27<=kij26 and kij<=ten8<yesterday_price:
+          print ('تنکانسن بافاصله بالاي کيجونسن ميباشد وقيمت تنکانسن راروبه پايين قطع کرد')
+
+
+ten=ten8+60
+if ten9>=ten8<kij27>=kij26 and today_price<=ten<kij26:
+     print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت هم پايين تنکانسن است')
+else:
+     if ten9>=ten8<today_price<kij27>=kij26 and yesterday_price<=ten<kij26:
+          print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
           
 
 print ()
@@ -1216,10 +1239,10 @@ else:
          print (' price < Em_10 ')
 
 
-if ticker.adj_close > Month103_mean < ticker.yesterday_price:
+if ticker.adj_close > Month103_mean > ticker.yesterday_price:
     print ('قيمت امروز ميانگين 103رو روبه بالاقطع کرد')
 else:
-    if ticker.adj_close < Month103_mean > ticker.yesterday_price:
+    if ticker.adj_close < Month103_mean < ticker.yesterday_price:
         print ('قيمت امروزميانگين 103 رو روبه پايين قطع کرد')
         
 
