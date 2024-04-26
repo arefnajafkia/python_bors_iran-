@@ -1176,6 +1176,7 @@ else:
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
         
 
+print()
 #=======================================================
 
 closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
@@ -1188,11 +1189,12 @@ ma10 = (math.ceil(average_price))
 
 print (30*'=','  moving',sahame,)
 
-if ticker.adj_close<=ticker.last_price > ma10 > ticker.yesterday_price:
-    print (' price > sma_10 : موقع خريده')
+if ticker.yesterday_price+400 > ticker.yesterday_price< ma10 < ticker.adj_close :
+    print (' بعدازريزش 20درصدي که داشته price > ma10 : موقع خريده')
 else:
-    if ticker.adj_close>=ticker.last_price < ma10 < ticker.yesterday_price:
-        print (' price < sma_10 : موقع فروشه')
+    if ticker.yesterday_price-400 < ticker.yesterday_price> ma10 > ticker.adj_close :
+        print ('بعدازسعود 20درصدي که داشته price < ma10 : موقع فروشه')
+        
 
 
 if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
@@ -1200,8 +1202,17 @@ if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
 else:
     if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
         print (' ميانگين هاوقيمت همه صعودي شدن')
-
         
+
+
+if ticker.yesterday_price+300 > ticker.yesterday_price < ticker.adj_close :
+     print ('باريزش بيش از12درصد امروزمثبت شده واحتمال صعود دارد')
+else:
+    if ticker.yesterday_price-300 < ticker.yesterday_price > ticker.adj_close :
+         print ('با صعود بيش از12درصد امروزمنفي شده واحتمال ريزش دارد')
+     
+
+print ()
 #=======================================================
         
 # بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
