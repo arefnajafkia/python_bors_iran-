@@ -629,6 +629,20 @@ print(f"komu52_max: {komu52_max}  ,  komu52_min: {komu52_min} ")
 #print(f"komu52_min: {komu52_min}")
 print ()
 
+window_size = 14
+past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+window_size = 28
+past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
+print (past_14_days_low,'past_14_days_low')
+print (past_28_days_low,'past_28_days_low')
+
+if past_14_days_low < past_28_days_low :
+     print ('روند نزوليه')
+else:
+     if past_14_days_low > past_28_days_low :
+          print ('روند صعوديه')
+
+
 
 if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
      print ('به احتمال زياد سقف روند صعوديه مواظب ريزش باش')
@@ -1287,26 +1301,24 @@ if ticker.high_price > Month30 >= ticker.yesterday_price:
 else:
     if ticker.low_price < Month30 <= ticker.yesterday_price:
         print ('Month30 شروع روند کاهشي مراقب باش ')
+
+
         
-
-
-if max_price_b1 < max_price_b3 < max_price_b5 < max_price_b7 < max_price_b9 :
-    if ticker.last_price < ticker.yesterday_price:
-        print ("کانال وروند سه ماهه نزولي است")
-    else:
-        if min_price_b2 > min_price_b4 > min_price_b6 > min_price_b8 > min_price_b10 :
-            if ticker.last_price > ticker.yesterday_price:
-                print ("کانال وروند سه ماهه صعودي است ")
+if ticker.adj_close<min_price_b4<min_price_b8<min_price_b10<min_price_b12:
+     print ("کانال وروند سه ماهه کاملا نزولي ميباشد ")
+else:
+    if ticker.adj_close<min_price_b4<min_price_b8<min_price_b10:
+         print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
                 
 
 
-if max_price_b1 > max_price_b3 > max_price_b5 < ticker.high_price > ticker.yesterday_price:
-    print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
+if ticker.adj_close>min_price_b4>min_price_b8>min_price_b10>min_price_b12:
+     print ("کانال وروند سه ماهه کاملاصعودي ميباشد")
 else:
-    if min_price_b2 < min_price_b4 < min_price_b6 > ticker.high_price < ticker.yesterday_price:
-        print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
-        
-        
+    if ticker.adj_close>min_price_b4>min_price_b8>min_price_b10:
+         print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
+
+
 
 #========================================================        
 print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
@@ -1325,9 +1337,9 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=0
-     s=4290
-     v=20000
+     p=4313
+     s=4251
+     v=5000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1368,7 +1380,7 @@ if index == 3:
 # وسپه
 if index == 4:
      p=4255
-     s=0
+     s=4545
      v=2000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
