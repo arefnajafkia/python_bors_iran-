@@ -1219,11 +1219,11 @@ else:
         
 
 
-if ticker.yesterday_price+300 > ticker.yesterday_price < ticker.adj_close :
-     print ('باريزش بيش از12درصد امروزمثبت شده واحتمال صعود دارد')
+if ticker.yesterday_price+500 > ticker.yesterday_price < ticker.adj_close :
+     print ('باريزشي که داشته 10% احتمال برگشت داره')
 else:
-    if ticker.yesterday_price-300 < ticker.yesterday_price > ticker.adj_close :
-         print ('با صعود بيش از12درصد امروزمنفي شده واحتمال ريزش دارد')
+    if ticker.yesterday_price-500 < ticker.yesterday_price > ticker.adj_close :
+         print ('باصعودي که داشته 10% احتمال ريزش داره')
      
 
 print ()
