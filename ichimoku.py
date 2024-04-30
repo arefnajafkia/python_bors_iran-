@@ -3,6 +3,7 @@
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # وبازدن اينتر محاسبات راانجام داده وبه شمانشان ميدهد
 # محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
+# درمرحله دوم فقط شماره کنارسهم راتايپ کرده واينتررابزنيد
 
 import time
 import math
@@ -369,7 +370,7 @@ else:
 print ()
 
 #==================================================       
-print(40*"=",nam,"One year support and resistance")
+print(39*"=",nam,"One year support and resistance")
 # Engulfing Calculations  محاسبات اينگل فينگ
 today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
@@ -1280,10 +1281,10 @@ else:
         
 
 
-if Month103_mean < ticker.adj_close > ticker.yesterday_price > today_two_price:
+if Month103_mean < ticker.adj_close > ticker.yesterday_price :
     print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
 else:
-    if Month103_mean > ticker.adj_close < ticker.yesterday_price < today_two_price:
+    if Month103_mean > ticker.adj_close < ticker.yesterday_price :
         print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
         
 
