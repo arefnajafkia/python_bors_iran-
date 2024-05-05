@@ -1,8 +1,5 @@
 
 
-    
-
-
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # وبازدن اينتر محاسبات راانجام داده وبه شمانشان ميدهد
 # محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
@@ -494,6 +491,7 @@ tse.download(symbols=sahame,
              write_to_csv=True,
              adjust=True)
 ticker = tse.Ticker(sahame)
+print ()
 print ('-'*20)
 print(ticker.last_date,': تاريخ وساعت آخرين اطلاعات قيمت پاياني ومعاملاتي')
 print ('-'*20)
@@ -1265,9 +1263,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=2143
+     p=2110
      s=0
-     v=205000
+     v=230000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
