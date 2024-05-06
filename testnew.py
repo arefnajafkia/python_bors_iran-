@@ -395,65 +395,6 @@ else:
 
 print ()
 
-#=====================================================
-print(40*"=",nam,"Charts EMA_3,10,20 ")
-# EMA_3,10,20 نمايش نمودارقيمت و
-DF.index = DF['Date']
-mplf.plot(DF[-200:], type='candle', mav=(50, 10, 20))
-plt.show()
-# Calculate the average price for ten days
-ten_day_average = DF['Close'].rolling(10).mean()
-today_price_scalar = today_price.item()
-
-print (' The graph of the averages was done .')
-print ()
-#=================================================
-#رسم نمودارايچيموکو
-print(40*"=",nam,"Charts ichimoku ")
-# Convert the 'Date' column to a datetime object
-DF['Date'] = pd.to_datetime(DF['Date'])
-
-# Calculate the conversion line (Tenkan-sen)
-DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
-
-# Calculate the base line (Kijun-sen)
-DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
-
-# Calculate the leading span A (Senkou Span A)
-DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
-DF['leading_span_a'] = DF['leading_span_a'].shift(9)
-
-# Calculate the leading span B (Senkou Span B)
-DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
-DF['leading_span_b'] = DF['leading_span_b'].shift(26)
-
-# Calculate the lagging span (Chikou Span)
-DF['lagging_span'] = DF['Close'].shift(-26)
-
-# Plot the Ichimoku cloud
-import matplotlib.pyplot as plt
-
-fig, ax = plt.subplots(figsize=(12, 6))
-
-ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
-ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
-ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
-ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
-ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
-ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
-
-ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
-
-plt.title('Ichimoku Cloud for {}'.format(nam))
-plt.xlabel('Date')
-plt.ylabel('Price')
-plt.legend()
-plt.grid(True)
-plt.show()
-
-print (' The Ichimoku diagram was drawn .')
-print ()
-#==========================================================
 print ("="*40)
 #==========================================================
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
@@ -1508,6 +1449,7 @@ print (ticker.low_price,': پايين ترين امروز')
 print (ticker.adj_close,': بسته شدن امروز')
 print (ticker.volume,': حجم امروز')
 print (today_Volume_yesterday,': حجم ديروز')
+print ()
 
 
 if ticker.volume > today_Volume_yesterday :
@@ -1515,29 +1457,30 @@ if ticker.volume > today_Volume_yesterday :
 else:
     if ticker.volume < today_Volume_yesterday :
         print ('حجم امروز کمترازحجم ديروزشده')
-        
-        
+                
+
+print ('~'*10)        
 print (20*'-','Bullish Harami - for buy')
 
-if today_price_max>today_Open_price>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
+if today_Open_price<today_price_max>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
      print ('signal buy : هارامي')
      
 
 print (20*'-','Bearish Harami - for sell')
 
-if today_price_max<today_Open_price<ticker.high_price>ticker.adj_close<ticker.open_price<today_price>today_price_min :
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<ticker.open_price<today_price>today_price_min :
      print ('signal sell : هارامي ')
      
 
 print (20*'-','Bullish Engulfing - for buy')
 
-if today_Open_price<ticker.high_price>=ticker.adj_close>today_price_max>today_price>ticker.open_price>=ticker.low_price :
+if today_Open_price<today_price_max<ticker.high_price>=ticker.adj_close>today_price_max>today_price>ticker.open_price>=ticker.low_price :
      print ('signal buy : اينگل فينگ')
      
 
 print (20*'-','Bearish Engulfing - for sell')
 
-if today_Open_price<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
      print ('signal sell : اينگل فينگ')
 
      
