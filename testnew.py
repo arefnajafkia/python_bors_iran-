@@ -107,7 +107,65 @@ else :
 
 
 print()          
-#=====================================================      
+#================================================
+
+max_price = DF['High'].iloc[-9:] # بالاترين قيمت هاي 9روز ten_max
+min_price = DF['Low'].iloc[-9:]  # پايين ترين قيمت هاي 9روز ten_min
+
+max_price2 = DF['High'].iloc[-26:] # بالاترين قيمت هاي 26 روزگذشته kij_max
+min_price2 = DF['Low'].iloc[-26:]  # پايين ترين قيمت هاي 26 روزگذشته kij_min
+
+
+# Get the closing prices for the last 10and26 days
+closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
+closing_prices = DF['Close'].iloc[-10:]      # قيمت بسته شدن 10روز گذشته
+closing_prices8 = DF['Close'].iloc[-20:]      # قيمت بسته شدن 20روزگذشته
+closing_prices2 = DF['Close'].iloc[-26:]     # قيمت بسته شدن 26 روزگذشته
+closing_prices3 = DF['Close'].iloc[-50:]     # قيمت بسته شدن 50روزگذشته
+closing_prices4 = DF['Close'].iloc[-103:]    # قيمت بسته شدن 103روزگذشته
+closing_prices5 = DF['Close'].iloc[-150:]    # قيمت بسته شدن 150روزگذشته
+closing_prices6 = DF['Close'].iloc[-5:]      # قيمت بسته شدن 5 روزگذشته
+closing_prices9 = DF['Close'].iloc[-4:]       # قيمت بسته شدن 4 روزگذشته
+closing_prices10 = DF['Close'].iloc[-11:]      # قيمت بسته شدن 11 روزگذشته
+closing_prices99 = DF['Close'].iloc[-99:]    # قيمت بسته شدن 99 روز
+closing_prices94 = DF['Close'].iloc[-94:]    # 94
+closing_prices89 = DF['Close'].iloc[-89:]    # 89
+closing_prices84 = DF['Close'].iloc[-84:]    # 84
+closing_prices79 = DF['Close'].iloc[-79:]    # 79
+
+Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
+Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
+today_Volume = DF['Volume'].iloc[-1] # حجم امروز
+today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
+
+# Calculate the average price محاسبه ميانگين هاي 10 و 26
+average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
+average_prices2 = closing_prices2.mean() # محاسبه ميانگين قيمت بسته شدن26روز
+average_prices3 = closing_prices3.mean() #محاسبه ميانگين قيمت بسته شدن 50روز
+average_prices4 = closing_prices4.mean() #محاسبه ميانگين قيمت بسته شدن 103روز
+average_prices5 = closing_prices5.mean() #محاسبه ميانگين قيمت بسته شدن 150روز
+average_prices6 = closing_prices6.mean() # محاسبات ميانگين قيمت بسته شدن 5روز
+average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
+average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
+average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
+average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
+average_prices99 = closing_prices99.mean() #ميانگين قيمت 99
+average_prices94 = closing_prices94.mean() #94
+average_prices89 = closing_prices89.mean() #89
+average_prices84 = closing_prices84.mean() #84
+average_prices79 = closing_prices79.mean() #79
+
+
+average_max_price = max_price.mean() # ميانگين بالاترين قيمت 9روز ten_max_m9
+average_min_price = min_price.mean() # ميانگين پايين ترين قيمت 9روز ten_min_m9
+
+average_max_price2 = max_price2.mean() # ميانگين بالاترين قيمت 26روز kij_max_m26
+average_min_price2 = min_price2.mean() #ميانگين پايين ترين قيمت 26روز kij_min_m26
+
+average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
+average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
+#=====================================================     
 print(30*"=",nam,"ichimoku Signals for buying and selling  ")
 # Ensure the DataFrame is sorted by date
 DF.sort_values('Date', inplace=True)
@@ -336,64 +394,7 @@ else:
           
 
 print ()
-#================================================
 
-max_price = DF['High'].iloc[-9:] # بالاترين قيمت هاي 9روز ten_max
-min_price = DF['Low'].iloc[-9:]  # پايين ترين قيمت هاي 9روز ten_min
-
-max_price2 = DF['High'].iloc[-26:] # بالاترين قيمت هاي 26 روزگذشته kij_max
-min_price2 = DF['Low'].iloc[-26:]  # پايين ترين قيمت هاي 26 روزگذشته kij_min
-
-
-# Get the closing prices for the last 10and26 days
-closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
-closing_prices = DF['Close'].iloc[-10:]      # قيمت بسته شدن 10روز گذشته
-closing_prices8 = DF['Close'].iloc[-20:]      # قيمت بسته شدن 20روزگذشته
-closing_prices2 = DF['Close'].iloc[-26:]     # قيمت بسته شدن 26 روزگذشته
-closing_prices3 = DF['Close'].iloc[-50:]     # قيمت بسته شدن 50روزگذشته
-closing_prices4 = DF['Close'].iloc[-103:]    # قيمت بسته شدن 103روزگذشته
-closing_prices5 = DF['Close'].iloc[-150:]    # قيمت بسته شدن 150روزگذشته
-closing_prices6 = DF['Close'].iloc[-5:]      # قيمت بسته شدن 5 روزگذشته
-closing_prices9 = DF['Close'].iloc[-4:]       # قيمت بسته شدن 4 روزگذشته
-closing_prices10 = DF['Close'].iloc[-11:]      # قيمت بسته شدن 11 روزگذشته
-closing_prices99 = DF['Close'].iloc[-99:]    # قيمت بسته شدن 99 روز
-closing_prices94 = DF['Close'].iloc[-94:]    # 94
-closing_prices89 = DF['Close'].iloc[-89:]    # 89
-closing_prices84 = DF['Close'].iloc[-84:]    # 84
-closing_prices79 = DF['Close'].iloc[-79:]    # 79
-
-Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
-Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
-today_Volume = DF['Volume'].iloc[-1] # حجم امروز
-today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
-today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
-
-# Calculate the average price محاسبه ميانگين هاي 10 و 26
-average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
-average_prices2 = closing_prices2.mean() # محاسبه ميانگين قيمت بسته شدن26روز
-average_prices3 = closing_prices3.mean() #محاسبه ميانگين قيمت بسته شدن 50روز
-average_prices4 = closing_prices4.mean() #محاسبه ميانگين قيمت بسته شدن 103روز
-average_prices5 = closing_prices5.mean() #محاسبه ميانگين قيمت بسته شدن 150روز
-average_prices6 = closing_prices6.mean() # محاسبات ميانگين قيمت بسته شدن 5روز
-average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
-average_prices8 = closing_prices8.mean() #محاسبه ميانگين 20روزه
-average_prices9 = closing_prices9.mean() #محاسبه ميانگين 4 روزه
-average_price10 = closing_prices10.mean() #محاسبه ميانگين 11 روزه
-average_prices99 = closing_prices99.mean() #ميانگين قيمت 99
-average_prices94 = closing_prices94.mean() #94
-average_prices89 = closing_prices89.mean() #89
-average_prices84 = closing_prices84.mean() #84
-average_prices79 = closing_prices79.mean() #79
-
-
-average_max_price = max_price.mean() # ميانگين بالاترين قيمت 9روز ten_max_m9
-average_min_price = min_price.mean() # ميانگين پايين ترين قيمت 9روز ten_min_m9
-
-average_max_price2 = max_price2.mean() # ميانگين بالاترين قيمت 26روز kij_max_m26
-average_min_price2 = min_price2.mean() #ميانگين پايين ترين قيمت 26روز kij_min_m26
-
-average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
-average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
 #=====================================================
 print(40*"=",nam,"Charts EMA_3,10,20 ")
 # EMA_3,10,20 نمايش نمودارقيمت و
@@ -1205,8 +1206,8 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4255
-     s=4545
+     p=4215
+     s=0
      v=2000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1496,6 +1497,51 @@ if index<=14 and p > 0:
 
 #=================================================           
 print(40*"=",nam,"Engulfing Calculations")
+
+print (today_Open_price,': بازشدن ديروز')
+print (today_price_max,': بالاترين ديروز')
+print (today_price_min,': پايين ترين ديروز')
+print (today_price,': بسته شدن ديروز')
+print (ticker.open_price,': بازشدن امروز')
+print (ticker.high_price,': بالاترين امروز')
+print (ticker.low_price,': پايين ترين امروز')
+print (ticker.adj_close,': بسته شدن امروز')
+print (ticker.volume,': حجم امروز')
+print (today_Volume_yesterday,': حجم ديروز')
+
+
+if ticker.volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if ticker.volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+        
+        
+print (20*'-','Bullish Harami - for buy')
+
+if today_price_max>today_Open_price>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
+     print ('signal buy : هارامي')
+     
+
+print (20*'-','Bearish Harami - for sell')
+
+if today_price_max<today_Open_price<ticker.high_price>ticker.adj_close<ticker.open_price<today_price>today_price_min :
+     print ('signal sell : هارامي ')
+     
+
+print (20*'-','Bullish Engulfing - for buy')
+
+if today_Open_price<ticker.high_price>=ticker.adj_close>today_price_max>today_price>ticker.open_price>=ticker.low_price :
+     print ('signal buy : اينگل فينگ')
+     
+
+print (20*'-','Bearish Engulfing - for sell')
+
+if today_Open_price<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
+     print ('signal sell : اينگل فينگ')
+
+     
+#--------------------------
 # Engulfing  ascending صعودي
 # Bullish Engulfing Support level
 h1 = ticker.adj_close > ticker.open_price
