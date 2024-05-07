@@ -1047,11 +1047,12 @@ tse.download(symbols=sahame,
              adjust=True)
 ticker = tse.Ticker(sahame)
 print ('-'*20)
+PE_ticker=(math.ceil(ticker.p_e_ratio))
 print(ticker.last_date,': تاريخ وساعت آخرين اطلاعات قيمت پاياني ومعاملاتي')
 print ('-'*20)
 print(ticker.state,ticker.flow,ticker.group_name)     
 print(f"نام شرکت : {ticker.title}    ,    سال مالي : {ticker.fiscal_year}")
-print(f"EPS : {ticker.eps}  , P/E : {ticker.p_e_ratio}  ,  group P/E : {ticker.group_p_e_ratio}")
+print(f"EPS : {ticker.eps}  , P/E : {PE_ticker}  ,  group P/E : {ticker.group_p_e_ratio}")
 print(f"درصد سهام شناور : {ticker.float_shares}    ,    حجم مبنا : {ticker.base_volume}") 
 print()  
 print(ticker.open_price,' : قيمت بازشدن امروز')
@@ -1154,17 +1155,17 @@ if ticker.volume > 4*(average_Volume_week):
     print (" حجم امروز 4برابر حجم هفتگي ميباشد")
 
 
-if ticker.yesterday_price > ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
+if ticker.yesterday_price > ticker.adj_close > today_price6 and ticker.volume > today_Volume_yesterday:
     print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
 else:
-    if ticker.yesterday_price< ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
+    if ticker.yesterday_price< ticker.adj_close < today_price6 and ticker.volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
 
         
-if ticker.last_price > today_price9 and ticker.volume > today_Volume_yesterday:
+if ticker.adj_close > today_price9 and ticker.volume > today_Volume_yesterday:
     print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
 else:
-    if ticker.last_price < today_price9 and ticker.volume < today_Volume_yesterday:
+    if ticker.adj_close < today_price9 and ticker.volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
 
 
@@ -1177,17 +1178,17 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 
-if ticker.volume > today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
     print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
         print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
 
-if ticker.volume > today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
     print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
         
 
@@ -1212,10 +1213,10 @@ else:
         
 
 
-if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
+if ma3<ma10 >ticker.adj_close <ticker.yesterday_price:
     print (' ميانگين ها وقيمت همه نزولي شدن')
 else:
-    if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
+    if ma3>ma10 <ticker.adj_close >ticker.yesterday_price:
         print (' ميانگين هاوقيمت همه صعودي شدن')
         
 
@@ -1380,8 +1381,8 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4255
-     s=4545
+     p=4215
+     s=0
      v=2000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1741,6 +1742,55 @@ if today_two_price_max < yesterday_price_max > ticker.high_price:
 
 #=================================================           
 print(40*"=",nam,"Engulfing Calculations")
+
+print (today_Open_price,': بازشدن ديروز')
+print (today_price_max,': بالاترين ديروز')
+print (today_price_min,': پايين ترين ديروز')
+print (today_price,': بسته شدن ديروز')
+print (ticker.open_price,': بازشدن امروز')
+print (ticker.high_price,': بالاترين امروز')
+print (ticker.low_price,': پايين ترين امروز')
+print (ticker.adj_close,': بسته شدن امروز')
+print (ticker.volume,': حجم امروز')
+print (today_Volume_yesterday,': حجم ديروز')
+print ()
+
+
+if ticker.volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if ticker.volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+                
+
+print ('~'*10)        
+print (20*'-','Bullish Harami - for buy')
+
+if today_Open_price<today_price_max>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
+     print ('signal buy : هارامي')
+     
+
+print (20*'-','Bearish Harami - for sell')
+
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<ticker.open_price<today_price>today_price_min :
+     print ('signal sell : هارامي ')
+     
+
+print (20*'-','Bullish Engulfing - for buy')
+
+if today_Open_price<today_price_max<ticker.high_price>=ticker.adj_close>today_price_max>today_price>ticker.open_price>=ticker.low_price :
+     print ('signal buy : اينگل فينگ')
+     
+
+print (20*'-','Bearish Engulfing - for sell')
+
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
+     print ('signal sell : اينگل فينگ')
+
+
+print ()
+print (30*'-')
+#--------------------------
 # Engulfing  ascending صعودي
 # Bullish Engulfing Support level
 h1 = ticker.adj_close > ticker.open_price
@@ -1769,23 +1819,28 @@ if ticker.adj_close < lowest_price_90 :
      print (' حمايت سه ماه ازدست رفت')
      
 
-if h_ascending and h5:
+if  h5:
     c = "Engulfing :"
     print (c , "hemer ascending !  صعودي مناسب خريد" )
-    
-if h_Descending and h10:
+elif  h10 :
     c = "Engulfing :"
     print (c , "hemer Descending !  نزولي وقت فروش" )
+else:
+    c = "hold :"
+    print (c , "not Engulfing !")
+    print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
     
 print ('~'*10)
-print ('روند False يا True دقت کنيدبه')
-print (h5, ' :ascending   روند صعودي ')
-print (h10 , ' :Descending   روند نزولي')
+print ('بودن روند False يا True دقت کنيدبه')
+print (h5,': ascending روند صعودي ')
+print (h10 ,': Descending روند نزولي')
                
 #=======================================================
 
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
+
+
 
 
 

@@ -435,11 +435,12 @@ tse.download(symbols=sahame,
 ticker = tse.Ticker(sahame)
 print ()
 print ('-'*20)
+PE_ticker=(math.ceil(ticker.p_e_ratio))
 print(ticker.last_date,': تاريخ وساعت آخرين اطلاعات قيمت پاياني ومعاملاتي')
 print ('-'*20)
 print(ticker.state,ticker.flow,ticker.group_name)     
 print(f"نام شرکت : {ticker.title}    ,    سال مالي : {ticker.fiscal_year}")
-print(f"EPS : {ticker.eps}  , P/E : {ticker.p_e_ratio}  ,  group P/E : {ticker.group_p_e_ratio}")
+print(f"EPS : {ticker.eps}  , P/E : {PE_ticker}  ,  group P/E : {ticker.group_p_e_ratio}")
 print(f"درصد سهام شناور : {ticker.float_shares}    ,    حجم مبنا : {ticker.base_volume}") 
 print()  
 print(ticker.open_price,' : قيمت بازشدن امروز')
@@ -645,10 +646,10 @@ else :
           print (' قيمت امروزپايين ترازديروزه ')
 
 
-if ticker.volume > today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
     print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
         print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
 
@@ -1147,9 +1148,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4215
+     p=4220
      s=0
-     v=2000
+     v=10000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1483,7 +1484,9 @@ print (20*'-','Bearish Engulfing - for sell')
 if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
      print ('signal sell : اينگل فينگ')
 
-     
+
+print ()
+print (30*'-')
 #--------------------------
 # Engulfing  ascending صعودي
 # Bullish Engulfing Support level
