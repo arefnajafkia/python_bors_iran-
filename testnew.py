@@ -1,9 +1,8 @@
 
-
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
-# وبازدن اينتر محاسبات راانجام داده وبه شمانشان ميدهد
-# محاسبات RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
-# درمرحله دوم فقط شماره کنارسهم راتايپ کرده واينتررابزنيد
+# محاسبات ايچيمکو راانجام ميدهد ودرمرحله دوم
+# فقط بازدن شماره کنارسهم محاسبات راانجام داده ونتيجه رااغلام مي کند
+#  RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
 
 import time
 import math
@@ -623,17 +622,17 @@ if ticker.volume > 4*(average_Volume_week):
     print (" حجم امروز 4برابر حجم هفتگي ميباشد")
 
 
-if ticker.yesterday_price > ticker.last_price > today_price6 and ticker.volume > today_Volume_yesterday:
+if ticker.yesterday_price > ticker.adj_close > today_price6 and ticker.volume > today_Volume_yesterday:
     print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
 else:
-    if ticker.yesterday_price< ticker.last_price < today_price6 and ticker.volume < today_Volume_yesterday:
+    if ticker.yesterday_price< ticker.adj_close < today_price6 and ticker.volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
 
         
-if ticker.last_price > today_price9 and ticker.volume > today_Volume_yesterday:
+if ticker.adj_close > today_price9 and ticker.volume > today_Volume_yesterday:
     print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
 else:
-    if ticker.last_price < today_price9 and ticker.volume < today_Volume_yesterday:
+    if ticker.adj_close < today_price9 and ticker.volume < today_Volume_yesterday:
         print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
 
 
@@ -653,10 +652,10 @@ else:
         print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
 
-if ticker.volume > today_Volume_yesterday and ticker.last_price > ticker.yesterday_price :
+if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
     print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
 else:
-    if ticker.volume < today_Volume_yesterday and ticker.last_price < ticker.yesterday_price :
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
         print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
         
 
