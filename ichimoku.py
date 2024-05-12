@@ -1383,7 +1383,7 @@ if index == 3:
 if index == 4:
      p=4215
      s=0
-     v=2000
+     v=12000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
