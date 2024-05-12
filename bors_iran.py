@@ -2198,11 +2198,11 @@ else:
 
 
        
-if Month103_mean < ticker.last_price < ticker.yesterday_price < today_two_price:
+if Month103_mean < ticker.adj_close < ticker.yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
     print ('-'*20)
 else:
-    if Month103_mean > ticker.last_price > ticker.yesterday_price > today_two_price:
+    if Month103_mean > ticker.adj_close > ticker.yesterday_price > today_two_price:
         print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
         print ('-'*20)
 
@@ -2224,11 +2224,11 @@ else:
 
 
 if ticker.high_price > Month30 >= ticker.yesterday_price:
-    print ('Month60 شروع روند افزايشي بااحتياط خريدکن')
+    print ('Month30 شروع روند افزايشي بااحتياط خريدکن')
     print ('-'*20)
 else:
     if ticker.low_price < Month30 <= ticker.yesterday_price:
-        print ('Month60 شروع روند کاهشي مراقب باش ')
+        print ('Month30 شروع روند کاهشي مراقب باش ')
         print ('-'*20)
 
 
@@ -2310,8 +2310,8 @@ if index == 1:
           
 # تليسه
 if index == 2:
-     p=4290
-     s=0
+     p=0
+     s=4290
      v=20000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -2352,9 +2352,9 @@ if index == 3:
           
 # وسپه
 if index == 4:
-     p=4408
+     p=4215
      s=0
-     v=80000
+     v=12000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -2386,7 +2386,7 @@ if index == 4:
 # غکورش
 if index == 5:
      p=9352
-     s=0
+     s=7260
      v=26000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -2410,9 +2410,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=2316
+     p=2304
      s=0
-     v=130039
+     v=133000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
