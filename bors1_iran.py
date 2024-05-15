@@ -669,11 +669,6 @@ if today_price_max2<today_price_max1 and today_price_min2<today_price_min1 and t
 time.sleep(3)
     
 print(40*"=",nam,"One year support and resistance")
-# Engulfing Calculations  محاسبات اينگل فينگ
-today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
-today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
-yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
-yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
 # محاسبات مقاومت هفتگي تاساليانه 
 highest_price_7 = max(DF['High'][-7:])    #محاسبه مقاومت هفتگي
 highest_price_8 = max(DF['High'][-8:])
@@ -888,11 +883,11 @@ print()
 # Bullish Harami EngulFing support or Resistance level
 
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
-   if (today_two_price)<(yesterday_price)<(today_price):
-       if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
-           print ("Bullish Harami EngulFing support")
-           print ("-----اینگل فینگ صعودی شده خریدکن -----")
-           print ("-"*10)
+    if (today_two_price)<(yesterday_price)<(today_price):     
+        if lowest_price_7 or lowest_price_30 or lowest_price_90 <=(today_two_price_min):
+            print ("Bullish Harami EngulFing support")
+            print ("-----اینگل فینگ صعودی شده خریدکن -----")
+            print ("-"*10)
 
 
 if (today_two_price_max)>(yesterday_price_max) and (today_two_price_min)<(yesterday_price_min):
@@ -1478,13 +1473,15 @@ if index == 1:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
           
           
 # تليسه
 if index == 2:
-     p=4331
-     s=4431
-     v=74000
+     p=4313
+     s=4251
+     v=5000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1507,6 +1504,8 @@ if index == 2:
          print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
      if 9918>ticker.adj_close>8839:
          print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
          
           
 # غمينو
@@ -1520,13 +1519,15 @@ if index == 3:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
           
           
 # وسپه
 if index == 4:
-     p=4408
-     s=0
-     v=80000
+     p=4215
+     s=4151
+     v=12000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1552,13 +1553,15 @@ if index == 4:
      if 6810>ticker.adj_close>6146:
          print ("مابين حمايت 6146 ومقاومت 6810 هستيم درميانه 6461 روداريم")
      if 7473>ticker.adj_close>6810:
-         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")  
+         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
          
          
 # غکورش
 if index == 5:
      p=9352
-     s=0
+     s=7260
      v=26000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1577,14 +1580,16 @@ if index == 5:
      if 9977>ticker.adj_close>8788:
          print ("مابين حمايت 8788 ومقاومت 9977 هستيم درميانه 9383 روداريم")
      if 11160>ticker.adj_close>9977:
-         print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم") 
+         print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
          
          
 # شپاکسا
 if index == 6:
-     p=2316
+     p=2110
      s=0
-     v=105000
+     v=230000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
@@ -1603,6 +1608,8 @@ if index == 6:
          print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
      if 5591>ticker.adj_close>4834:
          print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
          
           
 # ثبهساز
@@ -1627,7 +1634,9 @@ if index == 7:
      if 4320>ticker.adj_close>3835:
          print ("مابين حمايت 3835 ومقاومت 4320 هستيم درميانه 4067 روداريم")
      if 4807>ticker.adj_close>4320:
-         print ("مابين حمايت 4320 ومقاومت 4807 هستيم درميانه 4565 روداريم")          
+         print ("مابين حمايت 4320 ومقاومت 4807 هستيم درميانه 4565 روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
          
          
 # تاپيکو
@@ -1641,6 +1650,8 @@ if index == 8:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
           
           
 # دسبحان
@@ -1654,19 +1665,29 @@ if index == 9:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
           
           
-# کگل
+# ومعادن
 if index == 10:
-     p=0
-     s=7050
-     v=4000
+     p=4874
+     s=4844
+     v=47000
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if 4066>ticker.adj_close>2526:
+          print ("مابين حمايت 2526 ومقاومت 4066 هستيم درميانه 3198 روداريم") 
+     if 5610>ticker.adj_close>4066:
+          print ("مابين حمايت  4066 ومقاومت 5610 هستيم درميانه  4763 روداريم")
+     if 7184>ticker.adj_close>5610:
+          print ("مابين حمايت 5610 ومقاومت 7184 هستيم درميانه  6343  روداريم")
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
           
 
 # فصبا
@@ -1693,10 +1714,49 @@ if index == 12:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
+
+
+# خگستر
+if index == 13:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
+
+
+# فولاد
+if index == 14:
+     p=0 
+     s=0
+     v=0
+     if p > 0 :
+          print (p , ': قيمت خريد شمااز',sahame )
+          print (v ,': تعداد سهام موجود')
+     if s > 0 :
+          print (s , ': قيمت فروش شمااز',sahame )
+          print (v ,': تعدادسهام فروخته شده')
+     if p>0 and s>0 :
+          print (s,'شمااين سهم رافروخته ايد به قيمت')
+
+
           
+if ticker.yesterday_price < ticker.last_price :
+    print (' بطرف مقاومت ميرويم')
+else:
+    if ticker.yesterday_price > ticker.last_price :
+        print (' بطرف حمايت ميرويم')
           
 
-if index >= 13 : 
+if index >= 15 : 
      print (sahame ,'  :  شماازاين سهم خريد نداريد')
 
      
