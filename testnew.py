@@ -2,7 +2,7 @@
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # محاسبات ايچيمکو راانجام ميدهد ودرمرحله دوم
 # فقط بازدن شماره کنارسهم محاسبات راانجام داده ونتيجه رااغلام مي کند
-#  RSI - ichimoku - EMA - Volume - Profit and loss - Charts - Canal - Moving 103 - Candel
+# RSI-ichimoku-EMA-Volume-Profit and loss-Charts-Canal-Moving 103-Candel
 
 import time
 import math
