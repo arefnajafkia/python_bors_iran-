@@ -946,10 +946,10 @@ omc = cmo(open_price, price_min)
 print(f" او ام سي شما {omc:.2f} است ")
 print(20*"-")
 
-if today_Final_price == price_max:
+if ticker.sta_max == ticker.last_price:
      print('صف خريدشده')
 else:
-     if today_Final_price == price_min:
+     if ticker.sta_min == ticker.last_price:
           print ('صف فروش شده')
 
 
