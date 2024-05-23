@@ -707,6 +707,7 @@ highest_price_30 = max(DF['High'][-30:])
 highest_price_33 = max(DF['High'][-33:])
 highest_price_60 = max(DF['High'][-60:])
 highest_price_90 = max(DF['High'][-90:])
+highest_price_120 = max(DF['High'][-120:])
 highest_price_180 = max(DF['High'][-180:])
 highest_price_280 = max(DF['High'][-280:])
 highest_price_360 = max(DF['High'][-360:])    #محاسبه مقاومت ساليانه
@@ -718,6 +719,7 @@ lowest_price_30 = min(DF['Low'][-30:])
 lowest_price_33 = min(DF['Low'][-33:])
 lowest_price_60 = min(DF['Low'][-60:])
 lowest_price_90 = min(DF['Low'][-90:])
+lowest_price_120 = min(DF['Low'][-120:])
 lowest_price_180 = min(DF['Low'][-180:])
 lowest_price_280 = min(DF['Low'][-280:])                              
 lowest_price_360 = min(DF['Low'][-360:])       #محاسبه حمايت ساليانه
@@ -729,9 +731,9 @@ mohasebeh1= (mohasebeh + highest_price_360)/2
 # محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
 mohasebeh2= (mohasebeh + lowest_price_360)/2
 # ازمقاومت سه ماهه 50تاکم کرديم براي محاسبات سقف کانال
-kh_3=(highest_price_90)-50
+kh_3=(highest_price_90)-100
 # به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
-kL_3=(lowest_price_90)+50
+kL_3=(lowest_price_90)+100
 #فاصله قيمت با مقاومت سه ماهه
 fgh_3=highest_price_90 - today_price
 #فاصله قيمت با حمايت سه ماهه
@@ -753,14 +755,26 @@ else:
                
 
 #تشخيص روند
-if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
-    print (' کانال سه ماه رنج شده')
-elif highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
-     print (' کانال ماهيانه رنج شده')
-else :
-     if kh_3 <= today_price <= highest_price_90 :
-          print ('قيمت به سقف کانال سه ماه رسيده')
-     elif kL_3 >= today_price >= lowest_price_90 :
+if highest_price_180>=highest_price_30>=today_price or lowest_price_180<=lowest_price_30<=today_price and highest_price_90>=highest_price_60 or lowest_price_90<=lowest_price_60:
+    print (' کانال رنج ميباشد')
+else:
+     if highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
+          print (' کانال ماهيانه رنج شده')
+
+          
+
+if highest_price_120>=highest_price_60>=highest_price_30 and lowest_price_120>today_price:
+     print ('کانال نزولي ميباشد')
+else:
+     if lowest_price_120<=lowest_price_60<=lowest_price_30 and highest_price_120<today_price:
+          print ('کانال صعودي ميباشد')
+          
+
+     
+if kh_3 <= today_price <= highest_price_90 :
+     print ('قيمت به سقف کانال سه ماه رسيده')
+else:
+     if kL_3 >= today_price >= lowest_price_90 :
           print ('قيمت به کف کانال سه ماه رسيده')
           
 
