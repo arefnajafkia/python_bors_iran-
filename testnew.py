@@ -755,7 +755,7 @@ else:
                
 
 #تشخيص روند
-if highest_price_180>=highest_price_30>=today_price or lowest_price_180<=lowest_price_30<=today_price and highest_price_90>=highest_price_60 or lowest_price_90<=lowest_price_60:
+if highest_price_180>=highest_price_30>=today_price or lowest_price_180<=lowest_price_30<=today_price and highest_price_90>=highest_price_60 or lowest_price_90<=lowest_price_60 and highest_price_10>=today_price>=lowest_price_10:
     print (' کانال رنج ميباشد')
 else:
      if highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
@@ -1229,9 +1229,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=2110
+     p=2095
      s=0
-     v=230000
+     v=236600
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
           print (v ,': تعداد سهام موجود')
