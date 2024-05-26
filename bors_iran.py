@@ -814,6 +814,7 @@ window_size = 10
 past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten10 = (past_10_days_high + past_10_days_low)/2
+tenken10 = (math.ceil(ten10))
 
 window_size = 9
 past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -982,6 +983,17 @@ else:
      if today_price <= yesterday_price <= today_two_price < kij26 <= kij27 <= kij28 :
           print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
    
+
+# تقاطع تنکانسن وميانگين 103روزه سيگنال خريد يافروش
+if tenken8>average_prices4>=tenken9>tenken10 and today_price>average_prices4>=yesterday_price>=today_two_price:
+     print ('Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
+else:
+     if tenken8<average_prices4<=tenken9<tenken10 and today_price<average_prices4<=yesterday_price<=today_two_price:
+          print ('Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+
+
+if tenken8>average_prices4<kij26>=kij27 and today_price>average_prices4>=yesterday_price>=today_two_price:
+     print ('Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')
 
           
 print ('-'*30)

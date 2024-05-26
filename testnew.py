@@ -186,6 +186,7 @@ window_size = 10
 past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten10 = (past_10_days_high + past_10_days_low)/2
+tenken10 = (math.ceil(ten10))
 
 window_size = 9
 past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -390,7 +391,20 @@ if ten9>=ten8<kij27>=kij26 and today_price<=ten<kij26:
 else:
      if ten9>=ten8<today_price<kij27>=kij26 and yesterday_price<=ten<kij26:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
-          
+
+
+# تقاطع تنکانسن وميانگين 103روزه سيگنال خريد يافروش
+if tenken8>average_prices4>=tenken9>tenken10 and today_price>average_prices4>=yesterday_price>=today_two_price:
+     print ('Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
+else:
+     if tenken8<average_prices4<=tenken9<tenken10 and today_price<average_prices4<=yesterday_price<=today_two_price:
+          print ('Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+
+
+if tenken8>average_prices4<kij26>=kij27 and today_price>average_prices4>=yesterday_price>=today_two_price:
+     print ('Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')     
+     
+
 
 print ()
 
@@ -746,11 +760,11 @@ jnv=nv1/nv2
 jnv1=(math.ceil(jnv*100)) 
 
 if today_price > yesterday_price > today_two_price:
-    print (today_price,' قيمت سه روزه افزايشي ميباشد')
+    print (today_price,' قيمت بسته شدن سه روزه افزايشي ميباشد')
     print (f"%فاصله قيمت بامقاومت سه ماه به ريا ل ميشود : { fgh_3 } , تفاوت به درصد : { jnv1 }")
 else:
     if today_price < yesterday_price < today_two_price:
-        print (today_price,' قيمت سه روزه کاهشي ميباشد')
+        print (today_price,' قيمت بسته شده سه روزه کاهشي ميباشد')
         print (fgm_3 ,': فاصله قيمت باحمايت سه ماهه')
                
 
