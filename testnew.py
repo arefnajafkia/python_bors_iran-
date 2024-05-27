@@ -117,11 +117,9 @@ min_price2 = DF['Low'].iloc[-26:]  # پايين ترين قيمت هاي 26 رو
 
 # Get the closing prices for the last 10and26 days
 closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روزگذشته
-closing_prices = DF['Close'].iloc[-10:]      # قيمت بسته شدن 10روز گذشته
 closing_prices8 = DF['Close'].iloc[-20:]      # قيمت بسته شدن 20روزگذشته
 closing_prices2 = DF['Close'].iloc[-26:]     # قيمت بسته شدن 26 روزگذشته
 closing_prices3 = DF['Close'].iloc[-50:]     # قيمت بسته شدن 50روزگذشته
-closing_prices4 = DF['Close'].iloc[-103:]    # قيمت بسته شدن 103روزگذشته
 closing_prices5 = DF['Close'].iloc[-150:]    # قيمت بسته شدن 150روزگذشته
 closing_prices6 = DF['Close'].iloc[-5:]      # قيمت بسته شدن 5 روزگذشته
 closing_prices9 = DF['Close'].iloc[-4:]       # قيمت بسته شدن 4 روزگذشته
@@ -139,10 +137,26 @@ today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
 today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
 
 # Calculate the average price محاسبه ميانگين هاي 10 و 26
-average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
 average_prices2 = closing_prices2.mean() # محاسبه ميانگين قيمت بسته شدن26روز
 average_prices3 = closing_prices3.mean() #محاسبه ميانگين قيمت بسته شدن 50روز
-average_prices4 = closing_prices4.mean() #محاسبه ميانگين قيمت بسته شدن 103روز
+#محاسبه دقيق ميانگين 3روزه 
+window_size = 3
+past_3_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_3_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov3 = (past_3_days_high + past_3_days_low)/2
+moving_3=(math.ceil(mov3))
+#محاسبه دقيق ميانگين10روزه
+window_size = 10
+past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov10 = (past_10_days_high + past_10_days_low)/2
+moving_10=(math.ceil(mov10))
+#محاسبه دقيق ميانگين 103روزه 
+window_size = 103
+past_103_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_103_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov103 = (past_103_days_high + past_103_days_low)/2
+moving_103=(math.ceil(mov103))
 average_prices5 = closing_prices5.mean() #محاسبه ميانگين قيمت بسته شدن 150روز
 average_prices6 = closing_prices6.mean() # محاسبات ميانگين قيمت بسته شدن 5روز
 average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
@@ -154,7 +168,6 @@ average_prices94 = closing_prices94.mean() #94
 average_prices89 = closing_prices89.mean() #89
 average_prices84 = closing_prices84.mean() #84
 average_prices79 = closing_prices79.mean() #79
-
 
 average_max_price = max_price.mean() # ميانگين بالاترين قيمت 9روز ten_max_m9
 average_min_price = min_price.mean() # ميانگين پايين ترين قيمت 9روز ten_min_m9
@@ -222,6 +235,7 @@ window_size = 28
 past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij28 = (past_28_days_high + past_28_days_low)/2
+kijon28 = (math.ceil(kij28))
 
 window_size = 29
 past_29_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -236,8 +250,10 @@ kij30 = (past_30_days_high + past_30_days_low)/2
 #print ('kij26 :',(math.ceil(kij26)))
 #print ('kij27 :',(math.ceil(kij27)))
 
+print(f"moving_103: {moving_103}")
 print(f"ten8: {tenken8}   ,    kij26 : {kijon26}")
 print(f"ten9: {tenken9}   ,    kij27 : {kijon27}")
+print(f"ten10: {tenken10}   ,    kij28 : {kijon28}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -393,20 +409,23 @@ else:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
 
 
-# تقاطع تنکانسن وميانگين 103روزه سيگنال خريد يافروش
-if tenken8>average_prices4>=tenken9>tenken10 and today_price>average_prices4>=yesterday_price>=today_two_price:
-     print ('Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
+print ()
+# تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
+if tenken10<tenken9>moving_103 and today_two_price<=yesterday_price<today_price>moving_103:
+     print ('خيلي مهم Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
 else:
-     if tenken8<average_prices4<=tenken9<tenken10 and today_price<average_prices4<=yesterday_price<=today_two_price:
-          print ('Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+     if tenken10>tenken9<moving_103 and today_two_price>=yesterday_price>today_price<moving_103:
+          print ('خيلي مهم Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
 
 
-if tenken8>average_prices4<kij26>=kij27 and today_price>average_prices4>=yesterday_price>=today_two_price:
-     print ('Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')     
+
+if tenken9>moving_103<kij27 and today_two_price<=yesterday_price<today_price>moving_103:
+     print ('خيلي مهم Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')
+else:
+     if tenken9<moving_103>kij27 and today_two_price>=yesterday_price>today_price<moving_103:
+          print ('خيلي مهم Signal sell : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
      
 
-
-print ()
 
 print ("="*40)
 #==========================================================
@@ -417,7 +436,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-        "تاصيكو","نخريس","قهكمت"]
+        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -899,40 +918,33 @@ print ()
 print ('='*40,' ميانگين قيمت')
 #ميانگين قيمت 10 و20 روزسهم
 # Calculate the 10-day moving average
-avg_10_days = DF['Close'].rolling(window=10).mean().iloc[-1]
-avg_20_days = DF['Close'].rolling(window=20).mean().iloc[-1]
-avg_103_days = DF['Close'].rolling(window=103).mean().iloc[-1]
-movind10 = (math.ceil(avg_10_days))
-movind20 = (math.ceil(avg_20_days))
-movind103 = (math.ceil(avg_103_days))
 
 # Print the most recent price and the 10-day moving average
-print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_price10_day : {movind10}")
-print(f"yesterday_price : {DF['Close'].iloc[-2]}   ,   moving_price20_day : {movind20}")
-print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_price103_day : {movind103}")
+print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_10 : {moving_10}")
+print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_103 : {moving_103}")
 print ()
 
 
-if today_price>movind10>yesterday_price>today_two_price:
+if today_price>moving_10>yesterday_price>today_two_price:
      print ('قيمت امروزرفت بالاي ميانگين ده روزه')
-elif today_price>movind103>yesterday_price>today_two_price:
+elif today_price>moving_103>yesterday_price>today_two_price:
      print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
-     if today_price > movind10:
+     if today_price > moving_10:
           print ('قيمت هنوزبالاي ميانگين ده روزه است')
-     elif today_price > movind103:
+     elif today_price > moving_103:
            print ('قيمت هنوزبالاي ميانگين 103')       
 
 
      
-if today_price<movind10<yesterday_price<today_two_price:
+if today_price<moving_10<yesterday_price<today_two_price:
      print ('قيمت امروزرفت پايين ميانگين ده روزه')
-elif today_price<movind103<yesterday_price<today_two_price:
+elif today_price<moving_103<yesterday_price<today_two_price:
      print ('قيمت امروزرفت پايين ميانگين 103')
 else:
-    if today_price < movind10:
+    if today_price < moving_10:
         print ('قيمت هنوزپايين ميانگين ده روزه است')
-    elif today_price < movind103:
+    elif today_price < moving_103:
           print ('قيمت هنوز پايين ميانگين 103')  
 
          
@@ -993,24 +1005,21 @@ closing_prices7 = DF['Close'].iloc[-3:]       # قيمت بسته شدن 3روز
 closing_prices = DF['Close'].iloc[-10:]      # قيمت بسته شدن 10روز گذشته
 average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
 average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
-# بدست آوردن ميانگين هاي 3و10و20 روزه
-ma3 = (math.ceil(average_prices7))
-ma10 = (math.ceil(average_price))
 
 print (30*'=','  moving',sahame,)
 
-if ticker.yesterday_price+400 > ticker.yesterday_price< ma10 < ticker.adj_close :
-    print (' بعدازريزش 20درصدي که داشته price > ma10 : موقع خريده')
+if ticker.yesterday_price+400 > ticker.yesterday_price< moving_10 < ticker.adj_close :
+    print (' بعدازريزش 20درصدي که داشته price > moving_10 : موقع خريده')
 else:
-    if ticker.yesterday_price-400 < ticker.yesterday_price> ma10 > ticker.adj_close :
-        print ('بعدازسعود 20درصدي که داشته price < ma10 : موقع فروشه')
+    if ticker.yesterday_price-400 < ticker.yesterday_price> moving_10 > ticker.adj_close :
+        print ('بعدازسعود 20درصدي که داشته price < moving_10 : موقع فروشه')
         
 
 
-if ma3<ma10 >ticker.last_price <ticker.yesterday_price:
+if moving_3<moving_10 >ticker.last_price <ticker.yesterday_price:
     print (' ميانگين ها وقيمت همه نزولي شدن')
 else:
-    if ma3>ma10 <ticker.last_price >ticker.yesterday_price:
+    if moving_3>moving_10 <ticker.last_price >ticker.yesterday_price:
         print (' ميانگين هاوقيمت همه صعودي شدن')
         
 
@@ -1036,50 +1045,40 @@ min_price_b6 = min(DF['Low'][-30:])  # min_price day30
 max_price_b7 = max(DF['High'][-60:]) # max_price day60
 min_price_b8 = min(DF['Low'][-60:])  # min_price day60
 
-max_price_b9 = max(DF['High'][-103:]) # max_price day103
-min_price_b10 = min(DF['Low'][-103:])  # min_price day103
 
 max_price_b11 = max(DF['High'][-360:]) # max_price day360
 min_price_b12 = min(DF['Low'][-360:])  # min_price day360
 
-closing_price_b9 = DF['High'].iloc[-103:]  # max_price_day103
-closing_price_b10 = DF['Low'].iloc[-103:]  # mix_price_day103
-average_max5 = closing_price_b9.mean()   # average_max_price_day103                  
-average_min5 = closing_price_b10.mean()   # average_mix_price_day103
-# (max 103_mean + min 103_mean) /2
-Month103_mean = (average_max5 + average_min5)/2
-# max Month30 + min Month30 /2
-Month30 = (max_price_b5 + min_price_b6)/2
         
 print (30*'=','kanal ',sahame,)
 
-if ticker.adj_close > average_price :
+if ticker.adj_close > moving_10 :
      print (' price > Em_10 ')
 else:
-     if ticker.adj_close < average_price :
+     if ticker.adj_close < moving_10 :
          print (' price < Em_10 ')
 
 
-if ticker.adj_close > Month103_mean > ticker.yesterday_price:
+if ticker.adj_close > moving_103 > ticker.yesterday_price:
     print ('قيمت امروز ميانگين 103رو روبه بالاقطع کرد')
 else:
-    if ticker.adj_close < Month103_mean < ticker.yesterday_price:
+    if ticker.adj_close < moving_103 < ticker.yesterday_price:
         print ('قيمت امروزميانگين 103 رو روبه پايين قطع کرد')
         
 
 
-if Month103_mean < ticker.adj_close < ticker.yesterday_price < today_two_price:
+if moving_103 < ticker.adj_close < ticker.yesterday_price < today_two_price:
     print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
 else:
-    if Month103_mean > ticker.adj_close > ticker.yesterday_price > today_two_price:
+    if moving_103 > ticker.adj_close > ticker.yesterday_price > today_two_price:
         print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
         
 
 
-if Month103_mean < ticker.adj_close > ticker.yesterday_price :
+if moving_103 < ticker.adj_close > ticker.yesterday_price :
     print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
 else:
-    if Month103_mean > ticker.adj_close < ticker.yesterday_price :
+    if moving_103 > ticker.adj_close < ticker.yesterday_price :
         print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
         
 
@@ -1089,29 +1088,21 @@ if ticker.low_price > yesterday_price_min > today_two_price_min6 :
 else:
     if ticker.low_price < yesterday_price_min < today_two_price_min6 :
         print (' کف امروز پايين ترازکف 6 روزپيش شده')
-        
-
-
-if ticker.high_price > Month30 >= ticker.yesterday_price:
-    print ('Month30 شروع روند افزايشي بااحتياط خريدکن')
-else:
-    if ticker.low_price < Month30 <= ticker.yesterday_price:
-        print ('Month30 شروع روند کاهشي مراقب باش ')
 
 
         
-if ticker.adj_close<min_price_b4<min_price_b8<min_price_b10<min_price_b12:
+if ticker.adj_close<min_price_b4<min_price_b8<min_price_b12:
      print ("کانال وروند سه ماهه کاملا نزولي ميباشد ")
 else:
-    if ticker.adj_close<min_price_b4<min_price_b8<min_price_b10:
+    if ticker.adj_close<min_price_b4<min_price_b8:
          print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
                 
 
 
-if ticker.adj_close>min_price_b4>min_price_b8>min_price_b10>min_price_b12:
+if ticker.adj_close>min_price_b4>min_price_b8>min_price_b12:
      print ("کانال وروند سه ماهه کاملاصعودي ميباشد")
 else:
-    if ticker.adj_close>min_price_b4>min_price_b8>min_price_b10:
+    if ticker.adj_close>min_price_b4>min_price_b8:
          print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
 
 
