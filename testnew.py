@@ -251,7 +251,6 @@ kij30 = (past_30_days_high + past_30_days_low)/2
 #print ('kij27 :',(math.ceil(kij27)))
 
 print(f"moving_103: {moving_103}")
-print(f"ten8: {tenken8}   ,    kij26 : {kijon26}")
 print(f"ten9: {tenken9}   ,    kij27 : {kijon27}")
 print(f"ten10: {tenken10}   ,    kij28 : {kijon28}")
 print ()
