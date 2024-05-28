@@ -935,24 +935,36 @@ print ()
 if today_price>moving_10>yesterday_price>today_two_price:
      print ('قيمت امروزرفت بالاي ميانگين ده روزه')
 elif today_price>moving_103>yesterday_price>today_two_price:
-     print ('قيمت امروزرفت بالاي ميانگين 103')
+       print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
-     if today_price > moving_10:
-          print ('قيمت هنوزبالاي ميانگين ده روزه است')
-     elif today_price > moving_103:
-           print ('قيمت هنوزبالاي ميانگين 103')       
+     if today_price > moving_3 > moving_10 > moving_103:
+          print ('قيمت بالاي ميانگين3و10و103ميباشد')
+     elif today_price > moving_3 > moving_10:
+           print ('قيمت بالاي ميانگين 3و10 ميباشد')       
 
 
      
 if today_price<moving_10<yesterday_price<today_two_price:
      print ('قيمت امروزرفت پايين ميانگين ده روزه')
 elif today_price<moving_103<yesterday_price<today_two_price:
-     print ('قيمت امروزرفت پايين ميانگين 103')
+       print ('قيمت امروزرفت پايين ميانگين 103')
 else:
-    if today_price < moving_10:
-        print ('قيمت هنوزپايين ميانگين ده روزه است')
-    elif today_price < moving_103:
-          print ('قيمت هنوز پايين ميانگين 103')  
+    if today_price < moving_3 < moving_10 < moving_103:
+        print ('قيمت پايين ميانگين 3و10و103 ميباشد')
+    elif today_price < moving_3 < moving_10:
+          print ('قيمت پايين ميانگين 3و10 ميباشد')
+
+
+
+if today_price < moving_3 > moving_10 > moving_103:
+     print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10و103 ميباشد')
+elif today_price < moving_3 > moving_10:
+       print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10ميباشد')
+else:
+     if today_price > moving_3 < moving_10 < moving_103:
+          print ('قيمت بالاي ميانگين 3وپايين ميانگين10و103ميباشد')
+     elif today_price > moving_3 < moving_10:
+           print ('قيمت بالاي ميانگين 3وپايين ميانگين 10ميباشد')
 
          
 print ()
