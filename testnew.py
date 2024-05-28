@@ -508,7 +508,37 @@ print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
 print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
 print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
 print()
-#=======================================================
+#======================================================****
+# محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد                                                                         
+tik_close_low = ((((ticker.adj_close)-(ticker.low_price))/(ticker.adj_close))*100)
+tik_open_low = ((((ticker.open_price)-(ticker.low_price))/(ticker.open_price))*100)
+tik_ascending = ((math.ceil(tik_close_low))-(math.ceil(tik_open_low)))
+tik_close_high = ((((ticker.high_price)-(ticker.adj_close))/(ticker.high_price))*100)
+tik_open_high = ((((ticker.high_price)-(ticker.open_price))/(ticker.high_price))*100)
+tik_Descending =((math.ceil(tik_close_high))-(math.ceil(tik_open_high)))
+
+print(30*"=",sahame," Up or Down Tick")
+
+if ticker.open_price>ticker.low_price < ticker.adj_close:
+     if (math.ceil(tik_close_low))>(math.ceil(tik_open_low)):     
+          if ticker.adj_close > ticker.open_price :
+               print (tik_ascending , ' : Up tick')
+          else:
+               if ticker.open_price<ticker.high_price > ticker.adj_close:
+                    if (math.ceil(tik_close_high))>(math.ceil(tik_open_high)):
+                         if ticker.adj_close < ticker.open_price :
+                              print (tik_Descending , ' :  Down tick')
+               
+
+
+if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yesterday_price:
+     if ticker.adj_close > ticker.open_price:
+          print (" Today Up tick")
+     else:
+          if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
+               if ticker.adj_close < ticker.open_price:
+                     print (" Today Down tick")
+#======================================================****
 print ('='*20 ,"Calculations done RSI  ")
 
 rsi = ta.momentum.rsi(DF['Close'], length=14)
