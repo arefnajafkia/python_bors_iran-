@@ -410,21 +410,21 @@ else:
 
 print ()
 # تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
-if tenken10<tenken9>moving_103 and today_two_price<=yesterday_price<today_price>moving_103:
-     print ('خيلي مهم Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
-else:
-     if tenken10>tenken9<moving_103 and today_two_price>=yesterday_price>today_price<moving_103:
-          print ('خيلي مهم Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
-
-
 
 if tenken9>moving_103<kij27 and today_two_price<=yesterday_price<today_price>moving_103:
      print ('خيلي مهم Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')
 else:
-     if tenken9<moving_103>kij27 and today_two_price>=yesterday_price>today_price<moving_103:
-          print ('خيلي مهم Signal sell : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
-     
+     if tenken10<=tenken9>moving_103 and today_two_price<=yesterday_price<today_price>moving_103:
+          print ('خيلي مهم Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
 
+
+          
+if tenken9<moving_103>kij27 and today_two_price>=yesterday_price>today_price<moving_103:
+     print ('خيلي مهم Signal sell : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+else:
+     if tenken10>=tenken9<moving_103 and today_two_price>=yesterday_price>today_price<moving_103:
+          print ('خيلي مهم Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+        
 
 print ("="*40)
 #==========================================================
