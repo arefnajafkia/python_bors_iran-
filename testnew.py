@@ -1541,19 +1541,8 @@ print (ticker.open_price,': بازشدن امروز')
 print (ticker.high_price,': بالاترين امروز')
 print (ticker.low_price,': پايين ترين امروز')
 print (ticker.adj_close,': بسته شدن امروز')
-print (ticker.volume,': حجم امروز')
-print (today_Volume_yesterday,': حجم ديروز')
 print ()
-
-
-if ticker.volume > today_Volume_yesterday :
-     print ('حجم امروزبيشترازحجم ديروزشده')
-else:
-    if ticker.volume < today_Volume_yesterday :
-        print ('حجم امروز کمترازحجم ديروزشده')
-                
-
-print ('~'*10)        
+       
 print (20*'-','Bullish Harami - for buy')
 
 if today_Open_price<today_price_max>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
