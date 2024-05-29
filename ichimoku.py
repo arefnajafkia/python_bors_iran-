@@ -152,10 +152,26 @@ today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
 today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
 
 # Calculate the average price محاسبه ميانگين هاي 10 و 26
-average_price = closing_prices.mean()   #محاسبه ميانگين قيمت بسته شدن 10 روز
 average_prices2 = closing_prices2.mean() # محاسبه ميانگين قيمت بسته شدن26روز
 average_prices3 = closing_prices3.mean() #محاسبه ميانگين قيمت بسته شدن 50روز
-average_prices4 = closing_prices4.mean() #محاسبه ميانگين قيمت بسته شدن 103روز
+#محاسبه دقيق ميانگين 3روزه 
+window_size = 3
+past_3_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_3_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov3 = (past_3_days_high + past_3_days_low)/2
+moving_3=(math.ceil(mov3))
+#محاسبه دقيق ميانگين10روزه
+window_size = 10
+past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov10 = (past_10_days_high + past_10_days_low)/2
+moving_10=(math.ceil(mov10))
+#محاسبه دقيق ميانگين 103روزه 
+window_size = 103
+past_103_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_103_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov103 = (past_103_days_high + past_103_days_low)/2
+moving_103=(math.ceil(mov103))
 average_prices5 = closing_prices5.mean() #محاسبه ميانگين قيمت بسته شدن 150روز
 average_prices6 = closing_prices6.mean() # محاسبات ميانگين قيمت بسته شدن 5روز
 average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
@@ -383,6 +399,7 @@ highest_price_30 = max(DF['High'][-30:])
 highest_price_33 = max(DF['High'][-33:])
 highest_price_60 = max(DF['High'][-60:])
 highest_price_90 = max(DF['High'][-90:])
+highest_price_120 = max(DF['High'][-120:])
 highest_price_180 = max(DF['High'][-180:])
 highest_price_280 = max(DF['High'][-280:])
 highest_price_360 = max(DF['High'][-360:])    #محاسبه مقاومت ساليانه
@@ -394,6 +411,7 @@ lowest_price_30 = min(DF['Low'][-30:])
 lowest_price_33 = min(DF['Low'][-33:])
 lowest_price_60 = min(DF['Low'][-60:])
 lowest_price_90 = min(DF['Low'][-90:])
+lowest_price_120 = min(DF['Low'][-120:])
 lowest_price_180 = min(DF['Low'][-180:])
 lowest_price_280 = min(DF['Low'][-280:])                              
 lowest_price_360 = min(DF['Low'][-360:])       #محاسبه حمايت ساليانه
@@ -429,14 +447,26 @@ else:
                
 
 #تشخيص روند
-if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
-    print (' کانال سه ماه رنج شده')
-elif highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
-     print (' کانال ماهيانه رنج شده')
-else :
-     if kh_3 <= today_price <= highest_price_90 :
-          print ('قيمت به سقف کانال سه ماه رسيده')
-     elif kL_3 >= today_price >= lowest_price_90 :
+if highest_price_180>=highest_price_30>=today_price or lowest_price_180<=lowest_price_30<=today_price and highest_price_90>=highest_price_60 or lowest_price_90<=lowest_price_60 and highest_price_10>=today_price>=lowest_price_10:
+    print (' کانال رنج ميباشد')
+else:
+     if highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
+          print (' کانال ماهيانه رنج شده')
+
+          
+
+if highest_price_120>=highest_price_60>=highest_price_30 and lowest_price_120>today_price:
+     print ('کانال نزولي ميباشد')
+else:
+     if lowest_price_120<=lowest_price_60<=lowest_price_30 and highest_price_120<today_price:
+          print ('کانال صعودي ميباشد')
+          
+
+     
+if kh_3 <= today_price <= highest_price_90 :
+     print ('قيمت به سقف کانال سه ماه رسيده')
+else:
+     if kL_3 >= today_price >= lowest_price_90 :
           print ('قيمت به کف کانال سه ماه رسيده')
           
 
@@ -565,6 +595,7 @@ window_size = 10
 past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_10_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten10 = (past_10_days_high + past_10_days_low)/2
+tenken10 = (math.ceil(ten10))
 
 window_size = 9
 past_9_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -600,6 +631,7 @@ window_size = 28
 past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 kij28 = (past_28_days_high + past_28_days_low)/2
+kijon28 = (math.ceil(kij28))
 
 window_size = 29
 past_29_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -614,8 +646,9 @@ kij30 = (past_30_days_high + past_30_days_low)/2
 #print ('kij26 :',(math.ceil(kij26)))
 #print ('kij27 :',(math.ceil(kij27)))
 
-print(f"ten8: {tenken8}   ,    kij26 : {kijon26}")
+print(f"moving_103: {moving_103}")
 print(f"ten9: {tenken9}   ,    kij27 : {kijon27}")
+print(f"ten10: {tenken10}   ,    kij28 : {kijon28}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -771,6 +804,31 @@ else:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
           
 
+# تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
+
+if tenken9>moving_103<kij27 and today_two_price<=yesterday_price<today_price>moving_103:
+     print ('خيلي مهم Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')
+else:
+     if tenken10<=tenken9>moving_103 and today_two_price<=yesterday_price<today_price>moving_103:
+          print ('خيلي مهم Signal buy : تنکانسن وقيمت ميانگين 103راروبه بالا قطع کردن')
+
+
+          
+if tenken9<moving_103>kij27 and today_two_price>=yesterday_price>today_price<moving_103:
+     print ('خيلي مهم Signal sell : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+else:
+     if tenken10>=tenken9<moving_103 and today_two_price>=yesterday_price>today_price<moving_103:
+          print ('خيلي مهم Signal sell : تنکانسن وقيمت ميانگين 103راروبه پايين قطع کردن')
+        
+
+if today_price>moving_10:
+     print ('قيمت بالاي ميانگين 10 روزه ميباشد')
+
+
+if today_price<moving_10:
+     print ('قيمت پايين ميانگين 10روزه ميباشد')
+
+
 print ()
 #================================================
 print(40*"=",nam,"Engulfing Calculations")
@@ -828,27 +886,39 @@ print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_price103_day : {mo
 print ()
 
 
-if today_price>movind10>yesterday_price>today_two_price:
+if today_price>moving_10>yesterday_price>today_two_price:
      print ('قيمت امروزرفت بالاي ميانگين ده روزه')
-elif today_price>movind103>yesterday_price>today_two_price:
-     print ('قيمت امروزرفت بالاي ميانگين 103')
+elif today_price>moving_103>yesterday_price>today_two_price:
+       print ('قيمت امروزرفت بالاي ميانگين 103')
 else:
-     if today_price > movind10:
-          print ('قيمت هنوزبالاي ميانگين ده روزه است')
-     elif today_price > movind103:
-           print ('قيمت هنوزبالاي ميانگين 103')       
+     if today_price > moving_3 > moving_10 > moving_103:
+          print ('قيمت بالاي ميانگين3و10و103ميباشد')
+     elif today_price > moving_3 > moving_10:
+           print ('قيمت بالاي ميانگين 3و10 ميباشد')       
 
 
      
-if today_price<movind10<yesterday_price<today_two_price:
+if today_price<moving_10<yesterday_price<today_two_price:
      print ('قيمت امروزرفت پايين ميانگين ده روزه')
-elif today_price<movind103<yesterday_price<today_two_price:
-     print ('قيمت امروزرفت پايين ميانگين 103')
+elif today_price<moving_103<yesterday_price<today_two_price:
+       print ('قيمت امروزرفت پايين ميانگين 103')
 else:
-    if today_price < movind10:
-        print ('قيمت هنوزپايين ميانگين ده روزه است')
-    elif today_price < movind103:
-          print ('قيمت هنوز پايين ميانگين 103')  
+    if today_price < moving_3 < moving_10 < moving_103:
+        print ('قيمت پايين ميانگين 3و10و103 ميباشد')
+    elif today_price < moving_3 < moving_10:
+          print ('قيمت پايين ميانگين 3و10 ميباشد')
+
+
+
+if today_price < moving_3 > moving_10 > moving_103:
+     print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10و103 ميباشد')
+elif today_price < moving_3 > moving_10:
+       print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10ميباشد')
+else:
+     if today_price > moving_3 < moving_10 < moving_103:
+          print ('قيمت بالاي ميانگين 3وپايين ميانگين10و103ميباشد')
+     elif today_price > moving_3 < moving_10:
+           print ('قيمت بالاي ميانگين 3وپايين ميانگين 10ميباشد') 
 
          
 print ()
@@ -994,8 +1064,7 @@ else:
         print ('ميانگين حجم هفتگي نسبت به ماهيانه کاهشي است')
 
 print ('-'*20)
-#=======================================================
-#=======================================================
+
 #=======================================================
 print ()
 print("          "," Time information")
@@ -1017,7 +1086,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-        "تاصيكو","نخريس","قهكمت"]
+        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
