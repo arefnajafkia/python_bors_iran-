@@ -443,7 +443,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون"]
+        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون","آريا","اپال"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -567,6 +567,7 @@ if (today_Final_price<yesterday_Final_price>today_two_Final_price) > (Month_pric
                 print ('sell down price : واگرايي منفي rsi')
                 
 
+
 #واگرايي مثبت دردره ها
 if (today_Final_price>yesterday_Final_price<today_two_Final_price) > (Month_price>Month_price1<Month_price2): 
     if (rsi_Month26 > rsi_Month25 < rsi_Month24) < 50>=(rsi_Month > rsi_Month1 < rsi_Month2)<=30:
@@ -577,11 +578,13 @@ if (today_Final_price>yesterday_Final_price<today_two_Final_price) > (Month_pric
                 print ('Buy top price: واگراي مثبت شده rsi')
         
 
+
 if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 50 :      
      print(" Rsi : ورود به بالاي 50 ")
 else:
      if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 50 :      
           print(" Rsi : ريزش به زير50 ")
+
                 
 
 if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 30 :      
@@ -589,6 +592,7 @@ if rsi_diff.iloc[-2] > rsi_diff.iloc[-1] <= 30 :
 else:
      if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 70:
           print(" Rsi : ورود به منطقه اشباع خريد")
+
                 
 
 if rsi_diff.iloc[-2] < rsi_diff.iloc[-1] >= 30 :      
@@ -598,11 +602,13 @@ else:
           print(" Rsi : خروج ازمنطقه اشباع خريد")
 
 
+
 if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>70:
      print (' RSI  >  70')
 else:
     if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<70:
          print (' RSI  <  70')
+
 
          
 if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>50:
@@ -611,12 +617,14 @@ else:
     if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<50:
          print (' RSI  <  50')
 
+
          
 if (rsi_diff.iloc[-3])<(rsi_diff.iloc[-2])<(rsi_diff.iloc[-1])>30:
      print (' RSI  >  30')
 else:
     if (rsi_diff.iloc[-3])>(rsi_diff.iloc[-2])>(rsi_diff.iloc[-1])<30:
          print (' RSI  <  30')
+
 
 
 #=====================================================
@@ -627,27 +635,46 @@ DOje3= DOje1 - 20
 
 if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
+else:
+     if ticker.high_price >ticker.adj_close<= DOje1 >ticker.low_price:
+         print (' معتبرترین کندل دوجي شکل گرفته')
+         
 
 
-if ticker.high_price > ticker.last_price >= DOje2:
+if ticker.high_price > ticker.last_price>=ticker.adj_close >= DOje2>ticker.open_price:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if ticker.low_price < ticker.last_price <= DOje3:
-        print (' کندل دوجي قرمزشکل گرفته')
+     if ticker.open_price < ticker.last_price > DOje1:
+          print (' candle Green')
+
+
+
+
+if ticker.low_price < ticker.last_price<=ticker.adj_close >= DOje3<ticker.open_price:
+     print (' کندل دوجي قرمزشکل گرفته')
+else:
+     if ticker.open_price > ticker.last_price < DOje1:
+          print (' candle Red')
         
 
-if ticker.open_price < ticker.last_price > DOje1:
-    print (' candle Green')
-else:
-    if ticker.open_price > ticker.last_price < DOje1:
-        print (' candle Red')
 
 
-if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
-    print (' candle marabozo Green')
+if ticker.open_price <=ticker.low_price< ticker.last_price == ticker.high_price :
+    print (' candle marabozo Green معتبرترين')
 else:
-    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
-        print (' candle marabozo Red')
+    if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+         print (' candle marabozo Green')
+
+
+
+         
+if ticker.open_price >=ticker.high_price> ticker.last_price == ticker.low_price :
+     print (' candle marabozo Red معتبرترين')
+else:
+     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+          print (' candle marabozo Red') 
+
+
 
 #===============================================
 
