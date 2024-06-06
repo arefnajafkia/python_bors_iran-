@@ -554,11 +554,15 @@ nv1=((highest_price_7)-(today_price))
 nv2=((highest_price_7)+(today_price))/2
 jnv=nv1/nv2
 jnv1=(math.ceil(jnv*100)) 
+#بدست آوردن درصد تفاوت قيمت امروزبه حمايت هفتگي
+nv3=((lowest_price_7)-(today_price))
+nv4=((lowest_price_7)+(today_price))/2
+jnh=nv3/nv4
+jnh1=(math.ceil(jnh*100))
 
 
 if m_7 <= today_price <= highest_price_7 :
      print ('قيمت نزديک مقاومت هفتگي ميباشد')
-     print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
 elif m_30 <= today_price <= highest_price_60 :
      print ('قيمت نزديک مقاومت ماهيانه ميباشد')
 elif m_360 <= today_price <= highest_price_360 :
@@ -572,6 +576,8 @@ else:
           print ('قيمت نزديک حمايت ساليانه ميباشد')
           
              
+print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
+print (jnh1,'% : درصدتفاوت قيمت امروزباحمايت هفتگي')             
 print ()
 #=====================================================
 print(30*"=",nam,"ichimoku Signals for buying and selling  ")
@@ -1086,7 +1092,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون"]
+        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون","آريا","اپال"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -1154,32 +1160,48 @@ print()
 
 print ('='*30,' candel DOje')
 DOje1= (ticker.high_price+ticker.low_price)/2
-DOje2= DOje1 + 20
-DOje3= DOje1 - 20
+
 
 if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
+else:
+     if ticker.high_price >ticker.adj_close<= DOje1 >ticker.low_price:
+         print (' معتبرترین کندل دوجي شکل گرفته')
+         
 
 
-if ticker.high_price > ticker.last_price >= DOje2:
+if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if ticker.low_price < ticker.last_price <= DOje3:
-        print (' کندل دوجي قرمزشکل گرفته')
+     if ticker.open_price < ticker.last_price > DOje1:
+          print (' candle Green')
+
+
+
+
+if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
+     print (' کندل دوجي قرمزشکل گرفته')
+else:
+     if ticker.open_price > ticker.last_price < DOje1:
+          print (' candle Red')
         
 
-if ticker.open_price < ticker.last_price > DOje1:
-    print (' candle Green')
-else:
-    if ticker.open_price > ticker.last_price < DOje1:
-        print (' candle Red')
 
 
-if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
-    print (' candle marabozo Green')
+if ticker.open_price <=ticker.low_price< ticker.last_price == ticker.high_price :
+    print (' candle marabozo Green معتبرترين')
 else:
-    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
-        print (' candle marabozo Red')
+    if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+         print (' candle marabozo Green')
+
+
+
+         
+if ticker.open_price >=ticker.high_price> ticker.last_price == ticker.low_price :
+     print (' candle marabozo Red معتبرترين')
+else:
+     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+          print (' candle marabozo Red') 
 
 #===============================================
 
