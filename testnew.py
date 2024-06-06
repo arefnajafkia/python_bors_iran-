@@ -631,8 +631,7 @@ else:
 #=====================================================
 print ('='*30,' candel DOje')
 DOje1= (ticker.high_price+ticker.low_price)/2
-DOje2= DOje1 + 20
-DOje3= DOje1 - 20
+
 
 if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
@@ -959,25 +958,26 @@ h_360=(lowest_price_360)+50
 nv1=((highest_price_7)-(today_price))
 nv2=((highest_price_7)+(today_price))/2
 jnv=nv1/nv2
-jnv1=(math.ceil(jnv*100)) 
+jnv1=(math.ceil(jnv*100))
+#بدست آوردن درصد تفاوت قيمت امروزبه حمايت هفتگي
+nv3=((lowest_price_7)-(today_price))
+nv4=((lowest_price_7)+(today_price))/2
+jnh=nv3/nv4
+jnh1=(math.ceil(jnh*100))
 
 
 if m_7 <= today_price <= highest_price_7 :
      print ('قيمت نزديک مقاومت هفتگي ميباشد')
      print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
-elif m_30 <= today_price <= highest_price_60 :
-     print ('قيمت نزديک مقاومت ماهيانه ميباشد')
-elif m_360 <= today_price <= highest_price_360 :
-     print ('قيمت نزديک مقاومت ساليانه ميباشد')
 else:
      if h_7 >= today_price >= lowest_price_7 :
           print ('قيمت نزديک حمايت هفتگي ميباشد')
-     elif h_30 >= today_price >= lowest_price_60 :
-          print ('قيمت نزديک حمايت ماهيانه ميباشد')
-     elif h_360 >= today_price >= lowest_price_360 :
-          print ('قيمت نزديک حمايت ساليانه ميباشد')
-          
-             
+          print (jnh1,'% : درصدتفاوت قيمت امروزباحمايت هفتگي')
+
+
+
+print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
+print (jnh1,'% : درصدتفاوت قيمت امروزباحمايت هفتگي')             
 print ()
 #================================================================
 print ('='*40,' ميانگين قيمت')
