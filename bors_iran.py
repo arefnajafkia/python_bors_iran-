@@ -289,8 +289,8 @@ for word in words:
 print(30*"-")
 print ()
 
-sentence1 = "رسم نمودارميانگين هاي 10,20,50 .1 : "
-sentence2 = "انجام محاسبات حجم وکانال سهام شما .2 : "
+sentence1 = "رسم نمودارمانگينهاي 10و20و50 و ايچيموکو   =1 : "
+sentence2 = "انجام محاسبات حجم وکانالهاي سهام   =2 : "
 
 # Print the characters of the first prompt with a delay of 0.2 seconds
 for char in sentence1:
@@ -321,6 +321,50 @@ if user_input == "1":
     ten_day_average = DF['Close'].rolling(10).mean()
     today_price_scalar = today_price.item()
 # Check if the user wants to calculate the volume and channel
+#=================================================
+#رسم نمودارايچيموکو
+    print(40*"=",nam,"Charts ichimoku ")
+    # Convert the 'Date' column to a datetime object
+    DF['Date'] = pd.to_datetime(DF['Date'])
+
+    # Calculate the conversion line (Tenkan-sen)
+    DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
+
+    # Calculate the base line (Kijun-sen)
+    DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
+
+    # Calculate the leading span A (Senkou Span A)
+    DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
+    DF['leading_span_a'] = DF['leading_span_a'].shift(9)
+
+    # Calculate the leading span B (Senkou Span B)
+    DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
+    DF['leading_span_b'] = DF['leading_span_b'].shift(26)
+
+    # Calculate the lagging span (Chikou Span)
+    DF['lagging_span'] = DF['Close'].shift(-26)
+
+    # Plot the Ichimoku cloud
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
+    ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
+    ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
+    ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
+    ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
+    ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
+
+    ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
+
+    plt.title('Ichimoku Cloud for {}'.format(nam))
+    plt.xlabel('Date')
+    plt.ylabel('Price')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+#======================================================
 elif user_input == "2":
         print ()
         sentence = "----------Thanks for the explanation about your stock----------"
