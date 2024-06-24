@@ -1727,4 +1727,62 @@ print (h10 ,': Descending روند نزولي')
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 
+#=================================================
+
+#رسم نمودارايچيموکو
+print(40*"=",nam,"Charts ichimoku ")
+# Convert the 'Date' column to a datetime object
+DF['Date'] = pd.to_datetime(DF['Date'])
+
+# Calculate the conversion line (Tenkan-sen)
+DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
+
+# Calculate the base line (Kijun-sen)
+DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
+
+# Calculate the leading span A (Senkou Span A)
+DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
+DF['leading_span_a'] = DF['leading_span_a'].shift(9)
+
+# Calculate the leading span B (Senkou Span B)
+DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
+DF['leading_span_b'] = DF['leading_span_b'].shift(26)
+
+# Calculate the lagging span (Chikou Span)
+DF['lagging_span'] = DF['Close'].shift(-26)
+
+# Plot the Ichimoku cloud
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(12, 6))
+
+ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
+ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
+ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
+ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
+ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
+ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
+
+ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
+
+plt.title('Ichimoku Cloud for {}'.format(nam))
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+print ('it was shown ')      
+#===================================================
+
+print(40*"=",nam," EMA_3,10,20 نمايش نمودارقيمت و ")        
+# EMA_3,10,20 نمايش نمودارقيمت و
+DF.index = DF['Date']
+mplf.plot(DF[-200:], type='candle', mav=(50, 10, 20))
+plt.show()
+
+print ('it was shown ')
+
+#=================================================
+
 
