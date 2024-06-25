@@ -157,6 +157,12 @@ past_103_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_103_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 mov103 = (past_103_days_high + past_103_days_low)/2
 moving_103=(math.ceil(mov103))
+#محاسبه دقيق ميانگين 240روزه 
+window_size = 240
+past_240_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_240_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+mov240 = (past_240_days_high + past_240_days_low)/2
+moving_240=(math.ceil(mov240))
 average_prices5 = closing_prices5.mean() #محاسبه ميانگين قيمت بسته شدن 150روز
 average_prices6 = closing_prices6.mean() # محاسبات ميانگين قيمت بسته شدن 5روز
 average_prices7 = closing_prices7.mean() #محاسبه ميانگين 3روزه
@@ -432,6 +438,22 @@ if today_price>moving_10:
 
 if today_price<moving_10:
      print ('قيمت پايين ميانگين 10روزه ميباشد')
+
+
+if today_price>moving_103>moving_240:
+     print ('قيمت بالاي ميانگين 103و240روزه ميباشد')
+
+
+if today_price<moving_103<moving_240:
+     print ('قيمت پايين ميانگين 103و240روزه ميباشد')
+
+
+if today_price<moving_103<moving_240>ten8:
+     print('تنکانسن وقيمت پايين ميانگين 103و240روزه ميباشد')
+
+
+if today_price>moving_103>moving_240<ten8:
+     print('تنکانسن وقيمت بالاي ميانگين 103و240روزه ميباشد')
 
      
 print ("="*40)
@@ -1210,9 +1232,9 @@ if index == 1:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما') 
           
           
@@ -1246,9 +1268,9 @@ if index == 2:
          print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما') 
          
           
@@ -1266,9 +1288,9 @@ if index == 3:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما') 
           
           
@@ -1306,10 +1328,10 @@ if index == 4:
          print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
-          print (psv, 'مقدارزيان شما') 
+     if p > s > 0:
+          print (psv, 'مقدارزيان شما')
          
          
 # غکورش
@@ -1338,17 +1360,17 @@ if index == 5:
          print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما') 
          
          
 # شپاکسا
 if index == 6:
-     p=2095
-     s=1586
-     v=236600
+     p=1625
+     s=0
+     v=5000
      psv=(s*v)-(p*v)
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )
@@ -1370,9 +1392,9 @@ if index == 6:
          print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما') 
          
           
@@ -1402,10 +1424,10 @@ if index == 7:
          print ("مابين حمايت 4320 ومقاومت 4807 هستيم درميانه 4565 روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
-          print (psv, 'مقدارزيان شما')           
+     if p > s > 0:
+          print (psv, 'مقدارزيان شما')          
          
          
 # تاپيکو
@@ -1422,10 +1444,10 @@ if index == 8:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
-          print (psv, 'مقدارزيان شما')           
+     if p > s > 0:
+          print (psv, 'مقدارزيان شما')          
           
           
 # دسبحان
@@ -1442,9 +1464,9 @@ if index == 9:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما')           
           
           
@@ -1468,10 +1490,10 @@ if index == 10:
           print ("مابين حمايت 5610 ومقاومت 7184 هستيم درميانه  6343  روداريم")
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
-          print (psv, 'مقدارزيان شما')           
+     if p > s > 0:
+          print (psv, 'مقدارزيان شما')          
           
 
 # فصبا
@@ -1486,9 +1508,9 @@ if index == 11:
      if s > 0 :
           print (s , ': قيمت فروش شمااز',sahame )
           print (v ,': تعدادسهام فروخته شده')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما')           
           
           
@@ -1506,9 +1528,9 @@ if index == 12:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما')           
 
 
@@ -1526,9 +1548,9 @@ if index == 13:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما')           
 
 
@@ -1546,9 +1568,9 @@ if index == 14:
           print (v ,': تعدادسهام فروخته شده')
      if p>0 and s>0 :
           print (s,'شمااين سهم رافروخته ايد به قيمت')
-     if p < s :
+     if s > p > 0 :
           print (psv, 'مقدارسودشما')
-     if p > s :
+     if p > s > 0:
           print (psv, 'مقدارزيان شما')           
 
 
