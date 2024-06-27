@@ -434,26 +434,23 @@ else:
 
 if today_price>moving_10:
      print ('قيمت بالاي ميانگين 10 روزه ميباشد')
-
-
-if today_price<moving_10:
-     print ('قيمت پايين ميانگين 10روزه ميباشد')
-
-
-if today_price>moving_103>moving_240:
-     print ('قيمت بالاي ميانگين 103و240روزه ميباشد')
-
-
-if today_price<moving_103<moving_240:
-     print ('قيمت پايين ميانگين 103و240روزه ميباشد')
+else:
+     if today_price<moving_10:
+          print ('قيمت پايين ميانگين 10روزه ميباشد')
 
 
 if today_price<moving_103<moving_240>ten8:
      print('تنکانسن وقيمت پايين ميانگين 103و240روزه ميباشد')
+else:
+     if today_price<moving_103<moving_240:
+          print ('قيمت پايين ميانگين 103و240روزه ميباشد')
 
 
 if today_price>moving_103>moving_240<ten8:
      print('تنکانسن وقيمت بالاي ميانگين 103و240روزه ميباشد')
+else:
+     if today_price>moving_103>moving_240:
+          print ('قيمت بالاي ميانگين 103و240روزه ميباشد')
 
      
 print ("="*40)
