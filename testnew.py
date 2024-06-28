@@ -362,6 +362,14 @@ else:
 if kij30<=kij29<=kij28<=kij27<=kij26 >today_price>yesterday_price< ten8<=ten9<=ten10<=ten11<=ten12 :
      print ('قيمت زيرتنکانسن ميباشد وروبه بالابطرف کيجونسن ميرود')
 else:
+    if kij30>=kij29>=kij28>=kij27>=kij26 >today_price>yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
+         print ('قيمت بالاي تنکانسن ميباشد وروبه بالا بطرف کيجونسن ميرود')
+
+
+
+if kij30<=kij29<=kij28<=kij27<=kij26 <today_price<yesterday_price< ten8<=ten9<=ten10<=ten11<=ten12 :
+     print ('قيمت زيرتنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
+else:
     if kij30>=kij29>=kij28>=kij27>=kij26 <today_price<yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
          print ('قيمت بالاي تنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
          
@@ -454,27 +462,51 @@ else:
 
 
 #===============================================
-#تعيين مقاومت وحمايت سرراه باتقاطع تنکانسن وکيجونسن          
+#تعيين اولين مقاومت وحمايت سرراه با محاسبات انجام شده باايچيموکو         
+past_8 = past_8_days_high - past_8_days_low
+past_8h = past_8  + past_8_days_high
+past_8L = past_8_days_low - past_8
+h8 = (math.ceil(past_8h))
+L8 = (math.ceil(past_8L))
+
+if yesterday_price < today_price >= tenken8 == kijon26 :
+     print (past_8h, ' : اولين مقاومت سرراه')
+
+
+if yesterday_price > today_price <= tenken8 == kijon26 :
+     print (past_8L, ' : اولين حمايت سرراه')
+
+
+print (20*'-')
+if yesterday_price < today_price:
+     print (h8, ' : اولين مقاومت سرراه')
+else:
+     if yesterday_price > today_price:
+          print (L8, ' : اولين حمايت سرراه')
+
+
+#===============================================
+#تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو         
 past_26 = past_26_days_high - past_26_days_low
 past_26h = past_26  + past_26_days_high
 past_26L = past_26_days_low - past_26
 h26 = (math.ceil(past_26h))
 L26 = (math.ceil(past_26L))
 
-if yesterday_price < today_price >= tenken9 == kijon26 :
-     print (past_26h, ' : اولين مقاومت سرراه')
+if yesterday_price < today_price >= tenken8 == kijon26 :
+     print (past_26h, ' : دومين مقاومت سرراه')
 
 
-if yesterday_price > today_price <= tenken9 == kijon26 :
-     print (past_26L, ' : اولين حمايت سرراه')
+if yesterday_price > today_price <= tenken8 == kijon26 :
+     print (past_26L, ' : دومين حمايت سرراه')
 
 
 print (20*'-')
 if yesterday_price < today_price:
-     print (h26, ' : اولين مقاومت سرراه')
+     print (h26, ' : دومين مقاومت سرراه')
 else:
      if yesterday_price > today_price:
-          print (L26, ' : اولين حمايت سرراه')
+          print (L26, ' : دومين حمايت سرراه')
 
      
 print ("="*40)
