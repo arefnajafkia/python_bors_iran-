@@ -273,6 +273,7 @@ print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
 #print(f"komu52_min: {komu52_min}")
 print ()
 
+#تعيين روندنزولي ياصعودي باتنکانسن وکيجونسن
 window_size = 14
 past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 window_size = 28
@@ -284,7 +285,7 @@ if past_14_days_low < past_28_days_low :
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
-
+#----------------------------------
 
 
 if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
@@ -366,13 +367,17 @@ else:
          print ('قيمت بالاي تنکانسن ميباشد وروبه بالا بطرف کيجونسن ميرود')
 
 
+if kij30>=kij29>=kij28>=kij27>=kij26>ten8<=ten9<=ten10<=ten11<=ten12 <today_price>yesterday_price :
+     print ('قيمت بالاي تنکانسن وکيجونسن است وروبه بالادرحرکت ميباشد درضمن  تنکانسن زيرکيجونسن است ')
+
+
 
 if kij30<=kij29<=kij28<=kij27<=kij26 <today_price<yesterday_price< ten8<=ten9<=ten10<=ten11<=ten12 :
      print ('قيمت زيرتنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
 else:
     if kij30>=kij29>=kij28>=kij27>=kij26 <today_price<yesterday_price> ten8<=ten9<=ten10<=ten11<=ten12 :
          print ('قيمت بالاي تنکانسن ميباشد وروبه پايين بطرف کيجونسن ميرود')
-         
+        
 
 
 if kij30>=kij29>=kij28>ten12>=ten11>=ten10<kij27>=kij26>yesterday_price <=ten9<ten8<= today_price :
@@ -421,7 +426,12 @@ else:
      if ten9>=ten8<today_price<kij27>=kij26 and yesterday_price<=ten<kij26:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
 
+#----------------------------------
+#تعين فاصله تنکانسن باکيجونسن
+ten8_kij26 = kijon26 - tenken8
 
+print (ten8_kij26 , ' : فاصله تنکانسن باکيجونسن')
+#----------------------------------
 print ()
 # تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
 
