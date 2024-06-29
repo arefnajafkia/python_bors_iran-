@@ -27,7 +27,7 @@ nam = input ("Hello,Please write the name of the stock you want : \n لطفا ن
 
 DF = tse.Get_Price_History(stock=nam,
                             start_date='1401-01-01',
-                            end_date='1403-02-07',
+                            end_date='1403-04-09',
                             ignore_date=True,
                             adjust_price=True,
                             show_weekday=True,
@@ -1670,6 +1670,7 @@ if index<=14 and p > 0:
      sz= pf-pk 
      print(20*"-" )
      
+     
      if today_price > take_profit:
           profit = str ( pf - pk )
           profit_float = float(profit)
@@ -1679,7 +1680,9 @@ if index<=14 and p > 0:
           print (" شماسود ميکنيد به مبلغ :" ,pp)
           print("Your profit percentage :% درصدسودشماشده : {} ".format(math.ceil(profit_percentage)))
           print(20*"-" )
-     elif today_price < stop_loss:
+
+          
+     if today_price < stop_loss:
           loss = str ( pk - pf )
           loss_float = float(loss)
           loss_percentage = (loss_float / pk) * 100
@@ -1688,17 +1691,20 @@ if index<=14 and p > 0:
           print (" شماضرر ميکنيد به مبلغ :" ,pp)
           print("The percentage of your loss :% درصدضررشماشده : {} ".format(math.ceil(loss_percentage)))
           print(20*"-" )
-     else:
-          if pk > (ticker.adj_close * vol) :
-              print("Price to limit")
-              print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
-              print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
-              print(20*"-" )
-          if pk < (today_price * vol) :
-              print("Price to limit")
-              print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
-              print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
-              print(20*"-" )
+
+          
+     if pk > pf :
+          print("Price to limit")
+          print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
+          print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
+          print(20*"-" )
+
+          
+     if pk < pf :
+          print("Price to limit")
+          print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
+          print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
+          print(20*"-" )
 
           
      if p == p :
