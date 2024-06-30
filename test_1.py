@@ -688,70 +688,6 @@ buy_signals = (
 )
 print(buy_signals.tail(3))         
 #==========================================================
-#print(45*"=",nam,"hm_Fib and mo_Fib")
-#if (ticker.max_year)>(ticker.adj_close) and (ticker.adj_close)<(ticker.yesterday_price):
-hm1= (((((ticker.max_year)*23.60)/100)-(ticker.max_year)),' : hm_Fib_23.60')#: max_Fib_23.60
-hm2= (((((ticker.max_year)*38.20)/100)-(ticker.max_year)),' : hm_Fib_38.20')#: max_Fib_38.20'
-hm3= (((((ticker.max_year)*50)/100)-(ticker.max_year)),' : hm_Fib_50')      #: max_Fib_50
-hm4= (((((ticker.max_year)*61.80)/100)-(ticker.max_year)),' : hm_Fib_61.80')#: max_Fib_61.80
-hm5= (ticker.min_year,' : hm_Fib_78.60')                                          #: Fib_0
-hm6= (((((ticker.min_year)*23.60)/100)-(ticker.min_year)),' : hm_Fib_161.80')#: min_Fib_23.60
-#print ('حمايت 1',hm1,'\nحمايت 2', hm2,'\nحمايت 3', hm3,'\nحمايت 4', hm4,'\nحمايت 5',hm5,'\nحمايت 6',hm6,'\nحمايت 7',hm7,'\nحمايت 8',hm8,'\nحمايت 9',hm9)
-     
-#if (ticker.min_year)<(ticker.adj_close) and (ticker.adj_close)>(ticker.yesterday_price):
-mo1= (((((ticker.min_year)*23.60)/100)+(ticker.min_year)),' : mo_Fib_23.60') #: min_Fib_23.60
-mo2= (((((ticker.min_year)*38.20)/100)+(ticker.min_year)),' : mo_Fib_38.20') #: min_Fib_38.20
-mo3= (((((ticker.min_year)*50)/100)+(ticker.min_year)),' : mo_Fib_50')       #: min_Fib_50
-mo4= (((((ticker.min_year)*61.80)/100)+(ticker.min_year)),' : mo_Fib_61.80') #: min_Fib_61.80
-mo5= (((((ticker.min_year)*78.60)/100)+(ticker.min_year)),' : mo_Fib_78.60') #: min_Fib_78.60
-mo6= (((((ticker.min_year)*100)/100)+(ticker.min_year)),' : mo_Fib_100')     #: min_Fib_100
-#print (' مقاومت1 ',mo1,'\n مقاومت2 ', mo2,'\n مقاومت3 ', mo3,'\n مقاومت4 ', mo4,'\n مقاومت5 ', mo5,'\n مقاومت6 ', mo6,'\n مقاومت7 ', mo7,'\n مقاومت8 ', mo8,'\n مقاومت9 ', mo9,'\n مقاومت10 ', mo10)
-#-----------------------------------
-Fib=print(45*"=",sahame,"year for hm_Fib and mo_Fib")
-if (ticker.max_year)>(ticker.adj_close)<(ticker.yesterday_price):
-     print ( hm1,'\n', hm2,'\n', hm3,'\n', hm4,'\n',hm5,'\n',hm6)     
-  
-     print('-'*20)
-
-else:
-    if (ticker.min_year)<(ticker.adj_close) >(ticker.yesterday_price):
-         print (  mo1,'\n', mo2,'\n', mo3,'\n', mo4,'\n', mo5,'\n', mo6) 
-  
-         print('-'*20)          
-#----------------------------------
-
-#==========================================================
-#print(45*"=",nam,"hm_Fib and mo_Fib")
-#if (ticker.max_year)>(ticker.adj_close) and (ticker.adj_close)<(ticker.yesterday_price):
-hm1= (((((komu52_max)*23.60)/100)-(komu52_max)),' : hm_Fib_23.60')#: max_Fib_23.60
-hm2= (((((komu52_max)*38.20)/100)-(komu52_max)),' : hm_Fib_38.20')#: max_Fib_38.20'
-hm3= (((((komu52_max)*50)/100)-(komu52_max)),' : hm_Fib_50')      #: max_Fib_50
-hm4= (((((komu52_max)*61.80)/100)-(komu52_max)),' : hm_Fib_61.80')#: max_Fib_61.80
-hm5= (komu52_max,' : hm_Fib_78.60')                                          #: Fib_0
-hm6= (((((komu52_min)*23.60)/100)-(komu52_min)),' : hm_Fib_161.80')#: min_Fib_23.60
-#print ('حمايت 1',hm1,'\nحمايت 2', hm2,'\nحمايت 3', hm3,'\nحمايت 4', hm4,'\nحمايت 5',hm5,'\nحمايت 6',hm6,'\nحمايت 7',hm7,'\nحمايت 8',hm8,'\nحمايت 9',hm9)
-     
-#if (ticker.min_year)<(ticker.adj_close) and (ticker.adj_close)>(ticker.yesterday_price):
-mo1= (((((komu52_min)*23.60)/100)+(komu52_min)),' : mo_Fib_23.60') #: min_Fib_23.60
-mo2= (((((komu52_min)*38.20)/100)+(komu52_min)),' : mo_Fib_38.20') #: min_Fib_38.20
-mo3= (((((komu52_min)*50)/100)+(komu52_min)),' : mo_Fib_50')       #: min_Fib_50
-mo4= (((((komu52_min)*61.80)/100)+(komu52_min)),' : mo_Fib_61.80') #: min_Fib_61.80
-mo5= (((((komu52_min)*78.60)/100)+(komu52_min)),' : mo_Fib_78.60') #: min_Fib_78.60
-mo6= (((((komu52_min)*100)/100)+(komu52_min)),' : mo_Fib_100')     #: min_Fib_100
-#print (' مقاومت1 ',mo1,'\n مقاومت2 ', mo2,'\n مقاومت3 ', mo3,'\n مقاومت4 ', mo4,'\n مقاومت5 ', mo5,'\n مقاومت6 ', mo6,'\n مقاومت7 ', mo7,'\n مقاومت8 ', mo8,'\n مقاومت9 ', mo9,'\n مقاومت10 ', mo10)
-#-----------------------------------
-Fib=print(45*"=",sahame,"komu52 for hm_Fib and mo_Fib")
-if (komu52_max)>(ticker.adj_close)<(ticker.yesterday_price):
-     print ( hm1,'\n', hm2,'\n', hm3,'\n', hm4,'\n',hm5,'\n',hm6)     
-  
-     print('-'*20)
-
-else:
-    if (komu52_min)<(ticker.adj_close) >(ticker.yesterday_price):
-         print (  mo1,'\n', mo2,'\n', mo3,'\n', mo4,'\n', mo5,'\n', mo6) 
-  
-         print('-'*20)          
-#----------------------------------
 
 print(40*"="," Your stock purchase and sale calculations",sahame,)
 # چکارن
@@ -962,12 +898,12 @@ if index<=12 and p > 0:
           hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
           hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
           print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',sahame)
-          print ((math.ceil(hs1)),'   20% profit')
-          print ((math.ceil(hs2)),'   10% profit')
-          print ((math.ceil(hs3)),'   5% profit') 
-          print ((math.ceil(hz)),'    3% loss')
-          print ((math.ceil(hs4)),'   Best selling price ( = )')
-          print (ticker.last_price,' : last price ')
+          print ((math.ceil(hs1)),'   :20% profit')
+          print ((math.ceil(hs2)),'   :10% profit')
+          print ((math.ceil(hs3)),'   :5% profit') 
+          print ((math.ceil(hz)),'    :3% loss')
+          print ((math.ceil(hs4)),'   :Best selling price ( = )')
+          print (ticker.last_price,'  :last price ')
           print ('-'*20)
 
           
