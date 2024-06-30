@@ -1,5 +1,6 @@
 
 # ichikumo و RSI  محاسبات وسيگنالهاي 
+import time
 import math
 import numpy as np
 import pandas as pd
@@ -11,13 +12,15 @@ import pandas_ta as ta
 import yfinance as yf
 import pandas_datareader.data as web
 from datetime import date
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 nam = input("Please write the name of the stock you want : \n write in nam :")
 
 DF = tse.Get_Price_History(stock=nam,
                              start_date='1401-05-01',
-                             end_date='1402-05-08',
+                             end_date='1403-04-09',
                              ignore_date=True,
                              adjust_price=True,
                              show_weekday=True,
@@ -352,16 +355,13 @@ import matplotlib.pyplot as plt
 import pytse_client as tse
 
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
-namad =["چکارن","تلیسه","غمینو","وسپه",
-        "غکورش","شپاکسا","پاکشو",
-        "تاپیکو","دسبحان","کگل",
-        "فصبا","حتوکا","خگستر",
-        "فولاد","شپنا","فملی",
-        "حتاید","پی پاد","خودرو",
-        "تیپیکو","خساپا","سرچشمه",
-        "نیان","ختور","فپنتا",
-        "شبندر","شستان","غفارس",
-        "وبصادر","کچاد",]
+namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا","ثبهساز","تاپیکو",
+        "دسبحان","ومعادن","فصبا","حتوکا","خگستر","فولاد","شپنا","فملی","شستا",
+        "فسبزوار","خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور","فپنتا",
+        "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
+        "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
+        "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
+        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون","آريا","اپال"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -887,6 +887,7 @@ mo8= (((((ticker.min_year)*261.80)/100)+(ticker.min_year)),' : mo_Fib_261.80')#:
 mo9= (((((ticker.min_year)*361.80)/100)+(ticker.min_year)),' : mo_Fib_361.80')#: min_Fib_361.80
 mo10=(((((ticker.min_year)*423.60)/100)+(ticker.min_year)),' : mo_Fib_423.60')#: min_Fib_423.60
 #print (' مقاومت1 ',mo1,'\n مقاومت2 ', mo2,'\n مقاومت3 ', mo3,'\n مقاومت4 ', mo4,'\n مقاومت5 ', mo5,'\n مقاومت6 ', mo6,'\n مقاومت7 ', mo7,'\n مقاومت8 ', mo8,'\n مقاومت9 ', mo9,'\n مقاومت10 ', mo10)
+
 #-----------------------------------
 Fib=print(40*"=",sahame,"hm_Fib and mo_Fib")
 if (ticker.max_year)>(ticker.adj_close)<(ticker.yesterday_price):
@@ -894,6 +895,45 @@ if (ticker.max_year)>(ticker.adj_close)<(ticker.yesterday_price):
 else:
     if (ticker.min_year)<(ticker.adj_close) >(ticker.yesterday_price):
          print (' مقاومت1 ',mo1,'\n مقاومت2 ', mo2,'\n مقاومت3 ', mo3,'\n مقاومت4 ', mo4,'\n مقاومت5 ', mo5,'\n مقاومت6 ', mo6,'\n مقاومت7 ', mo7,'\n مقاومت8 ', mo8,'\n مقاومت9 ', mo9,'\n مقاومت10 ', mo10)
+
+#==========================================
+# محاسبات ابرکومو52 روزه به قبل
+# Calculate the highest and lowest price over the past 26 days
+window_size = 52
+past_52_days_high = DF['High'].rolling(window_size).max().iloc[-1]
+past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+komu52_max = (math.ceil(past_52_days_high))
+komu52_min = (math.ceil(past_52_days_low))
+#print(45*"=",nam,"hm_Fib and mo_Fib")
+#if (ticker.max_year)>(ticker.adj_close) and (ticker.adj_close)<(ticker.yesterday_price):
+hm1= (((((komu52_max)*23.60)/100)-(komu52_max)),' : hm_Fib_23.60')#: max_Fib_23.60
+hm2= (((((komu52_max)*38.20)/100)-(komu52_max)),' : hm_Fib_38.20')#: max_Fib_38.20'
+hm3= (((((komu52_max)*50)/100)-(komu52_max)),' : hm_Fib_50')      #: max_Fib_50
+hm4= (((((komu52_max)*61.80)/100)-(komu52_max)),' : hm_Fib_61.80')#: max_Fib_61.80
+hm5= (komu52_max,' : hm_Fib_78.60')                                          #: Fib_0
+hm6= (((((komu52_min)*23.60)/100)-(komu52_min)),' : hm_Fib_161.80')#: min_Fib_23.60
+#print ('حمايت 1',hm1,'\nحمايت 2', hm2,'\nحمايت 3', hm3,'\nحمايت 4', hm4,'\nحمايت 5',hm5,'\nحمايت 6',hm6,'\nحمايت 7',hm7,'\nحمايت 8',hm8,'\nحمايت 9',hm9)
+     
+#if (ticker.min_year)<(ticker.adj_close) and (ticker.adj_close)>(ticker.yesterday_price):
+mo1= (((((komu52_min)*23.60)/100)+(komu52_min)),' : mo_Fib_23.60') #: min_Fib_23.60
+mo2= (((((komu52_min)*38.20)/100)+(komu52_min)),' : mo_Fib_38.20') #: min_Fib_38.20
+mo3= (((((komu52_min)*50)/100)+(komu52_min)),' : mo_Fib_50')       #: min_Fib_50
+mo4= (((((komu52_min)*61.80)/100)+(komu52_min)),' : mo_Fib_61.80') #: min_Fib_61.80
+mo5= (((((komu52_min)*78.60)/100)+(komu52_min)),' : mo_Fib_78.60') #: min_Fib_78.60
+mo6= (((((komu52_min)*100)/100)+(komu52_min)),' : mo_Fib_100')     #: min_Fib_100
+#print (' مقاومت1 ',mo1,'\n مقاومت2 ', mo2,'\n مقاومت3 ', mo3,'\n مقاومت4 ', mo4,'\n مقاومت5 ', mo5,'\n مقاومت6 ', mo6,'\n مقاومت7 ', mo7,'\n مقاومت8 ', mo8,'\n مقاومت9 ', mo9,'\n مقاومت10 ', mo10)
+#-----------------------------------
+Fib=print(45*"=",sahame,"komu52 for hm_Fib and mo_Fib")
+if (komu52_max)>(ticker.adj_close)<(ticker.yesterday_price):
+     print ( hm1,'\n', hm2,'\n', hm3,'\n', hm4,'\n',hm5,'\n',hm6)     
+  
+     print('-'*20)
+
+else:
+    if (komu52_min)<(ticker.adj_close) >(ticker.yesterday_price):
+         print (  mo1,'\n', mo2,'\n', mo3,'\n', mo4,'\n', mo5,'\n', mo6) 
+  
+         print('-'*20)          
          
 #==========================================================
 print(30*"=","محاسبات خريد شمااز",sahame,)
