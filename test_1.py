@@ -846,7 +846,7 @@ if index<=12 and p > 0:
      vol=v
      # قيمت امروزسهم Today's stock price
      today_price = (math.ceil(ticker.adj_close))     
-     price_kharid= (-0.004 * price)  #کارمزد خريد
+     price_kharid= (-0.003 * price)  #کارمزد خريد
      price_forosh= (-0.009 * today_price) #کارمزد فروش محاسبه باقيمت امروز
      pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
      pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
