@@ -285,7 +285,7 @@ if past_14_days_low < past_28_days_low :
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
-#----------------------------------
+
 
 
 if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
@@ -1117,6 +1117,22 @@ else:
           print ('قيمت بالاي ميانگين 3وپايين ميانگين10و103ميباشد')
      elif today_price > moving_3 < moving_10:
            print ('قيمت بالاي ميانگين 3وپايين ميانگين 10ميباشد')
+           
+
+
+if moving_3 >= moving_10 >= tenken8 > kijon26 <= ticker.yesterday_price < ticker.adj_close :
+     print ('تيک صعودي شده اگرحمايت تنکانسن هم باهاش باشه,خريد باکندل تاييد')
+else:
+     if moving_3 <= moving_10 <= tenken8 < kijon26 >= ticker.yesterday_price > ticker.adj_close :
+          print ('تيک نزولي شده اگرحمايت تنکانسن هم باهاش بود ,باکندل تاييدبفروش')
+          
+
+
+if moving_3 > moving_10 > tenken8 > kijon26 < ticker.yesterday_price < ticker.adj_close :
+     print ('يک روند ادامه داروروبه بالاداريم')
+else:
+     if moving_3 < moving_10 < tenken8 < kijon26 > ticker.yesterday_price > ticker.adj_close :
+          print ('يک روند ادامه دار وروبه پايين داريم')
 
          
 print ()
@@ -1656,7 +1672,7 @@ if index<=14 and p > 0:
      vol=v
      # قيمت امروزسهم Today's stock price
      today_price = (math.ceil(ticker.last_price))     
-     price_kharid= (-0.004 * price)  #کارمزد خريد
+     price_kharid= (-0.003 * price)  #کارمزد خريد
      price_forosh= (-0.006 * today_price) #کارمزد فروش محاسبه باقيمت امروز
      pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
      pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
@@ -1807,72 +1823,102 @@ else:
     print (c , "not Engulfing !")
     print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
     
+print ()
 print ('~'*10)
 print ('بودن روند False يا True دقت کنيدبه')
 print (h5,': ascending روند صعودي ')
 print (h10 ,': Descending روند نزولي')
+print ()
                
 #=======================================================
 
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
+print ('       ','-'*30)
+# پرسيدن براي خارج شدن ازبرنامه يا نمايش رسم نمودارايچيموکوانجام شود
+sentence1 = "1 . for Charts ichimoku : "
+sentence2 = "2 . for get out : "
 
+# Print the characters of the first prompt with a delay of 0.2 seconds
+for char in sentence1:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Print the characters of the second prompt with a delay of 0.2 seconds
+for char in sentence2:
+    print(char, end="")
+    time.sleep(0.2)
+print()
+
+# Get the user's input
+user_input = input("Enter 1 or 2 : ")
+print ('       ','-'*30)
 #=================================================
 
-#رسم نمودارايچيموکو
-print(40*"=",nam,"Charts ichimoku ")
-# Convert the 'Date' column to a datetime object
-DF['Date'] = pd.to_datetime(DF['Date'])
+#بازدن شماره 2ازبرنامه خارچ ميشويم
+# Check if the user wants to calculate the volume and channel
+if user_input == "2":
+     exit () 
 
-# Calculate the conversion line (Tenkan-sen)
-DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
+#بازدن شماره 2 نمودارايچيموکو ونمودارميانگين هارسم ميشود
+# Check if the user wants to plot the stock price
+if user_input == "1":
+     print(40*"=",nam,"Charts ichimoku ")
+     
+     # Convert the 'Date' column to a datetime object
+     DF['Date'] = pd.to_datetime(DF['Date'])
 
-# Calculate the base line (Kijun-sen)
-DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
+     # Calculate the conversion line (Tenkan-sen)
+     DF['conversion_line'] = (DF['High'].rolling(9).mean() + DF['Low'].rolling(9).mean()) / 2
 
-# Calculate the leading span A (Senkou Span A)
-DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
-DF['leading_span_a'] = DF['leading_span_a'].shift(9)
+     # Calculate the base line (Kijun-sen)
+     DF['base_line'] = (DF['High'].rolling(26).mean() + DF['Low'].rolling(26).mean()) / 2
 
-# Calculate the leading span B (Senkou Span B)
-DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
-DF['leading_span_b'] = DF['leading_span_b'].shift(26)
+     # Calculate the leading span A (Senkou Span A)
+     DF['leading_span_a'] = ((DF['conversion_line'].rolling(9).mean()) + (DF['base_line'].rolling(9).mean())) / 2
+     DF['leading_span_a'] = DF['leading_span_a'].shift(9)
 
-# Calculate the lagging span (Chikou Span)
-DF['lagging_span'] = DF['Close'].shift(-26)
+     # Calculate the leading span B (Senkou Span B)
+     DF['leading_span_b'] = ((DF['conversion_line'].rolling(26).mean()) + (DF['base_line'].rolling(26).mean())) / 2
+     DF['leading_span_b'] = DF['leading_span_b'].shift(26)
 
-# Plot the Ichimoku cloud
-import matplotlib.pyplot as plt
+     # Calculate the lagging span (Chikou Span)
+     DF['lagging_span'] = DF['Close'].shift(-26)
 
-fig, ax = plt.subplots(figsize=(12, 6))
+     # Plot the Ichimoku cloud
+     import matplotlib.pyplot as plt
 
-ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
-ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
-ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
-ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
-ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
-ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
+     fig, ax = plt.subplots(figsize=(12, 6))
 
-ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
+     ax.plot(DF['Date'], DF['Close'], label='Close', color='blue', alpha=0.5)
+     ax.plot(DF['Date'], DF['leading_span_a'], label='Leading Span A', color='green', linestyle='--')
+     ax.plot(DF['Date'], DF['leading_span_b'], label='Leading Span B', color='red', linestyle='--')
+     ax.plot(DF['Date'], DF['conversion_line'], label='Conversion Line', color='orange', linestyle='-')
+     ax.plot(DF['Date'], DF['base_line'], label='Base Line', color='purple', linestyle='-')
+     ax.plot(DF['Date'], DF['lagging_span'], label='Lagging Span', color='black', linestyle=':')
 
-plt.title('Ichimoku Cloud for {}'.format(nam))
-plt.xlabel('Date')
-plt.ylabel('Price')
-plt.legend()
-plt.grid(True)
-plt.show()
+     ax.fill_between(DF['Date'], DF['leading_span_a'], DF['leading_span_b'], alpha=0.2, color='gray')
 
-print ('it was shown ')      
-#===================================================
+     plt.title('Ichimoku Cloud for {}'.format(nam))
+     plt.xlabel('Date')
+     plt.ylabel('Price')
+     plt.legend()
+     plt.grid(True)
+     plt.show()
 
-print(40*"=",nam," EMA_3,10,20 نمايش نمودارقيمت و ")        
-# EMA_3,10,20 نمايش نمودارقيمت و
-DF.index = DF['Date']
-mplf.plot(DF[-200:], type='candle', mav=(50, 10, 20))
-plt.show()
+     print ('it was shown ')      
+     #===================================================
 
-print ('it was shown ')
+     print(40*"=",nam," EMA_3,10,20 نمايش نمودارقيمت و ")        
+     # EMA_3,10,20 نمايش نمودارقيمت و
+     DF.index = DF['Date']
+     mplf.plot(DF[-200:], type='candle', mav=(50, 10, 20))
+     plt.show()
 
-#=================================================
+     print ('it was shown ')
+
+     #=================================================
+     exit ()
 
 
