@@ -1133,6 +1133,14 @@ if moving_3 > moving_10 > tenken8 > kijon26 < ticker.yesterday_price < ticker.ad
 else:
      if moving_3 < moving_10 < tenken8 < kijon26 > ticker.yesterday_price > ticker.adj_close :
           print ('يک روند ادامه دار وروبه پايين داريم')
+          
+
+
+if moving_3 < ticker.yesterday_price > ticker.adj_close <= moving_10 > tenken8 > kijon26 :
+     print (' احتمال ريزش ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
+else:
+    if moving_3 > ticker.yesterday_price < ticker.adj_close >= moving_10 < tenken8 < kijon26 :
+         print (' احتمال صعودي شدن ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
 
          
 print ()
