@@ -273,6 +273,7 @@ print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
 #print(f"komu52_min: {komu52_min}")
 print ()
 
+#--------------------------------
 #تعيين روندنزولي ياصعودي باتنکانسن وکيجونسن
 window_size = 14
 past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
@@ -305,7 +306,7 @@ else:
           print ('kijon26 < tenken8')
           print ("{:.0f}%".format(percent_2),':  درصد فاصله تنکانسن به کيجونسن')
           print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
-
+#------------------------------
 
 
 
@@ -1157,6 +1158,36 @@ if moving_3 >= ticker.yesterday_price > ticker.adj_close >= moving_10 > tenken8 
 else:
     if moving_3 <= ticker.yesterday_price < ticker.adj_close <= moving_10 < tenken8 < kijon26 :
          print (' احتمال صعودي شدن ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
+
+
+
+#------------------------------
+# تعيين فاصله ميانگين 3 و10
+num1 = moving_10
+num2 = moving_3
+
+# تعيين درصدفاصله بين ميانگين 3و10
+percent_1 = ((num2-num1)/((num2 + num1)/2))*100
+percent_2 = ((num1-num2)/((num1 + num2)/2))*100
+#-------------------------------
+#تعيين مقدارفاصله ميانگين 3و10
+moving_3_10 = moving_10 - moving_3
+
+#--------------------------------
+
+#تعيين روند ميانگين 3و10
+if moving_3 < moving_10 :
+     print ('حرکت قيمت نزولي')
+     print ('moving_10 > moving_3')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله بين ميانگين3و10روزه')
+     print (moving_3_10 , ' : مقدارفاصله بين ميانگين 3و10روزه')
+else:
+     if moving_3 > moving_10 :
+          print ('حرکت قيمت صعودي')
+          print ('moving_10 < moving_3')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله بين ميانگين3و10روزه')
+          print (moving_3_10 , ' : مقدارفاصله بين ميانگين 3و10روزه')
+#------------------------------
 
          
 print ()
