@@ -279,12 +279,22 @@ past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 window_size = 28
 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
 
-
+#--------------------------------
+#تعيين روند با تنکانسن وکيجونسن
 if past_14_days_low < past_28_days_low :
      print ('روند نزوليه')
+     print ('kijon26 > tenken8')
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
+          print ('kijon26 < tenken8')
+
+#----------------------------------
+#تعين فاصله تنکانسن باکيجونسن
+ten8_kij26 = kijon26 - tenken8
+          
+print (ten8_kij26 , ' : فاصله تنکانسن باکيجونسن')
+#----------------------------------          
 
 
 
@@ -426,11 +436,6 @@ else:
      if ten9>=ten8<today_price<kij27>=kij26 and yesterday_price<=ten<kij26:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
 
-#----------------------------------
-#تعين فاصله تنکانسن باکيجونسن
-ten8_kij26 = kijon26 - tenken8
-
-print (ten8_kij26 , ' : فاصله تنکانسن باکيجونسن')
 #----------------------------------
 print ()
 # تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
@@ -1129,17 +1134,17 @@ else:
 
 
 if moving_3 > moving_10 > tenken8 > kijon26 < ticker.yesterday_price < ticker.adj_close :
-     print ('يک روند ادامه داروروبه بالاداريم')
+     print ('قيمت بالاي ميانگين 3و10وتنکانسن هم بالاي کيجونسن ميباشد يک روند صعودي خوب')
 else:
      if moving_3 < moving_10 < tenken8 < kijon26 > ticker.yesterday_price > ticker.adj_close :
-          print ('يک روند ادامه دار وروبه پايين داريم')
+          print ('قيمت پايين ميانگين 3و10وتنکانسن هم پايين کيجونسن ميباشد يک روند نزولي قوي')
           
 
 
-if moving_3 < ticker.yesterday_price > ticker.adj_close <= moving_10 > tenken8 > kijon26 :
+if moving_3 >= ticker.yesterday_price > ticker.adj_close >= moving_10 > tenken8 > kijon26 :
      print (' احتمال ريزش ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
 else:
-    if moving_3 > ticker.yesterday_price < ticker.adj_close >= moving_10 < tenken8 < kijon26 :
+    if moving_3 <= ticker.yesterday_price < ticker.adj_close <= moving_10 < tenken8 < kijon26 :
          print (' احتمال صعودي شدن ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
 
          
