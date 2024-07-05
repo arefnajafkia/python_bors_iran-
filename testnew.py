@@ -256,8 +256,8 @@ kij30 = (past_30_days_high + past_30_days_low)/2
 #print ('kij26 :',(math.ceil(kij26)))
 #print ('kij27 :',(math.ceil(kij27)))
 
-print(f"ten9  : {tenken9}     ,    kij27 :  {kijon27}")
-print(f"ten10 : {tenken10}     ,    kij28 :  {kijon28}")
+print(f"ten8  : {tenken8}     ,    kij26 :  {kijon26}")
+print(f"ten9 : {tenken9}     ,    kij27 :  {kijon27}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -279,22 +279,33 @@ past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 window_size = 28
 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
 
+#------------------------------
+# تعيين فاصله تنکانسن وکيجونسن به درصد
+num1 = kijon26
+num2 = tenken8
+
+# Calculate percentage
+percent_1 = ((num2-num1)/((num2 + num1)/2))*100
+percent_2 = ((num1-num2)/((num1 + num2)/2))*100
+#-------------------------------
+#تعيين مقدارفاصله تنکانسن باکيچونسن
+ten8_kij26 = kijon26 - tenken8
+
 #--------------------------------
+
 #تعيين روند با تنکانسن وکيجونسن
 if past_14_days_low < past_28_days_low :
      print ('روند نزوليه')
      print ('kijon26 > tenken8')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله تنکانسن به کيجونسن')
+     print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
           print ('kijon26 < tenken8')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله تنکانسن به کيجونسن')
+          print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
 
-#----------------------------------
-#تعين فاصله تنکانسن باکيجونسن
-ten8_kij26 = kijon26 - tenken8
-          
-print (ten8_kij26 , ' : فاصله تنکانسن باکيجونسن')
-#----------------------------------          
 
 
 
