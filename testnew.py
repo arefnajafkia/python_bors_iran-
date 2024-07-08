@@ -282,15 +282,15 @@ past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
 
 #------------------------------
 # تعيين فاصله تنکانسن وکيجونسن به درصد
-num1 = kijon26
-num2 = tenken8
+num1 = tenken8
+num2 = kijon26
 
 # Calculate percentage
 percent_1 = ((num2-num1)/((num2 + num1)/2))*100
 percent_2 = ((num1-num2)/((num1 + num2)/2))*100
 #-------------------------------
 #تعيين مقدارفاصله تنکانسن باکيچونسن
-ten8_kij26 = kijon26 - tenken8
+ten8_kij26 = tenken8 - kijon26
 
 #--------------------------------
 
@@ -298,16 +298,34 @@ ten8_kij26 = kijon26 - tenken8
 if past_14_days_low < past_28_days_low :
      print ('روند نزوليه')
      print ('kijon26 > tenken8')
-     print ("{:.0f}%".format(percent_1),':  درصد فاصله تنکانسن به کيجونسن')
-     print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
           print ('kijon26 < tenken8')
-          print ("{:.0f}%".format(percent_2),':  درصد فاصله تنکانسن به کيجونسن')
-          print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
+          print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
+          print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
 #------------------------------
 
+
+if today_Final_price > moving_3 >=ten8>ten9 :
+     print ('قيمت بالاي ميانگين 3روزه وتنکانسن ميباشد وشروع روندصعودي بشرط حمايت تنکانسن')
+else:
+     if today_Final_price < moving_3 <=ten8<ten9 :
+          print ('قيمت زيرميانگين 3روزه وتنکانسن ميباشد وشروع ريزش بشرط حمايت تنکانسن')
+
+
+
+if today_Final_price > moving_3 >=ten8<ten9 > moving_10 > kij26 :
+     print ('قيمت بالاي ميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشدوشروع روند صعودي ادامه داراست')
+else:
+     if today_Final_price < moving_3 <=ten8<ten9 < moving_10 < kij26 :
+          print ('قيمت زيرميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشد وشروع ريزش ادامه داراست')
+          
+
+print (20*'-')          
+#----------------------------------
 
 
 if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
@@ -449,7 +467,6 @@ else:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
 
 #----------------------------------
-print ()
 # تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
 
 if tenken9>moving_103<kij27 and today_two_price<=yesterday_price<today_price>moving_103:
@@ -496,21 +513,15 @@ past_8L = past_8_days_low - past_8
 h8 = (math.ceil(past_8h))
 L8 = (math.ceil(past_8L))
 
+
 if yesterday_price < today_price >= tenken8 == kijon26 :
-     print (past_8h, ' : اولين مقاومت سرراه')
-
-
-if yesterday_price > today_price <= tenken8 == kijon26 :
-     print (past_8L, ' : اولين حمايت سرراه')
+     print (h8 , ' : اولين مقاومت سرراه')
+else:
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L8 , ' : اولين حمايت سرراه')
 
 
 print (20*'-')
-if yesterday_price < today_price:
-     print (h8, ' : اولين مقاومت سرراه')
-else:
-     if yesterday_price > today_price:
-          print (L8, ' : اولين حمايت سرراه')
-
 
 #===============================================
 #تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو         
@@ -520,20 +531,12 @@ past_26L = past_26_days_low - past_26
 h26 = (math.ceil(past_26h))
 L26 = (math.ceil(past_26L))
 
+
 if yesterday_price < today_price >= tenken8 == kijon26 :
-     print (past_26h, ' : دومين مقاومت سرراه')
-
-
-if yesterday_price > today_price <= tenken8 == kijon26 :
-     print (past_26L, ' : دومين حمايت سرراه')
-
-
-print (20*'-')
-if yesterday_price < today_price:
-     print (h26, ' : دومين مقاومت سرراه')
+     print (h26 , ' : دومين مقاومت سرراه')
 else:
-     if yesterday_price > today_price:
-          print (L26, ' : دومين حمايت سرراه')
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L26 , ' : دومين حمايت سرراه')
 
      
 print ("="*40)
@@ -1163,15 +1166,15 @@ else:
 
 #------------------------------
 # تعيين فاصله ميانگين 3 و10
-num1 = moving_10
-num2 = moving_3
+num1 = moving_3
+num2 = moving_10
 
 # تعيين درصدفاصله بين ميانگين 3و10
 percent_1 = ((num2-num1)/((num2 + num1)/2))*100
 percent_2 = ((num1-num2)/((num1 + num2)/2))*100
 #-------------------------------
 #تعيين مقدارفاصله ميانگين 3و10
-moving_3_10 = moving_10 - moving_3
+moving_3_10 = moving_3 - moving_10
 
 #--------------------------------
 
@@ -1179,14 +1182,14 @@ moving_3_10 = moving_10 - moving_3
 if moving_3 < moving_10 :
      print ('حرکت قيمت نزولي')
      print ('moving_10 > moving_3')
-     print ("{:.0f}%".format(percent_1),':  درصد فاصله بين ميانگين3و10روزه')
-     print (moving_3_10 , ' : مقدارفاصله بين ميانگين 3و10روزه')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانه تاميانگين 3به 10برسد')
+     print (moving_3_10 , ' : مقدارفاصله مانه تا ميانگين 3 به 10برسد')
 else:
      if moving_3 > moving_10 :
           print ('حرکت قيمت صعودي')
           print ('moving_10 < moving_3')
-          print ("{:.0f}%".format(percent_2),':  درصد فاصله بين ميانگين3و10روزه')
-          print (moving_3_10 , ' : مقدارفاصله بين ميانگين 3و10روزه')
+          print ("{:.0f}%".format(percent_2),':  درصدفاصله مانه تاميانگين 10به 3برسد')
+          print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
 #------------------------------
 
          
@@ -1502,7 +1505,7 @@ if index == 5:
 # شپاکسا
 if index == 6:
      p=1625
-     s=0
+     s=1710
      v=5000
      psv=(s*v)-(p*v)
      if p > 0 :
