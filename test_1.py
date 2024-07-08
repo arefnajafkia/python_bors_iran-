@@ -252,8 +252,8 @@ kij30 = (past_30_days_high + past_30_days_low)/2
 #print ('kij26 :',(math.ceil(kij26)))
 #print ('kij27 :',(math.ceil(kij27)))
 
-print(f"ten9  : {tenken9}     ,    kij27 :  {kijon27}")
-print(f"ten10 : {tenken10}     ,    kij28 :  {kijon28}")
+print(f"ten8  : {tenken8}     ,    kij26 :  {kijon26}")
+print(f"ten9 : {tenken9}     ,    kij27 :  {kijon27}")
 print ()
 
 # محاسبات ابرکومو52 روزه به قبل
@@ -269,18 +269,60 @@ print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
 #print(f"komu52_min: {komu52_min}")
 print ()
 
+#--------------------------------
 #تعيين روندنزولي ياصعودي باتنکانسن وکيجونسن
 window_size = 14
 past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 window_size = 28
 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
 
+#------------------------------
+# تعيين فاصله تنکانسن وکيجونسن به درصد
+num1 = tenken8
+num2 = kijon26
 
+# Calculate percentage
+percent_1 = ((num2-num1)/((num2 + num1)/2))*100
+percent_2 = ((num1-num2)/((num1 + num2)/2))*100
+#-------------------------------
+#تعيين مقدارفاصله تنکانسن باکيچونسن
+ten8_kij26 = tenken8 - kijon26
+#تعيين مقدارفاصله قيمت به تنکانسن
+price_ten8 = today_Final_price - ten8
+#--------------------------------
+print (30*'-' ,nam)
+#تعيين روند با تنکانسن وکيجونسن
 if past_14_days_low < past_28_days_low :
      print ('روند نزوليه')
+     print ('kijon26 > tenken8 > price')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله تنکانسن به کيجونسن')
+     print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
+     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
 else:
      if past_14_days_low > past_28_days_low :
           print ('روند صعوديه')
+          print ('kijon26 < tenken8 < price')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله تنکانسن به کيجونسن')
+          print (ten8_kij26 , ' : مقدارفاصله تنکانسن باکيجونسن')
+          print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+#-------------------------------------
+          
+
+if today_Final_price < moving_3 <=ten8<ten9 < moving_10 < kij26 :
+     print ('قيمت زيرميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشد وشروع ريزش ادامه داراست')
+else:
+     if today_Final_price < moving_3 <=ten8<ten9 :
+          print ('قيمت زيرميانگين 3روزه وتنکانسن ميباشد وشروع ريزش بشرط حمايت تنکانسن')
+
+
+if today_Final_price > moving_3 >=ten8<ten9 > moving_10 > kij26 :
+     print ('قيمت بالاي ميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشدوشروع روند صعودي ادامه داراست')
+else:
+     if today_Final_price > moving_3 >=ten8>ten9 :
+          print ('قيمت بالاي ميانگين 3روزه وتنکانسن ميباشد وشروع روندصعودي بشرط حمايت تنکانسن')
+          
+
+print (20*'-')          
 #----------------------------------
 
 
@@ -423,11 +465,6 @@ else:
           print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت تنکانسن راروبه بالاقطع کرد')
 
 #----------------------------------
-#تعين فاصله تنکانسن باکيجونسن
-ten8_kij26 = kijon26 - tenken8
-
-print (ten8_kij26 , ' : فاصله تنکانسن باکيجونسن')
-#----------------------------------
 print ()
 # تقاطع تنکانسن وکيجونسن با ميانگين 103روزه که سيگنال خريد يافروش ميدهد
 
@@ -467,6 +504,7 @@ else:
           print ('قيمت بالاي ميانگين 103و240روزه ميباشد')
 
 
+print ()
 #===============================================
 #تعيين اولين مقاومت وحمايت سرراه با محاسبات انجام شده باايچيموکو         
 past_8 = past_8_days_high - past_8_days_low
@@ -476,20 +514,13 @@ h8 = (math.ceil(past_8h))
 L8 = (math.ceil(past_8L))
 
 if yesterday_price < today_price >= tenken8 == kijon26 :
-     print (past_8h, ' : اولين مقاومت سرراه')
-
-
-if yesterday_price > today_price <= tenken8 == kijon26 :
-     print (past_8L, ' : اولين حمايت سرراه')
+     print (h8 , ' : اولين مقاومت سرراه')
+else:
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L8 , ' : اولين حمايت سرراه')
 
 
 print (20*'-')
-if yesterday_price < today_price:
-     print (h8, ' : اولين مقاومت سرراه')
-else:
-     if yesterday_price > today_price:
-          print (L8, ' : اولين حمايت سرراه')
-
 
 #===============================================
 #تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو         
@@ -500,22 +531,12 @@ h26 = (math.ceil(past_26h))
 L26 = (math.ceil(past_26L))
 
 if yesterday_price < today_price >= tenken8 == kijon26 :
-     print (past_26h, ' : دومين مقاومت سرراه')
-
-
-if yesterday_price > today_price <= tenken8 == kijon26 :
-     print (past_26L, ' : دومين حمايت سرراه')
-
-
-print (20*'-')
-if yesterday_price < today_price:
-     print (h26, ' : دومين مقاومت سرراه')
+     print (h26 , ' : دومين مقاومت سرراه')
 else:
-     if yesterday_price > today_price:
-          print (L26, ' : دومين حمايت سرراه')
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L26 , ' : دومين حمايت سرراه')
 
-
-     
+   
 print ("="*40)
 #====================================================
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
@@ -569,8 +590,8 @@ print(ticker.open_price,' : open price')
 print()
 print(ticker.high_price,' :  high price')  
 print(ticker.low_price,' :  Low price')
-print(ticker.sta_max,' :  ste max ')  
-print(ticker.sta_min,' :  sta min')
+print(math.ceil(ticker.sta_max),' :  ste max ')  
+print(math.ceil(ticker.sta_min),' :  sta min')
 print()
 print(ticker.volume,' :  volume ')
 print(ticker.month_average_volume,' :  month average volume')
@@ -869,7 +890,9 @@ if index<=12 and p > 0:
           print (" You make a profit in the amount :" ,pp)
           print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
           print(20*"-" )
-     elif today_price < stop_loss:
+
+          
+     if today_price < stop_loss:
           loss = str ( pk - pf )
           loss_float = float(loss)
           loss_percentage = (loss_float / pk) * 100
@@ -878,17 +901,23 @@ if index<=12 and p > 0:
           print ("   You lose the amount  :" ,pp)
           print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
           print(20*"-" )
-     else:
-          if pk > pf :
-              print("Price to limit")
-              print (" price is not  +20% !  \n The price has not reached the profit of 20%")                             
-              print (sz ,": If you sell today, your profit سود")
-              print(20*"-" )
-          if pk < pf :
-              print("Price to limit")
-              print (" price is not -3% !  \n The price has not reached the level of 3% loss") 
-              print(sz,": If you sell today, you will lose زيان")
-              print(20*"-" )
+
+          
+     
+     if pk > pf :
+          print(" Price to limit")
+          print (" price is not  +20% !  \n The price has not reached the profit of 20%")                             
+          print (sz ,": If you sell today, your profit سود")
+          print(20*"-" )
+
+
+          
+     if pk < pf :
+          print("Price to limit")
+          print (" price is not -3% !  \n The price has not reached the level of 3% loss") 
+          print(sz,": If you sell today, you will lose زيان")
+          print(20*"-" )
+          
           
           
      if p == p :
