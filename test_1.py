@@ -593,6 +593,11 @@ print(ticker.low_price,' :  Low price')
 print(math.ceil(ticker.sta_max),' :  ste max ')  
 print(math.ceil(ticker.sta_min),' :  sta min')
 print()
+print(today_Open_price,': yesterday open price')
+print(today_price_max,': yesterday price max')
+print(today_price_min,': yesterday price min')
+print(today_price,': yesterday price')
+print()
 print(ticker.volume,' :  volume ')
 print(ticker.month_average_volume,' :  month average volume')
 print()
@@ -677,6 +682,597 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
                      print (" Today Down tick")
 
 
+print ()
+#=======================================================
+print(39*"=",nam,"One year support and resistance")
+# Engulfing Calculations  محاسبات اينگل فينگ
+today_price = DF['Close'].iloc[-1]   # آخرین قیمت امروز
+today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
+yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
+yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
+# محاسبات مقاومت هفتگي تاساليانه 
+highest_price_7 = max(DF['High'][-7:])    #محاسبه مقاومت هفتگي
+highest_price_10 = max(DF['High'][-10:])
+highest_price_30 = max(DF['High'][-30:])
+highest_price_33 = max(DF['High'][-33:])
+highest_price_60 = max(DF['High'][-60:])
+highest_price_90 = max(DF['High'][-90:])
+highest_price_120 = max(DF['High'][-120:])
+highest_price_180 = max(DF['High'][-180:])
+highest_price_280 = max(DF['High'][-280:])
+highest_price_360 = max(DF['High'][-360:])    #محاسبه مقاومت ساليانه
+#------------------------
+# محاسبات حمايت هفتگي تاساليانه
+lowest_price_7 = min(DF['Low'][-7:])         #محاسبه حمايت هفتگي
+lowest_price_10 = min(DF['Low'][-10:])
+lowest_price_30 = min(DF['Low'][-30:])
+lowest_price_33 = min(DF['Low'][-33:])
+lowest_price_60 = min(DF['Low'][-60:])
+lowest_price_90 = min(DF['Low'][-90:])
+lowest_price_120 = min(DF['Low'][-120:])
+lowest_price_180 = min(DF['Low'][-180:])
+lowest_price_280 = min(DF['Low'][-280:])                              
+lowest_price_360 = min(DF['Low'][-360:])       #محاسبه حمايت ساليانه
+
+# محاسبه قيمتي مابين حمايت ومقاومت يکساله
+mohasebeh = (highest_price_360 + lowest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت بامقاومت يکساله
+mohasebeh1= (mohasebeh + highest_price_360)/2
+# محاسبه قيمتي مابين نيمه حمايت ومقاومت باحمايت يکساله
+mohasebeh2= (mohasebeh + lowest_price_360)/2
+# ازمقاومت سه ماهه 50تاکم کرديم براي محاسبات سقف کانال
+kh_3=(highest_price_90)-100
+# به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
+kL_3=(lowest_price_90)+100
+#فاصله قيمت با مقاومت سه ماهه
+fgh_3=highest_price_90 - today_price
+#فاصله قيمت با حمايت سه ماهه
+fgm_3=today_price - lowest_price_90
+
+#درصد تفاوت قيمت امروزبا مقاومت سه ماهه
+nv1=((highest_price_90)-(today_price))
+nv2=((highest_price_90)+(today_price))/2
+jnv=nv1/nv2
+jnv1=(math.ceil(jnv*100)) 
+
+if today_price > yesterday_price > today_two_price:
+    print (today_price,' قيمت بسته شدن سه روزه افزايشي ميباشد')
+    print (f"%فاصله قيمت بامقاومت سه ماه به ريا ل ميشود : { fgh_3 } , تفاوت به درصد : { jnv1 }")
+else:
+    if today_price < yesterday_price < today_two_price:
+        print (today_price,' قيمت بسته شده سه روزه کاهشي ميباشد')
+        print (fgm_3 ,': فاصله قيمت باحمايت سه ماهه')
+               
+
+#تشخيص روند
+if highest_price_180>=highest_price_30>=today_price or lowest_price_180<=lowest_price_30<=today_price and highest_price_90>=highest_price_60 or lowest_price_90<=lowest_price_60 and highest_price_10>=today_price>=lowest_price_10:
+    print (' کانال رنج ميباشد')
+else:
+     if highest_price_60>=highest_price_30>=today_price>=lowest_price_60<=lowest_price_30:
+          print (' کانال ماهيانه رنج شده')
+
+          
+
+if highest_price_120>=highest_price_60>=highest_price_30 and lowest_price_120>today_price:
+     print ('کانال نزولي ميباشد')
+else:
+     if lowest_price_120<=lowest_price_60<=lowest_price_30 and highest_price_120<today_price:
+          print ('کانال صعودي ميباشد')
+          
+
+     
+if kh_3 <= today_price <= highest_price_90 :
+     print ('قيمت به سقف کانال سه ماه رسيده')
+else:
+     if kL_3 >= today_price >= lowest_price_90 :
+          print ('قيمت به کف کانال سه ماه رسيده')
+          
+
+
+#قرارگرفتن قيمت درنزديکي حمايت ومقاومت هاي هفتگي به بالا
+if today_price < highest_price_7 < yesterday_price:
+     print ('قيمت مقاومت هفتگي رو بطرف پايين شکست')
+elif today_price > highest_price_7 > yesterday_price:
+     print ('قيمت مقاومت هفتگي روبطرف بالاشکست')
+else:
+     if today_price < lowest_price_7 < yesterday_price:
+         print ('قيمت حمايت هفتگي روبطرف پايين شکست')
+     elif today_price > lowest_price_7 > yesterday_price:
+          print ('قيمت حمايت هفتگي روبطرف بالاشکست')
+          
+
+
+if today_price < highest_price_60 < yesterday_price:
+     print ('قيمت مقاومت ماهيانه روبطرف پايين شکست')
+elif today_price > highest_price_60 > yesterday_price:
+     print ('قيمت مقاومت ماهيانه روبطرف بالا شکست')
+else:
+     if today_price < lowest_price_60 < yesterday_price:
+         print ('قيمت حمايت ماهيانه روبطرف پايين شکست')
+     elif today_price > lowest_price_60 > yesterday_price:
+          print ('قيمت حمايت ماهيانه روبطرف بالا شکست')
+          
+
+
+if today_price < highest_price_280 < yesterday_price:
+     print ('قيمت مقاومت يکساله رابطرف پايين شکست')
+elif today_price > highest_price_280 > yesterday_price:
+     print ('قيمت مقاومت يکساله روبطرف بالاشکست')
+else:
+     if today_price < lowest_price_280 < yesterday_price:
+         print ('قيمت حمايت يکساله روبطرف پايين شکست')
+     elif today_price > lowest_price_280 > yesterday_price:
+          print ('قيمت حمايت يکساله روبطرف بالاشکست')
+        
+
+
+if highest_price_180>highest_price_90>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_90<lowest_price_180:
+    print ("کانال کاهشي يکساله داريم")
+else:
+    if highest_price_180<highest_price_90<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_90>lowest_price_180:
+         print ("کانال افزايشي يکساله داريم")
+         
+
+
+if highest_price_90>highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60<lowest_price_90:
+    print ("کانال کاهشي 90روزه داريم")
+else:
+    if highest_price_90<highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60>lowest_price_90:
+         print ("کانال افزايشي 90روزه داريم")
+         
+
+
+if highest_price_60>highest_price_30>=today_price_max>=lowest_price_30<lowest_price_60  :
+    print ("کانال کاهشي ماهيانه داريم")
+else:
+    if highest_price_60<highest_price_30>=today_price_max>=lowest_price_30>lowest_price_60 :
+         print ("کانال افزايشي ماهيانه داريم")
+         
+
+    
+if highest_price_90 <=  lowest_price_90 :
+    print ("حمايت تبديل به مقاومت شد")
+
+    
+print ()
+print ('-'*20,' حمايت ومقاومت هاي هفتگي وماهيانه')
+print ()
+print(f"Weekly support : {lowest_price_7}    ,    Weekly resistance : {highest_price_7}")
+print(f"Monthly support : {lowest_price_60}  ,    Monthly resistance : {highest_price_60}")
+
+# براي انجام محاسبات مقاومت وحمايتهامقدار20تا کم يازيادکرديم
+m_7=(highest_price_7)-50
+m_30=(highest_price_60)-50
+m_360=(highest_price_360)-50
+h_7=(lowest_price_7)+50
+h_30=(lowest_price_60)+50
+h_360=(lowest_price_360)+50
+#بدست آوردن درصدتفاوت قيمت امروزبه مقاومت هفتگي
+nv1=((highest_price_7)-(today_price))
+nv2=((highest_price_7)+(today_price))/2
+jnv=nv1/nv2
+jnv1=(math.ceil(jnv*100))
+#بدست آوردن درصد تفاوت قيمت امروزبه حمايت هفتگي
+nv3=((lowest_price_7)-(today_price))
+nv4=((lowest_price_7)+(today_price))/2
+jnh=nv3/nv4
+jnh1=(math.ceil(jnh*100))
+
+
+if m_7 <= today_price <= highest_price_7 :
+     print ('قيمت نزديک مقاومت هفتگي ميباشد')
+     print (jnv1,'% : درصدتفاوت قيمت امروزبامقاومت هفتگي')
+else:
+     if h_7 >= today_price >= lowest_price_7 :
+          print ('قيمت نزديک حمايت هفتگي ميباشد')
+          print (jnh1,'% : درصدتفاوت قيمت امروزباحمايت هفتگي')
+
+
+           
+print ()
+#=====================================================
+print ('='*30,' candel DOje')
+DOje1= (ticker.high_price+ticker.low_price)/2
+
+
+if ticker.last_price == DOje1 :
+    print (' کندل دوجي شکل گرفته')
+else:
+     if ticker.high_price >ticker.adj_close<= DOje1 >ticker.low_price:
+         print (' معتبرترین کندل دوجي شکل گرفته')
+         
+
+
+if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
+    print (' کندل دوجي سبزشکل گرفته')
+else:
+     if ticker.open_price < ticker.last_price > DOje1:
+          print (' candle Green')
+
+
+
+
+if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
+     print (' کندل دوجي قرمزشکل گرفته')
+else:
+     if ticker.open_price > ticker.last_price < DOje1:
+          print (' candle Red')
+        
+
+
+
+if ticker.open_price <=ticker.low_price< ticker.last_price == ticker.high_price :
+    print (' candle marabozo Green معتبرترين')
+else:
+    if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
+         print (' candle marabozo Green')
+
+
+
+         
+if ticker.open_price >=ticker.high_price> ticker.last_price == ticker.low_price :
+     print (' candle marabozo Red معتبرترين')
+else:
+     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+          print (' candle marabozo Red') 
+
+
+
+#===============================================
+
+today_price6 = DF['Close'].iloc[-6]
+today_price9 = DF['Close'].iloc[-9]
+Volume_week = DF['Volume'].iloc[-5] # حجم هفتگي
+Volume_Month = DF['Volume'].iloc[-26] # حجم ماهيانهBase volume
+today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
+average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
+        
+print (35*'=',sahame,'volume')
+print (ticker.volume ,'حجم امروز')
+print (today_Volume_yesterday , 'حجم ديروز')
+          
+if ticker.volume > (math.ceil(average_Volume_Month)):
+     print ('حجم امروزبيشترازحجم ماهيانه شده')
+else:
+     if ticker.volume < (math.ceil(average_Volume_Month)):
+          print ('حجم امروزکمتر ازحجم ماهيانه شده')
+          
+
+if ticker.volume < today_Volume_yesterday < Volume_week:
+     print ('حجم درهفته گذشته کاهشي بود')
+else:
+     if ticker.volume > today_Volume_yesterday > Volume_week:
+         print ('حجم درهفته گذشته افزايشي بود')
+
+          
+if ticker.volume > today_Volume_yesterday :
+     print ('حجم امروزبيشترازحجم ديروزشده')
+else:
+    if ticker.volume < today_Volume_yesterday :
+        print ('حجم امروز کمترازحجم ديروزشده')
+
+         
+if ticker.volume > (math.ceil(average_Volume_Month))*3 :
+     print ('حجم امروز بيشترازدوبرابر حجم ماهيانه شده')
+
+
+if ticker.volume > 4*(average_Volume_week):
+    print (" حجم امروز 4برابر حجم هفتگي ميباشد")
+
+
+if ticker.yesterday_price > ticker.adj_close > today_price6 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 6 روزقبل هم بالاتره')
+else:
+    if ticker.yesterday_price< ticker.adj_close < today_price6 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 6 روزقبل هم کمترشده')
+
+        
+if ticker.adj_close > today_price9 and ticker.volume > today_Volume_yesterday:
+    print ('حجم افزايشي وقيمت امروزاز 9 روزقبل هم بالاتررفت')
+else:
+    if ticker.adj_close < today_price9 and ticker.volume < today_Volume_yesterday:
+        print ('حجم کاهشي وقيمت امروزاز 9 روزقبل هم پايين تررفت')
+
+
+print ()
+#================================================
+print(25*"-")     
+if ticker.adj_close > ticker.yesterday_price:
+     print (' قيمت امروزبالاترازديروزه ')
+else :
+     if ticker.adj_close < ticker.yesterday_price:
+          print (' قيمت امروزپايين ترازديروزه ')
+
+
+if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
+    print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
+else:
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
+        print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
+
+
+if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
+    print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
+else:
+    if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
+        print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+        
+
+print ()
+#================================================================
+print ('='*40,' ميانگين قيمت')
+#ميانگين قيمت 10 و20 روزسهم
+# Calculate the 10-day moving average
+
+# Print the most recent price and the 10-day moving average
+print(f"today_price : {DF['Close'].iloc[-1]}       ,   moving_10 : {moving_10}")
+print(f"today_two_price : {DF['Close'].iloc[-3]}   ,   moving_103 : {moving_103}")
+print ()
+
+
+if today_price>moving_10>yesterday_price>today_two_price:
+     print ('قيمت امروزرفت بالاي ميانگين ده روزه')
+elif today_price>moving_103>yesterday_price>today_two_price:
+       print ('قيمت امروزرفت بالاي ميانگين 103')
+else:
+     if today_price > moving_3 > moving_10 > moving_103:
+          print ('قيمت بالاي ميانگين3و10و103ميباشد')
+     elif today_price > moving_3 > moving_10:
+           print ('قيمت بالاي ميانگين 3و10 ميباشد')       
+
+
+     
+if today_price<moving_10<yesterday_price<today_two_price:
+     print ('قيمت امروزرفت پايين ميانگين ده روزه')
+elif today_price<moving_103<yesterday_price<today_two_price:
+       print ('قيمت امروزرفت پايين ميانگين 103')
+else:
+    if today_price < moving_3 < moving_10 < moving_103:
+        print ('قيمت پايين ميانگين 3و10و103 ميباشد')
+    elif today_price < moving_3 < moving_10:
+          print ('قيمت پايين ميانگين 3و10 ميباشد')
+
+
+
+if today_price < moving_3 > moving_10 > moving_103:
+     print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10و103 ميباشد')
+elif today_price < moving_3 > moving_10:
+       print ('قيمت پايين ميانگين 3 وبالاي ميانگين 10ميباشد')
+else:
+     if today_price > moving_3 < moving_10 < moving_103:
+          print ('قيمت بالاي ميانگين 3وپايين ميانگين10و103ميباشد')
+     elif today_price > moving_3 < moving_10:
+           print ('قيمت بالاي ميانگين 3وپايين ميانگين 10ميباشد')
+           
+
+
+if moving_3 >= moving_10 >= tenken8 > kijon26 <= ticker.yesterday_price < ticker.adj_close :
+     print ('تيک صعودي شده اگرحمايت تنکانسن هم باهاش باشه,خريد باکندل تاييد')
+else:
+     if moving_3 <= moving_10 <= tenken8 < kijon26 >= ticker.yesterday_price > ticker.adj_close :
+          print ('تيک نزولي شده اگرحمايت تنکانسن هم باهاش بود ,باکندل تاييدبفروش')
+          
+
+
+if moving_3 > moving_10 > tenken8 > kijon26 < ticker.yesterday_price < ticker.adj_close :
+     print ('قيمت بالاي ميانگين 3و10وتنکانسن هم بالاي کيجونسن ميباشد يک روند صعودي خوب')
+else:
+     if moving_3 < moving_10 < tenken8 < kijon26 > ticker.yesterday_price > ticker.adj_close :
+          print ('قيمت پايين ميانگين 3و10وتنکانسن هم پايين کيجونسن ميباشد يک روند نزولي قوي')
+          
+
+
+if moving_3 >= ticker.yesterday_price > ticker.adj_close >= moving_10 > tenken8 > kijon26 :
+     print (' احتمال ريزش ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
+else:
+    if moving_3 <= ticker.yesterday_price < ticker.adj_close <= moving_10 < tenken8 < kijon26 :
+         print (' احتمال صعودي شدن ميباشد چون قيمت وميانگين 3روزه به سمت تنکانسن ميروند')
+
+
+
+#------------------------------
+# تعيين فاصله ميانگين 3 و10
+num1 = moving_3
+num2 = moving_10
+
+# تعيين درصدفاصله بين ميانگين 3و10
+percent_1 = ((num2-num1)/((num2 + num1)/2))*100
+percent_2 = ((num1-num2)/((num1 + num2)/2))*100
+#-------------------------------
+#تعيين مقدارفاصله ميانگين 3و10
+moving_3_10 = moving_3 - moving_10
+#تعيين مقدارفاصله قيمت به تنکانسن
+price_ten8 = ticker.last_price - ten8
+
+#--------------------------------
+print (30*'-' ,nam)
+#تعيين روند ميانگين 3و10
+if moving_3 < moving_10 :
+     print ('حرکت قيمت نزولي')
+     print ('moving_3 < moving_10')
+     print ("{:.0f}%".format(percent_1),':  درصدفاصله مانده تاميانگين 3به 10برسد')
+     print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 3 به 10برسد')
+     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+else:
+     if moving_10 > today_Final_price >= moving_3  :
+          print ('حالت استراحت درنزول ')
+          print ('moving_10 > price >= moving_3 ')
+          print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
+          print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+
+
+
+
+if moving_3 > moving_10 :
+     print ('حرکت قيمت صعودي')
+     print ('moving_3 > moving_10')
+     print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاميانگين 10به 3برسد')
+     print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
+     print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+else:
+    if moving_10 < today_Final_price <= moving_3 :
+          print ('حالت استراحت درصعود ')
+          print ('moving_10 < price <= moving_3 ')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
+          print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+
+          
+print ()
+#=======================================================
+        
+# بالاترين وپايين ترين قيمتهاي 7و14و30و60و103و360 روز قبل max and min
+max_price_b1 = max(DF['High'][-7:]) # max_price day7
+min_price_b2 = min(DF['Low'][-7:])  # min_price day7
+max_price_b3 = max(DF['High'][-14:]) # max_price day14
+min_price_b4 = min(DF['Low'][-14:])  # min_price day14
+
+max_price_b5 = max(DF['High'][-30:]) # max_price day30
+min_price_b6 = min(DF['Low'][-30:])  # min_price day30
+max_price_b7 = max(DF['High'][-60:]) # max_price day60
+min_price_b8 = min(DF['Low'][-60:])  # min_price day60
+
+
+max_price_b11 = max(DF['High'][-360:]) # max_price day360
+min_price_b12 = min(DF['Low'][-360:])  # min_price day360
+
+        
+print (30*'=','kanal ',sahame,)
+
+if ticker.adj_close > moving_10 :
+     print (' price > Em_10 ')
+else:
+     if ticker.adj_close < moving_10 :
+         print (' price < Em_10 ')
+
+
+if ticker.adj_close > moving_103 > ticker.yesterday_price:
+    print ('قيمت امروز ميانگين 103رو روبه بالاقطع کرد')
+else:
+    if ticker.adj_close < moving_103 < ticker.yesterday_price:
+        print ('قيمت امروزميانگين 103 رو روبه پايين قطع کرد')
+        
+
+
+if moving_103 < ticker.adj_close < ticker.yesterday_price < today_two_price:
+    print ('قيمت روبه پايين وبه سمت ميانگين   103 روزه ميرود')
+else:
+    if moving_103 > ticker.adj_close > ticker.yesterday_price > today_two_price:
+        print ('قيمت روبه بالا وبه سمت ميانگين   103 روزه ميرود')
+        
+
+
+if moving_103 < ticker.adj_close > ticker.yesterday_price :
+    print ('قيمت بالاي ميانگين 103 روزه است وداره بالاترميره')
+else:
+    if moving_103 > ticker.adj_close < ticker.yesterday_price :
+        print ('قيمت پايين ميانگين 103روزه است وداره پايين ترميره')
+        
+
+
+if ticker.low_price > yesterday_price_min > today_two_price_min6 :
+    print (' کف امروزبالاترازکف 6روزپيش شده ')
+else:
+    if ticker.low_price < yesterday_price_min < today_two_price_min6 :
+        print (' کف امروز پايين ترازکف 6 روزپيش شده')
+
+
+        
+if ticker.adj_close<min_price_b4<min_price_b8<min_price_b12:
+     print ("کانال وروند سه ماهه کاملا نزولي ميباشد ")
+else:
+    if ticker.adj_close<min_price_b4<min_price_b8:
+         print ("کانال وروند يک ماه همچنان نزولي ميباشد ")
+                
+
+
+if ticker.adj_close>min_price_b4>min_price_b8>min_price_b12:
+     print ("کانال وروند سه ماهه کاملاصعودي ميباشد")
+else:
+    if ticker.adj_close>min_price_b4>min_price_b8:
+         print ("کانال وروند يک ماه همچنال افزايشي ميباشد")
+         
+#=================================================           
+print(40*"=",nam,"Engulfing Calculations")
+print ()
+       
+print (20*'-','Bullish Harami - for buy')
+
+if today_Open_price<today_price_max>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
+     print ('signal buy : هارامي')
+     
+
+print (20*'-','Bearish Harami - for sell')
+
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<ticker.open_price<today_price>today_price_min :
+     print ('signal sell : هارامي ')
+     
+
+print (20*'-','Bullish Engulfing - for buy')
+
+if today_Open_price<today_price_max<ticker.high_price>=ticker.adj_close>today_price_max>today_price>ticker.open_price>=ticker.low_price :
+     print ('signal buy : اينگل فينگ')
+     
+
+print (20*'-','Bearish Engulfing - for sell')
+
+if today_Open_price<today_price_max<ticker.high_price>ticker.adj_close<today_price_max>=today_price<ticker.open_price>ticker.low_price :
+     print ('signal sell : اينگل فينگ')
+
+
+print ()
+print (30*'-')
+#--------------------------
+# Engulfing  ascending صعودي
+# Bullish Engulfing Support level
+h1 = ticker.adj_close > ticker.open_price
+h2 = yesterday_Open_price > yesterday_price
+h3 = yesterday_price > ticker.open_price
+h4 = ticker.adj_close > yesterday_Open_price
+h5 = (ticker.adj_close - ticker.open_price) > 5*(yesterday_Open_price - yesterday_price)
+
+h_ascending = h1 and h2 and h3 and h4 and h5
+ 
+
+# Engulfing  Descending نزولي
+# Bullish Engulfing Resistance level 
+h6 = ticker.adj_close < ticker.open_price
+h7 = yesterday_Open_price < yesterday_price
+h8 = yesterday_price < ticker.open_price
+h9 = ticker.adj_close < yesterday_Open_price
+h10 = (ticker.adj_close - ticker.open_price) < 5*(yesterday_Open_price - yesterday_price)
+
+h_Descending = h6 and h7 and h8 and h9 and h10
+
+
+
+if ticker.adj_close > highest_price_90 :
+     print (' مقاومت سه ماه شکسته شد')
+
+if ticker.adj_close < lowest_price_90 :
+     print (' حمايت سه ماه ازدست رفت')
+     
+
+if  h_ascending:
+    c = "Engulfing :"
+    print (c , "hemer ascending !  صعودي مناسب خريد" )
+elif  h_Descending :
+    c = "Engulfing :"
+    print (c , "hemer Descending !  نزولي وقت فروش" )
+else:
+    c = "hold :"
+    print (c , "not Engulfing !")
+    print ("نمودارهاي قيمت هنوزاينگل فينگي تشکيل ندادند")
+    
+print ()
+print ('~'*10)
+print ('بودن روند False يا True دقت کنيدبه')
+print (h5 ,': ascending روند صعودي ')
+print (h10 ,': Descending روند نزولي')
+print ()
+               
 #=================================================
 
 print(30*"=",sahame," True and False مقادير sma3-10")          
@@ -707,238 +1303,22 @@ buy_signals = (
         (sma_3 > sma_20) &
         (sma_20.shift(1) > sma_3.shift(1))
 )
-print(buy_signals.tail(3))         
-#==========================================================
+print(buy_signals.tail(3))
+#----------------------------------------------
+print(30*"=",sahame," True and False مقادير sma10-20")          
 
-print(40*"="," Your stock purchase and sale calculations",sahame,)
-# چکارن
-if index == 1:
-     p=0
-     s=4250
-     v=20000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib    
-# تليسه
-if index == 2:
-     p=4285
-     s=0
-     v=75000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# غمينو
-if index == 3:
-     p=11181
-     s=10110
-     v=5000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib   
-# وسپه
-if index == 4:
-     p=4548
-     s=5062
-     v=7538
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib   
-# غکورش
-if index == 5:
-     p=9605
-     s=0
-     v=23000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib    
-# شپاکسا
-if index == 6:
-     p=1625
-     s=0
-     v=5000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your buy price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# پاکشو
-if index == 7:
-     p=0
-     s=7100
-     v=21964
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# تاپيکو
-if index == 8:
-     p=0
-     s=17560
-     v=2000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# دسبحان
-if index == 9:
-     p=0
-     s=11650
-     v=10000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your buy price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# کگل
-if index == 10:
-     p=0
-     s=7050
-     v=4000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# ومعادن
-if index == 11:
-     p=0
-     s=0
-     v=0
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
-# حتوکا
-if index == 12:
-     p=3261
-     s=3400
-     v=5000
-     if p > 0 :
-          print (p , ': your buy price ',sahame )
-          print (v ,': Your number of shares')
-     if s > 0 :
-          print (s , ': your sell price',sahame )
-          print (v ,': Number of shares sold')
-          Fib == Fib  
+history = ticker.history
 
-if index >= 13 :
-     print (sahame ,'  :  شماازاين سهم خريد نداريد')
-         
-import sys
+def sma(series, periods: int, ):
+    return series.rolling(window=periods, min_periods=periods).mean()
 
-if index<=12 and p > 0:     
-     price=p
-     price_s=s
-     vol=v
-     # قيمت امروزسهم Today's stock price
-     today_price = (math.ceil(ticker.adj_close))     
-     price_kharid= (-0.003 * price)  #کارمزد خريد
-     price_forosh= (-0.009 * today_price) #کارمزد فروش محاسبه باقيمت امروز
-     pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
-     pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
-     sl = 0.03 # حدضرر3درصد
-     tp = 0.2 # حدسود20درصد
-     # تعیین حد ضرر
-     stop_loss = price * (1-sl)
-     # تعیین حد سود
-     take_profit = price * (1+tp)
-     pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
-     sz= pf-pk 
-     print(20*"-" )
-
-     if today_price > take_profit:
-          profit = str ( pf - pk )
-          profit_float = float(profit)
-          profit_percentage =(profit_float / pk) * 100
-          print (" Your total payment is Buy  :" ,pk)
-          print (" If you sell the rest today :" , pf)
-          print (" You make a profit in the amount :" ,pp)
-          print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
-          print(20*"-" )
-
-          
-     if today_price < stop_loss:
-          loss = str ( pk - pf )
-          loss_float = float(loss)
-          loss_percentage = (loss_float / pk) * 100
-          print (" Your total payment is Buy :" ,pk)
-          print (" if sell price :" , pf)
-          print ("   You lose the amount  :" ,pp)
-          print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
-          print(20*"-" )
-
-          
-     
-     if pk > pf :
-          print(" Price to limit")
-          print (" price is not  +20% !  \n The price has not reached the profit of 20%")                             
-          print (sz ,": If you sell today, your profit سود")
-          print(20*"-" )
-
-
-          
-     if pk < pf :
-          print("Price to limit")
-          print (" price is not -3% !  \n The price has not reached the level of 3% loss") 
-          print(sz,": If you sell today, you will lose زيان")
-          print(20*"-" )
-          
-          
-          
-     if p == p :
-          hs1 = (( p * 0.2 + p )*100)/100 # حدسود20درصد
-          hs2 = (( p * 0.1 + p )*100)/100 # حدسود10درصد
-          hs3 = (( p * 0.05 + p )*100)/100 # حدسود5درصد
-          hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
-          hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
-          print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',sahame)
-          print ((math.ceil(hs1)),'   :20% profit')
-          print ((math.ceil(hs2)),'   :10% profit')
-          print ((math.ceil(hs3)),'   :5% profit') 
-          print ((math.ceil(hz)),'    :3% loss')
-          print ((math.ceil(hs4)),'   :Best selling price ( = )')
-          print (ticker.last_price,'  :last price ')
-          print ('-'*20)
-
-          
-     if pk == pf :
-          print ("  Best selling price :" ,today_price )
-          print ('-------')
+sma_10 = sma(history.close, 10)
+sma_20 = sma(history.close, 20)
+buy_signals = (
+        (sma_10 > sma_20) &
+        (sma_20.shift(1) > sma_10.shift(1))
+)
+print(buy_signals.tail(3)) 
 
 #=====================================================          
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')         

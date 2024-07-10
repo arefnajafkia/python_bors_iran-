@@ -296,19 +296,35 @@ price_ten8 = today_Final_price - ten8
 #--------------------------------
 print (30*'-' ,nam)
 #تعيين روند با تنکانسن وکيجونسن
-if past_14_days_low < past_28_days_low :
+if past_28_days_low > past_14_days_low > today_Final_price :
      print ('روند نزوليه')
      print ('kijon26 > tenken8 > price')
      print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
      print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
      print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
 else:
-     if past_14_days_low > past_28_days_low :
+     if past_28_days_low< past_14_days_low < today_Final_price :
           print ('روند صعوديه')
           print ('kijon26 < tenken8 < price')
           print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
           print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
           print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+
+
+
+if past_28_days_low == past_14_days_low > today_Final_price :
+     print ('استراحت تونزول ')
+     print ('kijon26 = tenken8 > price')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+else:
+    if past_28_days_low == past_14_days_low < today_Final_price :
+          print ('استراحت توصعود ')
+          print ('kijon26 = tenken8 < price')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
 #------------------------------
 
 
@@ -1185,19 +1201,36 @@ print (30*'-' ,nam)
 #تعيين روند ميانگين 3و10
 if moving_3 < moving_10 :
      print ('حرکت قيمت نزولي')
-     print ('moving_10 > moving_3')
-     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانه تاميانگين 3به 10برسد')
-     print (moving_3_10 , ' : مقدارفاصله مانه تا ميانگين 3 به 10برسد')
+     print ('moving_3 < moving_10')
+     print ("{:.0f}%".format(percent_1),':  درصدفاصله مانده تاميانگين 3به 10برسد')
+     print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 3 به 10برسد')
      print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
 else:
-     if moving_3 > moving_10 :
-          print ('حرکت قيمت صعودي')
-          print ('moving_10 < moving_3')
-          print ("{:.0f}%".format(percent_2),':  درصدفاصله مانه تاميانگين 10به 3برسد')
+     if moving_10 > today_Final_price >= moving_3  :
+          print ('حالت استراحت درنزول ')
+          print ('moving_10 > price >= moving_3 ')
+          print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
+          print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+
+
+
+
+if moving_3 > moving_10 :
+     print ('حرکت قيمت صعودي')
+     print ('moving_3 > moving_10')
+     print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاميانگين 10به 3برسد')
+     print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
+     print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+else:
+    if moving_10 < today_Final_price <= moving_3 :
+          print ('حالت استراحت درصعود ')
+          print ('moving_10 < price <= moving_3 ')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
           print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
           print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
 
-
+          
 print ()
 #================================================
 print(40*"=",nam,"bmi and omc محاسبه")
@@ -1853,9 +1886,10 @@ h1 = ticker.adj_close > ticker.open_price
 h2 = yesterday_Open_price > yesterday_price
 h3 = yesterday_price > ticker.open_price
 h4 = ticker.adj_close > yesterday_Open_price
+h5 = (ticker.adj_close - ticker.open_price) > 5*(yesterday_Open_price - yesterday_price)
 
-h_ascending = h1 and h2 and h3 and h4
-h5 =  (ticker.adj_close - ticker.open_price) > 5*(yesterday_Open_price - yesterday_price) 
+h_ascending = h1 and h2 and h3 and h4 and h5
+ 
 
 # Engulfing  Descending نزولي
 # Bullish Engulfing Resistance level 
@@ -1863,9 +1897,10 @@ h6 = ticker.adj_close < ticker.open_price
 h7 = yesterday_Open_price < yesterday_price
 h8 = yesterday_price < ticker.open_price
 h9 = ticker.adj_close < yesterday_Open_price
-
-h_Descending = h6 and h7 and h8 and h9
 h10 = (ticker.adj_close - ticker.open_price) < 5*(yesterday_Open_price - yesterday_price)
+
+h_Descending = h6 and h7 and h8 and h9 and h10
+
 
 
 if ticker.adj_close > highest_price_90 :
@@ -1875,10 +1910,10 @@ if ticker.adj_close < lowest_price_90 :
      print (' حمايت سه ماه ازدست رفت')
      
 
-if  h5:
+if  h_ascending:
     c = "Engulfing :"
     print (c , "hemer ascending !  صعودي مناسب خريد" )
-elif  h10 :
+elif  h_Descending :
     c = "Engulfing :"
     print (c , "hemer Descending !  نزولي وقت فروش" )
 else:
@@ -1889,7 +1924,7 @@ else:
 print ()
 print ('~'*10)
 print ('بودن روند False يا True دقت کنيدبه')
-print (h5,': ascending روند صعودي ')
+print (h5 ,': ascending روند صعودي ')
 print (h10 ,': Descending روند نزولي')
 print ()
                
@@ -1898,6 +1933,7 @@ print ()
 print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
 #------------------------------------------------
 print ('       ','-'*30)
+
 # پرسيدن براي خارج شدن ازبرنامه يا نمايش رسم نمودارايچيموکوانجام شود
 sentence1 = "1 . for Charts ichimoku : "
 sentence2 = "2 . for get out : "
