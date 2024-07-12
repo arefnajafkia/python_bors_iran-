@@ -195,11 +195,13 @@ window_size = 12
 past_12_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_12_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten12 = (past_12_days_high + past_12_days_low)/2
+tenken12 = (math.ceil(ten12))
 
 window_size = 11
 past_11_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_11_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
 ten11 = (past_11_days_high + past_11_days_low)/2
+tenken11 = (math.ceil(ten11))
 
 window_size = 10
 past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -274,13 +276,6 @@ print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
 print ()
 
 #--------------------------------
-#تعيين روندنزولي ياصعودي باتنکانسن وکيجونسن
-window_size = 14
-past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-window_size = 28
-past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-14]
-
-#------------------------------
 # تعيين فاصله تنکانسن وکيجونسن به درصد
 num1 = tenken8
 num2 = kijon26
@@ -295,31 +290,36 @@ ten8_kij26 = tenken8 - kijon26
 price_ten8 = today_Final_price - ten8
 #--------------------------------
 print (30*'-' ,nam)
+
 #تعيين روند با تنکانسن وکيجونسن
-if past_28_days_low > past_14_days_low > today_Final_price :
+if kijon28 > tenken12 > today_Final_price :
      print ('روند نزوليه')
      print ('kijon26 > tenken8 > price')
      print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
      print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
      print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+     print (' :چون فاصله تنکانسن باکيجونسن از3- بيشتراست ,احتمال برگشت روندميباشد')
+     print (percent_1)
 else:
-     if past_28_days_low< past_14_days_low < today_Final_price :
+     if kijon28 < tenken12 < today_Final_price :
           print ('روند صعوديه')
           print ('kijon26 < tenken8 < price')
           print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
           print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
           print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+          print (' :چون فاصله تنکانسن باکيجونسن از3+ بيشتراست,احتمال برگشت روندميباشد')
+          print (percent_2)
 
 
 
-if past_28_days_low == past_14_days_low > today_Final_price :
+if kijon28 == tenken12 > today_Final_price :
      print ('استراحت تونزول ')
      print ('kijon26 = tenken8 > price')
      print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
      print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
      print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
 else:
-    if past_28_days_low == past_14_days_low < today_Final_price :
+    if kijon28 == tenken12 < today_Final_price :
           print ('استراحت توصعود ')
           print ('kijon26 = tenken8 < price')
           print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
@@ -329,13 +329,10 @@ else:
 
 
 print (20*'-')
-if percent_1 > -3  :
-     print (' چون فاصله تنکانسن باکيجونسن از3- بيشتراست ,احتمال برگشت روندميباشد')
-     print (percent_1)
-else:
-     if percent_2 > 3  :
-          print (' چون فاصله تنکانسن باکيجونسن از3+ بيشتراست,احتمال برگشت روندميباشد')
-          print (percent_2)
+if percent_1 == percent_2 and kijon28 == tenken12 :
+     print ('اگرتنکانسن بالاي کيجونسن رفت بخر,وبلعکسش روبفروش')
+     print (percent_2)
+     
 #------------------------------
 
 
