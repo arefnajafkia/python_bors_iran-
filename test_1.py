@@ -272,14 +272,6 @@ print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
 print ()
 
 #--------------------------------
-#تعيين روندنزولي ياصعودي باتنکانسن وکيجونسن
-window_size = 14
-past_14_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-
-window_size = 28
-past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
-
-#------------------------------
 # تعيين فاصله تنکانسن وکيجونسن به درصد
 num1 = tenken8
 num2 = kijon26
@@ -337,11 +329,6 @@ if percent_1 == percent_2 and kijon28 == tenken12 :
      print ('اگرتنکانسن بالاي کيجونسن رفت بخر,وبلعکسش روبفروش')
      print (percent_2)
 
-
-print (past_28_days_low)
-print (past_14_days_low)
-print (tenken8)
-print (kijon26)
 #-------------------------------------
           
 
@@ -566,8 +553,51 @@ else:
      if yesterday_price > today_price <= tenken8 == kijon26 :
           print (L26 , ' : دومين حمايت سرراه')
 
+
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if today_price_max > today_price > today_Open_price >= today_price_min :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if today_price_max > today_Open_price > today_price >= today_price_min :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if today_Open_price == today_price_max > today_price > today_price_min :
+     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
+     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
+     print (' O = H > C > L ')
+     
+
+
+if today_Open_price > today_price_max > today_price > today_price_min :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if today_Open_price < today_price_max > today_price > today_price_min :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O < H > C > L ')
+
+
+
+if today_Open_price < today_price_max == today_price > today_price_min :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+
+
    
 print ("="*40)
+
 #====================================================
 # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
 namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا","ثبهساز","تاپیکو",
@@ -631,10 +661,12 @@ print()
 print(ticker.volume,' :  volume ')
 print(ticker.month_average_volume,' :  month average volume')
 print()
-closing_prices7
+
+
 print('-*'*20)
 if ticker.adj_close > ticker.max_year :
      print ('  break ticker max year')
+
 
 
 if (ticker.min_week)>(ticker.adj_close):
@@ -642,6 +674,7 @@ if (ticker.min_week)>(ticker.adj_close):
 else:
      if (ticker.min_week)<(ticker.adj_close):
           print(' ticker min week < ticker adj close ')
+
 
 
 if (ticker.max_week)<(ticker.adj_close):
@@ -654,9 +687,10 @@ if ticker.adj_close > closing_prices7 :
 else:
      if ticker.adj_close < closing_prices7 :
           print ('price < price_two_3')
+          
+
      
 print('-*'*20) 
-
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
 Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
@@ -681,6 +715,49 @@ else:
      if (ticker.last_price) < (ticker.adj_close):
           print ((math.floor(Percent_last)),'% : price Tomorrow ( + )')
           print("قیمت امروزبشترازقیمت دیروزشد")
+
+
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if ticker.open_price == ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
+     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
+     print (' O = H > C > L ')
+     
+
+
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O < H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+
+
 
 
 #===============================================================

@@ -565,6 +565,47 @@ else:
      if yesterday_price > today_price <= tenken8 == kijon26 :
           print (L26 , ' : دومين حمايت سرراه')
 
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if today_price_max > today_price > today_Open_price >= today_price_min :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if today_price_max > today_Open_price > today_price >= today_price_min :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if today_Open_price == today_price_max > today_price > today_price_min :
+     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
+     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
+     print (' O = H > C > L ')
+     
+
+
+if today_Open_price > today_price_max > today_price > today_price_min :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if today_Open_price < today_price_max > today_price > today_price_min :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O < H > C > L ')
+
+
+
+if today_Open_price < today_price_max == today_price > today_price_min :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+     
+
      
 print ("="*40)
 #==========================================================
@@ -682,6 +723,50 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
           if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
                if ticker.adj_close < ticker.open_price:
                      print (" Today Down tick")
+
+
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if ticker.open_price == ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
+     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
+     print (' O = H > C > L ')
+     
+
+
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O < H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+
+
+                     
 #======================================================****
 print ('='*20 ,"Calculations done RSI  ")
 
@@ -811,10 +896,10 @@ else:
 
 
          
-if ticker.open_price >=ticker.high_price> ticker.last_price == ticker.low_price :
+if ticker.open_price >=ticker.high_price> ticker.last_price >= ticker.low_price :
      print (' candle marabozo Red معتبرترين')
 else:
-     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
+     if ticker.open_price > ticker.last_price >= ticker.low_price < (ticker.high_price-150):
           print (' candle marabozo Red') 
 
 
