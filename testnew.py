@@ -582,22 +582,15 @@ if today_price_max > today_Open_price > today_price >= today_price_min :
 
 
 
-if today_Open_price == today_price_max > today_price > today_price_min :
-     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
-     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
-     print (' O = H > C > L ')
+if today_Open_price <= today_price_max > today_price > today_price_min :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O <= H > C > L ')
      
 
 
 if today_Open_price > today_price_max > today_price > today_price_min :
      print ('مارابوزوي قرمز نزولي')
      print (' O > H > C > L ')
-
-
-
-if today_Open_price < today_price_max > today_price > today_price_min :
-     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O < H > C > L ')
 
 
 
@@ -742,22 +735,15 @@ if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price 
 
 
 
-if ticker.open_price == ticker.high_price > ticker.adj_close > ticker.low_price :
-     print ('اگر دوجي قرمزشدمعمولاانتهاي روندصعودي ميادياادامه دهنده روندنزولي است')
-     print ('واگر دوجي سبزشد معمولا انتهاي روند نزولي مياد يا ادامه دهنده روند صعودي است')
-     print (' O = H > C > L ')
+if ticker.open_price <= ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O <= H > C > L ')
      
 
 
 if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
      print ('مارابوزوي قرمز نزولي')
      print (' O > H > C > L ')
-
-
-
-if ticker.open_price < ticker.high_price > ticker.adj_close > ticker.low_price :
-     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O < H > C > L ')
 
 
 

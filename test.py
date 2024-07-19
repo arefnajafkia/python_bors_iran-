@@ -107,12 +107,14 @@ if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
 
 
+
 if ticker.high_price > ticker.last_price >= DOje2:
     print (' کندل دوجي سبزشکل گرفته')
 else:
     if ticker.low_price < ticker.last_price <= DOje3:
         print (' کندل دوجي قرمزشکل گرفته')
         
+
 
 if ticker.open_price < ticker.last_price > DOje1:
     print (' candle Green')
@@ -121,12 +123,49 @@ else:
         print (' candle Red')
 
 
+
 if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
     print (' candle marabozo Green')
 else:
     if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
         print (' candle marabozo Red')
-    
+
+
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if ticker.open_price <= ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O <= H > C > L ')
+     
+
+
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+
+
+   
 #======================================================   
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
