@@ -268,7 +268,21 @@ komu52_min = (math.ceil(past_52_days_low))
 
 print(f"moving_103 : {moving_103}")
 print(f"komu52_max : {komu52_max}   ,  komu52_min : {komu52_min} ")
-#print(f"komu52_min: {komu52_min}")
+
+
+if kijon27 <= kijon26 == tenken8 >= tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن به حالت فلت برابرشدن')
+
+
+if kijon27 < kijon26 == tenken8 > tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن روبه بالا باهم برابرشدن')
+
+
+
+if kijon27 > kijon26 == tenken8 < tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن روبه پايين باهم برابرشدن')
+     
+
 print ()
 
 #--------------------------------
@@ -586,6 +600,11 @@ if today_Open_price > today_price_max > today_price > today_price_min :
 if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
+
+
+
+if today_Open_price == today_price_max :
+     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
 
 
    

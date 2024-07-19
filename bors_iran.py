@@ -955,7 +955,21 @@ komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
 print(f"komu52_max: {komu52_max}  ,  komu52_min: {komu52_min} ")
-#print(f"komu52_min: {komu52_min}")
+
+
+if kijon27 <= kijon26 == tenken8 >= tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن به حالت فلت برابرشدن')
+
+
+if kijon27 < kijon26 == tenken8 > tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن روبه بالا باهم برابرشدن')
+
+
+
+if kijon27 > kijon26 == tenken8 < tenken9 :
+     print ('kijon26 == tenken8 , تنکانسن وکيجونسن روبه پايين باهم برابرشدن')
+
+
 print ()
 
 
