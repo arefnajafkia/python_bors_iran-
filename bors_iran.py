@@ -438,6 +438,11 @@ if today_Open_price > today_price_max > today_price > today_price_min :
 if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
+
+
+
+if today_Open_price == today_price_max :
+     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
      
     
 #=================================================

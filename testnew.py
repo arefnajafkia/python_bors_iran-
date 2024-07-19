@@ -610,6 +610,11 @@ if today_Open_price > today_price_max > today_price > today_price_min :
 if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
+
+
+
+if today_Open_price == today_price_max :
+     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
      
 
      
@@ -763,6 +768,11 @@ if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
 if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
+
+
+
+if ticker.open_price == ticker.high_price :
+     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
 
 
                      

@@ -764,6 +764,11 @@ if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price 
 
 
 
+if ticker.open_price == ticker.high_price :
+     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
+
+
+
 #===============================================================
 print(40*"=",sahame,"Process")     
 if ticker.adj_close >= ticker.max_week :
