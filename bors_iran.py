@@ -423,9 +423,9 @@ if today_price_max > today_Open_price > today_price >= today_price_min :
 
 
 
-if today_Open_price <= today_price_max > today_price > today_price_min :
+if today_Open_price == today_price_max > today_price > today_price_min :
      print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O <= H > C > L ')
+     print (' O = H > C > L ')
      
 
 
@@ -439,10 +439,6 @@ if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
 
-
-
-if today_Open_price == today_price_max :
-     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
      
     
 #=================================================
@@ -1801,38 +1797,44 @@ if user_input == "1":
     print(20*"-",sahame,"کانال وکندلهاي امروز")
               
 #=====================================================
-print ('='*30,' candel DOje')
+print ('='*30,' hammer candle and Doji ')
 DOje1= (ticker.high_price+ticker.low_price)/2
-DOje2= DOje1 + 20
-DOje3= DOje1 - 20
+
 
 if ticker.last_price == DOje1 :
     print (' کندل دوجي شکل گرفته')
+else:
+     if ticker.high_price >ticker.adj_close<= DOje1 >ticker.low_price:
+         print (' معتبرترین کندل دوجي شکل گرفته')
+         
 
 
-if ticker.high_price > ticker.last_price >= DOje2:
+if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-    if ticker.low_price < ticker.last_price <= DOje3:
-        print (' کندل دوجي قرمزشکل گرفته')
+     if ticker.open_price < ticker.adj_close > DOje1:
+          print (' candle Green')
+
+
+
+
+if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
+     print (' کندل دوجي قرمزشکل گرفته')
+else:
+     if ticker.open_price > ticker.adj_close < DOje1:
+          print (' candle Red')
         
 
-if ticker.open_price < ticker.last_price > DOje1:
-    print (' candle Green')
-else:
-    if ticker.open_price > ticker.last_price < DOje1:
-        print (' candle Red')
 
 
-if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
-    print (' candle marabozo Green')
-else:
-    if ticker.open_price > ticker.last_price == ticker.low_price < (ticker.high_price-150):
-        print (' candle marabozo Red')
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
+    print (' candle marabozo Green معتبرترين')
 
 
-#=====================================================
-print ('='*30,' hammer candle and Doji ')
+         
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
+     print (' candle marabozo Red معتبرترين')
+
 
 
 if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
@@ -1847,9 +1849,9 @@ if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price 
 
 
 
-if ticker.open_price <= ticker.high_price > ticker.adj_close > ticker.low_price :
+if ticker.open_price == ticker.high_price > ticker.adj_close > ticker.low_price :
      print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O <= H > C > L ')
+     print (' O = H > C > L ')
      
 
 
@@ -2590,9 +2592,9 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=2095
-     s=1586
-     v=236600
+     p=1692
+     s=0
+     v=5000
      psv=(s*v)-(p*v)
      if p > 0 :
           print (p , ': قيمت خريد شمااز',sahame )

@@ -1,4 +1,4 @@
-
+     
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # محاسبات ايچيمکو راانجام ميدهد ودرمرحله دوم
 # فقط بازدن شماره کنارسهم محاسبات راانجام داده ونتيجه رااغلام مي کند
@@ -310,8 +310,8 @@ if kijon28 > tenken12 > today_Final_price :
      print ('kijon26 > tenken8 > price')
      print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
      print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
-     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
-     print (' :چون فاصله تنکانسن باکيجونسن از3- بيشتراست ,احتمال برگشت روندميباشد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+     print (' :اگرفاصله تنکانسن با کيجونسن از 3- بيشترباشد , احتمال برگشت روندميباشد')
      print (percent_1)
 else:
      if kijon28 < tenken12 < today_Final_price :
@@ -319,8 +319,8 @@ else:
           print ('kijon26 < tenken8 < price')
           print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
           print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
-          print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
-          print (' :چون فاصله تنکانسن باکيجونسن از3+ بيشتراست,احتمال برگشت روندميباشد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+          print (' :اگرفاصله تنکانسن با کيجونسن از 3+ بيشترشد , احتمال برگشت روندميباشد')
           print (percent_2)
 
 
@@ -330,14 +330,14 @@ if kijon28 == tenken12 > today_Final_price :
      print ('kijon26 = tenken8 > price')
      print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
      print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
-     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 else:
     if kijon28 == tenken12 < today_Final_price :
           print ('استراحت توصعود ')
           print ('kijon26 = tenken8 < price')
           print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
           print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
-          print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 
 
 
@@ -595,9 +595,9 @@ if today_price_max > today_Open_price > today_price >= today_price_min :
 
 
 
-if today_Open_price <= today_price_max > today_price > today_price_min :
+if today_Open_price == today_price_max > today_price > today_price_min :
      print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O <= H > C > L ')
+     print (' O = H > C > L ')
      
 
 
@@ -610,11 +610,6 @@ if today_Open_price > today_price_max > today_price > today_price_min :
 if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
-
-
-
-if today_Open_price == today_price_max :
-     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
      
 
      
@@ -657,10 +652,13 @@ tse.download(symbols=sahame,
              adjust=True)
 ticker = tse.Ticker(sahame)
 print ()
+
 print ('-'*20)
 PE_ticker=(math.ceil(ticker.p_e_ratio))
+
 print(ticker.last_date,': تاريخ وساعت آخرين اطلاعات قيمت پاياني ومعاملاتي')
 print ('-'*20)
+
 print(ticker.title,' : نام شرکت ')
 print(ticker.state,ticker.flow,ticker.group_name)     
 print(ticker.fiscal_year,' : سال مالی ')  
@@ -689,6 +687,7 @@ print(ticker.count,' : تعداد معاملات ')
 print(ticker.value,' :  ارزش معاملات ')
 print(ticker.volume,' : حجم معاملات امروز ')
 print(ticker.month_average_volume,' : میانگین حجم ماه')
+
 print ('-'*20)
 #بدست آوردن درصدنوسان قيمتي امروز
 nv1=ticker.high_price-ticker.low_price
@@ -734,45 +733,6 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
           if ticker.open_price < ticker.yesterday_price and ticker.high_price > ticker.yesterday_price:           
                if ticker.adj_close < ticker.open_price:
                      print (" Today Down tick")
-
-
-
-#=====================================================
-print ('='*30,' hammer candle and Doji ')
-
-
-if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
-     print ('چکش سبز برگشتي درروند نزولي ')
-     print (' H > C > O >= L ')
-
-
-
-if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price :
-     print ('چکش قرمزبرگشتي درروند صعودي ')
-     print (' H > O > C >= L ')
-
-
-
-if ticker.open_price <= ticker.high_price > ticker.adj_close > ticker.low_price :
-     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O <= H > C > L ')
-     
-
-
-if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
-     print ('مارابوزوي قرمز نزولي')
-     print (' O > H > C > L ')
-
-
-
-if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
-     print ('مارابوزوي سبز صعودي ')
-     print (' O < H = C > L ')
-
-
-
-if ticker.open_price == ticker.high_price :
-     print (' O = H , قيمت بازشدن با حداکثرقيمت برابرشده')
 
 
                      
@@ -866,7 +826,7 @@ else:
 
 
 #=====================================================
-print ('='*30,' candel DOje')
+print ('='*30,' hammer candle and Doji ')
 DOje1= (ticker.high_price+ticker.low_price)/2
 
 
@@ -881,7 +841,7 @@ else:
 if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-     if ticker.open_price < ticker.last_price > DOje1:
+     if ticker.open_price < ticker.adj_close > DOje1:
           print (' candle Green')
 
 
@@ -890,28 +850,49 @@ else:
 if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
      print (' کندل دوجي قرمزشکل گرفته')
 else:
-     if ticker.open_price > ticker.last_price < DOje1:
+     if ticker.open_price > ticker.adj_close < DOje1:
           print (' candle Red')
         
 
 
 
-if ticker.open_price <=ticker.low_price< ticker.last_price == ticker.high_price :
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
     print (' candle marabozo Green معتبرترين')
-else:
-    if ticker.open_price < ticker.last_price == ticker.high_price > (ticker.low_price+150):
-         print (' candle marabozo Green')
-
 
 
          
-if ticker.open_price >=ticker.high_price> ticker.last_price >= ticker.low_price :
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
      print (' candle marabozo Red معتبرترين')
-else:
-     if ticker.open_price > ticker.last_price >= ticker.low_price < (ticker.high_price-150):
-          print (' candle marabozo Red') 
 
 
+
+if ticker.high_price > ticker.adj_close > ticker.open_price >= ticker.low_price :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if ticker.high_price > ticker.open_price > ticker.adj_close >= ticker.low_price :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if ticker.open_price == ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O = H > C > L ')
+     
+
+
+if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
 
 #===============================================
 
@@ -1644,8 +1625,8 @@ if index == 5:
          
 # شپاکسا
 if index == 6:
-     p=1625
-     s=1710
+     p=1692
+     s=0
      v=5000
      psv=(s*v)-(p*v)
      if p > 0 :
@@ -1931,7 +1912,7 @@ if index<=14 and p > 0:
           print(f"حدسود20درصد : {hs1}    ,    حدسود10درصد : {hs2}")
           print(f"حدسود5درصد : {hs3}    ,    حد ضرر سه درصد : {hz}")
           print (hs4,'قيمت سربه سربراي فروش')
-          print (today_price,' : قيمت بسته شدن امروز')
+          print (ticker.adj_close,' : قيمت بسته شدن امروز')
           print (ticker.last_price,' : قيمت آخرين معامله امروز')
           print ('-'*20)
 
@@ -1953,6 +1934,7 @@ print (ticker.open_price,': بازشدن امروز')
 print (ticker.high_price,': بالاترين امروز')
 print (ticker.low_price,': پايين ترين امروز')
 print (ticker.adj_close,': بسته شدن امروز')
+print (ticker.last_price,' : قيمت آخرين معامله امروز')
 print ()
        
 print (20*'-','Bullish Harami - for buy')
