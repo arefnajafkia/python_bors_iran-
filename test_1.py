@@ -1196,14 +1196,14 @@ if moving_3 < moving_10 :
      print ('moving_3 < moving_10')
      print ("{:.0f}%".format(percent_1),':  درصدفاصله مانده تاميانگين 3به 10برسد')
      print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 3 به 10برسد')
-     print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 else:
      if moving_10 > today_Final_price >= moving_3  :
           print ('حالت استراحت درنزول ')
           print ('moving_10 > price >= moving_3 ')
           print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
           print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
-          print (price_ten8 , ' : مقدارفاصله بين تنکانسن وقيمت ,مابين 10و20باشد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 
 
 
@@ -1213,14 +1213,14 @@ if moving_3 > moving_10 :
      print ('moving_3 > moving_10')
      print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاميانگين 10به 3برسد')
      print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
-     print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 else:
     if moving_10 < today_Final_price <= moving_3 :
           print ('حالت استراحت درصعود ')
           print ('moving_10 < price <= moving_3 ')
           print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
           print (moving_3_10 , ' : مقدارفاصله مانده تاميانگين 10به 3برسد')
-          print (price_ten8 , ' : مقدارفاصله بين قيمت وتنکانسن ,مابين 10و20باشد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
 
 
           

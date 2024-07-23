@@ -231,7 +231,41 @@ window.mainloop()
 exit()
 
 #-----------------------------------------------------------------
+import math
 
+def calculate_percentage(num1, num2):
+    try:
+        # Check if num1 is zero to avoid division by zero error
+        if num1 == 0:
+            return "Error: Division by zero is not allowed."
+        else:
+            # Calculate percentage
+            percentage = (num2 / num1) * 100
+            return "{:.0f}%".format(percentage)
+    except TypeError:
+        return "Error: Both inputs must be numbers."
+
+# Test the function
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+print(calculate_percentage(num1, num2))
+#================================
+# Get input from user
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+
+# Calculate percentage
+percent = (num2 / num1) * 100
+
+# Print the percentage
+print("{:.0f}%".format(percent))
+#-------------------------------
+print ("python", end = '')
+print ("3","and windows 10 - ",(3+2)*100/2+12596842)
+print ("or bama bashid",end = '')
+print ("zam zam ab beheshte")
+
+#===================================================
 
 
 
