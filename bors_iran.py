@@ -406,39 +406,6 @@ else:
     if today_Open_price > today_Final_price == today_price_min < (today_price_max-150):
         print (' candle marabozo Red')
 
-
-#------------------------------------------------
-print ('='*30,' hammer candle and Doji ')
-
-
-if today_price_max > today_price > today_Open_price >= today_price_min :
-     print ('چکش سبز برگشتي درروند نزولي ')
-     print (' H > C > O >= L ')
-
-
-
-if today_price_max > today_Open_price > today_price >= today_price_min :
-     print ('چکش قرمزبرگشتي درروند صعودي ')
-     print (' H > O > C >= L ')
-
-
-
-if today_Open_price == today_price_max > today_price > today_price_min :
-     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
-     print (' O = H > C > L ')
-     
-
-
-if today_Open_price > today_price_max > today_price > today_price_min :
-     print ('مارابوزوي قرمز نزولي')
-     print (' O > H > C > L ')
-
-
-
-if today_Open_price < today_price_max == today_price > today_price_min :
-     print ('مارابوزوي سبز صعودي ')
-     print (' O < H = C > L ')
-
      
     
 #=================================================
@@ -952,6 +919,7 @@ print ()
 window_size = 52
 past_52_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij52 = (past_52_days_high + past_52_days_low)/2
 komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
@@ -972,6 +940,84 @@ if kijon27 > kijon26 == tenken8 < tenken9 :
 
 
 print ()
+#--------------------------------
+# تعيين فاصله تنکانسن وکيجونسن به درصد
+num1 = tenken8
+num2 = kijon26
+
+# Calculate percentage
+percent_1 = ((num2-num1)/((num2 + num1)/2))*100
+percent_2 = ((num1-num2)/((num1 + num2)/2))*100
+#-------------------------------
+#تعيين مقدارفاصله تنکانسن باکيچونسن
+ten8_kij26 = tenken8 - kijon26
+#تعيين مقدارفاصله قيمت به تنکانسن
+price_ten8 = today_Final_price - ten8
+#--------------------------------
+print (30*'-' ,nam)
+
+#تعيين روند با تنکانسن وکيجونسن
+if kijon28 > tenken12 > today_Final_price :
+     print ('روند نزوليه')
+     print ('kijon26 > tenken8 > price')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+     print (' :اگرفاصله تنکانسن با کيجونسن از 3- بيشترباشد , احتمال برگشت روندميباشد')
+     print (percent_1)
+else:
+     if kijon28 < tenken12 < today_Final_price :
+          print ('روند صعوديه')
+          print ('kijon26 < tenken8 < price')
+          print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
+          print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+          print (' :اگرفاصله تنکانسن با کيجونسن از 3+ بيشترشد , احتمال برگشت روندميباشد')
+          print (percent_2)
+
+
+
+if kijon28 == tenken12 > today_Final_price :
+     print ('استراحت تونزول ')
+     print ('kijon26 = tenken8 > price')
+     print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
+     print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+else:
+    if kijon28 == tenken12 < today_Final_price :
+          print ('استراحت توصعود ')
+          print ('kijon26 = tenken8 < price')
+          print ("{:.0f}%".format(percent_2),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
+          print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
+
+
+
+print (20*'-')
+if percent_1 == percent_2 and kijon28 == tenken12 :
+     print ('اگرتنکانسن بالاي کيجونسن رفت بخر,وبلعکسش روبفروش')
+     print (percent_2)
+     
+#------------------------------
+
+
+if today_Final_price > moving_3 >=ten8>ten9 :
+     print ('قيمت بالاي ميانگين 3روزه وتنکانسن ميباشد وشروع روندصعودي بشرط حمايت تنکانسن')
+else:
+     if today_Final_price < moving_3 <=ten8<ten9 :
+          print ('قيمت زيرميانگين 3روزه وتنکانسن ميباشد وشروع ريزش بشرط حمايت تنکانسن')
+
+
+
+if today_Final_price > moving_3 >=ten8<ten9 > moving_10 > kij26 :
+     print ('قيمت بالاي ميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشدوشروع روند صعودي ادامه داراست')
+else:
+     if today_Final_price < moving_3 <=ten8<ten9 < moving_10 < kij26 :
+          print ('قيمت زيرميانگين 3و10روزه وهمچنين تنکانسن وکيجونسن ميباشد وشروع ريزش ادامه داراست')
+          
+
+print (20*'-')          
+#----------------------------------
 
 
 if ten12<ten11<ten10<=ten9>=ten8 < today_two_price<yesterday_price>today_price > kij26==kij27==kij28>=kij29>=kij30 :
@@ -1088,6 +1134,203 @@ else:
 if tenken8>average_prices4<kij26>=kij27 and today_price>average_prices4>=yesterday_price>=today_two_price:
      print ('Signal buy : کيجونسن وتنکانسن وقيمت ميانگين 103راروبه بالاقطع کردن')
 
+
+#===============================================
+#تعيين اولين مقاومت وحمايت سرراه با محاسبات انجام شده باايچيموکو         
+past_8 = past_8_days_high - past_8_days_low
+past_8h = past_8  + past_8_days_high
+past_8L = past_8_days_low - past_8
+h8 = (math.ceil(past_8h))
+L8 = (math.ceil(past_8L))
+
+
+if yesterday_price < today_price >= tenken8 == kijon26 :
+     print (h8 , ' : اولين مقاومت سرراه')
+else:
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L8 , ' : اولين حمايت سرراه')
+
+
+print (20*'-')
+
+#===============================================
+#تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو         
+past_26 = past_26_days_high - past_26_days_low
+past_26h = past_26  + past_26_days_high
+past_26L = past_26_days_low - past_26
+h26 = (math.ceil(past_26h))
+L26 = (math.ceil(past_26L))
+
+
+if yesterday_price < today_price >= tenken8 == kijon26 :
+     print (h26 , ' : دومين مقاومت سرراه')
+else:
+     if yesterday_price > today_price <= tenken8 == kijon26 :
+          print (L26 , ' : دومين حمايت سرراه')
+
+
+#=====================================================
+print ('='*30,' hammer candle and Doji ')
+
+
+if today_price_max > today_price > today_Open_price >= today_price_min :
+     print ('چکش سبز برگشتي درروند نزولي ')
+     print (' H > C > O >= L ')
+
+
+
+if today_price_max > today_Open_price > today_price >= today_price_min :
+     print ('چکش قرمزبرگشتي درروند صعودي ')
+     print (' H > O > C >= L ')
+
+
+
+if today_Open_price == today_price_max > today_price > today_price_min :
+     print ('دوجي قرمزشد نزولي است ياادامه دهنده نزول واگرسبزشد صعودي ياادامه دهنده صعود')
+     print (' O = H > C > L ')
+     
+
+
+if today_Open_price > today_price_max > today_price > today_price_min :
+     print ('مارابوزوي قرمز نزولي')
+     print (' O > H > C > L ')
+
+
+
+if today_Open_price < today_price_max == today_price > today_price_min :
+     print ('مارابوزوي سبز صعودي ')
+     print (' O < H = C > L ')
+     
+
+     
+#===================================================
+print ("-"*20,nam,'Signal candlestick patterns')
+piercing_1= (yesterday_Open_price+yesterday_price)/2
+
+
+
+if yesterday_price_max > yesterday_Open_price > yesterday_price > yesterday_price_min and today_price == today_price_max > today_Open_price > today_price_min :
+     print ('Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
+
+
+
+if yesterday_price_max > yesterday_price > yesterday_Open_price > yesterday_price_min and today_price == today_price_min < today_Open_price < today_price_max :
+     print ('Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+
+
+
+if today_price >= yesterday_price_max < today_price_max and today_Open_price >= yesterday_price_min > today_price_min and yesterday_Open_price > yesterday_price:
+     print ('Bullish Engulfing الگوي برگشتي صعودي معمولادرکف رخميده')
+
+
+
+if today_price <= yesterday_price_min > today_price_min and today_Open_price <= yesterday_price_max < today_price_max and yesterday_Open_price < yesterday_price:
+     print ('Bearish Engulfing الگوي برگشتي نزولي درکف رخميده')
+
+
+
+if yesterday_price_max > today_price_max > piercing_1 < today_price and yesterday_price_min > today_price_min < yesterday_price > today_Open_price <yesterday_Open_price :
+     print ('piercing patterns الگوي برگشتي صعودي پرسينگ (کندل دومي پايين ترازنيمه اولي)')
+
+
+
+if yesterday_price_max < today_price_max > piercing_1 > today_price and yesterday_price_min < today_price_min < yesterday_price < today_Open_price > yesterday_Open_price  :
+     print ('Dark Cloud patterns الگوي برگشتي نزولي دارک کلود (کندل دومي بالاترازنيمه اولي)')     
+
+
+
+if today_two_price_max <= today_price_max > yesterday_price_max > today_two_price_min < today_price_min > yesterday_Open_price == yesterday_price_min < yesterday_price and today_price_min > yesterday_price_max :
+     print ('Morning star الگوي سه کندلي برگشتي صعودي,کندل وسط دوجي سبز')
+
+
+
+if today_two_price_max > today_price_max < yesterday_price_max > today_two_price_min < today_price_min < yesterday_Open_price > yesterday_price > yesterday_price_min and today_price_min < today_two_price_max :
+     print ('Evening star الگوي سه کندلي برگشتي نزولي,کندل وسط دوجي قرمز')
+     
+
+
+#=====================================================
+print ('='*30,' signal canal Day26 and Day52 ')
+
+
+if past_26_days_low < yesterday_price < today_price > kij26 and today_price < past_26_days_high :
+     print ('قيمت بالاي نيمه کانال 26روزه است وروبه بالاميره')
+
+
+
+if past_26_days_low < yesterday_price > today_price > kij26 and today_price < past_26_days_high :
+     print ('قيمت بالاي نيمه کانال26روزه است وروبه پايين ميره')
+
+
+
+if past_26_days_low < yesterday_price < today_price < kij26 and today_price < past_26_days_high :
+     print ('قيمت پايين نيمه کانال26روزه است وروبه بالاميره')
+
+
+
+if past_26_days_low < yesterday_price > today_price < kij26 and today_price < past_26_days_high :
+     print ('قيمت پايين نيمه کانال26روزه است وروبه پايين ميره')
+
+     
+
+if past_26_days_high < yesterday_price > today_price < past_26_days_high:
+     print ('signal sell : ','قيمت بالاي کانال 26روزه روبه سمت پايين شکست')
+
+
+
+if past_26_days_high > yesterday_price < today_price > past_26_days_high :
+     print ('signal buy : ','قيمت بالاي کانال 26روزه روبه سمت بالا شکست')
+     
+
+
+if past_26_days_low < yesterday_price > today_price < past_26_days_low :
+     print ('قيمت پايين کانال26روزه روبه سمت پايين شکست')
+
+
+
+if past_26_days_low > yesterday_price < today_price > past_26_days_low :
+     print ('قيمت پايين کانال26روزه روبه سمت بالاشکست')
+
+
+#-------------------52
+if past_52_days_low < yesterday_price < today_price > kij52 and today_price < past_52_days_high :
+     print ('قيمت بالاي نيمه کانال52روزه است وروبه بالاميره')
+
+
+
+if past_52_days_low < yesterday_price > today_price > kij52 and today_price < past_52_days_high :
+     print ('قيمت بالاي نيمه کانال52روزه است وروبه پايين ميره')
+
+
+
+if past_52_days_low < yesterday_price < today_price < kij52 and today_price < past_52_days_high :
+     print ('قيمت پايين نيمه کانال52روزه است وروبه بالاميره')
+
+
+
+if past_52_days_low < yesterday_price > today_price < kij52 and today_price < past_52_days_high :
+     print ('قيمت پايين نيمه کانال52روزه است وروبه پايين ميره')
+
+     
+
+if past_52_days_high < yesterday_price > today_price < past_52_days_high:
+     print ('signal sell : ','قيمت بالاي کانال52روزه روبه سمت پايين شکست')
+
+
+
+if past_52_days_high > yesterday_price < today_price > past_52_days_high :
+     print ('signal buy : ','قيمت بالاي کانال52روزه روبه سمت بالاشکست')
+     
+
+
+if past_52_days_low < yesterday_price > today_price < past_52_days_low :
+     print ('قيمت پايين کانال52روزه روبه سمت پايين شکست')
+
+
+
+if past_52_days_low > yesterday_price < today_price > past_52_days_low :
+     print ('قيمت پايين کانال52روزه روبه سمت بالاشکست')
+     
           
 print ('-'*30)
 #===============================================

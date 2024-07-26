@@ -267,6 +267,7 @@ print ()
 window_size = 52
 past_52_days_high = DF['High'].rolling(window_size).max().iloc[-1]
 past_52_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
+kij52 = (past_52_days_high + past_52_days_low)/2
 komu52_max = (math.ceil(past_52_days_high))
 komu52_min = (math.ceil(past_52_days_low))
 
@@ -610,6 +611,136 @@ if today_Open_price > today_price_max > today_price > today_price_min :
 if today_Open_price < today_price_max == today_price > today_price_min :
      print ('مارابوزوي سبز صعودي ')
      print (' O < H = C > L ')
+     
+
+     
+#===================================================
+print ("-"*20,nam,'Signal candlestick patterns')
+piercing_1= (yesterday_Open_price+yesterday_price)/2
+
+
+
+if yesterday_price_max > yesterday_Open_price > yesterday_price > yesterday_price_min and today_price == today_price_max > today_Open_price > today_price_min :
+     print ('Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
+
+
+
+if yesterday_price_max > yesterday_price > yesterday_Open_price > yesterday_price_min and today_price == today_price_min < today_Open_price < today_price_max :
+     print ('Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+
+
+
+if today_price >= yesterday_price_max < today_price_max and today_Open_price >= yesterday_price_min > today_price_min and yesterday_Open_price > yesterday_price:
+     print ('Bullish Engulfing الگوي برگشتي صعودي معمولادرکف رخميده')
+
+
+
+if today_price <= yesterday_price_min > today_price_min and today_Open_price <= yesterday_price_max < today_price_max and yesterday_Open_price < yesterday_price:
+     print ('Bearish Engulfing الگوي برگشتي نزولي درکف رخميده')
+
+
+
+if yesterday_price_max > today_price_max > piercing_1 < today_price and yesterday_price_min > today_price_min < yesterday_price > today_Open_price <yesterday_Open_price :
+     print ('piercing patterns الگوي برگشتي صعودي پرسينگ (کندل دومي پايين ترازنيمه اولي)')
+
+
+
+if yesterday_price_max < today_price_max > piercing_1 > today_price and yesterday_price_min < today_price_min < yesterday_price < today_Open_price > yesterday_Open_price  :
+     print ('Dark Cloud patterns الگوي برگشتي نزولي دارک کلود (کندل دومي بالاترازنيمه اولي)')     
+
+
+
+if today_two_price_max <= today_price_max > yesterday_price_max > today_two_price_min < today_price_min > yesterday_Open_price == yesterday_price_min < yesterday_price and today_price_min > yesterday_price_max :
+     print ('Morning star الگوي سه کندلي برگشتي صعودي,کندل وسط دوجي سبز')
+
+
+
+if today_two_price_max > today_price_max < yesterday_price_max > today_two_price_min < today_price_min < yesterday_Open_price > yesterday_price > yesterday_price_min and today_price_min < today_two_price_max :
+     print ('Evening star الگوي سه کندلي برگشتي نزولي,کندل وسط دوجي قرمز')
+     
+
+
+#=====================================================
+print ('='*30,' signal canal Day26 and Day52 ')
+
+
+if past_26_days_low < yesterday_price < today_price > kij26 and today_price < past_26_days_high :
+     print ('قيمت بالاي نيمه کانال 26روزه است وروبه بالاميره')
+
+
+
+if past_26_days_low < yesterday_price > today_price > kij26 and today_price < past_26_days_high :
+     print ('قيمت بالاي نيمه کانال26روزه است وروبه پايين ميره')
+
+
+
+if past_26_days_low < yesterday_price < today_price < kij26 and today_price < past_26_days_high :
+     print ('قيمت پايين نيمه کانال26روزه است وروبه بالاميره')
+
+
+
+if past_26_days_low < yesterday_price > today_price < kij26 and today_price < past_26_days_high :
+     print ('قيمت پايين نيمه کانال26روزه است وروبه پايين ميره')
+
+     
+
+if past_26_days_high < yesterday_price > today_price < past_26_days_high:
+     print ('signal sell : ','قيمت بالاي کانال 26روزه روبه سمت پايين شکست')
+
+
+
+if past_26_days_high > yesterday_price < today_price > past_26_days_high :
+     print ('signal buy : ','قيمت بالاي کانال 26روزه روبه سمت بالا شکست')
+     
+
+
+if past_26_days_low < yesterday_price > today_price < past_26_days_low :
+     print ('قيمت پايين کانال26روزه روبه سمت پايين شکست')
+
+
+
+if past_26_days_low > yesterday_price < today_price > past_26_days_low :
+     print ('قيمت پايين کانال26روزه روبه سمت بالاشکست')
+
+
+#-------------------52
+if past_52_days_low < yesterday_price < today_price > kij52 and today_price < past_52_days_high :
+     print ('قيمت بالاي نيمه کانال52روزه است وروبه بالاميره')
+
+
+
+if past_52_days_low < yesterday_price > today_price > kij52 and today_price < past_52_days_high :
+     print ('قيمت بالاي نيمه کانال52روزه است وروبه پايين ميره')
+
+
+
+if past_52_days_low < yesterday_price < today_price < kij52 and today_price < past_52_days_high :
+     print ('قيمت پايين نيمه کانال52روزه است وروبه بالاميره')
+
+
+
+if past_52_days_low < yesterday_price > today_price < kij52 and today_price < past_52_days_high :
+     print ('قيمت پايين نيمه کانال52روزه است وروبه پايين ميره')
+
+     
+
+if past_52_days_high < yesterday_price > today_price < past_52_days_high:
+     print ('signal sell : ','قيمت بالاي کانال52روزه روبه سمت پايين شکست')
+
+
+
+if past_52_days_high > yesterday_price < today_price > past_52_days_high :
+     print ('signal buy : ','قيمت بالاي کانال52روزه روبه سمت بالاشکست')
+     
+
+
+if past_52_days_low < yesterday_price > today_price < past_52_days_low :
+     print ('قيمت پايين کانال52روزه روبه سمت پايين شکست')
+
+
+
+if past_52_days_low > yesterday_price < today_price > past_52_days_low :
+     print ('قيمت پايين کانال52روزه روبه سمت بالاشکست')
      
 
      
