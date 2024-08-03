@@ -753,7 +753,7 @@ namad =["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاک
         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-        "تاصيكو","نخريس","قهكمت","تكشا","شاروم","مارون","آريا","اپال"]
+        "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال"]
 
 # Print the list of stocks and their indices
 #for i, n in enumerate(namad):
@@ -969,31 +969,19 @@ else:
          
 
 
-if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
-    print (' کندل دوجي سبزشکل گرفته')
+if ticker.open_price > ticker.adj_close < DOje1:
+     print (' candle Red')
 else:
      if ticker.open_price < ticker.adj_close > DOje1:
           print (' candle Green')
 
 
 
-
 if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
      print (' کندل دوجي قرمزشکل گرفته')
 else:
-     if ticker.open_price > ticker.adj_close < DOje1:
-          print (' candle Red')
-        
-
-
-
-if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
-    print (' candle marabozo Green معتبرترين')
-
-
-         
-if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
-     print (' candle marabozo Red معتبرترين')
+     if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
+         print (' کندل دوجي سبزشکل گرفته')
 
 
 

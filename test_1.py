@@ -830,19 +830,26 @@ else:
 print('-*'*20) 
 # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد
 Percent =((((ticker.high_price)-(ticker.low_price))/(ticker.high_price))*100)
-Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)                                                                         
+Percent_last =((((ticker.last_price)-(ticker.adj_close))/(ticker.last_price))*100)
+
 tik_close_low = ((((ticker.adj_close)-(ticker.low_price))/(ticker.adj_close))*100)
 tik_open_low = ((((ticker.open_price)-(ticker.low_price))/(ticker.open_price))*100)
+
 tik_ascending = ((math.ceil(tik_close_low))-(math.ceil(tik_open_low)))
+
 tik_close_high = ((((ticker.high_price)-(ticker.adj_close))/(ticker.high_price))*100)
 tik_open_high = ((((ticker.high_price)-(ticker.open_price))/(ticker.high_price))*100)
+
 tik_Descending =((math.ceil(tik_close_high))-(math.ceil(tik_open_high)))
+
+
                               
 if (ticker.last_price) > (ticker.adj_close):
      print ((math.floor(Percent )),'% : فاصله بالاترين وپايين ترين قيمت امروزبه درصد')
 else:
      if (ticker.last_price) < (ticker.adj_close):
           print (-(math.floor(Percent )),'% : فاصله بالاترين وپايين ترين قيمت امروزبه درصد')
+
 
 
 if (ticker.last_price) > (ticker.adj_close):
@@ -871,28 +878,18 @@ else:
 if ticker.high_price >= ticker.last_price>=ticker.adj_close >= DOje1>=ticker.open_price:
     print (' کندل دوجي سبزشکل گرفته')
 else:
-     if ticker.open_price < ticker.adj_close > DOje1:
-          print (' candle Green')
+     if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
+          print (' کندل دوجي قرمزشکل گرفته')
 
 
 
 
-if ticker.low_price <= ticker.last_price<=ticker.adj_close <= DOje1<=ticker.open_price:
-     print (' کندل دوجي قرمزشکل گرفته')
+if ticker.open_price < ticker.adj_close > DOje1:
+     print (' candle Green')
 else:
      if ticker.open_price > ticker.adj_close < DOje1:
           print (' candle Red')
         
-
-
-
-if ticker.open_price < ticker.high_price == ticker.adj_close > ticker.low_price :
-    print (' candle marabozo Green معتبرترين')
-
-
-         
-if ticker.open_price > ticker.high_price > ticker.adj_close > ticker.low_price :
-     print (' candle marabozo Red معتبرترين')
 
 
 
