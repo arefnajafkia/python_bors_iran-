@@ -23,7 +23,7 @@ nam = input ("Hello,Please write the name of the stock you want : \n لطفا ن
 
 DF = tse.Get_Price_History(stock=nam,
                             start_date='1401-01-01',
-                            end_date='1403-04-09',
+                            end_date='1403-05-01',
                             ignore_date=True,
                             adjust_price=True,
                             show_weekday=True,
@@ -538,7 +538,7 @@ else:
 
 print ()
 #===============================================
-#تعيين اولين مقاومت وحمايت سرراه با محاسبات انجام شده باايچيموکو         
+#تعيين اولين مقاومت وحمايت سرراه با محاسبات انجام شده باايچيموکو
 past_8 = past_8_days_high - past_8_days_low
 past_8h = past_8  + past_8_days_high
 past_8L = past_8_days_low - past_8
@@ -555,7 +555,7 @@ else:
 print (20*'-')
 
 #===============================================
-#تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو         
+#تعيين دومين مقاومت وحمايت سرراه با محاسبات انجام شده ايچيموکو
 past_26 = past_26_days_high - past_26_days_low
 past_26h = past_26  + past_26_days_high
 past_26L = past_26_days_low - past_26

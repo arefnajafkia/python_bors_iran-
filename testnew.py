@@ -866,6 +866,26 @@ if ticker.open_price > ticker.yesterday_price and ticker.low_price < ticker.yest
                      print (" Today Down tick")
 
 
+print(35*"=",sahame,"Tik Top or Down") 
+print(ticker.max_year,' : حداکثر قیمت بازه سال')
+print(ticker.min_year,' : حداقل قیمت بازه سال')
+
+
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (tik_ascending , ' : تيک صعودي')
+
+    
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
+    print (tik_Descending , ' : تيک نزولي')
+
+               
+
+if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
+    print (" امروزتيک صعودي داريم")
+
+     
+if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
+    print (" امروزتيک نزولي داريم")
                      
 #======================================================****
 print ('='*20 ,"Calculations done RSI  ")
@@ -1483,6 +1503,28 @@ if omc < bmi :
 else:
     if omc > bmi :
          print ('omc > bmi : به احتمال زيادفردا قيمت پايين ترازامروزه')
+
+#----------------------------------
+
+print(40*"=",sahame,"For order")
+nimeh_price = ((ticker.high_price + ticker.low_price)/2)
+nimeh_ste = ((ticker.sta_max + ticker.sta_min)/2)
+
+
+if nimeh_ste < nimeh_price < ticker.adj_close > ticker.yesterday_price :
+    print ("ميتوني خريد کني فردا قيمت بالاترميره")
+else:
+    if nimeh_ste > nimeh_price > ticker.adj_close < ticker.yesterday_price :
+        print ("قيمت فرداپايين ترمياد براي خريد دست نگهدار")
+
+        
+
+if bmi > omc :
+    print ('bmi > omc',': for buy','   = موقعيت خريد')
+else:
+    if bmi < omc :
+        print ('bmi < omc',': for sell','   = موقعيت فروش')
+
          
 print ()        
 #===============================================
