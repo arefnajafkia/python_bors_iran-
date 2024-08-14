@@ -731,6 +731,20 @@ if past_52_days_low < yesterday_price > today_price < past_52_days_low :
 
 if past_52_days_low > yesterday_price < today_price > past_52_days_low :
      print ('قيمت پايين کانال52روزه روبه سمت بالاشکست')
+
+
+if today_Volume_yesterday2 < today_Volume_yesterday < today_Volume :
+    print ('سه روزحجم داره ميره بالا')
+else:
+    if today_Volume_yesterday2 > today_Volume_yesterday > today_Volume :
+        print ('سه روزحجم داره ميره پايين')
+
+
+if today_price > yesterday_price > today_two_price :
+    print ('سه روز قيمت داره ميره بالا')
+else:
+    if today_price < yesterday_price < today_two_price :
+        print ('سه روز قيمت داره ميره پايين')
      
 
      
