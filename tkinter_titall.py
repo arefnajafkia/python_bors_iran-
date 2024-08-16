@@ -1,30 +1,39 @@
 import time
+import math
 
-
+# نه تابع مختلف باکارايي هاي متفاوت
 def main_menu():
     print(10*"-" , 'لطفا انتخاب کنيد',10*"-")
     print ()   
-    print("1 . RSI اطلاعات اوليه سهام شماومحاسبات : ")
-    print("2 . رسم نمودارميانگين هاي 10/20/50 : ")
-    print("3 . وضعيت کندلهاي سهام انتخابي شما : ")
+    print("1 . براي درصدگيري ازدوعدد : ")
+    print ()
+    print("2 . درست کردن فايل وخواندنش دردرايو اي : ")
+    print ()
+    print("3 . پاک کردن فايل ماي فايل ازدرايو اي درپوشه فيلم : ")
+    print ()
     print("4 . گزارش وضعيت حجم وقيمت سهام انتخابي : ")
+    print ()
     print("5 . گزارشي ازوضعيت حمايت ومقاومت ها : ")
+    print ()
     print("6 . محاسبات ايچيموکو و اينکل فينگ : ")
+    print ()
     print("7 . bmi and omc انجام محاسبات با : ")
+    print ()
     print("8 . نتيجه محاسبات ميانگين 103وکانالها : ")
-    print("9 . EXIT ")
+    print ()
+    print("9 .  --- EXIT  --- ")
 
 
-def plot_Information_RSI():
-    # 1 . RSI اطلاعات اوليه سهام شماومحاسبات
+def Percentage_two_numbers():
+    # 1 . براي درصدگيري ازدوعدد
     pass
 
-def calculate_Average_the_chart():
-    # 2 . رسم نمودارميانگين هاي 10/20/50
+def Create_file_and_read():
+    # 2 . درست کردن فايل وخواندنش دردرايو اي 
     pass
 
-def Condition_candle_take_stock():
-    # 3 . وضعيت کندلهاي سهام انتخابي شما
+def Delete_the_file_from_the_drive():
+    # 3 . پاک کردن فايل ماي فايل ازدرايو اي درپوشه فيلم
     pass
 
 def Condition_candle_Volume_stock():
@@ -50,20 +59,57 @@ def Result_Average_channels():
 
 while True:
     main_menu()
+    print ('-'*10)
     user_input = input("Enter 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 : ")
+    print ('-'*10)
+    print ()
 
     if user_input == "1":
-        plot_Information_RSI()
+        Percentage_two_numbers()
+        #print ('براي درصدگيري ازدوعدد')
+        num1 = float(input("Enter first number: "))
+        num2 = float(input("Enter second number: "))
+            
+        # Calculate percentage
+        percent = (num2 / num1) * 100
         print ()
-        print ("="*15,"Basic information of your stock and rsi" ,"="*15)
+        # Print the percentage
+        print("{:.0f}%".format(percent),': مقداردرصد')
+        print ('-'*10)
+
+        
     elif user_input == "2":
-        calculate_Average_the_chart()
+        Create_file_and_read()
         print ()
-        print ('-'*10,"Drawing average graphs 10/20/50" ,'-'*10)
+        # درست کردن فايل ماي فايل دردرايواي درپوشه فيلم
+        with open ('E:/film/myfile.ipynb','w') as f :
+            line1 = 'Hello word\n'
+            line2 = 'python3\n'
+            line3 = 'with\n'
+            line4 = 'myfile.ipynb\n'
+            line5 = 'salam agha\n'
+            f.write (line1)
+            f.write (line2)
+            f.write (line3)
+            f.write (line4)
+            f.write (line5)
+
+        # خواندن فايل ماي فايل ازدرايو اي درپوشه فيلم
+        with open ('E:/film/myfile.ipynb','r') as f :
+            for line in f :
+                print (line, end ='')
+        print ('-'*10)
+        
     elif user_input == "3":
-        Condition_candle_take_stock()
+        Delete_the_file_from_the_drive()
         print ()
-        print ('-'*10,"The status of your selected stock candles" ,'-'*10)
+        # پاک کردن فايل ماي فايل ازدرايو اي درپوشه فيلم
+        import os
+        n = 'E:/film/myfile.ipynb'
+        print (os.path.exists(n))
+        os.remove(n)
+        print ('-'*10,' فايل پاک شد')
+        
     elif user_input == "4":
         Condition_candle_Volume_stock()
         print ()
@@ -85,6 +131,7 @@ while True:
         print ()
         print ('-'*10,"The result of 103 average calculations and channels" ,'-'*10)
     elif user_input == "9":
+        print ('-'*10,' شماازبرنامه خارج شديد')
         break
     else:
         print ()
@@ -162,4 +209,32 @@ elif user_input == "4":
 else:
     print ()
     print("Invalid input. Continue the program in the next step.")
+
+
+
+#==================================================
+
+#بدست آوردن سيگنال خريد يافروش باايچيموکو
+
+import pandas as pd
+import ichimoku_cloud_indicator as ichimoku
+
+# داده های تاریخچی نماد را بارگیری می کنیم
+data = pd.read_csv('شستا')
+
+# شاخص ICHIMOKU Cloud را محاسبه می کنیم
+ichimoku_cloud = ichimoku.IchimokuCloud(data['Close'], conversion_line_periods=9, base_line_periods=26, lead_line_periods=52, displacement=26)
+data['Conversion Line'] = ichimoku_cloud.conversion_line
+data['Base Line'] = ichimoku_cloud.base_line
+data['Lead Line 1'] = ichimoku_cloud.lead_line_1
+data['Lead Line 2'] = ichimoku_cloud.lead_line_2
+data['Cloud Top'] = ichimoku_cloud.cloud_top
+data['Cloud Bottom'] = ichimoku_cloud.cloud_bottom
+
+# نماد را بررسی می کنیم
+if data['Conversion Line'][0] < data['Base Line'][0] and data['Base Line'][0] < data['Lead Line 1'][0] and data['Lead Line 1'][0] < data['Lead Line 2'][0] and data['Close'][0] > data['Cloud Top'][0]:
+    print('سیگنال خرید برای نماد HCHMK.IR')
+else:
+    print('سیگنال خرید برای نماد HCHMK.IR وجود ندارد')
+
 
