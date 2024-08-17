@@ -83,16 +83,84 @@ while True:
         print ()
         # درست کردن فايل ماي فايل دردرايواي درپوشه فيلم
         with open ('E:/film/myfile.ipynb','w') as f :
-            line1 = 'Hello word\n'
-            line2 = 'python3\n'
-            line3 = 'with\n'
-            line4 = 'myfile.ipynb\n'
-            line5 = 'salam agha\n'
+            line1 = 'print ("marhale one_1")\n'
+            
+            line2 = 'import time\n'
+            
+            line3 = '# پرسيدن براي خارج شدن ياادامه عمليات درصدگيري\n'
+            line4 = 'sentence1 = "1 . for anjame dobareh : \n'
+            line5 = 'sentence2 = "2 . for get out : "\n'
+            
+            line6 = '# Print the characters of the first prompt with a delay of 0.2 seconds \n'
+            line7 = 'for char in sentence1:\n'
+            line8 = '    print(char, end="")\n'
+            line9 = '    time.sleep(0.2)\n'
+            line10 = 'print()\n'
+            
+            line11 = '# Print the characters of the second prompt with a delay of 0.2 seconds\n'
+            line12 = 'for char in sentence2:\n'
+            line13= '    print(char, end="")\n'
+            line14 = '    time.sleep(0.2)\n'
+            line15 = 'print()\n'
+            
+            line16 = "# Get the user's input\n"
+            line17 = 'user_input = input("Enter 1 or 2 : ")\n'
+            line18 = "print ('       ','-'*30)\n"
+            
+            line19 = '# Check if the user wants to plot the stock price\n'
+            line20 = 'if user_input == "1":\n'
+            line21 = '     print("for anjame dobareh ")\n'
+
+            
+            line22 = '     num1 = float(input("Enter first number: "))\n'
+            line23 = '     num2 = float(input("Enter second number: "))\n'
+
+            
+            line24 = '     # Calculate percentage\n'
+            line25 = '     percent = (num2 / num1) * 100\n'
+            
+            line26 = '     # Print the percentage\n'
+            line27 = '     print("{:.0f}%".format(percent))\n'
+            
+            line28 = '#بازدن شماره 2ازبرنامه خارچ ميشويم\n'
+            line29 = 'if user_input == "2":\n'
+            line30 = "    print ('-'*10,' شماازبرنامه خارج ميشويد')\n"
+            
+            line31 = '    exit ()\n'
+            line32 = 'فايل بالابراي درصدگيري ازدوعددنوشته شده که باپايتون3قابل اجراميباشد\n'
+            
             f.write (line1)
             f.write (line2)
             f.write (line3)
             f.write (line4)
             f.write (line5)
+            f.write (line6)
+            f.write (line7)
+            f.write (line8)
+            f.write (line9)
+            f.write (line10)
+            f.write (line11)
+            f.write (line12)
+            f.write (line13)
+            f.write (line14)
+            f.write (line15)
+            f.write (line16)
+            f.write (line17)
+            f.write (line18)
+            f.write (line19)
+            f.write (line20)
+            f.write (line21)
+            f.write (line22)
+            f.write (line23)
+            f.write (line24)
+            f.write (line25)
+            f.write (line26)
+            f.write (line27)
+            f.write (line28)
+            f.write (line29)
+            f.write (line30)
+            f.write (line31)
+            f.write (line32)
 
         # خواندن فايل ماي فايل ازدرايو اي درپوشه فيلم
         with open ('E:/film/myfile.ipynb','r') as f :
