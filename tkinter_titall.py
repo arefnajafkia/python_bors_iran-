@@ -127,7 +127,49 @@ while True:
             line30 = "    print ('-'*10,' شماازبرنامه خارج ميشويد')\n"
             
             line31 = '    exit ()\n'
-            line32 = 'فايل بالابراي درصدگيري ازدوعددنوشته شده که باپايتون3قابل اجراميباشد\n'
+            
+            line32 = 'print ("marhale tow_2")\n'
+            line33 = 'import math\n'
+            
+            line34 = '#براي درصدگيري ازدوعدد ميباشد عددبزرگ اول تايپ شود\n'
+            line35 = '# وبازدن عدد1 دوباره تکرارميشود وعدد2ازبرنامه خارج ميشود\n'
+            line36 = 'def main_menu():\n'
+            line37 = '    print(10*"-" , "لطفا انتخاب کنيد",10*"-")\n'
+            line38 = '    print ()\n'
+            line39 = '    print ("براي درصدگيري دوعدد ")\n'
+            line40 = '    print ("To begin with = 1  and  exit = 2" )\n'
+
+            line41 = 'def calculate_percentage():\n'
+            line42 = '    pass\n'
+
+            
+            line43 = 'while True :\n'
+            line44 = '    main_menu()\n'
+            line45 = '    print ("-"*10)\n'
+            line46 = '    user_input = input("Enter 1 or 2 : ")\n'
+            line47 = '    print ("-"*10)\n'
+            
+            line48 = '    if user_input == "1":\n'
+            line49 = '        calculate_percentage()\n'
+            line50 = '        #print ("براي درصدگيري ازدوعدد")\n'
+            line51 = '        num1 = float(input("Enter first number: "))\n'
+            line52 = '        num2 = float(input("Enter second number: "))\n'
+            
+            line53 = '        # Calculate percentage\n'
+            line54 = '        percent = (num2 / num1) * 100\n'
+            line55 = '        print ()\n'
+            line56 = '        # Print the percentage\n'
+            line57 = '        print("{:.0f}%".format(percent),": مقداردرصد")\n'
+            line58 = '        print ("-"*10)\n'
+
+            
+            line59 = '    if user_input == "2":\n'
+            line60 = '        print ("-"*10," شماازبرنامه خارج شديد")\n'
+            
+            line61 = '        exit()\n'
+            
+            line62 = 'فايل درآدرس زير ساخته شد \n'
+            line63 = ' E:/film/myfile.ipynb \n'
             
             f.write (line1)
             f.write (line2)
@@ -161,6 +203,38 @@ while True:
             f.write (line30)
             f.write (line31)
             f.write (line32)
+            f.write (line33)
+            f.write (line34)
+            f.write (line35)
+            f.write (line36)
+            f.write (line37)
+            f.write (line38)
+            f.write (line39)
+            f.write (line40)
+            f.write (line41)
+            f.write (line42)
+            f.write (line43)
+            f.write (line44)
+            f.write (line45)
+            f.write (line46)
+            f.write (line47)
+            f.write (line48)
+            f.write (line49)
+            f.write (line50)
+            f.write (line51)
+            f.write (line52)
+            f.write (line53)
+            f.write (line54)
+            f.write (line55)
+            f.write (line56)
+            f.write (line57)
+            f.write (line58)
+            f.write (line59)
+            f.write (line60)
+            f.write (line61)
+            f.write (line62)
+            f.write (line63)
+
 
         # خواندن فايل ماي فايل ازدرايو اي درپوشه فيلم
         with open ('E:/film/myfile.ipynb','r') as f :
@@ -181,7 +255,7 @@ while True:
     elif user_input == "4":
         Condition_candle_Volume_stock()
         print ()
-        print ('-'*10,"Report on the volume and price of selected stocks" ,'-'*10)
+        print ('-'*10,"Report on the status of support and resistance" ,'-'*10)
     elif user_input == "5":
         Condition_Protection_resistance()
         print ()
