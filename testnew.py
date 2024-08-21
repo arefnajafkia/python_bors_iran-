@@ -27,7 +27,7 @@ nam = input ("Hello,Please write the name of the stock you want : \n لطفا ن
 
 DF = tse.Get_Price_History(stock=nam,
                             start_date='1401-01-01',
-                            end_date='1403-04-09',
+                            end_date='1403-06-01',
                             ignore_date=True,
                             adjust_price=True,
                             show_weekday=True,
