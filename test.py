@@ -15,7 +15,7 @@ def for_exit_tse_py():
 while True:
     main_menu()
     print ('-'*10)
-    user_input = input("Enter 1 ادامه ميدهيد ؟ \nEnter 2 ياازبرنامه خارج ميشويد؟ : ")
+    user_input = input("Enter 1 ؟ test.py برنامه راادامه ميدهيدبا \nEnter 2 ياازبرنامه خارج ميشويد؟ : ")
     print ('-'*10)
     print ()
 
@@ -44,7 +44,7 @@ while True:
                 import pandas_datareader.data as web
                 from datetime import date
 
-                #===================================================
+                #-----------------------------------------
                 print(25*"=","Check available stocks",25*"=")
                 import pytse_client as tse
                 #درج تاريخ ميلادي
@@ -525,10 +525,6 @@ while True:
                         print ('bmi < omc',': for sell','   = موقعيت فروش')
 
                 #-------------------------------------
-
-
-                          
-                #----------------------------------
                 print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
                 # چکارن
                 if index == 1:

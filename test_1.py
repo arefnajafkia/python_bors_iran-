@@ -20,7 +20,7 @@ def for_exit_tsenew_py():
 while True:
     main_menu()
     print ('-'*10)
-    user_input = input("Enter 1 ادامه ميدهيد ؟ \nEnter 2 ياازبرنامه خارج ميشويد؟ : ")
+    user_input = input("Enter 1 ؟ test_1.py برنامه راادامه ميدهيدبا \nEnter 2 ياازبرنامه خارج ميشويد؟ : ")
     print ('-'*10)
     print ()
 
