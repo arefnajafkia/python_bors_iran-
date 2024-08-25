@@ -834,7 +834,7 @@ while True:
                print(ticker.base_volume,' :  Base volume ')
                print()  
                print(ticker.last_price,' :  Last price ')  
-               print(ticker.adj_close,' :  adj cloos ')  
+               print(ticker.adj_close,' :  adj cloes ')  
                print(ticker.yesterday_price,' : yesterday price ')
                print(ticker.open_price,' : open price')   
                print()
@@ -855,7 +855,10 @@ while True:
 
                print('-*'*20)
                if ticker.adj_close > ticker.max_year :
-                    print ('  break ticker max year')
+                    print (' break ticker max year')
+               else:
+                    if ticker.adj_close < ticker.max_year :
+                         print (' down ticker max year')
 
 
 
@@ -869,15 +872,18 @@ while True:
 
                if (ticker.max_week)<(ticker.adj_close):
                     print(' ticker max week < ticker adj close')
-
-
-
-               if ticker.adj_close > closing_prices7 :
-                    print ('price > price_two_3')
                else:
-                    if ticker.adj_close < closing_prices7 :
-                         print ('price < price_two_3')
-                         
+                    if (ticker.max_week)>(ticker.adj_close):
+                          print(' ticker max week > ticker adj close')
+
+
+
+               if ticker.adj_close > today_price :
+                    print (' price > today_price')
+               else:
+                    if ticker.adj_close < today_price :
+                         print (' price < today_price')
+                           
 
                     
                print('-*'*20) 
