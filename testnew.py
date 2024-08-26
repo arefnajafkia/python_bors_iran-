@@ -495,19 +495,29 @@ while True:
 
 
                if kij30>=kij29>=kij28>ten12>=ten11>=ten10<kij27>=kij26>yesterday_price <=ten9<ten8<= today_price :
+                    print ()
                     print ('--- Signal buy :خيلي خيلي مهم: قيمت تنکانسن وکيجونسن روروبه بالاقطع کرد ---')
+                    print ()
+                    print ()
                else:
                     if kij30<=kij29<=kij28<ten12<=ten11<=ten10>kij27<=kij26<yesterday_price >=ten9>ten8>= today_price :
+                         print ()
                          print ('--- Signal sell :خيلي خيلي مهم : قيمت تنکانسن وکيجونسن روروبه پايين قطع کرد ---')
+                         print ()
+                         print ()
 
 
 
                if kij30>=kij29>=kij28>=kij27>=kij26>yesterday_price and kij26 < today_price :
-                    print ('--- Signal buy :خيلي مهم : قيمت کيجونسن رو روبه بالاقطع کرد ---')
+                   print ()
+                   print ('--- Signal buy :خيلي مهم : قيمت کيجونسن رو روبه بالاقطع کرد ---')
+                   print ()
                else:
                     if kij30<=kij29<=kij28<=kij27<=kij26<yesterday_price and kij26> today_price :
-                         print ('--- Signal sell :خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
-
+                        print ()
+                        print ('--- Signal sell :خيلي مهم : قيمت کيجونسن رو روبه پايين قطع کرد ---')
+                        print ()
+                        
 
 
                if kij30>=kij29>=kij28>=kij27>=kij26 > today_price>=yesterday_price>=today_two_price :
@@ -525,7 +535,7 @@ while True:
                          print ('***همچنان قيمت پايين کيجونسن ميباشد واحتمالا روندنزولي است***')
 
 
-               kij=kij26+60
+               #kij=kij26+60
                if ten10<=ten9<=ten8>kij28<=kij27<=kij26 and kij<=ten8<today_price:
                     print ('تنکانسن بافاصله بالاي کيجونسن ميباشدوقيمت هم بالاي تنکانسن است')
                else:
@@ -533,7 +543,7 @@ while True:
                          print ('تنکانسن بافاصله بالاي کيجونسن ميباشد وقيمت تنکانسن راروبه پايين قطع کرد')
 
 
-               ten=ten8+60
+               #ten=ten8+60
                if ten9>=ten8<kij27>=kij26 and today_price<=ten<kij26:
                     print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت هم پايين تنکانسن است')
                else:
@@ -652,14 +662,23 @@ while True:
                piercing_1= (yesterday_Open_price+yesterday_price)/2
 
 
-
-               if yesterday_price_max > yesterday_Open_price > yesterday_price > yesterday_price_min and today_price == today_price_max > today_Open_price > today_price_min :
-                    print ('Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
-
+               if today_open_price > yesterday_price < yesterday_open_price > today_price > today_open_price :
+                    print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
 
 
-               if yesterday_price_max > yesterday_price > yesterday_Open_price > yesterday_price_min and today_price == today_price_min < today_Open_price < today_price_max :
-                    print ('Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+
+               if today_price > yesterday_open_price < yesterday_price > today_open_price > today_price :
+                    print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+
+
+
+               if today_open_price < yesterday_price < yesterday_open_price < today_price > today_open_price :
+                   print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
+
+
+
+               if today_price < yesterday_open_price < yesterday_price <  today_open_price > today_price :
+                   print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 
 
