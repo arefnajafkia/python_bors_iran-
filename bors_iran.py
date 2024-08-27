@@ -1243,43 +1243,53 @@ while True:
 
 
 
-                if yesterday_price_max > yesterday_Open_price > yesterday_price > yesterday_price_min and today_price == today_price_max > today_Open_price > today_price_min :
-                     print ('Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
+                if today_open_price > yesterday_price < yesterday_open_price > today_price > today_open_price :
+                    print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
 
 
 
-                if yesterday_price_max > yesterday_price > yesterday_Open_price > yesterday_price_min and today_price == today_price_min < today_Open_price < today_price_max :
-                     print ('Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+                if today_price > yesterday_open_price < yesterday_price > today_open_price > today_price :
+                    print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
+
+
+
+                if today_open_price < yesterday_price < yesterday_open_price < today_price > today_open_price :
+                    print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
+
+
+
+                if today_price < yesterday_open_price < yesterday_price <  today_open_price > today_price :
+                   print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 
 
                 if today_price >= yesterday_price_max < today_price_max and today_Open_price >= yesterday_price_min > today_price_min and yesterday_Open_price > yesterday_price:
-                     print ('Bullish Engulfing الگوي برگشتي صعودي معمولادرکف رخميده')
+                    print ('Bullish Engulfing الگوي برگشتي صعودي معمولادرکف رخميده')
 
 
 
                 if today_price <= yesterday_price_min > today_price_min and today_Open_price <= yesterday_price_max < today_price_max and yesterday_Open_price < yesterday_price:
-                     print ('Bearish Engulfing الگوي برگشتي نزولي درکف رخميده')
+                    print ('Bearish Engulfing الگوي برگشتي نزولي درکف رخميده')
 
 
 
                 if yesterday_price_max > today_price_max > piercing_1 < today_price and yesterday_price_min > today_price_min < yesterday_price > today_Open_price <yesterday_Open_price :
-                     print ('piercing patterns الگوي برگشتي صعودي پرسينگ (کندل دومي پايين ترازنيمه اولي)')
+                    print ('piercing patterns الگوي برگشتي صعودي پرسينگ (کندل دومي پايين ترازنيمه اولي)')
 
 
 
-                if yesterday_price_max < today_price_max > piercing_1 > today_price and yesterday_price_min < today_price_min < yesterday_price < today_Open_price > yesterday_Open_price  :
-                     print ('Dark Cloud patterns الگوي برگشتي نزولي دارک کلود (کندل دومي بالاترازنيمه اولي)')     
+                if yesterday_price_max < today_price_max > piercing_1 > today_price and yesterday_price_min < today_price_min < yesterday_price < today_Open_price > yesterday_Open_price:
+                    print ('Dark Cloud patterns الگوي برگشتي نزولي دارک کلود (کندل دومي بالاترازنيمه اولي)')     
 
 
 
-                if today_two_price_max <= today_price_max > yesterday_price_max > today_two_price_min < today_price_min > yesterday_Open_price == yesterday_price_min < yesterday_price and today_price_min > yesterday_price_max :
-                     print ('Morning star الگوي سه کندلي برگشتي صعودي,کندل وسط دوجي سبز')
+                if today_two_price_max <= today_price_max > yesterday_price_max > today_two_price_min < today_price_min > yesterday_Open_price == yesterday_price_min < yesterday_price and today_price_min > yesterday_price_max:
+                    print ('Morning star الگوي سه کندلي برگشتي صعودي,کندل وسط دوجي سبز')
 
 
 
                 if today_two_price_max > today_price_max < yesterday_price_max > today_two_price_min < today_price_min < yesterday_Open_price > yesterday_price > yesterday_price_min and today_price_min < today_two_price_max :
-                     print ('Evening star الگوي سه کندلي برگشتي نزولي,کندل وسط دوجي قرمز')
+                    print ('Evening star الگوي سه کندلي برگشتي نزولي,کندل وسط دوجي قرمز')
                      
 
 
