@@ -530,7 +530,7 @@ while True:
 
 
 
-               #kij=kij26+60
+               kij=kij26+60
                if ten10<=ten9<=ten8>kij28<=kij27<=kij26 and kij<=ten8<today_price:
                     print ('تنکانسن بافاصله بالاي کيجونسن ميباشدوقيمت هم بالاي تنکانسن است')
                else:
@@ -538,7 +538,7 @@ while True:
                          print ('تنکانسن بافاصله بالاي کيجونسن ميباشد وقيمت تنکانسن راروبه پايين قطع کرد')
 
 
-               #ten=ten8+60
+               ten=ten8+60
                if ten9>=ten8<kij27>=kij26 and today_price<=ten<kij26:
                     print ('تنکانسن بافاصله پايين کيجونسن ميباشد وقيمت هم پايين تنکانسن است')
                else:
@@ -655,26 +655,26 @@ while True:
 
                #===================================================
                print ("-"*20,nam,'Signal candlestick patterns')
-               piercing_1= (yesterday_Open_price+yesterday_price)/2
+               piercing_1= (yesterday_Open_price + yesterday_price)/2
 
 
 
-               if today_open_price > yesterday_price < yesterday_open_price > today_price > today_open_price :
+               if today_Open_price > yesterday_price < yesterday_Open_price > today_price > today_Open_price :
                     print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
 
 
 
-               if today_price > yesterday_open_price < yesterday_price > today_open_price > today_price :
+               if today_price > yesterday_Open_price < yesterday_price > today_Open_price > today_price :
                     print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
 
 
 
-               if today_open_price < yesterday_price < yesterday_open_price < today_price > today_open_price :
+               if today_Open_price < yesterday_price < yesterday_Open_price < today_price > today_Open_price :
                    print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
 
 
 
-               if today_price < yesterday_open_price < yesterday_price <  today_open_price > today_price :
+               if today_price < yesterday_Open_price < yesterday_price <  today_Open_price > today_price :
                    print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 

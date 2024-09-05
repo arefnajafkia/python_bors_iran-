@@ -606,6 +606,9 @@ while True:
                 today_Open_price = DF['Open'].iloc[-1] # قيمت بازشدن امروز
                 yesterday_price = DF['Close'].iloc[-2] # آخرین قیمت دیروز
                 yesterday_Open_price = DF['Open'].iloc[-2] # قيمت بازشدن ديروز
+                yesterday_two_price = DF['Close'].iloc[-3] # آخرين قيمت پريروز
+                moving_3 = (today_price + yesterday_price + yesterday_two_price )/3 # ميانگير3 روز
+                
                 # محاسبات مقاومت هفتگي تاساليانه 
                 highest_price_7 = max(DF['High'][-7:])    #محاسبه مقاومت هفتگي
                 highest_price_10 = max(DF['High'][-10:])
@@ -616,7 +619,7 @@ while True:
                 highest_price_180 = max(DF['High'][-180:])
                 highest_price_280 = max(DF['High'][-280:])
                 highest_price_360 = max(DF['High'][-360:])    #محاسبه مقاومت ساليانه
-                #------------------------
+                
                 # محاسبات حمايت هفتگي تاساليانه
                 lowest_price_7 = min(DF['Low'][-7:])         #محاسبه حمايت هفتگي
                 lowest_price_10 = min(DF['Low'][-10:])
@@ -638,12 +641,14 @@ while True:
                 kh_3=(highest_price_90)-50
                 # به حمايت سه ماهه 50تا اضافه کرديم براي محاسبات کف کانال
                 kL_3=(lowest_price_90)+50
+                
 
                 if today_price > yesterday_price > today_two_price:
                     print (today_price,' قيمت سه روزه افزايشي ميباشد')
                 else:
                     if today_price < yesterday_price < today_two_price:
                         print (today_price,' قيمت سه روزه کاهشي ميباشد')
+                        
 
                 if highest_price_360 > today_Final_price > mohasebeh1:
                     print (mohasebeh1,':بالاي ميانه ساليانه هستيم ',highest_price_360,' قيمت ميان اين دودرحرکت است')
@@ -664,6 +669,7 @@ while True:
                 else:
                     if today_Final_price < yesterday_Final_price :
                         print (today_Final_price,' قيمت امروزبه سمت پايين درحرکت است')
+                        
 
                 #تشخيص روند
                 if highest_price_90>=highest_price_60>=highest_price_30>=today_price>=lowest_price_90<=lowest_price_60<=lowest_price_30:
@@ -707,11 +713,13 @@ while True:
                     print ("ومقاومت درسه ماه کلا افزايشي  است  7>30>90")
                 else:
                     if highest_price_30 <  highest_price_90:
-                        print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")    
+                        print ("ومقاومت درسه ماه کلاکاهشي شده 7<30<90")
+                        
 
                 # فاصله مقاومت هفتگي باساليانه
                 resistance= highest_price_7 - highest_price_360
                 resistance_1= highest_price_10 - highest_price_360
+                
 
                 if resistance < resistance_1 :
                     print (resistance_1 ,": فاصله مقاومت هفتگي باساليانه داره کم ميشه")
@@ -750,10 +758,12 @@ while True:
                 else:
                     if lowest_price_7 > lowest_price_10 :
                         print ("حمايت هفتگي شروع کرده روبه پايين بره")
+                        
                    
                 # فاصله حمايت هفتگي باساليانه
                 support= lowest_price_7 -lowest_price_360
                 support_1= lowest_price_10 -lowest_price_360
+                
 
                 if support < support_1:
                     print (support_1 ,": فاصله حمايت هفتگي باساليانه داره زيادميشه")
@@ -847,6 +857,7 @@ while True:
                 h10 = (today_price - today_Open_price) < 5*(yesterday_Open_price - yesterday_price)
 
 
+
                 if today_price > highest_price_90 :
                      print (' مقاومت سه ماه شکسته شد')
                 else:
@@ -884,11 +895,13 @@ while True:
                 past_12_days_high = DF['High'].rolling(window_size).max().iloc[-1]
                 past_12_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
                 ten12 = (past_12_days_high + past_12_days_low)/2
+                tenken12 = (math.ceil(ten12))
 
                 window_size = 11
                 past_11_days_high = DF['High'].rolling(window_size).max().iloc[-1]
                 past_11_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
                 ten11 = (past_11_days_high + past_11_days_low)/2
+                tenken11 = (math.ceil(ten11))
 
                 window_size = 10
                 past_10_days_high = DF['High'].rolling(window_size).max().iloc[-1]
@@ -930,16 +943,19 @@ while True:
                 past_28_days_high = DF['High'].rolling(window_size).max().iloc[-1]
                 past_28_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
                 kij28 = (past_28_days_high + past_28_days_low)/2
+                kijon28 = (math.ceil(kij28))
 
                 window_size = 29
                 past_29_days_high = DF['High'].rolling(window_size).max().iloc[-1]
                 past_29_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
                 kij29 = (past_29_days_high + past_29_days_low)/2
+                kijon29 = (math.ceil(kij29))
 
                 window_size = 30
                 past_30_days_high = DF['High'].rolling(window_size).max().iloc[-1]
                 past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
                 kij30 = (past_30_days_high + past_30_days_low)/2
+                kijon30 = (math.ceil(kij30))
 
                 #print ('kij26 :',(math.ceil(kij26)))
                 #print ('kij27 :',(math.ceil(kij27)))
@@ -1239,26 +1255,26 @@ while True:
                      
                 #===================================================
                 print ("-"*20,nam,'Signal candlestick patterns')
-                piercing_1= (yesterday_Open_price+yesterday_price)/2
+                piercing_1= (yesterday_Open_price + yesterday_price)/2
 
 
 
-                if today_open_price > yesterday_price < yesterday_open_price > today_price > today_open_price :
+                if today_Open_price > yesterday_price < yesterday_Open_price > today_price > today_Open_price :
                     print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
 
 
 
-                if today_price > yesterday_open_price < yesterday_price > today_open_price > today_price :
+                if today_price > yesterday_Open_price < yesterday_price > today_Open_price > today_price :
                     print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
 
 
 
-                if today_open_price < yesterday_price < yesterday_open_price < today_price > today_open_price :
+                if today_Open_price < yesterday_price < yesterday_Open_price < today_price > today_Open_price :
                     print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
 
 
 
-                if today_price < yesterday_open_price < yesterday_price <  today_open_price > today_price :
+                if today_price < yesterday_Open_price < yesterday_price <  today_Open_price > today_price :
                    print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 
@@ -2236,11 +2252,11 @@ while True:
                     
 
                 if ravand < ticker.last_price :
-                     print ('** توجه داشته باشيد روند قيمتي ساليانه صعوديه **')
+                     print ('***** توجه داشته باشيد روند قيمتي ساليانه صعوديه *****')
                      print ()
                 else :
                      if ravand > ticker.last_price :
-                          print ('** توجه داشته باشيد روند قيمتي ساليانه نزوليه **')
+                          print ('***** توجه داشته باشيد روند قيمتي ساليانه نزوليه *****')
                           print ()
 
 
