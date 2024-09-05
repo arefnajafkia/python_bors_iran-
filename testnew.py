@@ -659,25 +659,26 @@ while True:
                     
                #===================================================
               print ("-"*20,nam,'Signal candlestick patterns')
-              piercing_1= (yesterday_Open_price+yesterday_price)/2
+              piercing_1= (yesterday_Open_price + yesterday_price)/2
+              
 
 
-              if today_open_price > yesterday_price < yesterday_open_price > today_price > today_open_price :
+              if today_Open_price > yesterday_price < yesterday_Open_price > today_price > today_Open_price:
                   print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
 
 
 
-              if today_price > yesterday_open_price < yesterday_price > today_open_price > today_price :
+              if today_price > yesterday_Open_price < yesterday_price > today_Open_price > today_price:
                    print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
 
 
 
-              if today_open_price < yesterday_price < yesterday_open_price < today_price > today_open_price :
+              if today_Open_price < yesterday_price < yesterday_Open_price < today_price > today_Open_price:
                    print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
 
 
 
-              if today_price < yesterday_open_price < yesterday_price <  today_open_price > today_price :
+              if today_price < yesterday_Open_price < yesterday_price <  today_Open_price > today_price:
                    print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 
@@ -714,6 +715,7 @@ while True:
 
                #=====================================================
               print ('='*30,' signal canal Day26 and Day52 ')
+              
 
 
               if past_26_days_low < yesterday_price < today_price > kij26 and today_price < past_26_days_high :
@@ -801,6 +803,7 @@ while True:
               else:
                   if today_Volume_yesterday2 > today_Volume_yesterday > today_Volume :
                        print ('سه روزحجم داره ميره پايين')
+                       
 
 
               if today_price > yesterday_price > today_two_price :
@@ -808,6 +811,7 @@ while True:
               else:
                    if today_price < yesterday_price < today_two_price :
                        print ('سه روز قيمت داره ميره پايين')
+                       
 
                     
               print ("="*40)
