@@ -64,7 +64,7 @@ while True:
                         "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
                         "درازک","كپارس","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
                         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-                        "تاصيكو","نخريس","قهكمت"]
+                        "تاصيكو","نخريس","قهكمت","واعتبار","اطلس"]
 
                 # Print the list of stocks and their indices
                 #for i, n in enumerate(namad):
@@ -528,9 +528,9 @@ while True:
                 print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
                 # چکارن
                 if index == 1:
-                     p=0
-                     s=4591
-                     v=20000
+                     p=2585
+                     s=2595
+                     v=5000
                      if p > 0 :
                           print (p , ': قيمت خريد شمااز',sahame )
                           print (v ,': تعداد سهام موجود')
@@ -636,7 +636,7 @@ while True:
 
                 # شپاکسا
                 if index == 6:
-                     p=1692
+                     p=1745
                      s=0
                      v=5000
                      if p > 0 :
@@ -827,7 +827,164 @@ while True:
                 print ('-'*20)          
                 #====================================================
                       
-                print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')         
+                print(ticker.url,'\n :  TSETMC آدرس صفحه',sahame,'در')
+
+                #-------------------
+                import pandas as pd
+                import numpy as np
+
+                def calculate_ichimoku(df):
+                    # محاسبه ایچیموکو
+                    high_9 = df['High'].rolling(window=9).max()
+                    low_9 = df['Low'].rolling(window=9).min()
+                    df['Tenkan-sen'] = (high_9 + low_9) / 2
+
+                    high_26 = df['High'].rolling(window=26).max()
+                    low_26 = df['Low'].rolling(window=26).min()
+                    df['Kijun-sen'] = (high_26 + low_26) / 2
+
+                    df['Senkou Span A'] = ((df['Tenkan-sen'] + df['Kijun-sen']) / 2).shift(26)
+                    df['Senkou Span B'] = ((df['High'].rolling(window=52).max() + df['Low'].rolling(window=52).min()) / 2).shift(26)
+                    df['Chikou Span'] = df['Close'].shift(-26)
+
+                    return df
+
+                def buy_signal(df):
+                    # آخرین مقادیر ایچیموکو
+                    latest = df.iloc[-1]
+                    
+                    # بررسی شرایط سیگنال خرید
+                    if (latest['Tenkan-sen'] > latest['Kijun-sen'] and
+                        latest['Close'] > latest['Senkou Span A'] and
+                        latest['Close'] > latest['Senkou Span B'] and
+                        latest[ticker.yesterday_price] < [ticker.adj_close]and
+                        latest['Chikou Span'] > latest['Close']):
+                        return True
+                    return False
+
+                def sell_signal(df):
+                    # آخرین مقادیر ایچیموکو
+                    latest = df.iloc[-1]
+                    
+                    # بررسی شرایط سیگنال فروش
+                    if (latest['Tenkan-sen'] < latest['Kijun-sen'] and
+                        latest['Close'] < latest['Senkou Span A'] and
+                        latest['Close'] < latest['Senkou Span B'] and
+                        larest [ticker.yesterday_price] > [ticker.adj_close]and
+                        latest['Chikou Span'] < latest['Close']):
+                        return True
+                    return False
+
+                def main():
+                    # دریافت نام سهم از کاربر
+                    #stock_name = input("لطفا نام سهام موردنظرتان رابنويسيد : ")
+                    stock_name = sahame
+
+                    # بارگذاری داده‌های سهام از فایل CSV
+                    try:
+                        df = pd.read_csv(stock_name)
+                    except FileNotFoundError:
+                        print("فایل پیدا نشد. لطفاً نام صحیح فایل را وارد کنید.")
+                        return
+
+                    # بررسی اینکه آیا داده‌های لازم وجود دارد
+                    required_columns = ['High', 'Low', 'Close']
+                    if not all(column in df.columns for column in required_columns):
+                        print("فایل باید شامل ستون‌های 'High', 'Low' و 'Close' باشد.")
+                        return
+
+                    # محاسبه ایچیموکو
+                    df = calculate_ichimoku(df)
+
+                    # بررسی سیگنال خرید
+                    if buy_signal(df):
+                        print("وقت خرید این سهم است.")
+                    else:
+                        print("وقت خرید این سهم نیست.")
+
+                    # بررسی سیگنال فروش
+                    if sell_signal(df):
+                        print("وقت فروش این سهم است.")
+                    else:
+                        print("وقت فروش این سهم نیست.")
+
+                if __name__ == "__main__":
+                    main()
+
+                #-------------------
+                import pandas as pd
+                import numpy as np
+
+                def calculate_ichimoku(df):
+                    # محاسبه ایچیموکو
+                    high_9 = df['High'].rolling(window=9).max()
+                    low_9 = df['Low'].rolling(window=9).min()
+                    df['Tenkan-sen'] = (high_9 + low_9) / 2
+
+                    high_26 = df['High'].rolling(window=26).max()
+                    low_26 = df['Low'].rolling(window=26).min()
+                    df['Kijun-sen'] = (high_26 + low_26) / 2
+
+                    df['Senkou Span A'] = ((df['Tenkan-sen'] + df['Kijun-sen']) / 2).shift(26)
+                    df['Senkou Span B'] = ((df['High'].rolling(window=52).max() + df['Low'].rolling(window=52).min()) / 2).shift(26)
+                    df['Chikou Span'] = df['Close'].shift(-26)
+
+                    return df
+
+                def buy_signal(df):
+                    # آخرین مقادیر ایچیموکو
+                    latest = df.iloc[-1]
+                    
+                    # بررسی شرایط سیگنال خرید
+                    if (latest['Tenkan-sen'] > latest['Kijun-sen'] and
+                        latest['Close'] > latest['Senkou Span A'] and
+                        latest['Close'] > latest['Senkou Span B'] and
+                        latest[ticker.yesterday_price] < [ticker.adj_close]and
+                        latest['Chikou Span'] > latest['Close']):
+                        return True
+                    return False
+
+                def sell_signal(df):
+                    # آخرین مقادیر ایچیموکو
+                    latest = df.iloc[-1]
+                    
+                    # بررسی شرایط سیگنال فروش
+                    if (latest['Tenkan-sen'] < latest['Kijun-sen'] and
+                        latest['Close'] < latest['Senkou Span A'] and
+                        latest['Close'] < latest['Senkou Span B'] and
+                        larest [ticker.yesterday_price] > [ticker.adj_close]and
+                        latest['Chikou Span'] < latest['Close']):
+                        return True
+                    return False
+
+                # بارگذاری داده‌های سهام
+                # فرض کنید داده‌ها را از یک فایل CSV بارگذاری می‌کنید
+                # df = pd.read_csv('your_stock_data.csv')
+
+                # برای مثال، داده‌ها را به صورت دستی ایجاد می‌کنیم
+                data = {
+                    'High': [120, 122, 121, 123, 125, 126, 127, 128, 129, 130, 131, 132],
+                    'Low': [115, 116, 115, 118, 119, 120, 121, 122, 123, 124, 125, 126],
+                    'Close': [119, 121, 120, 121, 124, 125, 126, 127, 128, 129, 130, 131]
+                }
+                df = pd.DataFrame(data)
+
+                # محاسبه ایچیموکو
+                df = calculate_ichimoku(df)
+
+                # بررسی سیگنال خرید
+                if buy_signal(df):
+                    print("وقت خرید این سهم است.")
+                else:
+                    print("وقت خرید این سهم نیست.")
+
+                # بررسی سیگنال فروش
+                if sell_signal(df):
+                    print("وقت فروش این سهم است.")
+                else:
+                    print("وقت فروش این سهم نیست.")
+                
+                #-----------------
 
                 print ()
           except (TypeError , Exception) as te:
