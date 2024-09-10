@@ -1871,7 +1871,7 @@ while True:
                         
                # شپاکسا
               if index == 6:
-                    p=1692
+                    p=1844
                     s=0
                     v=5000
                     psv=(s*v)-(p*v)
