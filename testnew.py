@@ -901,6 +901,9 @@ while True:
               print(ticker.count,' : تعداد معاملات ')
               print(ticker.value,' :  ارزش معاملات ')
               print(ticker.volume,' : حجم معاملات امروز ')
+              today_Volume = DF['Volume'].iloc[-1] # حجم امروز
+              print(today_Volume,"حجم ديروز")
+              print(today_Volume_yesterday,"حجم سه روزپيش")
               print(ticker.month_average_volume,' : میانگین حجم ماه')
 
               print ('-'*20)
@@ -1130,7 +1133,7 @@ while True:
                        
               print (35*'=',sahame,'volume')
               print (ticker.volume ,'حجم امروز')
-              print (today_Volume_yesterday , 'حجم ديروز')
+              print (today_Volume , 'حجم ديروز')
                          
               if ticker.volume > (math.ceil(average_Volume_Month)):
                     print ('حجم امروزبيشترازحجم ماهيانه شده')
