@@ -1080,6 +1080,8 @@ while True:
                 print(ticker.count,' : تعداد معاملات ')
                 print(ticker.value,' :  ارزش معاملات ')
                 print(ticker.volume,' : حجم معاملات امروز ')
+                print(today_Volume_yesterday,"حجم ديروز")
+                print(today_Volume_yesterday2,"حجم سه روزقبل")
                 print(ticker.month_average_volume,' : میانگین حجم ماه')
                 print()
                 time.sleep(3)

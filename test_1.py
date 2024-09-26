@@ -869,7 +869,9 @@ while True:
                print(today_price_min,': yesterday price min')
                print(today_price,': yesterday price')
                print()
-               print(ticker.volume,' :  volume ')
+               print(ticker.volume,' : today volume ')
+               print(today_Volume_yesterday," : yesterday volume")
+               print(today_Volume_yesterday2," : there yesterday volume")  
                print(ticker.month_average_volume,' :  month average volume')
                print()
 
