@@ -1,4 +1,5 @@
 
+
 def main_menu():
     print(10*"-" , 'لطفا انتخاب کنيد',10*"-")
     print ()
@@ -57,15 +58,15 @@ while True:
                 print("date and time =", dt_string)
                 print ('-'*30,)
                 #-------------------------------------------
-                # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است
-                namad=["چکارن","تلیسه","غمینو","وسپه","غکورش","شپاکسا","ثبهساز","تاپیکو",
-                        "دسبحان","ومعادن","شستا","حتوکا","خگستر","فولاد","شپنا","فملی","فصبا",
-                        "فسبزوار","خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور","فپنتا",
-                        "شبندر","فارس","غفارس","وبصادر","کچاد","کگل","داتام","نخريس","پاکشو",
-                        "درازک","کچاد","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
-                        "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
-                        "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال",
-                        "واعتبار","اطلس","شپترو","سمگا","نخريس","سبزوا"]
+               # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است 
+                namad =["چکارن","تلیسه","غمینو","غکورش","وسپه","شپاکسا","ومعادن","تاپیکو",
+                         "دسبحان","کچاد","شستا","حتوکا","خگستر","فولاد","شپنا","فملی","فصبا",
+                         "فسبزوار","خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور","فپنتا",
+                         "شبندر","فارس","غفارس","وبصادر","کچاد","درازک","داتام","نخريس","پاکشو",
+                         "کگل","ثبهساز","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
+                         "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
+                         "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال",
+                         "واعتبار","اطلس","شپترو","سمگا","سبزوا","سيمانو","استيل"]
 
                 # Print the list of stocks and their indices
                 #for i, n in enumerate(namad):
@@ -103,31 +104,31 @@ while True:
                 print(ticker.title,' : نام شرکت ')
                 print(ticker.state,ticker.flow,ticker.group_name)     
                 print(ticker.fiscal_year,' : سال مالی ')  
-                print(ticker.eps ,'  :  EPS  ')  
-                print(ticker.p_e_ratio ,' :   P/E')  
+                print(math.ceil(ticker.eps) ,'   :  EPS  ')  
+                print(math.ceil(ticker.p_e_ratio) ,'   :   P/E')  
                 print(ticker.group_p_e_ratio, '  :  group P/E ')  
-                print(ticker.float_shares,' : درصد سهام شناور')   
-                print(ticker.base_volume,' : حجم مبنا ')
+                print(math.ceil(ticker.float_shares),'  : درصد سهام شناور')   
+                print(math.ceil(ticker.base_volume),'  : حجم مبنا ')
                 print()  
-                print(ticker.last_price,' : آخرین معامله ')  
-                print(ticker.adj_close,' : قیمت پایانی ')  
-                print(ticker.yesterday_price,' : قیمت دیروز ')
-                print(ticker.open_price,' : قيمت بازشدن')   
+                print(ticker.last_price,'  : آخرین معامله ')  
+                print(ticker.adj_close,'  : قیمت پایانی ')  
+                print(ticker.yesterday_price,' : قیمت دیروز ')  
+                print(ticker.open_price,'  : قيمت بازشدن')   
                 print()
                 print(ticker.high_price,' : حداکثرقيمت امروز')  
-                print(ticker.low_price,' : حداقل قيمت امروز')
-                print(ticker.sta_max,' : حداکثر قیمت مجاز')  
-                print(ticker.sta_min,' : حداقل قیمت مجاز')
+                print(ticker.low_price,'  : حداقل قيمت امروز')
+                print(math.ceil(ticker.sta_max),' : حداکثر قیمت مجاز')  
+                print(math.ceil(ticker.sta_min),' : حداقل قیمت مجاز')
                 print()
-                print(ticker.min_week,' : حداقل قیمت هفته اخیر')  
-                print(ticker.max_week,' : حداکثر قیمت هفته اخیر')
-                print(ticker.min_year,' : حداقل قیمت بازه سال')  
-                print(ticker.max_year,' : حداکثر قیمت بازه سال')
+                print(math.ceil(ticker.min_week),' : حداقل قیمت هفته اخیر')  
+                print(math.ceil(ticker.max_week),' : حداکثر قیمت هفته اخیر')
+                print(math.ceil(ticker.min_year),' : حداقل قیمت بازه سال')  
+                print(math.ceil(ticker.max_year),' : حداکثر قیمت بازه سال')
                 print()
-                print(ticker.count,' : تعداد معاملات ')
-                print(ticker.value,' :  ارزش معاملات ')
+                print(ticker.count,'  : تعداد معاملات ')
+                print(ticker.value,'  :  ارزش معاملات ')
                 print(ticker.volume,' : حجم معاملات امروز ')
-                print(ticker.month_average_volume,' : میانگین حجم ماه')
+                print(ticker.month_average_volume,': میانگین حجم ماه')
                 print()
 
                 #=====================================================
@@ -321,8 +322,8 @@ while True:
                 #=========================================================     
                 print(20*"-",sahame,"Tik Top or Down")
 
-                print(ticker.max_year,' : حداکثر قیمت بازه سال')
-                print(ticker.min_year,' : حداقل قیمت بازه سال')
+                print(math.ceil(ticker.max_year),' : حداکثر قیمت بازه سال')
+                print(math.ceil(ticker.min_year),' : حداقل قیمت بازه سال')
 
 
                 if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
@@ -527,289 +528,402 @@ while True:
 
                 #-------------------------------------
                 print(40*"=","حدود حمايت ومقاومت باقيمت",sahame,)
-                # چکارن
+                
+               # چکارن
                 if index == 1:
-                     p=2585
-                     s=2595
-                     v=5000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                    
-                # تليسه
-                if index == 2:
-                     p=4331
-                     s=4431
-                     v=75000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                     if 2370>ticker.adj_close>1334:
-                         print ("مابين حمايت 1334ومقاومت 2370هستيم ودرميانه 1878روداريم")
-                     if 3421>ticker.adj_close>2370:
-                         print ("مابين حمايت 2370ومقاومت 3421هستيم درميانه 2920روداريم")
-                     if 4516>ticker.adj_close>3421:
-                         print ("مابين حمايت 3421 ومقاومت 4516 هستيم درميانه 3956 روداريم ")
-                     if 5597>ticker.adj_close>4516:
-                         print ("مابين حمايت 4516 ومقاومت 5597 هستيم درميانه 5025 روداريم")
-                     if 6663>ticker.adj_close>5597:
-                         print ("مابين حمايت 5597 ومقاومت 6663 هستيم درميانه 6094 روداريم")
-                     if 7758>ticker.adj_close>6663:
-                         print ("مابين حمايت 6663 ومقاومت 7758 هستيم درميانه 7208 روداريم")
-                     if 8839>ticker.adj_close>7758:
-                         print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
-                     if 9918>ticker.adj_close>8839:
-                         print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
-
-                # غمينو
-                if index == 3:
-                     p=11181
-                     s=10020
-                     v=4000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                 
-                # وسپه
-                if index == 4:
-                     p=4408
-                     s=0
-                     v=80000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                     if 1330>ticker.adj_close>618:
-                         print ("مابين حمايت 618 ومقاومت 1330 هستيم درميانه 974 روداريم")
-                     if 2022>ticker.adj_close>1330:
-                         print ("مابين حمايت 1330 ومقاومت2022 هستيم درميانه 1666 روداريم")
-                     if 2714>ticker.adj_close>2022:
-                         print ("مابين حمايت 2022 ومقاومت 2714 هستيم درميانه 2358 روداريم ")
-                     if 3397>ticker.adj_close>2714:
-                         print ("مابين حمايت 2714 ومقاومت 3397 هستيم درميانه 3041 روداريم")
-                     if 4079>ticker.adj_close>3397:
-                         print ("مابين حمايت 3397 ومقاومت 4079 هستيم درميانه 3733 روداريم")
-                     if 4782>ticker.adj_close>4079:
-                         print ("مابين حمايت 4079 ومقاومت 4782 هستيم درميانه 4435 روداريم")
-                     if 5465>ticker.adj_close>4782:
-                         print ("مابين حمايت 4782 ومقاومت 5465 هستيم درميانه 5127 روداريم")
-                     if 6146>ticker.adj_close>5465:
-                         print ("مابين حمايت 5465 ومقاومت 6146 هستيم درميانه 5807 روداريم")
-                     if 6810>ticker.adj_close>6146:
-                         print ("مابين حمايت 6146 ومقاومت 6810 هستيم درميانه 6461 روداريم")
-                     if 7473>ticker.adj_close>6810:
-                         print ("مابين حمايت 6810 ومقاومت 7473 هستيم درميانه 7149 روداريم")          
-                    
-                # غکورش
-                if index == 5:
-                     p=9435
-                     s=0
-                     v=25000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                     if 5210>ticker.adj_close>4032:
-                         print ("مابين حمايت 4032 ومقاومت 5210 هستيم درميانه 4615 روداريم")
-                     if 6410>ticker.adj_close>5210:
-                         print ("مابين حمايت 5210 ومقاومت 6410 هستيم درميانه 5804 روداريم")
-                     if 7599>ticker.adj_close>6410:
-                         print ("مابين حمايت 6410 ومقاومت 7599 هستيم درميانه 7004 روداريم ")
-                     if 8788>ticker.adj_close>7599:
-                         print ("مابين حمايت 7599 ومقاومت 8788 هستيم درميانه 8204 روداريم")
-                     if 9977>ticker.adj_close>8788:
-                         print ("مابين حمايت 8788 ومقاومت 9977 هستيم درميانه 9383 روداريم")
-                     if 11160>ticker.adj_close>9977:
-                         print ("مابين حمايت 9977 ومقاومت 11160 هستيم درميانه 10550 روداريم") 
-
-                # شپاکسا
-                if index == 6:
-                     p=1844
-                     s=0
-                     v=5000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-                     if 1769>ticker.adj_close>1382:
-                         print ("مابين حمايت 1382 ومقاومت 1769 هستيم درميانه1572 روداريم")
-                     if 2543>ticker.adj_close>1769:
-                         print ("مابين حمايت 1769 ومقاومت 2543 هستيم درميانه 2149 روداريم")
-                     if 3302>ticker.adj_close>2543:
-                         print ("مابين حمايت 2543 ومقاومت 3302 هستيم درميانه 2922 روداريم ")
-                     if 4061>ticker.adj_close>3302:
-                         print ("مابين حمايت 3302 ومقاومت 4061 هستيم درميانه 3688 روداريم")
-                     if 4834>ticker.adj_close>4061:
-                         print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
-                     if 5591>ticker.adj_close>4834:
-                         print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
-
-                # پاکشو
-                if index == 7:
-                     p=0
-                     s=6750
-                     v=1000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-                # تاپيکو
-                if index == 8:
-                     p=0
-                     s=17560
-                     v=2000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-                # دسبحان
-                if index == 9:
-                     p=0
-                     s=11650
-                     v=10000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-                # کگل
-                if index == 10:
-                     p=0
-                     s=7050
-                     v=4000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-                # شستا
-                if index == 11:
-                     p=1127
-                     s=1161
-                     v=8000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-                # حتوکا
-                if index == 12:
-                     p=0
-                     s=3705
-                     v=5000
-                     if p > 0 :
-                          print (p , ': قيمت خريد شمااز',sahame )
-                          print (v ,': تعداد سهام موجود')
-                     if s > 0 :
-                          print (s , ': قيمت فروش شمااز',sahame )
-                          print (v ,': تعدادسهام فروخته شده')
-
-
-                if index >= 13 : 
-                     print (sahame ,'  :  شماازاين سهم خريد نداريد')
-                       
-
-                     
+                    p=2588
+                    s=0
+                    v=3000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما') 
                          
+                         
+               # تليسه
+                if index == 2:
+                    p=4313
+                    s=4251
+                    v=5000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if 2370>ticker.adj_close>1334:
+                        print ("مابين حمايت 1334ومقاومت 2370هستيم ودرميانه 1878روداريم")
+                    if 3421>ticker.adj_close>2370:
+                        print ("مابين حمايت 2370ومقاومت 3421هستيم درميانه 2920روداريم")
+                    if 4516>ticker.adj_close>3421:
+                        print ("مابين حمايت 3421 ومقاومت 4516 هستيم درميانه 3956 روداريم ")
+                    if 5597>ticker.adj_close>4516:
+                        print ("مابين حمايت 4516 ومقاومت 5597 هستيم درميانه 5025 روداريم")
+                    if 6663>ticker.adj_close>5597:
+                        print ("مابين حمايت 5597 ومقاومت 6663 هستيم درميانه 6094 روداريم")
+                    if 7758>ticker.adj_close>6663:
+                        print ("مابين حمايت 6663 ومقاومت 7758 هستيم درميانه 7208 روداريم")
+                    if 8839>ticker.adj_close>7758:
+                        print ("مابين حمايت 7758 ومقاومت 8839 هستيم درميانه 8262روداريم")
+                    if 9918>ticker.adj_close>8839:
+                        print ("مابين حمايت 8839 ومقاومت 9918 هستيم درميانه 9361 روداريم")
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما') 
+                        
+                         
+               # غمينو
+                if index == 3:
+                    p=11181
+                    s=10020
+                    v=4000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما') 
+                         
+                         
+               # غکورش
+                if index == 4:
+                    p=0
+                    s=0
+                    v=0
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')
+                    
+                        
+               # وسپه
+                if index == 5:
+                    p=4215
+                    s=4151
+                    v=12000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما') 
+                        
+                        
+               # شپاکسا
+                if index == 6:
+                    p=1925
+                    s=0
+                    v=5000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if 1769>ticker.adj_close>1382:
+                        print ("مابين حمايت 1382 ومقاومت 1769 هستيم درميانه1572 روداريم")
+                    if 2543>ticker.adj_close>1769:
+                        print ("مابين حمايت 1769 ومقاومت 2543 هستيم درميانه 2149 روداريم")
+                    if 3302>ticker.adj_close>2543:
+                        print ("مابين حمايت 2543 ومقاومت 3302 هستيم درميانه 2922 روداريم ")
+                    if 4061>ticker.adj_close>3302:
+                        print ("مابين حمايت 3302 ومقاومت 4061 هستيم درميانه 3688 روداريم")
+                    if 4834>ticker.adj_close>4061:
+                        print ("مابين حمايت 4061 ومقاومت 4834 هستيم درميانه 4452 روداريم")
+                    if 5591>ticker.adj_close>4834:
+                        print ("مابين حمايت 4834 ومقاومت 5591 هستيم درميانه 5211 روداريم")
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما') 
+                        
+                         
+               # ومعادن
+                if index == 7:
+                    p=4874
+                    s=4844
+                    v=47000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')          
+                        
+                        
+               # تاپيکو
+                if index == 8:
+                    p=0
+                    s=17560
+                    v=2000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')          
+                         
+                         
+               # دسبحان
+                if index == 9:
+                    p=0
+                    s=11650
+                    v=10000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')           
+                         
+                        
+               # کچاد
+                if index == 10:
+                    p=2847
+                    s=0
+                    v=5000
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')         
+                         
+
+               # شستا
+                if index == 11:
+                    p=0
+                    s=0
+                    v=0
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')           
+                         
+                         
+               # حتوکا
+                if index == 12:
+                    p=0 
+                    s=0
+                    v=0
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')           
+
+
+               # خگستر
+                if index == 13:
+                    p=0 
+                    s=0
+                    v=0
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')           
+
+
+               # فولاد
+                if index == 14:
+                    p=0 
+                    s=0
+                    v=0
+                    psv=(s*v)-(p*v)
+                    if p > 0 :
+                         print (p , ': قيمت خريد شمااز',sahame )
+                         print (v ,': تعداد سهام موجود')
+                    if s > 0 :
+                         print (s , ': قيمت فروش شمااز',sahame )
+                         print (v ,': تعدادسهام فروخته شده')
+                    if p>0 and s>0 :
+                         print (s,'شمااين سهم رافروخته ايد به قيمت')
+                    if s > p > 0 :
+                         print (psv, 'مقدارسودشما')
+                    if p > s > 0:
+                         print (psv, 'مقدارزيان شما')           
+
+
+                         
+                if ticker.yesterday_price < ticker.last_price :
+                     print (' بطرف مقاومت ميرويم')
+                else:
+                     if ticker.yesterday_price > ticker.last_price :
+                         print (' بطرف حمايت ميرويم')
+                         
+
+                if index >= 15 : 
+                     print (sahame ,'  :  شماازاين سهم خريد نداريد')
+
+                    
                 import sys
 
-                if index<=12 and p > 0:
-                     price=p
-                     price_s=s
-                     vol=v
-                     # قيمت امروزسهم Today's stock price
-                     today_price = (math.ceil(ticker.adj_close))     
-                     price_kharid= (-0.004 * price)  #کارمزد خريد
-                     price_forosh= (-0.009 * today_price) #کارمزد فروش محاسبه باقيمت امروز
-                     pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
-                     pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
-                     sl = 0.03 # حدضرر3درصد
-                     tp = 0.2 # حدسود20درصد
-                     # تعیین حد ضرر
-                     stop_loss = price * (1-sl)
-                     # تعیین حد سود
-                     take_profit = price * (1+tp)
-                     pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
-                     sz= pf-pk 
-                     print(20*"-" )
-                     
-                     if today_price > take_profit:
-                          profit = str ( pf - pk )
-                          profit_float = float(profit)
-                          profit_percentage =(profit_float / pk) * 100
-                          print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
-                          print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
-                          print (" شماسود ميکنيد به مبلغ :" ,pp)
-                          print("Your profit percentage : درصدسودشماشده : {}% ".format(math.ceil(profit_percentage)))
-                          print(20*"-" )
-                     elif today_price < stop_loss:
-                          loss = str ( pk - pf )
-                          loss_float = float(loss)
-                          loss_percentage = (loss_float / pk) * 100
-                          print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
-                          print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
-                          print (" شماضرر ميکنيد به مبلغ :" ,pp)
-                          print("The percentage of your loss : درصدضررشماشده : {}% ".format(math.ceil(loss_percentage)))
-                          print(20*"-" )
-                     else:
-                          if pk > today_price :
-                              print("Price to limit")
-                              print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
-                              print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
-                          if pk < today_price :
-                              print("Price to limit")
-                              print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
-                              print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
-                              print(20*"-" )
+                if index<=14 and p > 0:
+                    price=p
+                    price_s=s
+                    vol=v
+                    # قيمت امروزسهم Today's stock price
+                    today_price = (math.ceil(ticker.last_price))     
+                    price_kharid= (-0.003 * price)  #کارمزد خريد
+                    price_forosh= (-0.006 * today_price) #کارمزد فروش محاسبه باقيمت امروز
+                    pk=((math.ceil(price_kharid)+price) * vol)#قيمت کل خريد باکارمزد
+                    pf=((math.ceil(price_forosh)+today_price) * vol)#قيمت کل فروش باکارمزد
+                    sl = 0.03 # حدضرر3درصد
+                    tp = 0.2 # حدسود20درصد
+                    # تعیین حد ضرر
+                    stop_loss = price * (1-sl)
+                    # تعیین حد سود
+                    take_profit = price * (1+tp)
+                    pp = (((math.ceil(price_forosh)+today_price)* vol)-(((math.ceil(price_kharid)+price)* vol)))
+                    sz= pf-pk 
+                    print(20*"-" )
+                    
+                    
+                    if today_price > take_profit:
+                         profit = str ( pf - pk )
+                         profit_float = float(profit)
+                         profit_percentage =(profit_float / pk) * 100
+                         print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
+                         print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
+                         print (" شماسود ميکنيد به مبلغ :" ,pp)
+                         print("Your profit percentage :% درصدسودشماشده : {} ".format(math.ceil(profit_percentage)))
+                         print(20*"-" )
 
-                          
-                     if p == p :
-                          hs1 = (( p * 0.2 + p )*100)/100 # حدسود20درصد
-                          hs2 = (( p * 0.1 + p )*100)/100 # حدسود10درصد
-                          hs3 = (( p * 0.05 + p )*100)/100 # حدسود5درصد
-                          hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
-                          hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
-                          print (' : تعيين حدسودوزيان بااحتساب قيمت خريد شمااز ',sahame)
-                          print (hs1,'حدسود20درصد')
-                          print (hs2,'حدسود10درصد')
-                          print (hs3,'حدسود5درصد') 
-                          print (hz,'حدضرر 3درصد')
-                          print (hs4,'قيمت سربه سربراي فروش')
-                          print(ticker.adj_close,' : قيمت بسته شدن امروز')
-                          print (ticker.last_price,' : قيمت آخرين معامله امروز') 
-                          print ('-'*20)
+                         
+                    if today_price < stop_loss:
+                         loss = str ( pk - pf )
+                         loss_float = float(loss)
+                         loss_percentage = (loss_float / pk) * 100
+                         print (" جمع پرداختي شمابااحتساب قيمت خريدتان :" ,pk)
+                         print (" اگرباقيمت امروزبفروشيد ميشه :" , pf)
+                         print (" شماضرر ميکنيد به مبلغ :" ,pp)
+                         print("The percentage of your loss :% درصدضررشماشده : {} ".format(math.ceil(loss_percentage)))
+                         print(20*"-" )
 
-                          
-                     if pk == pf :
-                          print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
-                          print ('-------')
+                         
+                    if pk > pf :
+                         print("Price to limit")
+                         print (" قيمت به حد سود20درصد نرسيده!  \n The price has not reached the profit of 20%")                             
+                         print (sz ,": اگرامروزبفروشيد مقدارزيان شماميشود")
+                         print(20*"-" )
+
+                         
+                    if pk < pf :
+                         print("Price to limit")
+                         print (" قيمت به حد ضرر3درصد نرسيده !  \n The price has not reached the level of 3% loss") 
+                         print(sz,": اگرامروزبفروشيد مقدارسودشماميشود")
+                         print(20*"-" )
+
+                         
+                    if p == p :
+                         hs1 = (( p * 0.2 + p )*100)/100 # حدسود20درصد
+                         hs2 = (( p * 0.1 + p )*100)/100 # حدسود10درصد
+                         hs3 = (( p * 0.05 + p )*100)/100 # حدسود5درصد
+                         hs4 = (( p * 0.011 + p )*100)/100 # قيمت سربه سر
+                         hz = ((p * -0.03 + p)*100)/100# حدضرر3درصد
+                         print (' تعيين حدسودوزيان بااحتساب قيمت خريد شمااز  :' ,sahame)
+                         print(f"حدسود20درصد : {hs1}    ,    حدسود10درصد : {hs2}")
+                         print(f"حدسود5درصد : {hs3}    ,    حد ضرر سه درصد : {hz}")
+                         print (math.ceil(hs4),' : قيمت سربه سربراي فروش')
+                         print (ticker.adj_close,' : قيمت بسته شدن امروز')
+                         print (ticker.last_price,' : قيمت آخرين معامله امروز')
+                         print ('-'*20)
+
+                         
+                    if pk == pf :
+                         print (" اگرعلان بفروشيد سربه سرميشيد :" ,today_price )
+                         print ('-------')
 
 
                 #=====================================================

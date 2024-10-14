@@ -1,4 +1,4 @@
-     
+
 # برسي سهام دربورس ايران باپايتون3 فقط باتايپ نام سهم به فارسي
 # محاسبات ايچيمکو راانجام ميدهد ودرمرحله دوم
 # فقط بازدن شماره کنارسهم محاسبات راانجام داده ونتيجه رااغلام مي کند
@@ -215,6 +215,10 @@ while True:
 
               average_Volume_week = Volume_week.mean() # محاسبه ميانگين حجم هفتگي
               average_Volume_Month = Volume_Month.mean() # محاسبه ميانگين حجم ماهيان
+
+              print (today_Volume, ' : حجم امروز')
+              print (today_Volume_yesterday, ' : حجم ديروز')
+              print (today_Volume_yesterday2, ' : حجم سه روزقبل')
                #=====================================================     
               print(30*"=",nam,"ichimoku Signals for buying and selling  ")
                # Ensure the DataFrame is sorted by date
@@ -344,7 +348,7 @@ while True:
                    print ("{:.0f}%".format(percent_1),':  درصد فاصله مانده تاتنکانسن به کيجونسن برسد')
                    print (ten8_kij26 , ' : مقدارفاصله مانده تاتنکانسن به کيجونسن برسد')
                    print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
-                   print (' :اگرفاصله تنکانسن با کيجونسن از 3- بيشترباشد , احتمال برگشت روندميباشد')
+                   print (' : اگرفاصله تنکانسن باکيجونسن از4- بيشترباشد - احتمال برگشت روندميباشد')
                    print (percent_1)
               else:
                    if kijon28 < tenken12 < today_Final_price :
@@ -353,7 +357,7 @@ while True:
                         print ("{:.0f}%".format(percent_2),':  درصدفاصله مانده تاکيجونسن به تنکانسن برسد')
                         print (ten8_kij26 , ' : مقدارفاصله مانده تاکيجونسن به تنکانسن برسد')
                         print (price_ten8 , ' : فاصله مابين تنکانسن وقيمت از50 کمترباشد')
-                        print (' :اگرفاصله تنکانسن با کيجونسن از 3+ بيشترشد , احتمال برگشت روندميباشد')
+                        print (' : اگرفاصله تنکانسن باکيجونسن از4+ بيشترباشد - احتمال برگشت روندميباشد')
                         print (percent_2)
 
 
@@ -828,7 +832,7 @@ while True:
               dt_string = now.strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
               print("date and time =", dt_string)
               print ('-'*30,)
-               #------------------------------------------- فصبا
+               #------------------------------------------- 
                # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است 
               namad =["چکارن","تلیسه","غمینو","غکورش","وسپه","شپاکسا","ومعادن","تاپیکو",
                        "دسبحان","کچاد","شستا","حتوکا","خگستر","فولاد","شپنا","فملی","فصبا",
@@ -837,7 +841,7 @@ while True:
                        "کگل","ثبهساز","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
                        "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
                        "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال",
-                       "واعتبار","اطلس","شپترو","سمگا","نخريس","سبزوا"]
+                       "واعتبار","اطلس","شپترو","سمگا","سبزوا","سيمانو","استيل"]
 
                # Print the list of stocks and their indices
                #for i, n in enumerate(namad):
@@ -877,33 +881,33 @@ while True:
               print(ticker.title,' : نام شرکت ')
               print(ticker.state,ticker.flow,ticker.group_name)     
               print(ticker.fiscal_year,' : سال مالی ')  
-              print(ticker.eps ,'  :  EPS  ')  
-              print(ticker.p_e_ratio ,' :   P/E')  
+              print(math.ceil(ticker.eps) ,'   :  EPS  ')  
+              print(math.ceil(ticker.p_e_ratio) ,'   :   P/E')  
               print(ticker.group_p_e_ratio, '  :  group P/E ')  
-              print(ticker.float_shares,' : درصد سهام شناور')   
-              print(ticker.base_volume,' : حجم مبنا ')
+              print(math.ceil(ticker.float_shares),'  : درصد سهام شناور')   
+              print(math.ceil(ticker.base_volume),'  : حجم مبنا ')
               print()  
-              print(ticker.last_price,' : آخرین معامله ')  
-              print(ticker.adj_close,' : قیمت پایانی ')  
+              print(ticker.last_price,'  : آخرین معامله ')  
+              print(ticker.adj_close,'  : قیمت پایانی ')  
               print(ticker.yesterday_price,' : قیمت دیروز ')  
-              print(ticker.open_price,' : قيمت بازشدن')   
+              print(ticker.open_price,'  : قيمت بازشدن')   
               print()
               print(ticker.high_price,' : حداکثرقيمت امروز')  
-              print(ticker.low_price,' : حداقل قيمت امروز')
-              print(ticker.sta_max,' : حداکثر قیمت مجاز')  
-              print(ticker.sta_min,' : حداقل قیمت مجاز')
+              print(ticker.low_price,'  : حداقل قيمت امروز')
+              print(math.ceil(ticker.sta_max),' : حداکثر قیمت مجاز')  
+              print(math.ceil(ticker.sta_min),' : حداقل قیمت مجاز')
               print()
-              print(ticker.min_week,' : حداقل قیمت هفته اخیر')  
-              print(ticker.max_week,' : حداکثر قیمت هفته اخیر')
-              print(ticker.min_year,' : حداقل قیمت بازه سال')  
-              print(ticker.max_year,' : حداکثر قیمت بازه سال')
+              print(math.ceil(ticker.min_week),' : حداقل قیمت هفته اخیر')  
+              print(math.ceil(ticker.max_week),' : حداکثر قیمت هفته اخیر')
+              print(math.ceil(ticker.min_year),' : حداقل قیمت بازه سال')  
+              print(math.ceil(ticker.max_year),' : حداکثر قیمت بازه سال')
               print()
-              print(ticker.count,' : تعداد معاملات ')
-              print(ticker.value,' :  ارزش معاملات ')
+              print(ticker.count,'  : تعداد معاملات ')
+              print(ticker.value,'  :  ارزش معاملات ')
               print(ticker.volume,' : حجم معاملات امروز ')
-              print(today_Volume_yesterday,"حجم ديروز")
-              print(today_Volume_yesterday2,"حجم سه روزقبل")
-              print(ticker.month_average_volume,' : میانگین حجم ماه')
+              print(today_Volume_yesterday,"     : حجم ديروز")
+              print(today_Volume_yesterday2,"    : حجم سه روزقبل")
+              print(ticker.month_average_volume,': میانگین حجم ماه')
 
               print ('-'*20)
                #بدست آوردن درصدنوسان قيمتي امروز
@@ -916,9 +920,9 @@ while True:
               n2=(ticker.adj_close+ticker.yesterday_price)/2
               j1=n1/n2
               j2=j1*100
-              print (math.ceil(j2) ,': درصدتفاوت قيمت ديروزبه امروز')
+              print (math.ceil(j2) ,'   : درصدتفاوت قيمت ديروزبه امروز')
               print (n1 ,' : تفاوت قيمت ديروزبه امروزبه ريا ل')
-              print (math.ceil(jnv1) ,': درصدنوسان قيمتي امروز')
+              print (math.ceil(jnv1) ,' : درصدنوسان قيمتي امروز')
               print()
                #======================================================****
                # محاسبه بدست آوردن فاصله بين حداکثروحداقل قيمت به درصد                                                                         
@@ -953,9 +957,9 @@ while True:
                                     print (" Today Down tick")
 
 
-              print(35*"=",sahame,"Tik Top or Down") 
-              print(ticker.max_year,' : حداکثر قیمت بازه سال')
-              print(ticker.min_year,' : حداقل قیمت بازه سال')
+
+              print(35*"=",sahame,"Tik Top or Down")
+              #------------------------------------------
 
 
               if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
@@ -1723,11 +1727,12 @@ while True:
 
                #========================================================        
               print(40*"=","محاسبات قيمت خريد شمااز ",sahame,)
+              
                # چکارن
               if index == 1:
-                    p=2588
+                    p=0
                     s=0
-                    v=3000
+                    v=0
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
@@ -1841,7 +1846,7 @@ while True:
                         
                # شپاکسا
               if index == 6:
-                    p=1844
+                    p=1925
                     s=0
                     v=5000
                     psv=(s*v)-(p*v)
@@ -1934,7 +1939,7 @@ while True:
                # کچاد
               if index == 10:
                     p=2847
-                    s=0
+                    s=3016
                     v=5000
                     psv=(s*v)-(p*v)
                     if p > 0 :
@@ -1953,9 +1958,9 @@ while True:
 
                # شستا
               if index == 11:
-                    p=1127
+                    p=0
                     s=0
-                    v=8000
+                    v=0
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
@@ -1972,8 +1977,8 @@ while True:
                # حتوکا
               if index == 12:
                     p=0 
-                    s=3400
-                    v=5000
+                    s=0
+                    v=0
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
@@ -2109,7 +2114,7 @@ while True:
                          print (' تعيين حدسودوزيان بااحتساب قيمت خريد شمااز  :' ,sahame)
                          print(f"حدسود20درصد : {hs1}    ,    حدسود10درصد : {hs2}")
                          print(f"حدسود5درصد : {hs3}    ,    حد ضرر سه درصد : {hz}")
-                         print (hs4,'قيمت سربه سربراي فروش')
+                         print (math.ceil(hs4),' : قيمت سربه سربراي فروش')
                          print (ticker.adj_close,' : قيمت بسته شدن امروز')
                          print (ticker.last_price,' : قيمت آخرين معامله امروز')
                          print ('-'*20)
@@ -2122,7 +2127,7 @@ while True:
 
                          
                          
-               #=================================================           
+                    #=================================================           
                          print(40*"=",nam,"Engulfing Calculations")
 
                          print (today_Open_price,': بازشدن ديروز')
@@ -2137,6 +2142,7 @@ while True:
                          print ()
                               
                          print (20*'-','Bullish Harami - for buy')
+                         #--------------------------------------------
 
                     if today_Open_price<today_price_max>ticker.high_price>ticker.adj_close>ticker.open_price>today_price>today_price_min :
                         print ('signal buy : هارامي')
