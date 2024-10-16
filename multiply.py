@@ -1,5 +1,6 @@
+
 #--------------------------------------------
-#رسم شکل هندسي باپايتون
+#رسم شکل هندسي باپايتون شماره 1
 import turtle
 turtle.setup(width=1000, height=600)
 screen = turtle.Screen()
@@ -14,9 +15,9 @@ for x in range(361):
     turtle.left(59)
 turtle.hideturtle ()
 
-print("Suherfe.blog.ir")
+#print("Suherfe.blog.ir")
 #--------------------------------------------
-#رسم شکل هندسي باپايتون
+#رسم شکل هندسي باپايتون شماره 2
 import turtle
 turtle.setup(width=1000, height=600)
 screen = turtle.Screen()
@@ -49,9 +50,8 @@ while x < 1000:
     c = c + 0.1
 turtle.exitonclick()
 
-print("Suherfe.blog.ir")
+#print("Suherfe.blog.ir")
 #--------------------------------------------
-
 
 #ازکاربرپرسيده ميشود شماره اول رابگو وبعد دوم را حالا دوعدد رادرهم
 # ضرب ميکند وجواب راميدهد ميتوان چهارعمل رياضيات راباپرسيدن ازکاربرامجام داد
@@ -62,7 +62,7 @@ def mdarsad(a, b):
     return ("{:.0f}".format(percents))
 
 def darsad(a, b):
-    percent = (a * 100)/b
+    percent = ((a * 100)/b)-100
     return ("%{:.0f}".format(percent))
 
 def add(a, b):
