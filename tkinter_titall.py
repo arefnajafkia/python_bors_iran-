@@ -70,13 +70,17 @@ while True:
         print ('tkinter_titall.py براي درصدگيري دوعدد با ')
         print ('   لطفا شروع کنيد  ' )
         print ()
+        print (' one number')
         num1 = float(input("Enter first number: "))
+        print ()
+        print (' Two number')
         num2 = float(input("Enter second number: "))
             
         # Calculate percentage
-        percent = (num2 / num1) * 100
+        percent = ((num2 / num1) * 100)-100
         print ()
         # Print the percentage
+        print (' Answer for you')
         print("{:.0f}%".format(percent),': مقداردرصد')
         print ('-'*10)
 
@@ -171,7 +175,7 @@ while True:
             
             line61 = '        exit()\n'
 
-            line62 = '------------------'
+            line62 = '------------------\n'
             line63 = 'فايل درآدرس زير ساخته شد \n'
             line64 = ' E:/film/myfile.ipynb \n'
             
@@ -864,9 +868,9 @@ while True:
 
             # شپاکسا
             if index == 6:
-                 p=1692
+                 p=1925
                  s=0
-                 v=5000
+                 v=7800
                  if p > 0 :
                       print (p , ': قيمت خريد شمااز',sahame )
                       print (v ,': تعداد سهام موجود')
