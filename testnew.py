@@ -958,25 +958,17 @@ while True:
 
 
 
-              print(35*"=",sahame,"Tik Top or Down")
+              print(30*"=",sahame," Tik ascending or Descending")
               #------------------------------------------
 
 
               if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
                    print (tik_ascending , ' : تيک صعودي')
-
-                   
-              if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
-                   print (tik_Descending , ' : تيک نزولي')
+              else :
+                  if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
+                        print (tik_Descending , ' : تيک نزولي')
 
                               
-
-              if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
-                   print (" امروزتيک صعودي داريم")
-
-                    
-              if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:           
-                   print (" امروزتيک نزولي داريم")
                                     
                #======================================================****
               print ('='*20 ,"Calculations done RSI  ")
@@ -1846,9 +1838,9 @@ while True:
                         
                # شپاکسا
               if index == 6:
-                    p=1925
+                    p=1914
                     s=0
-                    v=5000
+                    v=7800
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
