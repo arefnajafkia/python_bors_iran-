@@ -93,8 +93,8 @@ while True:
               dt_string = now.strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
               print("date and time =", dt_string)
 
-               #=====================================================
-               # Get today's price قيمتهاي روزانه
+              #=====================================================
+              # Get today's price قيمتهاي روزانه
               print ()
               today_price_max = DF['High'].iloc[-1] # بالاترين قيمت امروز
               today_price_min = DF['Low'].iloc[-1]  # پايين ترين قيمت امروز
@@ -976,8 +976,60 @@ while True:
               rsi = ta.momentum.rsi(DF['Close'], length=14)
 
               rsi_diff = rsi
-              print(rsi.tail(3))
+              #print(rsi.tail(3))
+              #=====================================================
 
+              # محاسبه تنکانسن و کیجونسن
+              high_9 = DF['High'].rolling(window=9).max()
+              low_9 = DF['Low'].rolling(window=9).min()
+              DF['Tenkan-sen'] = (high_9 + low_9) / 2
+
+              high_26 = DF['High'].rolling(window=26).max()
+              low_26 = DF['Low'].rolling(window=26).min()
+              DF['Kijun-sen'] = (high_26 + low_26) / 2
+
+              # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن
+              DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
+                                    np.where(DF['Tenkan-sen'] < DF['Kijun-sen'], -1, 0))
+
+              # محاسبه RSI
+              delta = DF['Close'].diff()
+              gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+              loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+              RS = gain / loss
+              DF['RSI'] = 100 - (100 / (1 + RS))
+
+              # سیگنال خرید و فروش بر اساس واگرایی RSI بدون هشدار
+              DF['RSI_Signal'] = 0
+              for i in range(1, len(DF)):
+                  if (DF['RSI'].iloc[i] < 30 and DF['Close'].iloc[i] > DF['Close'].iloc[i-1]):
+                      DF.at[DF.index[i], 'RSI_Signal'] = 1   # سیگنال خرید
+                  elif (DF['RSI'].iloc[i] > 70 and DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
+                      DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
+
+              # محاسبه MACD
+              exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
+              exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
+              DF['MACD'] = exp1 - exp2
+              DF['Signal_MACD'] = DF['MACD'].ewm(span=9, adjust=False).mean()
+
+              # سیگنال خرید و فروش بر اساس تقاطع MACD
+              DF['MACD_Signal'] = np.where(DF['MACD'] > DF['Signal_MACD'], 1, 
+                                         np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
+
+              # نمایش نتایج نهایی فقط برای 5 روز آخر
+              last_five_days = DF.tail(5)
+              print(last_five_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+              print(last_five_days[[ 'RSI', 'RSI_Signal']])
+              print(last_five_days[[ 'MACD', 'Signal_MACD', 'MACD_Signal']])
+
+              print ()
+              print (15*'-','توجه کنيد چنانجه')
+              print (' Signal and RSI_Signal and MACD_Signal > 0    (+1) سيگنال خريد')
+              print (' Signal and RSI_Signal and MACD_Signal < 0   (-1) سيگنال فروش')
+              print (30*'-')
+
+              #========================================================
               print ()
               Month_price = DF['Final'].iloc[-26] # آخرين قيمت 30روزقبل
               Month_price1 = DF['Final'].iloc[-25] # آخرين قيمت 29روزقبل
