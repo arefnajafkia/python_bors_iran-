@@ -1,6 +1,421 @@
 
 
 
+#===============================================
+#آخرين کار
+
+# سيگنالهاي خريد وفروش با انديکاتورهاي 
+# RSI and Stochastic and MACD and ichimoku and SMA_3,9
+
+import time
+import numpy as np
+import pandas as pd
+import finpy_tse as tse
+from datetime import datetime
+import warnings
+import jdatetime  # اضافه کردن کتابخانه jdatetime
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+def main_menu():
+    print()
+    print(10 * "*", 'لطفا انتخاب کنید', 10 * "*")
+
+def open_testnew_py():
+    # 1 . test.py محاسبات سهام در بورس ایران با فایل
+    pass
+
+def for_exit_tsenew_py():
+    # 2 . برای خارج شدن از برنامه
+    pass
+
+while True:
+    main_menu()
+    user_input = input("Enter 1 ؟ new_test.py برنامه را ادامه میدهید با \nEnter 2 یا از برنامه خارج میشوید؟ : ")
+    print('*' * 10)
+    print()
+
+    if user_input == "2":
+        for_exit_tsenew_py()
+        print('شما از برنامه خارج شدید')
+        exit()
+
+    elif user_input == "1":
+        open_testnew_py()
+
+        try:
+            print("=" * 15, "(ichimoku-Stochastic-MACD-RSI-SMA)برسي سهام بورس ايران با", "=" * 15)
+            print()
+
+            nam = input("لطفا نام سهام مورد نظرتان را بنویسید : ")
+
+            # تبدیل تاریخ شمسی به میلادی
+            start_date = jdatetime.datetime(1401, 1, 1).togregorian()
+            end_date = jdatetime.datetime(1403, 9, 1).togregorian()
+
+            # اطمینان از اینکه تاریخ‌ها در محدوده مجاز قرار دارند
+            start_date_str = start_date.strftime('%Y-%m-%d')
+            end_date_str = end_date.strftime('%Y-%m-%d')
+
+            DF = tse.Get_Price_History(stock=nam,
+                                        start_date=start_date_str,
+                                        end_date=end_date_str,
+                                        ignore_date=True,
+                                        adjust_price=True,
+                                        show_weekday=True,
+                                        double_date=True)
+
+            DropList = ['Open', 'High', 'Low', 'Close', 'Final']
+            DF.drop(columns=DropList, axis=1, inplace=True)
+
+            RenameDict = {
+                'Adj Open': 'Open',
+                'Adj High': 'High',
+                'Adj Low': 'Low',
+                'Adj Close': 'Close',
+                'Adj Final': 'Final',
+                'Adj Max ': 'Max '
+            }
+            
+            DF.rename(columns=RenameDict, inplace=True)
+
+            # تاریخ و زمان جاری به فرمت شمسی
+            now = datetime.now()
+            dt_string = now.strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
+            persian_date = jdatetime.datetime.now().strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
+
+            print ()
+            print("تاریخ و زمان میلادی =", dt_string)
+            print("تاریخ و زمان شمسی =", persian_date)
+
+            # محاسبه تنکانسن و کیجونسن
+            high_9 = DF['High'].rolling(window=9).max()
+            low_9 = DF['Low'].rolling(window=9).min()
+            DF['Tenkan-sen'] = (high_9 + low_9) / 2
+
+            high_26 = DF['High'].rolling(window=26).max()
+            low_26 = DF['Low'].rolling(window=26).min()
+            DF['Kijun-sen'] = (high_26 + low_26) / 2
+
+            # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن
+            DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
+                                    np.where(DF['Tenkan-sen'] < DF['Kijun-sen'], -1, 0))
+
+            # محاسبه RSI
+            delta = DF['Close'].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+            RS = gain / loss
+            DF['RSI'] = 100 - (100 / (1 + RS))
+
+            # سیگنال خرید و فروش بر اساس واگرایی RSI بدون هشدار
+            DF['RSI_Signal'] = 0
+            for i in range(1, len(DF)):
+                if (DF['RSI'].iloc[i] < 30 and DF['Close'].iloc[i] > DF['Close'].iloc[i-1]):
+                    DF.at[DF.index[i], 'RSI_Signal'] = 1   # سیگنال خرید
+                elif (DF['RSI'].iloc[i] > 70 and DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
+                    DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
+
+            # محاسبه MACD
+            exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
+            exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
+            DF['MACD'] = exp1 - exp2
+            DF['Signal_MACD'] = DF['MACD'].ewm(span=9, adjust=False).mean()
+
+            # سیگنال خرید و فروش بر اساس تقاطع MACD
+            DF['MACD_Signal'] = np.where(DF['MACD'] > DF['Signal_MACD'], 1, 
+                                        np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
+
+            # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
+            DF['SMA_3'] = DF['Close'].rolling(window=3).mean()
+            DF['SMA_9'] = DF['Close'].rolling(window=9).mean() 
+
+            # سیگنال خرید و فروش بر اساس تقاطع SMA ها
+            DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
+                                       np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+
+            # محاسبه استوکستیک
+            high_stoch = DF['High'].rolling(window=14).max()
+            low_stoch = DF['Low'].rolling(window=14).min()
+           
+            # %K و %D
+            DF['%K'] = (DF['Close'] - low_stoch) / (high_stoch - low_stoch) * 100
+            DF['%D'] = DF['%K'].rolling(window=3).mean()
+
+            # سیگنال خرید و فروش بر اساس واگرایی استوکستیک
+            DF['Stochastic_Signal'] = np.where((DF['%K'] < 20) & (DF['%K'] > DF['%D']), 1,
+                                               np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
+
+            # نمایش نتایج نهایی فقط برای آخرین سه روز
+            last_three_days = DF.tail(3)
+            
+            print(30*'-')
+            print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+            print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
+            print(last_three_days[['RSI', 'RSI_Signal']])
+            print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
+            print(last_three_days[['%K', '%D', 'Stochastic_Signal']])
+            print(last_three_days[['Close', 'Volume']])
+            print(30*'-')
+
+            # چاپ پیام خرید و فروش فقط برای آخرین روز
+            last_day = last_three_days.iloc[-1]
+
+            if isinstance(last_day.name, str):
+                last_day_date = pd.to_datetime(last_day.name, errors='coerce')  
+            else:
+                last_day_date = last_day.name
+
+            if last_day.get('Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : بخر (تنکانسن بالای کیجونسن)")
+            elif last_day.get('Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : بفروش (تنکانسن پایین کیجونسن)")
+
+            if last_day.get('Stochastic_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بخر")
+            elif last_day.get('Stochastic_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بفروش")
+
+            if last_day.get('SMA_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بخر")
+            elif last_day.get('SMA_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
+
+            if last_day.get('MACD_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : (MACD) بخر")
+            elif last_day.get('MACD_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : (MACD) بفروش")
+
+            if last_day.get('RSI_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : (RSI) بخر")
+            elif last_day.get('RSI_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : (RSI) بفروش")
+
+
+            date_format = '%Y-%m-%d'  # Example format; adjust based on your actual date format
+                 
+            #Ensure the index is in datetime format
+            #if not pd.api.types.is_datetime64_any_dtype(last_three_days.index):
+                #last_three_days.index = pd.to_datetime(last_three_days.index, errors='coerce')
+            
+            # محاسبه حجم مبنا (میانگین حجم معاملات در دوره مشخص)
+            volume_base_period_days = 30
+            volume_base = DF["Volume"].tail(volume_base_period_days).mean() if len(DF["Volume"]) >= volume_base_period_days else None
+
+            # نمایش نتایج نهایی فقط برای آخرین سه روز
+            last_three_days = DF.tail(3)
+            current_volume_today = last_three_days.iloc[-1]['Volume']
+            previous_close_price_today = last_three_days.iloc[-1]['Close']
+            previous_close_price_yesterday = last_three_days.iloc[-2]['Close']
+
+            # بررسی شرایط برای سیگنال خرید جدید
+            if previous_close_price_today < previous_close_price_yesterday and current_volume_today >= volume_base * 2:
+                print(f"در تاریخ {last_three_days.index[-1].date()} : سیگنال خرید به دلیل کاهش قیمت و افزایش حجم.")
+            if previous_close_price_today > previous_close_price_yesterday and current_volume_today >= volume_base * 2:
+                print(f"در تاریخ {last_three_days.index[-1].date()} : سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا.")
+
+            
+        except Exception as e:
+              print(f"یک خطا رخ داد: {e}")
+
+
+
+#===============================================
+#Stochastic             
+
+# سيگنالهاي خريد وفروش با انديکاتورهاي 
+# RSI and Stochastic and MACD and ichimoku and SMA_3,9
+
+import time
+import numpy as np
+import pandas as pd
+import finpy_tse as tse
+from datetime import datetime
+import warnings
+import jdatetime  # اضافه کردن کتابخانه jdatetime
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+def main_menu():
+    print()
+    print(10 * "*", 'لطفا انتخاب کنید', 10 * "*")
+
+def open_testnew_py():
+    # 1 . test.py محاسبات سهام در بورس ایران با فایل
+    pass
+
+def for_exit_tsenew_py():
+    # 2 . برای خارج شدن از برنامه
+    pass
+
+while True:
+    main_menu()
+    user_input = input("Enter 1 ؟ new_test.py برنامه را ادامه میدهید با \nEnter 2 یا از برنامه خارج میشوید؟ : ")
+    print('*' * 10)
+    print()
+
+    if user_input == "2":
+        for_exit_tsenew_py()
+        print('شما از برنامه خارج شدید')
+        exit()
+
+    elif user_input == "1":
+        open_testnew_py()
+
+        try:
+            print("=" * 15, "(ichimoku-Stochastic-MACD-RSI-SMA)برسي سهام بورس ايران با", "=" * 15)
+            print()
+
+            nam = input("لطفا نام سهام مورد نظرتان را بنویسید : ")
+
+            # تبدیل تاریخ شمسی به میلادی
+            start_date = jdatetime.datetime(1401, 1, 1).togregorian()
+            end_date = jdatetime.datetime(1403, 9, 1).togregorian()
+
+            # اطمینان از اینکه تاریخ‌ها در محدوده مجاز قرار دارند
+            start_date_str = start_date.strftime('%Y-%m-%d')
+            end_date_str = end_date.strftime('%Y-%m-%d')
+
+            DF = tse.Get_Price_History(stock=nam,
+                                        start_date=start_date_str,
+                                        end_date=end_date_str,
+                                        ignore_date=True,
+                                        adjust_price=True,
+                                        show_weekday=True,
+                                        double_date=True)
+
+            DropList = ['Open', 'High', 'Low', 'Close', 'Final']
+            DF.drop(columns=DropList, axis=1, inplace=True)
+
+            RenameDict = {
+                'Adj Open': 'Open',
+                'Adj High': 'High',
+                'Adj Low': 'Low',
+                'Adj Close': 'Close',
+                'Adj Final': 'Final',
+                'Adj Max ': 'Max '
+            }
+            
+            DF.rename(columns=RenameDict, inplace=True)
+
+            # تاریخ و زمان جاری به فرمت شمسی
+            now = datetime.now()
+            dt_string = now.strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
+            persian_date = jdatetime.datetime.now().strftime("%Y/%m/%d - %A   %H:%M:%S:%p")
+
+            print ()
+            print("تاریخ و زمان میلادی =", dt_string)
+            print("تاریخ و زمان شمسی =", persian_date)
+
+            # محاسبه تنکانسن و کیجونسن
+            high_9 = DF['High'].rolling(window=9).max()
+            low_9 = DF['Low'].rolling(window=9).min()
+            DF['Tenkan-sen'] = (high_9 + low_9) / 2
+
+            high_26 = DF['High'].rolling(window=26).max()
+            low_26 = DF['Low'].rolling(window=26).min()
+            DF['Kijun-sen'] = (high_26 + low_26) / 2
+
+            # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن
+            DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
+                                    np.where(DF['Tenkan-sen'] < DF['Kijun-sen'], -1, 0))
+
+            # محاسبه RSI
+            delta = DF['Close'].diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+            RS = gain / loss
+            DF['RSI'] = 100 - (100 / (1 + RS))
+
+            # سیگنال خرید و فروش بر اساس واگرایی RSI بدون هشدار
+            DF['RSI_Signal'] = 0
+            for i in range(1, len(DF)):
+                if (DF['RSI'].iloc[i] < 30 and DF['Close'].iloc[i] > DF['Close'].iloc[i-1]):
+                    DF.at[DF.index[i], 'RSI_Signal'] = 1   # سیگنال خرید
+                elif (DF['RSI'].iloc[i] > 70 and DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
+                    DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
+
+            # محاسبه MACD
+            exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
+            exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
+            DF['MACD'] = exp1 - exp2
+            DF['Signal_MACD'] = DF['MACD'].ewm(span=9, adjust=False).mean()
+
+            # سیگنال خرید و فروش بر اساس تقاطع MACD
+            DF['MACD_Signal'] = np.where(DF['MACD'] > DF['Signal_MACD'], 1, 
+                                        np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
+
+            # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
+            DF['SMA_3'] = DF['Close'].rolling(window=3).mean()
+            DF['SMA_9'] = DF['Close'].rolling(window=9).mean() 
+
+            # سیگنال خرید و فروش بر اساس تقاطع SMA ها
+            DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
+                                       np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+
+            # محاسبه استوکستیک
+            high_stoch = DF['High'].rolling(window=14).max()
+            low_stoch = DF['Low'].rolling(window=14).min()
+           
+            # %K و %D
+            DF['%K'] = (DF['Close'] - low_stoch) / (high_stoch - low_stoch) * 100
+            DF['%D'] = DF['%K'].rolling(window=3).mean()
+
+            # سیگنال خرید و فروش بر اساس واگرایی استوکستیک
+            DF['Stochastic_Signal'] = np.where((DF['%K'] < 20) & (DF['%K'] > DF['%D']), 1,
+                                               np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
+
+            # نمایش نتایج نهایی فقط برای آخرین سه روز
+            last_three_days = DF.tail(3)
+            
+            print(30*'-')
+            print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+            print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
+            print(last_three_days[['RSI', 'RSI_Signal']])
+            print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
+            print(last_three_days[['%K', '%D', 'Stochastic_Signal']])
+            print(last_three_days[['Close', 'Volume']])
+            print(30*'-')
+
+            # چاپ پیام خرید و فروش فقط برای آخرین روز
+            last_day = last_three_days.iloc[-1]
+
+            if isinstance(last_day.name, str):
+                last_day_date = pd.to_datetime(last_day.name, errors='coerce')  
+            else:
+                last_day_date = last_day.name
+
+            if last_day.get('Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : بخر (تنکانسن بالای کیجونسن)")
+            elif last_day.get('Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : بفروش (تنکانسن پایین کیجونسن)")
+
+            if last_day.get('Stochastic_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بخر")
+            elif last_day.get('Stochastic_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بفروش")
+
+            if last_day.get('SMA_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بخر")
+            elif last_day.get('SMA_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
+
+            if last_day.get('MACD_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : (MACD) بخر")
+            elif last_day.get('MACD_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : (MACD) بفروش")
+
+            if last_day.get('RSI_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : (RSI) بخر")
+            elif last_day.get('RSI_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : (RSI) بفروش")
+
+            
+        except Exception as e:
+              print(f"یک خطا رخ داد: {e}")
+
+
+
 
 #==========================================
 print ('marhale one_1')
