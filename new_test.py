@@ -1,4 +1,5 @@
 
+
 #===============================================
 #آخرين کار
 
@@ -251,6 +252,40 @@ while True:
                 print(f"در تاریخ {last_three_days.index[-1].date()} : سیگنال خرید به دلیل کاهش قیمت و افزایش حجم.")
             if previous_close_price_today > previous_close_price_yesterday and current_volume_today >= volume_base * 2:
                 print(f"در تاریخ {last_three_days.index[-1].date()} : سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا.")
+
+
+
+            # تعریف داده‌ها
+            data = {
+                'Open': [1, 2, 3],
+                'High': [2, 3, 4],
+                'Low': [0, 1, 2],
+                'Close': [1.5, 2.5, 3.5]
+            }
+
+            # ایجاد DataFrame
+            df = pd.DataFrame(data)
+
+            def is_hammer(candle):
+                body = candle['Close'] - candle['Open']
+                range_ = candle['High'] - candle['Low']
+                lower_shadow = candle['Open'] - candle['Low']
+                upper_shadow = candle['High'] - candle['Close']
+
+                if (lower_shadow > 2 * abs(body)) and (upper_shadow < abs(body)):
+                    return 'green' if body > 0 else 'red'
+                return None
+
+            for i in range(1, len(df)):
+                current_candle = df.iloc[i]
+                previous_candle = df.iloc[i - 1]
+
+                hammer_type = is_hammer(current_candle)
+
+                if hammer_type == 'green' and previous_candle['Close'] < previous_candle['Open']:
+                    print("سیگنال خرید: چکش سبز برگشتی در روند نزولی")
+                elif hammer_type == 'red' and previous_candle['Close'] > previous_candle['Open']:
+                    print("سیگنال فروش: چکش قرمز برگشتی در روند صعودی")
 
             
         except Exception as e:
