@@ -1140,9 +1140,6 @@ while True:
 
               date_format = '%Y-%m-%d'  # Example format; adjust based on your actual date format
                  
-              #Ensure the index is in datetime format
-              #if not pd.api.types.is_datetime64_any_dtype(last_three_days.index):
-                  #last_three_days.index = pd.to_datetime(last_three_days.index, errors='coerce')
             
               # محاسبه حجم مبنا (میانگین حجم معاملات در دوره مشخص)
               volume_base_period_days = 30
