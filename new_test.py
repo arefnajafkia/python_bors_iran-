@@ -1,6 +1,5 @@
 
 
-
 #===============================================
 #آخرين کار
 
@@ -88,6 +87,7 @@ while True:
             print("تاریخ و زمان میلادی =", dt_string)
             print("تاریخ و زمان شمسی =", persian_date)
 
+                     
             # محاسبه تنکانسن و کیجونسن
             high_9 = DF['High'].rolling(window=9).max()
             low_9 = DF['Low'].rolling(window=9).min()
@@ -96,6 +96,14 @@ while True:
             high_26 = DF['High'].rolling(window=26).max()
             low_26 = DF['Low'].rolling(window=26).min()
             DF['Kijun-sen'] = (high_26 + low_26) / 2
+
+            # بررسی و حذف مقادیر NA
+            DF['Tenkan-sen'] = DF['Tenkan-sen'].fillna(0)  # جایگزینی NA با 0
+            DF['Kijun-sen'] = DF['Kijun-sen'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر تنکانسن و کیجونسن به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['Tenkan-sen'] = DF['Tenkan-sen'].round(0).astype(int)
+            DF['Kijun-sen'] = DF['Kijun-sen'].round(0).astype(int)
 
             # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن
             DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
@@ -108,6 +116,12 @@ while True:
             RS = gain / loss
             DF['RSI'] = 100 - (100 / (1 + RS))
 
+            # بررسی و حذف مقادیر NA
+            DF['RSI'] = DF['RSI'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر RSI به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['RSI'] = DF['RSI'].round(0).astype(int)
+
             # سیگنال خرید و فروش بر اساس واگرایی RSI بدون هشدار
             DF['RSI_Signal'] = 0
             for i in range(1, len(DF)):
@@ -116,35 +130,63 @@ while True:
                 elif (DF['RSI'].iloc[i] > 70 and DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
                     DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
 
-            # محاسبه MACD
+
+           # محاسبه MACD
             exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
             exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
             DF['MACD'] = exp1 - exp2
+
+            # محاسبه سیگنال MACD
             DF['Signal_MACD'] = DF['MACD'].ewm(span=9, adjust=False).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['MACD'] = DF['MACD'].fillna(0)  # جایگزینی NA با 0
+            DF['Signal_MACD'] = DF['Signal_MACD'].fillna(0)  # جایگزینی NA با 0
 
             # سیگنال خرید و فروش بر اساس تقاطع MACD
             DF['MACD_Signal'] = np.where(DF['MACD'] > DF['Signal_MACD'], 1, 
-                                        np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
+                                          np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
 
-            # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
+            # گرد کردن مقادیر MACD و سیگنال MACD به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['MACD'] = DF['MACD'].round(0).astype(int)
+            DF['Signal_MACD'] = DF['Signal_MACD'].round(0).astype(int) 
+
+
+           # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
             DF['SMA_3'] = DF['Close'].rolling(window=3).mean()
-            DF['SMA_9'] = DF['Close'].rolling(window=9).mean() 
+            DF['SMA_9'] = DF['Close'].rolling(window=9).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['SMA_3'] = DF['SMA_3'].fillna(0)  # جایگزینی NA با 0
+            DF['SMA_9'] = DF['SMA_9'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر SMA به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['SMA_3'] = DF['SMA_3'].round(0).astype(int)
+            DF['SMA_9'] = DF['SMA_9'].round(0).astype(int)
 
             # سیگنال خرید و فروش بر اساس تقاطع SMA ها
             DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
-                                       np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0)) 
 
-            # محاسبه استوکستیک
+            # محاسبه استوکاستیک
             high_stoch = DF['High'].rolling(window=14).max()
             low_stoch = DF['Low'].rolling(window=14).min()
-           
+
             # %K و %D
             DF['%K'] = (DF['Close'] - low_stoch) / (high_stoch - low_stoch) * 100
             DF['%D'] = DF['%K'].rolling(window=3).mean()
 
+            # بررسی و حذف مقادیر NA
+            DF['%K'] = DF['%K'].fillna(0)  # جایگزینی NA با 0
+            DF['%D'] = DF['%D'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر %K و %D به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['%K'] = DF['%K'].round(0).astype(int)
+            DF['%D'] = DF['%D'].round(0).astype(int)
+
             # سیگنال خرید و فروش بر اساس واگرایی استوکستیک
             DF['Stochastic_Signal'] = np.where((DF['%K'] < 20) & (DF['%K'] > DF['%D']), 1,
-                                               np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
+                                                np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
 
             # نمایش نتایج نهایی فقط برای آخرین سه روز
             last_three_days = DF.tail(3)
@@ -194,9 +236,6 @@ while True:
 
             date_format = '%Y-%m-%d'  # Example format; adjust based on your actual date format
                  
-            #Ensure the index is in datetime format
-            #if not pd.api.types.is_datetime64_any_dtype(last_three_days.index):
-                #last_three_days.index = pd.to_datetime(last_three_days.index, errors='coerce')
             
             # محاسبه حجم مبنا (میانگین حجم معاملات در دوره مشخص)
             volume_base_period_days = 30
@@ -217,7 +256,6 @@ while True:
             
         except Exception as e:
               print(f"یک خطا رخ داد: {e}")
-
 
 
 #===============================================
@@ -316,6 +354,14 @@ while True:
             low_26 = DF['Low'].rolling(window=26).min()
             DF['Kijun-sen'] = (high_26 + low_26) / 2
 
+            # بررسی و حذف مقادیر NA
+            DF['Tenkan-sen'] = DF['Tenkan-sen'].fillna(0)  # جایگزینی NA با 0
+            DF['Kijun-sen'] = DF['Kijun-sen'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر تنکانسن و کیجونسن به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['Tenkan-sen'] = DF['Tenkan-sen'].round(0).astype(int)
+            DF['Kijun-sen'] = DF['Kijun-sen'].round(0).astype(int)
+
             # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن
             DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
                                     np.where(DF['Tenkan-sen'] < DF['Kijun-sen'], -1, 0))
@@ -327,6 +373,12 @@ while True:
             RS = gain / loss
             DF['RSI'] = 100 - (100 / (1 + RS))
 
+            # بررسی و حذف مقادیر NA
+            DF['RSI'] = DF['RSI'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر RSI به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['RSI'] = DF['RSI'].round(0).astype(int)
+
             # سیگنال خرید و فروش بر اساس واگرایی RSI بدون هشدار
             DF['RSI_Signal'] = 0
             for i in range(1, len(DF)):
@@ -335,35 +387,63 @@ while True:
                 elif (DF['RSI'].iloc[i] > 70 and DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
                     DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
 
-            # محاسبه MACD
+
+           # محاسبه MACD
             exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
             exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
             DF['MACD'] = exp1 - exp2
+
+            # محاسبه سیگنال MACD
             DF['Signal_MACD'] = DF['MACD'].ewm(span=9, adjust=False).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['MACD'] = DF['MACD'].fillna(0)  # جایگزینی NA با 0
+            DF['Signal_MACD'] = DF['Signal_MACD'].fillna(0)  # جایگزینی NA با 0
 
             # سیگنال خرید و فروش بر اساس تقاطع MACD
             DF['MACD_Signal'] = np.where(DF['MACD'] > DF['Signal_MACD'], 1, 
-                                        np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
+                                          np.where(DF['MACD'] < DF['Signal_MACD'], -1, 0))
 
-            # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
+            # گرد کردن مقادیر MACD و سیگنال MACD به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['MACD'] = DF['MACD'].round(0).astype(int)
+            DF['Signal_MACD'] = DF['Signal_MACD'].round(0).astype(int) 
+
+
+           # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
             DF['SMA_3'] = DF['Close'].rolling(window=3).mean()
-            DF['SMA_9'] = DF['Close'].rolling(window=9).mean() 
+            DF['SMA_9'] = DF['Close'].rolling(window=9).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['SMA_3'] = DF['SMA_3'].fillna(0)  # جایگزینی NA با 0
+            DF['SMA_9'] = DF['SMA_9'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر SMA به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['SMA_3'] = DF['SMA_3'].round(0).astype(int)
+            DF['SMA_9'] = DF['SMA_9'].round(0).astype(int)
 
             # سیگنال خرید و فروش بر اساس تقاطع SMA ها
             DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
-                                       np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0)) 
 
-            # محاسبه استوکستیک
+            # محاسبه استوکاستیک
             high_stoch = DF['High'].rolling(window=14).max()
             low_stoch = DF['Low'].rolling(window=14).min()
-           
+
             # %K و %D
             DF['%K'] = (DF['Close'] - low_stoch) / (high_stoch - low_stoch) * 100
             DF['%D'] = DF['%K'].rolling(window=3).mean()
 
+            # بررسی و حذف مقادیر NA
+            DF['%K'] = DF['%K'].fillna(0)  # جایگزینی NA با 0
+            DF['%D'] = DF['%D'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر %K و %D به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['%K'] = DF['%K'].round(0).astype(int)
+            DF['%D'] = DF['%D'].round(0).astype(int)
+
             # سیگنال خرید و فروش بر اساس واگرایی استوکستیک
             DF['Stochastic_Signal'] = np.where((DF['%K'] < 20) & (DF['%K'] > DF['%D']), 1,
-                                               np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
+                                                np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
 
             # نمایش نتایج نهایی فقط برای آخرین سه روز
             last_three_days = DF.tail(3)
@@ -415,9 +495,7 @@ while True:
               print(f"یک خطا رخ داد: {e}")
 
 
-
-
-#==========================================
+#===============================================
 print ('marhale one_1')
 
 import time
