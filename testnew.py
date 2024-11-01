@@ -838,14 +838,14 @@ while True:
               print ('-'*30,)
                #------------------------------------------- 
                # برسي سهام فقط بازدن شماره کنارسهم قابل برسي است 
-              namad =["چکارن","تلیسه","غمینو","غکورش","وسپه","شپاکسا","ومعادن","تاپیکو",
+              namad =["چکارن","تلیسه","غمینو","سيمانو","وسپه","شپاکسا","ومعادن","تاپیکو",
                        "دسبحان","کچاد","شستا","حتوکا","خگستر","فولاد","شپنا","فملی","فصبا",
                        "فسبزوار","خودرو","تیپیکو","خساپا","سرچشمه","نیان","ختور","فپنتا",
                        "شبندر","فارس","غفارس","وبصادر","کچاد","درازک","داتام","نخريس","پاکشو",
                        "کگل","ثبهساز","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
                        "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
                        "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال",
-                       "واعتبار","اطلس","شپترو","سمگا","سبزوا","سيمانو","استيل"]
+                       "واعتبار","اطلس","شپترو","سمگا","سبزوا","غکورش","استيل"]
 
                # Print the list of stocks and their indices
                #for i, n in enumerate(namad):
@@ -1286,7 +1286,8 @@ while True:
 
 
                #================================================
-              print(25*"-")     
+              print(25*"-")
+              
               if ticker.adj_close > ticker.yesterday_price:
                     print (' قيمت امروزبالاترازديروزه ')
               else :
@@ -1294,18 +1295,12 @@ while True:
                          print (' قيمت امروزپايين ترازديروزه ')
 
 
-              if ticker.volume > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
-                   print ("sell : قيمت داره ميادپايين حجم ميره بالابفروش")
-              else:
-                   if ticker.volume < today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
-                       print ("sell : حجم داره ميادپايين قيمت ميره بالا بفروش")
 
-
-              if ticker.volume > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price :
-                   print ("buy : حجم وقيمت هردوميره بالا يااول حمايت بخرياباشکست مقاومت بخر")
+              if (ticker.volume)*2 > today_Volume_yesterday and ticker.adj_close > ticker.yesterday_price and today_price>moving_10:
+                   print ("sell  : سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالاوقيمت بالاي ميانگين 10روزه")
               else:
-                   if ticker.volume < today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price :
-                       print ("buy : حجم وقيمت هردوداره ميادپايين نزديک حمايت بخر")
+                   if (ticker.volume)*2 > today_Volume_yesterday and ticker.adj_close < ticker.yesterday_price and today_price<moving_10:
+                       print ("buy  : سیگنال خرید به دلیل کاهش قیمت و افزایش حجم وقيمت پايين ميانگين 10روزه")
                        
 
               print()
@@ -1892,11 +1887,11 @@ while True:
                          print (psv, 'مقدارزيان شما') 
                          
                          
-               # غکورش
+               # سيمانو
               if index == 4:
-                    p=0
+                    p=10990
                     s=0
-                    v=0
+                    v=910
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
@@ -1934,9 +1929,9 @@ while True:
                         
                # شپاکسا
               if index == 6:
-                    p=1914
+                    p=1935
                     s=0
-                    v=7800
+                    v=11000
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
@@ -2035,9 +2030,9 @@ while True:
 
                # شستا
               if index == 11:
-                    p=0
+                    p=946
                     s=0
-                    v=0
+                    v=17000
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
