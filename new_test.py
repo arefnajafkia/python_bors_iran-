@@ -16,6 +16,29 @@ import jdatetime  # اضافه کردن کتابخانه jdatetime
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+def calculate_elliott_wave(prices):
+    if len(prices) < 5:
+        return "Insufficient data for wave analysis", None, None
+    
+    diffs = np.diff(prices)
+    peaks = [i for i in range(1, len(diffs)-1) if diffs[i-1] < 0 < diffs[i]]
+    troughs = [i for i in range(1, len(diffs)-1) if diffs[i-1] > 0 > diffs[i]]
+    
+    wave_count = len(peaks) + len(troughs)
+
+    # Determine current wave type and position
+    if len(peaks) > 0 and (len(troughs) == 0 or peaks[-1] > troughs[-1]):
+        current_wave_type = "صعودی"  # Bullish
+        current_wave_position = len(peaks)
+    elif len(troughs) > 0 and (len(peaks) == 0 or troughs[-1] > peaks[-1]):
+        current_wave_type = "نزولی"  # Bearish
+        current_wave_position = len(troughs)
+    else:
+        current_wave_type = "نامشخص"  # Undefined
+        current_wave_position = None
+
+    return wave_count, current_wave_type, current_wave_position
+
 def main_menu():
     print()
     print(10 * "*", 'لطفا انتخاب کنید', 10 * "*")
@@ -166,7 +189,24 @@ while True:
 
             # سیگنال خرید و فروش بر اساس تقاطع SMA ها
             DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
-                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0)) 
+                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+            
+
+            # محاسبه میانگین متحرک نمایی (EMA) برای دوره‌های 3 و 9 روزه
+            DF['EMA_3'] = DF['Close'].ewm(span=3, adjust=False).mean()
+            DF['EMA_9'] = DF['Close'].ewm(span=9, adjust=False).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['EMA_3'] = DF['EMA_3'].fillna(0)  # جایگزینی NA با 0
+            DF['EMA_9'] = DF['EMA_9'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر EMA به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['EMA_3'] = DF['EMA_3'].round(0).astype(int)
+            DF['EMA_9'] = DF['EMA_9'].round(0).astype(int)
+
+            # سیگنال خرید و فروش بر اساس تقاطع EMA ها
+            DF['EMA_Signal'] = np.where(DF['EMA_3'] > DF['EMA_9'], 1, np.where(DF['EMA_3'] < DF['EMA_9'], -1, 0))
+
 
             # محاسبه استوکاستیک
             high_stoch = DF['High'].rolling(window=14).max()
@@ -193,6 +233,7 @@ while True:
             
             print(30*'-')
             print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+            print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
             print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
             print(last_three_days[['RSI', 'RSI_Signal']])
             print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
@@ -223,6 +264,21 @@ while True:
             elif last_day.get('SMA_Signal') == -1:
                  print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
 
+            if last_day.get('EMA_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بخر")
+            elif last_day.get('EMA_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بفروش")
+
+            if last_day.get('SMA_9') < last_day.get('EMA_9'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA9 < EMA9') بخر")
+            elif last_day.get('SMA_9') > last_day.get('EMA_9'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA9 > EMA9') بفروش")
+
+            if last_day.get('SMA_3') < last_day.get('EMA_3'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 < EMA3') بخر")
+            elif last_day.get('SMA_3') > last_day.get('EMA_3'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 > EMA3') بفروش") 
+
             if last_day.get('MACD_Signal') == 1:
                  print(f"در تاریخ {last_day_date.date()} : (MACD) بخر")
             elif last_day.get('MACD_Signal') == -1:
@@ -240,6 +296,11 @@ while True:
             # محاسبه حجم مبنا (میانگین حجم معاملات در دوره مشخص)
             volume_base_period_days = 30
             volume_base = DF["Volume"].tail(volume_base_period_days).mean() if len(DF["Volume"]) >= volume_base_period_days else None
+        
+            today_Volume = DF['Volume'].iloc[-1] # حجم امروز
+            today_Volume_yesterday = DF['Volume'].iloc[-2] # حجم ديروز
+            today_Volume_yesterday2 = DF['Volume'].iloc[-3] # حجم سه روزقبل
+
 
             # نمایش نتایج نهایی فقط برای آخرین سه روز
             last_three_days = DF.tail(3)
@@ -248,10 +309,10 @@ while True:
             previous_close_price_yesterday = last_three_days.iloc[-2]['Close']
 
             # بررسی شرایط برای سیگنال خرید جدید
-            if previous_close_price_today < previous_close_price_yesterday and current_volume_today >= volume_base * 2:
-                print(f"در تاریخ {last_three_days.index[-1].date()} : سیگنال خرید به دلیل کاهش قیمت و افزایش حجم.")
-            if previous_close_price_today > previous_close_price_yesterday and current_volume_today >= volume_base * 2:
-                print(f"در تاریخ {last_three_days.index[-1].date()} : سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا.")
+            if previous_close_price_today < previous_close_price_yesterday and today_Volume_yesterday < today_Volume > (today_Volume_yesterday2)*3:
+                print (': سیگنال خرید به دلیل کاهش قیمت و افزایش حجم')
+            if previous_close_price_today > previous_close_price_yesterday and today_Volume_yesterday < today_Volume > (today_Volume_yesterday2)*3:
+                print (': سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا')
 
 
 
@@ -286,6 +347,17 @@ while True:
                     print("سیگنال خرید: چکش سبز برگشتی در روند نزولی")
                 elif hammer_type == 'red' and previous_candle['Close'] > previous_candle['Open']:
                     print("سیگنال فروش: چکش قرمز برگشتی در روند صعودی")
+                    
+
+
+            # Calculate the Elliott Wave based on closing prices
+            current_wave_count, current_wave_type, current_wave_position = calculate_elliott_wave(DF['Close'].values)
+            print ('-'*30)
+            print(f"تعداد امواج الیوت فعلی: {current_wave_count}")
+            print(f"نوع موج فعلی: {current_wave_type}")
+            if current_wave_position is not None:
+                print(f"موج فعلی در موقعیت: {current_wave_position}") 
+                print ('-'*30)
 
             
         except Exception as e:
@@ -457,7 +529,24 @@ while True:
 
             # سیگنال خرید و فروش بر اساس تقاطع SMA ها
             DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
-                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0)) 
+                                         np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0))
+
+
+            # محاسبه میانگین متحرک نمایی (EMA) برای دوره‌های 3 و 9 روزه
+            DF['EMA_3'] = DF['Close'].ewm(span=3, adjust=False).mean()
+            DF['EMA_9'] = DF['Close'].ewm(span=9, adjust=False).mean()
+
+            # بررسی و حذف مقادیر NA
+            DF['EMA_3'] = DF['EMA_3'].fillna(0)  # جایگزینی NA با 0
+            DF['EMA_9'] = DF['EMA_9'].fillna(0)  # جایگزینی NA با 0
+
+            # گرد کردن مقادیر EMA به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+            DF['EMA_3'] = DF['EMA_3'].round(0).astype(int)
+            DF['EMA_9'] = DF['EMA_9'].round(0).astype(int)
+
+            # سیگنال خرید و فروش بر اساس تقاطع EMA ها
+            DF['EMA_Signal'] = np.where(DF['EMA_3'] > DF['EMA_9'], 1, np.where(DF['EMA_3'] < DF['EMA_9'], -1, 0))
+            
 
             # محاسبه استوکاستیک
             high_stoch = DF['High'].rolling(window=14).max()
@@ -484,6 +573,7 @@ while True:
             
             print(30*'-')
             print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+            print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
             print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
             print(last_three_days[['RSI', 'RSI_Signal']])
             print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
@@ -513,6 +603,22 @@ while True:
                  print(f"در تاریخ {last_day_date.date()} : ('SMA') بخر")
             elif last_day.get('SMA_Signal') == -1:
                  print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
+
+            if last_day.get('EMA_Signal') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بخر")
+            elif last_day.get('EMA_Signal') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بفروش")
+
+            if last_day.get('SMA_9') < last_day.get('EMA_9'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA9 < EMA9') بخر")
+            elif last_day.get('SMA_9') > last_day.get('EMA_9'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA9 > EMA9') بفروش")
+
+
+            if last_day.get('SMA_3') < last_day.get('EMA_3'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 < EMA3') بخر")
+            elif last_day.get('SMA_3') > last_day.get('EMA_3'):
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 > EMA3') بفروش")
 
             if last_day.get('MACD_Signal') == 1:
                  print(f"در تاریخ {last_day_date.date()} : (MACD) بخر")

@@ -4,6 +4,40 @@
 # فقط بازدن شماره کنارسهم محاسبات راانجام داده ونتيجه رااغلام مي کند
 # RSI-ichimoku-EMA-Volume-Profit and loss-Charts-Canal-Moving 103-Candel
 
+import time
+import numpy as np
+import pandas as pd
+import finpy_tse as tse
+from datetime import datetime
+import warnings
+import jdatetime  # اضافه کردن کتابخانه jdatetime
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+def calculate_elliott_wave(prices):
+    if len(prices) < 5:
+        return "Insufficient data for wave analysis", None, None
+    
+    diffs = np.diff(prices)
+    peaks = [i for i in range(1, len(diffs)-1) if diffs[i-1] < 0 < diffs[i]]
+    troughs = [i for i in range(1, len(diffs)-1) if diffs[i-1] > 0 > diffs[i]]
+    
+    wave_count = len(peaks) + len(troughs)
+
+    # Determine current wave type and position
+    if len(peaks) > 0 and (len(troughs) == 0 or peaks[-1] > troughs[-1]):
+        current_wave_type = "صعودی"  # Bullish
+        current_wave_position = len(peaks)
+    elif len(troughs) > 0 and (len(peaks) == 0 or troughs[-1] > peaks[-1]):
+        current_wave_type = "نزولی"  # Bearish
+        current_wave_position = len(troughs)
+    else:
+        current_wave_type = "نامشخص"  # Undefined
+        current_wave_position = None
+
+    return wave_count, current_wave_type, current_wave_position
+
+
 def main_menu():
     print ()
     print(10*"-" , 'لطفا انتخاب کنيد',10*"-")
@@ -36,11 +70,7 @@ while True:
           
           try:
 
-              import time
               import math
-              import numpy as np
-              import pandas as pd
-              import finpy_tse as tse
               import mplfinance as mplf
               import scipy.stats as stt
               import matplotlib.pyplot as plt
@@ -48,7 +78,6 @@ while True:
               import yfinance as yf
               import pandas_datareader.data as web
               from datetime import date
-              import warnings
               warnings.filterwarnings("ignore", category=FutureWarning)
 
               print ("="*15,"برسي سهام دربورس ايران باايچيموکو","="*15)
@@ -65,10 +94,6 @@ while True:
                                          show_weekday=True,
                                          double_date=True)
 
-              # Convert index to datetime with error handling
-              #if not DF.index.empty:
-                  #DF.index = pd.to_datetime(DF.index, format='%Y-%m-%d', errors='coerce')  # Specify format
-                  #DF.dropna(inplace=True)  # حذف ردیف‌های با تاریخ نامعتبر
 
 
               DropList = ['Open', 'High', 'Low', 'Close', 'Final']
@@ -670,95 +695,76 @@ while True:
               piercing_1= (yesterday_Open_price + yesterday_price)/2
               
 
-
               if today_Open_price > yesterday_price < yesterday_Open_price > today_price > today_Open_price:
                   print ('_ مهم _ Harami patterns Bullish الگوي برگشتي صعودي (مادرباردار) ')
-
 
 
               if today_price > yesterday_Open_price < yesterday_price > today_Open_price > today_price:
                    print ('_ مهم _ Harami patterns Bearish الگوي برگشتي نزولي (مادرباردار) ')
 
 
-
               if today_Open_price < yesterday_price < yesterday_Open_price < today_price > today_Open_price:
                    print ('_ مهم _ Bullish Engulfing الگوي برگشتي صعودي معتبر')
-
 
 
               if today_price < yesterday_Open_price < yesterday_price <  today_Open_price > today_price:
                    print ('_ مهم _ Bearish Engulfing الگوي برگشتي نزولي معتبر')
 
 
-
               if today_price >= yesterday_price_max < today_price_max and today_Open_price >= yesterday_price_min > today_price_min and yesterday_Open_price > yesterday_price:
                     print ('Bullish Engulfing الگوي برگشتي صعودي معمولادرکف رخميده')
-
 
 
               if today_price <= yesterday_price_min > today_price_min and today_Open_price <= yesterday_price_max < today_price_max and yesterday_Open_price < yesterday_price:
                     print ('Bearish Engulfing الگوي برگشتي نزولي درکف رخميده')
 
 
-
               if yesterday_price_max > today_price_max > piercing_1 < today_price and yesterday_price_min > today_price_min < yesterday_price > today_Open_price <yesterday_Open_price :
                     print ('piercing patterns الگوي برگشتي صعودي پرسينگ (کندل دومي پايين ترازنيمه اولي)')
-
 
 
               if yesterday_price_max < today_price_max > piercing_1 > today_price and yesterday_price_min < today_price_min < yesterday_price < today_Open_price > yesterday_Open_price  :
                     print ('Dark Cloud patterns الگوي برگشتي نزولي دارک کلود (کندل دومي بالاترازنيمه اولي)')     
 
 
-
               if today_two_price_max <= today_price_max > yesterday_price_max > today_two_price_min < today_price_min > yesterday_Open_price == yesterday_price_min < yesterday_price and today_price_min > yesterday_price_max :
                     print ('Morning star الگوي سه کندلي برگشتي صعودي,کندل وسط دوجي سبز')
-
 
 
               if today_two_price_max > today_price_max < yesterday_price_max > today_two_price_min < today_price_min < yesterday_Open_price > yesterday_price > yesterday_price_min and today_price_min < today_two_price_max :
                     print ('Evening star الگوي سه کندلي برگشتي نزولي,کندل وسط دوجي قرمز')
                     
 
-
                #=====================================================
               print ('='*30,' signal canal Day26 and Day52 ')
               
 
-
               if past_26_days_low < yesterday_price < today_price > kij26 and today_price < past_26_days_high :
                   print ('قيمت بالاي نيمه کانال 26روزه است وروبه بالاميره')
-
 
 
               if past_26_days_low < yesterday_price > today_price > kij26 and today_price < past_26_days_high :
                     print ('قيمت بالاي نيمه کانال26روزه است وروبه پايين ميره')
 
 
-
               if past_26_days_low < yesterday_price < today_price < kij26 and today_price < past_26_days_high :
                     print ('قيمت پايين نيمه کانال26روزه است وروبه بالاميره')
 
 
-
               if past_26_days_low < yesterday_price > today_price < kij26 and today_price < past_26_days_high :
                     print ('قيمت پايين نيمه کانال26روزه است وروبه پايين ميره')
-
-                    
+                  
 
               if past_26_days_high < yesterday_price > today_price < past_26_days_high:
                     print ('signal sell : ','قيمت بالاي کانال 26روزه روبه سمت پايين شکست')
-
 
 
               if past_26_days_high > yesterday_price < today_price > past_26_days_high :
                     print ('signal buy : ','قيمت بالاي کانال 26روزه روبه سمت بالا شکست')
                     
 
-
               if past_26_days_low < yesterday_price > today_price < past_26_days_low :
                     print ('قيمت پايين کانال26روزه روبه سمت پايين شکست')
-
 
 
               if past_26_days_low > yesterday_price < today_price > past_26_days_low :
@@ -770,40 +776,32 @@ while True:
                     print ('قيمت بالاي نيمه کانال52روزه است وروبه بالاميره')
 
 
-
               if past_52_days_low < yesterday_price > today_price > kij52 and today_price < past_52_days_high :
                     print ('قيمت بالاي نيمه کانال52روزه است وروبه پايين ميره')
-
 
 
               if past_52_days_low < yesterday_price < today_price < kij52 and today_price < past_52_days_high :
                     print ('قيمت پايين نيمه کانال52روزه است وروبه بالاميره')
 
 
-
               if past_52_days_low < yesterday_price > today_price < kij52 and today_price < past_52_days_high :
                     print ('قيمت پايين نيمه کانال52روزه است وروبه پايين ميره')
-
                     
 
               if past_52_days_high < yesterday_price > today_price < past_52_days_high:
                     print ('signal sell : ','قيمت بالاي کانال52روزه روبه سمت پايين شکست')
 
 
-
               if past_52_days_high > yesterday_price < today_price > past_52_days_high :
                     print ('signal buy : ','قيمت بالاي کانال52روزه روبه سمت بالاشکست')
                     
-
 
               if past_52_days_low < yesterday_price > today_price < past_52_days_low :
                     print ('قيمت پايين کانال52روزه روبه سمت پايين شکست')
 
 
-
               if past_52_days_low > yesterday_price < today_price > past_52_days_low :
-                    print ('قيمت پايين کانال52روزه روبه سمت بالاشکست')
-                    
+                    print ('قيمت پايين کانال52روزه روبه سمت بالاشکست')                  
 
 
               if today_Volume_yesterday2 < today_Volume_yesterday < today_Volume :
@@ -965,14 +963,12 @@ while True:
               print(30*"=",sahame," Tik ascending or Descending")
               #------------------------------------------
 
-
               if ticker.adj_close > ticker.open_price > ticker.yesterday_price > ticker.low_price:
                    print (tik_ascending , ' : تيک صعودي')
               else :
                   if ticker.adj_close < ticker.open_price < ticker.yesterday_price < ticker.high_price:
                         print (tik_Descending , ' : تيک نزولي')
-
-                              
+                    
                                     
                #======================================================****
               print ('='*20 ,"Calculations done RSI-MACD-ichimoku-Stochastic  ")
@@ -1057,7 +1053,7 @@ while True:
               DF['Signal_MACD'] = DF['Signal_MACD'].round(0).astype(int) 
 
 
-             # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
+              # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
               DF['SMA_3'] = DF['Close'].rolling(window=3).mean()
               DF['SMA_9'] = DF['Close'].rolling(window=9).mean()
 
@@ -1072,6 +1068,22 @@ while True:
               # سیگنال خرید و فروش بر اساس تقاطع SMA ها
               DF['SMA_Signal'] = np.where(DF['SMA_3'] > DF['SMA_9'], 1, 
                                          np.where(DF['SMA_3'] < DF['SMA_9'], -1, 0)) 
+
+              # محاسبه میانگین متحرک نمایی (EMA) برای دوره‌های 3 و 9 روزه
+              DF['EMA_3'] = DF['Close'].ewm(span=3, adjust=False).mean()
+              DF['EMA_9'] = DF['Close'].ewm(span=9, adjust=False).mean()
+
+              # بررسی و حذف مقادیر NA
+              DF['EMA_3'] = DF['EMA_3'].fillna(0)  # جایگزینی NA با 0
+              DF['EMA_9'] = DF['EMA_9'].fillna(0)  # جایگزینی NA با 0
+
+              # گرد کردن مقادیر EMA به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
+              DF['EMA_3'] = DF['EMA_3'].round(0).astype(int)
+              DF['EMA_9'] = DF['EMA_9'].round(0).astype(int)
+
+              # سیگنال خرید و فروش بر اساس تقاطع EMA ها
+              DF['EMA_Signal'] = np.where(DF['EMA_3'] > DF['EMA_9'], 1, np.where(DF['EMA_3'] < DF['EMA_9'], -1, 0))
+
 
               # محاسبه استوکاستیک
               high_stoch = DF['High'].rolling(window=14).max()
@@ -1097,6 +1109,7 @@ while True:
             
               print(30*'-')
               print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
+              print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
               print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
               print(last_three_days[['RSI', 'RSI_Signal']])
               print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
@@ -1127,6 +1140,21 @@ while True:
               elif last_day.get('SMA_Signal') == -1:
                    print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
 
+              if last_day.get('EMA_Signal') == 1:
+                   print(f"در تاریخ {last_day_date.date()} : ('EMA') بخر")
+              elif last_day.get('EMA_Signal') == -1:
+                   print(f"در تاریخ {last_day_date.date()} : ('EMA') بفروش")
+
+              if last_day.get('SMA_9') < last_day.get('EMA_9'):
+                   print(f"در تاریخ {last_day_date.date()} : ('SMA9 < EMA9') بخر")
+              elif last_day.get('SMA_9') > last_day.get('EMA_9'):
+                   print(f"در تاریخ {last_day_date.date()} : ('SMA9 > EMA9') بفروش")
+
+              if last_day.get('SMA_3') < last_day.get('EMA_3'):
+                   print(f"در تاریخ {last_day_date.date()} : ('SMA3 < EMA3') بخر")
+              elif last_day.get('SMA_3') > last_day.get('EMA_3'):
+                   print(f"در تاریخ {last_day_date.date()} : ('SMA3 > EMA3') بفروش")      
+
               if last_day.get('MACD_Signal') == 1:
                    print(f"در تاریخ {last_day_date.date()} : (MACD) بخر")
               elif last_day.get('MACD_Signal') == -1:
@@ -1152,15 +1180,56 @@ while True:
               previous_close_price_yesterday = last_three_days.iloc[-2]['Close']
 
               # بررسی شرایط برای سیگنال خرید جدید
-              if previous_close_price_today < previous_close_price_yesterday and current_volume_today >= volume_base * 2:
-                  print(f"در تاریخ {last_three_days.index[-1].date()} : سیگنال خرید به دلیل کاهش قیمت و افزایش حجم.")
-              if previous_close_price_today > previous_close_price_yesterday and current_volume_today >= volume_base * 2:
-                  print(f"در تاریخ {last_three_days.index[-1].date()} : سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا.")
+              if previous_close_price_today < previous_close_price_yesterday and today_Volume_yesterday < today_Volume > (today_Volume_yesterday2)*3:
+                  print (': سیگنال خرید به دلیل کاهش قیمت و افزایش حجم')
+              if previous_close_price_today > previous_close_price_yesterday and today_Volume_yesterday < today_Volume > (today_Volume_yesterday2)*3:
+                  print (': سيگنال فروش به دليل افزايش قيمت وافزايش حجم بالا')
 
 
+              # تعریف داده‌ها
+              data = {
+                  'Open': [1, 2, 3],
+                  'High': [2, 3, 4],
+                  'Low': [0, 1, 2],
+                  'Close': [1.5, 2.5, 3.5]
+              }
+
+              # ایجاد DataFrame
+              df = pd.DataFrame(data)
+
+              def is_hammer(candle):
+                  body = candle['Close'] - candle['Open']
+                  range_ = candle['High'] - candle['Low']
+                  lower_shadow = candle['Open'] - candle['Low']
+                  upper_shadow = candle['High'] - candle['Close']
+
+                  if (lower_shadow > 2 * abs(body)) and (upper_shadow < abs(body)):
+                      return 'green' if body > 0 else 'red'
+                  return None
+
+              for i in range(1, len(df)):
+                  current_candle = df.iloc[i]
+                  previous_candle = df.iloc[i - 1]
+
+                  hammer_type = is_hammer(current_candle)
+
+                  if hammer_type == 'green' and previous_candle['Close'] < previous_candle['Open']:
+                     print("سیگنال خرید: چکش سبز برگشتی در روند نزولی")
+                  elif hammer_type == 'red' and previous_candle['Close'] > previous_candle['Open']:
+                      print("سیگنال فروش: چکش قرمز برگشتی در روند صعودی")
+                    
+
+
+              # Calculate the Elliott Wave based on closing prices
+              current_wave_count, current_wave_type, current_wave_position = calculate_elliott_wave(DF['Close'].values)
+              print ('-'*30)
+              print(f"تعداد امواج الیوت فعلی: {current_wave_count}")
+              print(f"نوع موج فعلی: {current_wave_type}")
+              if current_wave_position is not None:
+                  print(f"موج فعلی در موقعیت: {current_wave_position}")
+                  print ('-'*30)
 
               #========================================================
-              print ()
               Month_price = DF['Final'].iloc[-26] # آخرين قيمت 30روزقبل
               Month_price1 = DF['Final'].iloc[-25] # آخرين قيمت 29روزقبل
               Month_price2 = DF['Final'].iloc[-24] # آخرين قيمت 28روزقبل
