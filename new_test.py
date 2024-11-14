@@ -1,6 +1,7 @@
 
 
-#===============================================
+#==================================================
+
 #آخرين کار
 
 # سيگنالهاي خريد وفروش با انديکاتورهاي 
@@ -132,6 +133,21 @@ while True:
             DF['Signal'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen'], 1, 
                                     np.where(DF['Tenkan-sen'] < DF['Kijun-sen'], -1, 0))
 
+
+            # محاسبه کیجونسن 103 روزه
+            high_103 = DF['High'].rolling(window=103).max()
+            low_103 = DF['Low'].rolling(window=103).min()
+            DF['Kijun-sen_103'] = (high_103 + low_103) / 2
+
+            # بررسی و حذف مقادیر NA برای کیجونسن 103 روزه
+            DF['Kijun-sen_103'] = DF['Kijun-sen_103'].fillna(0)  # جایگزینی NA با 0
+            DF['Kijun-sen_103'] = DF['Kijun-sen_103'].round(0).astype(int)  # گرد کردن به عدد صحیح
+
+            # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن 103 روزه
+            DF['Signal_103'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen_103'], 1,
+                                         np.where(DF['Tenkan-sen'] < DF['Kijun-sen_103'], -1, 0))
+            
+
             # محاسبه RSI
             delta = DF['Close'].diff()
             gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
@@ -208,6 +224,19 @@ while True:
             DF['EMA_Signal'] = np.where(DF['EMA_3'] > DF['EMA_9'], 1, np.where(DF['EMA_3'] < DF['EMA_9'], -1, 0))
 
 
+            # محاسبه میانگین متحرک 20 روزه
+            DF['MA_20'] = DF['Close'].rolling(window=20).mean()
+
+            # بررسی وضعیت کانال
+            if DF['Close'].iloc[-1] > DF['MA_20'].iloc[-1]:
+                trend_status = "صعودی"
+            else:
+                trend_status = "نزولی"
+
+            # نمایش وضعیت کانال
+            print(f"وضعیت کانال: {trend_status}")
+
+
             # محاسبه استوکاستیک
             high_stoch = DF['High'].rolling(window=14).max()
             low_stoch = DF['Low'].rolling(window=14).min()
@@ -232,6 +261,7 @@ while True:
             last_three_days = DF.tail(3)
             
             print(30*'-')
+            print(last_three_days[['Tenkan-sen', 'Kijun-sen_103', 'Signal_103']])
             print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
             print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
             print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
@@ -239,6 +269,8 @@ while True:
             print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
             print(last_three_days[['%K', '%D', 'Stochastic_Signal']])
             print(last_three_days[['Close', 'Volume']])
+            print(20*'-')
+            print(f"وضعیت کانال: {trend_status}")
             print(30*'-')
 
             # چاپ پیام خرید و فروش فقط برای آخرین روز
@@ -254,20 +286,25 @@ while True:
             elif last_day.get('Signal') == -1:
                  print(f"در تاریخ {last_day_date.date()} : بفروش (تنکانسن پایین کیجونسن)")
 
+            if last_day.get('Signal_103') == 1:
+                 print(f"در تاریخ {last_day_date.date()} : بخر (تنکانسن بالاي کيجونسن 103)")
+            elif last_day.get('Signal_103') == -1:
+                 print(f"در تاریخ {last_day_date.date()} : بفروش (تنکانسن پايين کيجونسن 103)")     
+
             if last_day.get('Stochastic_Signal') == 1:
                  print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بخر")
             elif last_day.get('Stochastic_Signal') == -1:
                  print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بفروش")
 
             if last_day.get('SMA_Signal') == 1:
-                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بخر")
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 > SMA9') بخر")
             elif last_day.get('SMA_Signal') == -1:
-                 print(f"در تاریخ {last_day_date.date()} : ('SMA') بفروش")
+                 print(f"در تاریخ {last_day_date.date()} : ('SMA3 < SMA9') بفروش")
 
             if last_day.get('EMA_Signal') == 1:
-                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بخر")
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA3 > EMA9') بخر")
             elif last_day.get('EMA_Signal') == -1:
-                 print(f"در تاریخ {last_day_date.date()} : ('EMA') بفروش")
+                 print(f"در تاریخ {last_day_date.date()} : ('EMA3 < EMA9') بفروش")
 
             if last_day.get('SMA_9') < last_day.get('EMA_9'):
                  print(f"در تاریخ {last_day_date.date()} : ('SMA9 < EMA9') بخر")
@@ -288,6 +325,7 @@ while True:
                  print(f"در تاریخ {last_day_date.date()} : (RSI) بخر")
             elif last_day.get('RSI_Signal') == -1:
                  print(f"در تاریخ {last_day_date.date()} : (RSI) بفروش")
+
 
 
             date_format = '%Y-%m-%d'  # Example format; adjust based on your actual date format
@@ -364,7 +402,9 @@ while True:
               print(f"یک خطا رخ داد: {e}")
 
 
-#===============================================
+
+#==================================================
+              
 #Stochastic             
 
 # سيگنالهاي خريد وفروش با انديکاتورهاي 
@@ -635,7 +675,8 @@ while True:
               print(f"یک خطا رخ داد: {e}")
 
 
-#===============================================
+#===================================================
+
 print ('marhale one_1')
 
 import time
@@ -724,4 +765,5 @@ while True :
         print ('-'*10,' شماازبرنامه خارج شديد')
         
         exit()
-#===========================================
+
+
