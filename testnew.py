@@ -1023,8 +1023,41 @@ while True:
 
               # سیگنال خرید و فروش بر اساس تقاطع تنکانسن و کیجونسن 103 روزه
               DF['Signal_103'] = np.where(DF['Tenkan-sen'] > DF['Kijun-sen_103'], 1,
-                                           np.where(DF['Tenkan-sen'] < DF['Kijun-sen_103'], -1, 0)) 
-              
+                                           np.where(DF['Tenkan-sen'] < DF['Kijun-sen_103'], -1, 0))
+
+
+              # تابع برای بررسی و بازگشت آخرین واگرایی بین تنکانسن و قیمت بسته‌شده
+              def get_last_divergence_with_close(DF):
+                  last_divergence = None
+                  for i in range(1, len(DF)):
+                      # بررسی واگرایی مثبت
+                      if (DF['Tenkan-sen'].iloc[i] < DF['Tenkan-sen'].iloc[i-1] and 
+                          DF['Close'].iloc[i] > DF['Close'].iloc[i-1]):
+                          last_divergence = f"آخرین واگرایی مثبت در تاریخ {DF.index[i]}: ten and close سيگنال خريد"
+                        
+                      # بررسی واگرایی منفی
+                      elif (DF['Tenkan-sen'].iloc[i] > DF['Tenkan-sen'].iloc[i-1] and 
+                            DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
+                          last_divergence = f"آخرین واگرایی منفی در تاریخ {DF.index[i]}: ten and close سيگنال فروش"
+                    
+                  return last_divergence
+
+
+                # تابع برای بررسی و بازگشت آخرین واگرایی بین تنکانسن و کیجونسن
+              def get_last_divergence(DF):
+                  last_divergence = None
+                  for i in range(1, len(DF)):
+                      # بررسی واگرایی مثبت
+                      if (DF['Tenkan-sen'].iloc[i] < DF['Tenkan-sen'].iloc[i-1] and 
+                          DF['Kijun-sen'].iloc[i] > DF['Kijun-sen'].iloc[i-1]):
+                          last_divergence = f"آخرین واگرایی مثبت در تاریخ {DF.index[i]}: ten and kij سيگنال خريد"
+                        
+                # بررسی واگرایی منفی
+                      elif (DF['Tenkan-sen'].iloc[i] > DF['Tenkan-sen'].iloc[i-1] and 
+                              DF['Kijun-sen'].iloc[i] < DF['Kijun-sen'].iloc[i-1]):
+                          last_divergence = f"آخرین واگرایی منفی در تاریخ {DF.index[i]}: ten and kij سيگنال فروش"
+                    
+                  return last_divergence               
 
               # محاسبه RSI
               delta = DF['Close'].diff()
@@ -1146,6 +1179,20 @@ while True:
               print(last_three_days[['Close', 'Volume']])
               print(20*'-')
               print(f"وضعیت کانال: {trend_status}")
+              # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو
+              last_divergence_signal = get_last_divergence_with_close(DF)
+              if last_divergence_signal:
+                  print(last_divergence_signal)
+              else:
+                  print("ten and close هيچ واگرايي مشاهده نشد.")
+
+              # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو
+              last_divergence_signal = get_last_divergence(DF)
+              if last_divergence_signal:
+                  print(last_divergence_signal)
+              else:
+                  print("ten and kij هيچ واگرايي مشاهده نشد.") 
+              
               print(30*'-')
 
               # چاپ پیام خرید و فروش فقط برای آخرین روز
