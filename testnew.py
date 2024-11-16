@@ -1034,7 +1034,6 @@ while True:
                       if (DF['Tenkan-sen'].iloc[i] < DF['Tenkan-sen'].iloc[i-1] and 
                           DF['Close'].iloc[i] > DF['Close'].iloc[i-1]):
                           last_divergence = f"آخرین واگرایی مثبت در تاریخ {DF.index[i]}: ten and close سيگنال خريد"
-                        
                       # بررسی واگرایی منفی
                       elif (DF['Tenkan-sen'].iloc[i] > DF['Tenkan-sen'].iloc[i-1] and 
                             DF['Close'].iloc[i] < DF['Close'].iloc[i-1]):
@@ -1051,7 +1050,6 @@ while True:
                       if (DF['Tenkan-sen'].iloc[i] < DF['Tenkan-sen'].iloc[i-1] and 
                           DF['Kijun-sen'].iloc[i] > DF['Kijun-sen'].iloc[i-1]):
                           last_divergence = f"آخرین واگرایی مثبت در تاریخ {DF.index[i]}: ten and kij سيگنال خريد"
-                        
                 # بررسی واگرایی منفی
                       elif (DF['Tenkan-sen'].iloc[i] > DF['Tenkan-sen'].iloc[i-1] and 
                               DF['Kijun-sen'].iloc[i] < DF['Kijun-sen'].iloc[i-1]):
@@ -1165,10 +1163,21 @@ while True:
               # سیگنال خرید و فروش بر اساس واگرایی استوکستیک
               DF['Stochastic_Signal'] = np.where((DF['%K'] < 20) & (DF['%K'] > DF['%D']), 1,
                                                 np.where((DF['%K'] > 80) & (DF['%K'] < DF['%D']), -1, 0))
+
+              # Calculate Gator Oscillator
+              DF['Jaw'] = DF['Close'].rolling(window=13).mean().shift(8)
+              DF['Teeth'] = DF['Close'].rolling(window=8).mean().shift(5)
+              DF['Lips'] = DF['Close'].rolling(window=5).mean().shift(3)
+
+              # Generate Buy/Sell Signals based on Gator Oscillator
+              DF['Gator_Signal'] = np.where((DF['Lips'] > DF['Teeth']) & (DF['Teeth'] > DF['Jaw']), 1,
+                                            np.where((DF['Lips'] < DF['Teeth']) & (DF['Teeth'] < DF['Jaw']), -1, 0)) 
+              
               # نمایش نتایج نهایی فقط برای آخرین سه روز
               last_three_days = DF.tail(3)
             
               print(30*'-')
+              print(last_three_days[['Jaw', 'Teeth', 'Lips', 'Gator_Signal']])
               print(last_three_days[['Tenkan-sen', 'Kijun-sen_103', 'Signal_103']])
               print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
               print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
@@ -1212,6 +1221,12 @@ while True:
                    print(f"در تاریخ {last_day_date.date()} : بخر (تنکانسن بالاي کيجونسن 103)")
               elif last_day.get('Signal_103') == -1:
                    print(f"در تاریخ {last_day_date.date()} : بفروش (تنکانسن پايين کيجونسن 103)")
+
+              if last_day.get('Gator_Signal') == 1:
+                   print(f"در تاریخ {last_day_date.date()} : ('Gator_Signal') بخر")
+              elif last_day.get('Signal_103') == -1:
+                   print(f"در تاریخ {last_day_date.date()} : ('Gator_Signal') بفروش")
+                   
                    
               if last_day.get('Stochastic_Signal') == 1:
                    print(f"در تاریخ {last_day_date.date()} : ('Stochastic') بخر")
