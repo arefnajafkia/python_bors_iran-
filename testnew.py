@@ -286,9 +286,6 @@ while True:
               ten8 = (past_8_days_high + past_8_days_low)/2
               tenken8 = (math.ceil(ten8))
 
-               #print ('ten9 :',(math.ceil(ten9)))
-               #print ('ten8 :',(math.ceil(ten8)))
-
                # محاسبات کيجونسن26 روزه به قبل
                # Calculate the highest and lowest price over the past 26 days
 
@@ -320,8 +317,7 @@ while True:
               past_30_days_low = DF['Low'].rolling(window_size).min().iloc[-1]
               kij30 = (past_30_days_high + past_30_days_low)/2
 
-               #print ('kij26 :',(math.ceil(kij26)))
-               #print ('kij27 :',(math.ceil(kij27)))
+              #print ('kij26 :',(math.ceil(kij26)))
 
               print(f"ten8  : {tenken8}     ,    kij26 :  {kijon26}")
               print(f"ten9 : {tenken9}     ,    kij27 :  {kijon27}")
@@ -655,7 +651,6 @@ while True:
                    if yesterday_price > today_price <= tenken8 == kijon26 :
                          print (L26 , ' : دومين حمايت سرراه')
 
-
                #=====================================================
               print ('='*30,' hammer candle and Doji ')
 
@@ -665,11 +660,9 @@ while True:
                    print (' H > C > O >= L ')
 
 
-
               if today_price_max > today_Open_price > today_price >= today_price_min :
                    print ('چکش قرمزبرگشتي درروند صعودي ')
                    print (' H > O > C >= L ')
-
 
 
               if today_Open_price == today_price_max > today_price > today_price_min :
@@ -677,18 +670,15 @@ while True:
                    print (' O = H > C > L ')
                     
 
-
               if today_Open_price > today_price_max > today_price > today_price_min :
                    print ('مارابوزوي قرمز نزولي')
                    print (' O > H > C > L ')
-
 
 
               if today_Open_price < today_price_max == today_price > today_price_min :
                    print ('مارابوزوي سبز صعودي ')
                    print (' O < H = C > L ')
                     
-
                     
                #===================================================
               print ("-"*20,nam,'Signal candlestick patterns')
@@ -811,15 +801,13 @@ while True:
                        print ('سه روزحجم داره ميره پايين')
                        
 
-
               if today_price > yesterday_price > today_two_price :
                    print ('سه روز قيمت داره ميره بالا')
               else:
                    if today_price < yesterday_price < today_two_price :
                        print ('سه روز قيمت داره ميره پايين')
                        
-
-                    
+   
               print ("="*40)
                #==========================================================
                #-----------------------------------------
