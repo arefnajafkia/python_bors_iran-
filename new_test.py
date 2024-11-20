@@ -1,5 +1,7 @@
 
 
+
+
 #==================================================
 
 #آخرين کار
@@ -177,7 +179,42 @@ while True:
                           DF['Kijun-sen'].iloc[i] < DF['Kijun-sen'].iloc[i-1]):
                         last_divergence = f"آخرین واگرایی منفی در تاریخ {DF.index[i]}: ten and kij سيگنال فروش"
                 
-                return last_divergence   
+                return last_divergence
+
+
+            # Ichimoku  ترکيب سه کندل آخربا
+            def analyze_last_three_candles_with_ichimoku(DF):
+                # دریافت سه روز آخر از DataFrame
+                last_three = DF.tail(3)
+                
+                # استخراج قیمت‌های بسته‌شدن و خطوط ایچیموکو
+                closes = last_three['Close'].values
+                tenkan_sen = last_three['Tenkan-sen'].values
+                kijun_sen = last_three['Kijun-sen'].values
+
+                # تعیین وضعیت سه کندل آخر
+                if closes[2] < closes[1] < closes[0]:
+                    trend = "صعودی"  # Bullish
+                elif closes[2] > closes[1] > closes[0]:
+                    trend = "نزولی"  # Bearish
+                else:
+                    trend = "خنثی"  # Neutral
+
+                # بررسی سیگنال‌های ایچیموکو
+                ichimoku_signal = ""
+                if tenkan_sen[-1] > kijun_sen[-1]:
+                    ichimoku_signal = "سیگنال خرید (Tenkan بالای Kijun)"
+                elif tenkan_sen[-1] < kijun_sen[-1]:
+                    ichimoku_signal = "سیگنال فروش (Tenkan زیر Kijun)"
+                else:
+                    ichimoku_signal = "هیچ سیگنالی"
+
+                return trend, ichimoku_signal
+
+            # Ichimoku  ترکيب سه کندل آخربا
+            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
+            #trend_last_three, ichimoku_signal = analyze_last_three_candles_with_ichimoku(DF)
+            #print(f"وضعیت سه کندل آخر: {trend_last_three}, سیگنال ایچیموکو: {ichimoku_signal}")
             
 
             # محاسبه RSI
@@ -202,6 +239,36 @@ while True:
                     DF.at[DF.index[i], 'RSI_Signal'] = -1  # سیگنال فروش
 
 
+
+             # RSI ترکيب سه کندل آخربا
+            def analyze_last_three_candles_with_rsi(DF):
+                # دریافت سه روز آخر از DataFrame
+                last_three = DF.tail(3)
+                
+                # استخراج قیمت‌های بسته‌شدن و RSI
+                closes = last_three['Close'].values
+                rsi_values = last_three['RSI'].values
+                
+                # تعیین وضعیت سه کندل آخر
+                if closes[2] < closes[1] < closes[0]:
+                    trend = "صعودی"  # Bullish
+                elif closes[2] > closes[1] > closes[0]:
+                    trend = "نزولی"  # Bearish
+                else:
+                    trend = "خنثی"  # Neutral
+
+                # بررسی سیگنال‌های RSI
+                rsi_signal = ""
+                if rsi_values[-1] < 30:
+                    rsi_signal = "اشباع فروش (خرید)"
+                elif rsi_values[-1] > 70:
+                    rsi_signal = "اشباع خرید (فروش)"
+                else:
+                    rsi_signal = "عادی"
+
+                return trend, rsi_signal
+
+
            # محاسبه MACD
             exp1 = DF['Close'].ewm(span=12, adjust=False).mean()
             exp2 = DF['Close'].ewm(span=26, adjust=False).mean()
@@ -220,7 +287,37 @@ while True:
 
             # گرد کردن مقادیر MACD و سیگنال MACD به نزدیک‌ترین عدد صحیح و تبدیل به نوع integer
             DF['MACD'] = DF['MACD'].round(0).astype(int)
-            DF['Signal_MACD'] = DF['Signal_MACD'].round(0).astype(int) 
+            DF['Signal_MACD'] = DF['Signal_MACD'].round(0).astype(int)
+
+
+            # MACD  ترکيب سه کندل آخر با
+            def analyze_last_three_candles_with_macd(DF):
+                # دریافت سه روز آخر از DataFrame
+                last_three = DF.tail(3)
+                
+                # استخراج قیمت‌های بسته‌شدن و مقادیر MACD
+                closes = last_three['Close'].values
+                macd_values = last_three['MACD'].values
+                signal_macd_values = last_three['Signal_MACD'].values
+                
+                # تعیین وضعیت سه کندل آخر
+                if closes[2] < closes[1] < closes[0]:
+                    trend = "صعودی"  # Bullish
+                elif closes[2] > closes[1] > closes[0]:
+                    trend = "نزولی"  # Bearish
+                else:
+                    trend = "خنثی"  # Neutral
+
+                # بررسی سیگنال‌های MACD
+                macd_signal = ""
+                if macd_values[-1] > signal_macd_values[-1]:
+                    macd_signal = "سیگنال خرید (MACD بالای سیگنال)"
+                elif macd_values[-1] < signal_macd_values[-1]:
+                    macd_signal = "سیگنال فروش (MACD زیر سیگنال)"
+                else:
+                    macd_signal = "هیچ سیگنالی"
+
+                return trend, macd_signal           
 
 
            # محاسبه میانگین متحرک ساده (SMA) برای دوره‌های 3 و 9 روزه
@@ -327,6 +424,23 @@ while True:
                 print("ten and kij هيچ واگرايي مشاهده نشد.") 
                 
             print(30*'-')
+
+
+            # Ichimoku  ترکيب سه کندل آخربا
+            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
+            trend_last_three, ichimoku_signal = analyze_last_three_candles_with_ichimoku(DF)
+            print(f" وضعیت سه کندل آخر: {trend_last_three} \n سیگنال ایچیموکو: {ichimoku_signal}")
+
+            # RSI ترکيب سه کندل آخربا 
+            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
+            trend_last_three, rsi_signal = analyze_last_three_candles_with_rsi(DF)
+            print(f" سیگنال RSI: {rsi_signal}")
+
+            # MACD  ترکيب سه کندل آخر با
+            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
+            trend_last_three, macd_signal = analyze_last_three_candles_with_macd(DF)
+            print(f" سیگنال MACD: {macd_signal}")             
+ 
 
             # چاپ پیام خرید و فروش فقط برای آخرین روز
             last_day = last_three_days.iloc[-1]
