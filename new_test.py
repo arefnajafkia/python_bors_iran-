@@ -211,11 +211,81 @@ while True:
 
                 return trend, ichimoku_signal
 
-            # Ichimoku  ترکيب سه کندل آخربا
-            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
-            #trend_last_three, ichimoku_signal = analyze_last_three_candles_with_ichimoku(DF)
-            #print(f"وضعیت سه کندل آخر: {trend_last_three}, سیگنال ایچیموکو: {ichimoku_signal}")
-            
+
+             # Ichimoku  ترکيب سه کندل آخربراي واگرايي با
+            def check_divergence_with_ichimoku(DF):
+                # دریافت سه روز آخر از DataFrame
+                last_three = DF.tail(3)
+
+                # استخراج قیمت‌های بسته‌شدن و خطوط ایچیموکو
+                closes = last_three['Close'].values
+                tenkan_sen = last_three['Tenkan-sen'].values
+                kijun_sen = last_three['Kijun-sen'].values
+
+                # بررسی واگرایی مثبت
+                if closes[2] < closes[1] < closes[0] and tenkan_sen[2] > tenkan_sen[1] > tenkan_sen[0]:
+                    return f"واگرایی مثبت در تاریخ {last_three.index[0]} : Candl and ichimoku قيمت درحال افزايش ولي تنکانسن کاهشي."
+
+                # بررسی واگرایی منفی
+                elif closes[2] > closes[1] > closes[0] and tenkan_sen[2] < tenkan_sen[1] < tenkan_sen[0]:
+                    return f"واگرایی منفی در تاریخ {last_three.index[0]} : Candl and ichimoku قيمت درحال کاهش ولي تنکانسن افزايشي."
+
+                return "Candl and ichimoku براي هیچ واگرایی مشاهده نشد."
+
+
+
+            # Add this function to calculate Bollinger Bands سيگنال خريد وفروش با
+            def calculate_bollinger_bands(DF, window=20, num_std_dev=2):
+                DF['MA'] = DF['Close'].rolling(window=window).mean()  # Moving Average
+                DF['STD'] = DF['Close'].rolling(window=window).std()  # Standard Deviation
+                DF['Upper Band'] = DF['MA'] + (DF['STD'] * num_std_dev)  # Upper Band
+                DF['Lower Band'] = DF['MA'] - (DF['STD'] * num_std_dev)  # Lower Band
+
+                # Generate Buy/Sell Signals based on Bollinger Bands
+                DF['Bollinger_Signal'] = np.where(DF['Close'] < DF['Lower Band'], 1, 
+                                                   np.where(DF['Close'] > DF['Upper Band'], -1, 0))
+                
+                return DF
+
+
+            def analyze_last_three_candles_with_bollinger(DF):
+                last_three = DF.tail(3)
+                closes = last_three['Close'].values
+                upper_band = last_three['Upper Band'].values
+                lower_band = last_three['Lower Band'].values
+
+                # تعیین وضعیت سه کندل آخر
+                if closes[2] < closes[1] < closes[0]:
+                    trend = "صعودی"  # Bullish
+                    if closes[0] > upper_band[0]:  # قیمت بالای نوار بالایی
+                        signal = "سیگنال خرید (قیمت بالای نوار بالایی)"
+                    elif closes[0] < lower_band[0]:  # قیمت پایین نوار پایینی
+                        signal = "سیگنال فروش (قیمت پایین نوار پایینی)"
+                    else:
+                        signal = "هیچ سیگنالی"
+                elif closes[2] > closes[1] > closes[0]:
+                    trend = "نزولی"  # Bearish
+                    if closes[0] < lower_band[0]:  # قیمت پایین نوار پایینی
+                        signal = "سیگنال خرید (قیمت پایین نوار پایینی)"
+                    elif closes[0] > upper_band[0]:  # قیمت بالای نوار بالایی
+                        signal = "سیگنال فروش (قیمت بالای نوار بالایی)"
+                    else:
+                        signal = "هیچ سیگنالی"
+                else:
+                    trend = "خنثی"  # Neutral
+                    signal = "هیچ سیگنالی"
+
+                return trend, signal
+
+            # Call this function after loading your DataFrame (DF)
+            DF = calculate_bollinger_bands(DF)
+
+            # محاسبه نوارهای بولینگر
+            DF = calculate_bollinger_bands(DF)
+
+            # تحلیل سه کندل آخر با نوارهای بولینگر
+            trend_last_three, bollinger_signal = analyze_last_three_candles_with_bollinger(DF)
+
 
             # محاسبه RSI
             delta = DF['Close'].diff()
@@ -398,6 +468,7 @@ while True:
             last_three_days = DF.tail(3)
             
             print(30*'-')
+            print(last_three_days[['Close', 'Upper Band', 'Lower Band', 'Bollinger_Signal']])
             print(last_three_days[['Jaw', 'Teeth', 'Lips', 'Gator_Signal']])
             print(last_three_days[['Tenkan-sen', 'Kijun-sen_103', 'Signal_103']])
             print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
@@ -421,15 +492,20 @@ while True:
             if last_divergence_signal:
                 print(last_divergence_signal)
             else:
-                print("ten and kij هيچ واگرايي مشاهده نشد.") 
+                print(" ten and kij هيچ واگرايي مشاهده نشد .")
+
+
+            # Ichimoku  ترکيب سه کندل آخربراي واگرايي با 
+            # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
+            divergence_signal = check_divergence_with_ichimoku(DF)
+            print(divergence_signal)     
                 
             print(30*'-')
-
 
             # Ichimoku  ترکيب سه کندل آخربا
             # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
             trend_last_three, ichimoku_signal = analyze_last_three_candles_with_ichimoku(DF)
-            print(f" وضعیت سه کندل آخر: {trend_last_three} \n سیگنال ایچیموکو: {ichimoku_signal}")
+            print(f" وضعیت سه کندل آخر: {trend_last_three} \n سیگنال ایچیموکو: {ichimoku_signal}")            
 
             # RSI ترکيب سه کندل آخربا 
             # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
@@ -439,8 +515,12 @@ while True:
             # MACD  ترکيب سه کندل آخر با
             # در داخل تابع main_menu یا بعد از محاسبات ایچیموکو، این تابع را فراخوانی کنید:
             trend_last_three, macd_signal = analyze_last_three_candles_with_macd(DF)
-            print(f" سیگنال MACD: {macd_signal}")             
- 
+            print(f" سیگنال MACD: {macd_signal}")
+
+            #نوارهاي بولينگر چاپ نتایج
+            print(f" سیگنال بولینگر: {bollinger_signal}")
+            
+            print(30*'-')
 
             # چاپ پیام خرید و فروش فقط برای آخرین روز
             last_day = last_three_days.iloc[-1]
