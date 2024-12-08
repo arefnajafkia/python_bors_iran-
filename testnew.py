@@ -831,7 +831,7 @@ while True:
                        "کگل","ثبهساز","عيار","اهرم","غگيلا","توان","غشهداب","سحرخيز","دعبيد",
                        "بركت","وملل","كروي","كدما","پارس","شيران","ساروم","سدشت","كماسه",
                        "تاصيكو","حكشتي","قهكمت","تكشا","شاروم","مارون","آريا","اپال",
-                       "واعتبار","اطلس","شپترو","سمگا","سبزوا","غکورش","استيل","ارفع"]
+                       "واعتبار","اطلس","شپترو","سمگا","سبزوا","غکورش","استيل","ارفع","ثنوسا"]
 
                # Print the list of stocks and their indices
                #for i, n in enumerate(namad):
@@ -1055,15 +1055,15 @@ while True:
                   closes = last_three['Close'].values
                   tenkan_sen = last_three['Tenkan-sen'].values
                   kijun_sen = last_three['Kijun-sen'].values
-
+                  ##########################################
                   # تعیین وضعیت سه کندل آخر
                   if closes[2] < closes[1] < closes[0]:
-                      trend = "صعودی"  # Bullish
+                      trend = "نزولي"  # Bullish
                   elif closes[2] > closes[1] > closes[0]:
-                      trend = "نزولی"  # Bearish
+                      trend = "صعودي"  # Bearish
                   else:
                       trend = "خنثی"  # Neutral
-
+                  ##########################################
                   # بررسی سیگنال‌های ایچیموکو
                   ichimoku_signal = ""
                   if tenkan_sen[-1] > kijun_sen[-1]:
@@ -1095,6 +1095,17 @@ while True:
                       return f"واگرایی منفی در تاریخ {last_three.index[0]} : Candl and ichimoku قيمت درحال کاهش ولي تنکانسن افزايشي."
 
                   return "Candl and ichimoku هيچ واگرايي مشاهده نشد براي."
+
+
+              #تابع برای محاسبه مومنتوم
+              def calculate_momentum(DF, window=14):
+                  DF['Momentum'] = DF['Close'].diff(window)  # محاسبه تغییر قیمت
+                  # تولید سیگنال خرید و فروش بر اساس مومنتوم
+                  DF['Momentum_Signal'] = np.where(DF['Momentum'] > 0, 1, np.where(DF['Momentum'] < 0, -1, 0))
+                  return DF
+
+              # فراخوانی تابع برای محاسبه مومنتوم
+              DF = calculate_momentum(DF)
 
 
 
@@ -1327,15 +1338,8 @@ while True:
               last_three_days = DF.tail(3)
             
               print(30*'-')
-              print(last_three_days[['Close', 'Upper Band', 'Lower Band', 'Bollinger_Signal']])
-              print(last_three_days[['Jaw', 'Teeth', 'Lips', 'Gator_Signal']])
-              print(last_three_days[['Tenkan-sen', 'Kijun-sen_103', 'Signal_103']])
-              print(last_three_days[['Tenkan-sen', 'Kijun-sen', 'Signal']])
-              print(last_three_days[['EMA_3', 'EMA_9', 'EMA_Signal']])
-              print(last_three_days[['SMA_3', 'SMA_9', 'SMA_Signal']])
-              print(last_three_days[['RSI', 'RSI_Signal']])
-              print(last_three_days[['MACD', 'Signal_MACD', 'MACD_Signal']])
-              print(last_three_days[['%K', '%D', 'Stochastic_Signal']])
+              print(last_three_days[['Close', 'Momentum', 'Momentum_Signal']])
+              print(20*'-')
               print(last_three_days[['Close', 'Volume']])
               print(20*'-')
               print(f"وضعیت کانال: {trend_status}")
