@@ -2358,9 +2358,9 @@ while True:
                         
                # کچاد
               if index == 10:
-                    p=2847
-                    s=3016
-                    v=5000
+                    p=3770
+                    s=3261
+                    v=22000
                     psv=(s*v)-(p*v)
                     if p > 0 :
                          print (p , ': قيمت خريد شمااز',sahame )
